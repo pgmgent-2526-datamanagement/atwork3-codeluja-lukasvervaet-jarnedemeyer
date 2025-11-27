@@ -74,6 +74,8 @@ model Booking {
   notes      String?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+
+  foodItems BookingFoodItem[]
 }
 
 model Package {
@@ -121,4 +123,16 @@ model foodItem {
   description String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  bookings  BookingFoodItem[]
+}
+
+model BookingFoodItem {
+  id         Int      @id @default(autoincrement())
+  bookingId  Int
+  foodItemId Int
+  quantity   Int      @default(1)
+
+  booking    Booking   @relation(fields: [bookingId], references: [id])
+  foodItem   foodItem  @relation(fields: [foodItemId], references: [id])
 }

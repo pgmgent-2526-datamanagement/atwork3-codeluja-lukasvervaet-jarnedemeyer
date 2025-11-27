@@ -398,7 +398,8 @@ export const ModelName = {
   Booking: 'Booking',
   Package: 'Package',
   Customer: 'Customer',
-  foodItem: 'foodItem'
+  foodItem: 'foodItem',
+  BookingFoodItem: 'BookingFoodItem'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -414,7 +415,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userRole" | "host" | "shift" | "shiftRole" | "booking" | "package" | "customer" | "foodItem"
+    modelProps: "user" | "userRole" | "host" | "shift" | "shiftRole" | "booking" | "package" | "customer" | "foodItem" | "bookingFoodItem"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1084,6 +1085,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    BookingFoodItem: {
+      payload: Prisma.$BookingFoodItemPayload<ExtArgs>
+      fields: Prisma.BookingFoodItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BookingFoodItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingFoodItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BookingFoodItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingFoodItemPayload>
+        }
+        findFirst: {
+          args: Prisma.BookingFoodItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingFoodItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BookingFoodItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingFoodItemPayload>
+        }
+        findMany: {
+          args: Prisma.BookingFoodItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingFoodItemPayload>[]
+        }
+        create: {
+          args: Prisma.BookingFoodItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingFoodItemPayload>
+        }
+        createMany: {
+          args: Prisma.BookingFoodItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BookingFoodItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingFoodItemPayload>[]
+        }
+        delete: {
+          args: Prisma.BookingFoodItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingFoodItemPayload>
+        }
+        update: {
+          args: Prisma.BookingFoodItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingFoodItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.BookingFoodItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BookingFoodItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BookingFoodItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingFoodItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.BookingFoodItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingFoodItemPayload>
+        }
+        aggregate: {
+          args: Prisma.BookingFoodItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBookingFoodItem>
+        }
+        groupBy: {
+          args: Prisma.BookingFoodItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BookingFoodItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BookingFoodItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BookingFoodItemCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1243,6 +1318,16 @@ export const FoodItemScalarFieldEnum = {
 } as const
 
 export type FoodItemScalarFieldEnum = (typeof FoodItemScalarFieldEnum)[keyof typeof FoodItemScalarFieldEnum]
+
+
+export const BookingFoodItemScalarFieldEnum = {
+  id: 'id',
+  bookingId: 'bookingId',
+  foodItemId: 'foodItemId',
+  quantity: 'quantity'
+} as const
+
+export type BookingFoodItemScalarFieldEnum = (typeof BookingFoodItemScalarFieldEnum)[keyof typeof BookingFoodItemScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1475,6 +1560,7 @@ export type GlobalOmitConfig = {
   package?: Prisma.PackageOmit
   customer?: Prisma.CustomerOmit
   foodItem?: Prisma.foodItemOmit
+  bookingFoodItem?: Prisma.BookingFoodItemOmit
 }
 
 /* Types for Logging */

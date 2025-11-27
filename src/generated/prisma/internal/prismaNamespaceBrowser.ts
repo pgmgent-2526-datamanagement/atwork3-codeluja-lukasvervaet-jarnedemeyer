@@ -57,7 +57,8 @@ export const ModelName = {
   Booking: 'Booking',
   Package: 'Package',
   Customer: 'Customer',
-  foodItem: 'foodItem'
+  foodItem: 'foodItem',
+  BookingFoodItem: 'BookingFoodItem'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -196,6 +197,16 @@ export const FoodItemScalarFieldEnum = {
 } as const
 
 export type FoodItemScalarFieldEnum = (typeof FoodItemScalarFieldEnum)[keyof typeof FoodItemScalarFieldEnum]
+
+
+export const BookingFoodItemScalarFieldEnum = {
+  id: 'id',
+  bookingId: 'bookingId',
+  foodItemId: 'foodItemId',
+  quantity: 'quantity'
+} as const
+
+export type BookingFoodItemScalarFieldEnum = (typeof BookingFoodItemScalarFieldEnum)[keyof typeof BookingFoodItemScalarFieldEnum]
 
 
 export const SortOrder = {

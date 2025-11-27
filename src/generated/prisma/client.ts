@@ -86,3 +86,8 @@ export type Customer = Prisma.CustomerModel
  * 
  */
 export type foodItem = Prisma.foodItemModel
+/**
+ * Model BookingFoodItem
+ * 
+ */
+export type BookingFoodItem = Prisma.BookingFoodItemModel
