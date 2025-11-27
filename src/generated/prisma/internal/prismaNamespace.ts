@@ -395,7 +395,8 @@ export const ModelName = {
   Host: 'Host',
   Booking: 'Booking',
   Package: 'Package',
-  Customer: 'Customer'
+  Customer: 'Customer',
+  foodItem: 'foodItem'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -411,7 +412,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userRole" | "host" | "booking" | "package" | "customer"
+    modelProps: "user" | "userRole" | "host" | "booking" | "package" | "customer" | "foodItem"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -859,6 +860,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    foodItem: {
+      payload: Prisma.$foodItemPayload<ExtArgs>
+      fields: Prisma.foodItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.foodItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$foodItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.foodItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$foodItemPayload>
+        }
+        findFirst: {
+          args: Prisma.foodItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$foodItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.foodItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$foodItemPayload>
+        }
+        findMany: {
+          args: Prisma.foodItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$foodItemPayload>[]
+        }
+        create: {
+          args: Prisma.foodItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$foodItemPayload>
+        }
+        createMany: {
+          args: Prisma.foodItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.foodItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$foodItemPayload>[]
+        }
+        delete: {
+          args: Prisma.foodItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$foodItemPayload>
+        }
+        update: {
+          args: Prisma.foodItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$foodItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.foodItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.foodItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.foodItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$foodItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.foodItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$foodItemPayload>
+        }
+        aggregate: {
+          args: Prisma.FoodItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFoodItem>
+        }
+        groupBy: {
+          args: Prisma.foodItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FoodItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.foodItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FoodItemCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -985,6 +1060,17 @@ export const CustomerScalarFieldEnum = {
 } as const
 
 export type CustomerScalarFieldEnum = (typeof CustomerScalarFieldEnum)[keyof typeof CustomerScalarFieldEnum]
+
+
+export const FoodItemScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FoodItemScalarFieldEnum = (typeof FoodItemScalarFieldEnum)[keyof typeof FoodItemScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1214,6 +1300,7 @@ export type GlobalOmitConfig = {
   booking?: Prisma.BookingOmit
   package?: Prisma.PackageOmit
   customer?: Prisma.CustomerOmit
+  foodItem?: Prisma.foodItemOmit
 }
 
 /* Types for Logging */

@@ -71,3 +71,8 @@ export type Package = Prisma.PackageModel
  * 
  */
 export type Customer = Prisma.CustomerModel
+/**
+ * Model foodItem
+ * 
+ */
+export type foodItem = Prisma.foodItemModel
