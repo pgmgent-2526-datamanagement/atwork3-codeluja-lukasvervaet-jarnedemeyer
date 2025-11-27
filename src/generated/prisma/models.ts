@@ -8,6 +8,15 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/UserRole'
 export type * from './models/User'
+export type * from './models/UserRole'
+export type * from './models/Host'
+export type * from './models/Shift'
+export type * from './models/ShiftRole'
+export type * from './models/Booking'
+export type * from './models/Package'
+export type * from './models/Customer'
+export type * from './models/FoodItem'
+export type * from './models/BookingFoodItem'
+export type * from './models/BookingHost'
 export type * from './commonInputTypes'

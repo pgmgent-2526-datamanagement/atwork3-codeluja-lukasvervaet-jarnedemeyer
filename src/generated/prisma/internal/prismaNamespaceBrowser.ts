@@ -49,8 +49,17 @@ export const AnyNull = runtime.objectEnumValues.instances.AnyNull
 
 
 export const ModelName = {
+  User: 'User',
   UserRole: 'UserRole',
-  User: 'User'
+  Host: 'Host',
+  Shift: 'Shift',
+  ShiftRole: 'ShiftRole',
+  Booking: 'Booking',
+  Package: 'Package',
+  Customer: 'Customer',
+  FoodItem: 'FoodItem',
+  BookingFoodItem: 'BookingFoodItem',
+  BookingHost: 'BookingHost'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -69,6 +78,22 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const UserScalarFieldEnum = {
+  id: 'id',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  email: 'email',
+  phone: 'phone',
+  password: 'password',
+  role_id: 'role_id',
+  active: 'active',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
 export const UserRoleScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -80,19 +105,119 @@ export const UserRoleScalarFieldEnum = {
 export type UserRoleScalarFieldEnum = (typeof UserRoleScalarFieldEnum)[keyof typeof UserRoleScalarFieldEnum]
 
 
-export const UserScalarFieldEnum = {
+export const HostScalarFieldEnum = {
   id: 'id',
-  first_name: 'first_name',
-  last_name: 'last_name',
+  firstName: 'firstName',
+  lastName: 'lastName',
   email: 'email',
   phone: 'phone',
-  password: 'password',
-  roleId: 'roleId',
+  active: 'active',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
-export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+export type HostScalarFieldEnum = (typeof HostScalarFieldEnum)[keyof typeof HostScalarFieldEnum]
+
+
+export const ShiftScalarFieldEnum = {
+  id: 'id',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ShiftScalarFieldEnum = (typeof ShiftScalarFieldEnum)[keyof typeof ShiftScalarFieldEnum]
+
+
+export const ShiftRoleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ShiftRoleScalarFieldEnum = (typeof ShiftRoleScalarFieldEnum)[keyof typeof ShiftRoleScalarFieldEnum]
+
+
+export const BookingScalarFieldEnum = {
+  id: 'id',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  playersCount: 'playersCount',
+  hostsRequired: 'hostsRequired',
+  food_required: 'food_required',
+  is_b2b: 'is_b2b',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BookingScalarFieldEnum = (typeof BookingScalarFieldEnum)[keyof typeof BookingScalarFieldEnum]
+
+
+export const PackageScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  category: 'category',
+  groupType: 'groupType',
+  playTimeMin: 'playTimeMin',
+  visitDurationMin: 'visitDurationMin',
+  pricePerPlayer: 'pricePerPlayer',
+  gameSelection: 'gameSelection',
+  freeDrink: 'freeDrink',
+  freeSupervisor: 'freeSupervisor',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PackageScalarFieldEnum = (typeof PackageScalarFieldEnum)[keyof typeof PackageScalarFieldEnum]
+
+
+export const CustomerScalarFieldEnum = {
+  id: 'id',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  email: 'email',
+  phone: 'phone',
+  company: 'company',
+  vatNumber: 'vatNumber',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CustomerScalarFieldEnum = (typeof CustomerScalarFieldEnum)[keyof typeof CustomerScalarFieldEnum]
+
+
+export const FoodItemScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FoodItemScalarFieldEnum = (typeof FoodItemScalarFieldEnum)[keyof typeof FoodItemScalarFieldEnum]
+
+
+export const BookingFoodItemScalarFieldEnum = {
+  id: 'id',
+  bookingId: 'bookingId',
+  foodItemId: 'foodItemId',
+  quantity: 'quantity'
+} as const
+
+export type BookingFoodItemScalarFieldEnum = (typeof BookingFoodItemScalarFieldEnum)[keyof typeof BookingFoodItemScalarFieldEnum]
+
+
+export const BookingHostScalarFieldEnum = {
+  id: 'id',
+  bookingId: 'bookingId',
+  hostId: 'hostId'
+} as const
+
+export type BookingHostScalarFieldEnum = (typeof BookingHostScalarFieldEnum)[keyof typeof BookingHostScalarFieldEnum]
 
 
 export const SortOrder = {
