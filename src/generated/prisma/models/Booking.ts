@@ -265,6 +265,7 @@ export type BookingWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   foodItems?: Prisma.BookingFoodItemListRelationFilter
+  bookingHosts?: Prisma.BookingHostListRelationFilter
 }
 
 export type BookingOrderByWithRelationInput = {
@@ -279,6 +280,7 @@ export type BookingOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   foodItems?: Prisma.BookingFoodItemOrderByRelationAggregateInput
+  bookingHosts?: Prisma.BookingHostOrderByRelationAggregateInput
 }
 
 export type BookingWhereUniqueInput = Prisma.AtLeast<{
@@ -296,6 +298,7 @@ export type BookingWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   foodItems?: Prisma.BookingFoodItemListRelationFilter
+  bookingHosts?: Prisma.BookingHostListRelationFilter
 }, "id">
 
 export type BookingOrderByWithAggregationInput = {
@@ -343,6 +346,7 @@ export type BookingCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   foodItems?: Prisma.BookingFoodItemCreateNestedManyWithoutBookingInput
+  bookingHosts?: Prisma.BookingHostCreateNestedManyWithoutBookingInput
 }
 
 export type BookingUncheckedCreateInput = {
@@ -357,6 +361,7 @@ export type BookingUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   foodItems?: Prisma.BookingFoodItemUncheckedCreateNestedManyWithoutBookingInput
+  bookingHosts?: Prisma.BookingHostUncheckedCreateNestedManyWithoutBookingInput
 }
 
 export type BookingUpdateInput = {
@@ -370,6 +375,7 @@ export type BookingUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   foodItems?: Prisma.BookingFoodItemUpdateManyWithoutBookingNestedInput
+  bookingHosts?: Prisma.BookingHostUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateInput = {
@@ -384,6 +390,7 @@ export type BookingUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   foodItems?: Prisma.BookingFoodItemUncheckedUpdateManyWithoutBookingNestedInput
+  bookingHosts?: Prisma.BookingHostUncheckedUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingCreateManyInput = {
@@ -494,6 +501,20 @@ export type BookingUpdateOneRequiredWithoutFoodItemsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BookingUpdateToOneWithWhereWithoutFoodItemsInput, Prisma.BookingUpdateWithoutFoodItemsInput>, Prisma.BookingUncheckedUpdateWithoutFoodItemsInput>
 }
 
+export type BookingCreateNestedOneWithoutBookingHostsInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutBookingHostsInput, Prisma.BookingUncheckedCreateWithoutBookingHostsInput>
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutBookingHostsInput
+  connect?: Prisma.BookingWhereUniqueInput
+}
+
+export type BookingUpdateOneRequiredWithoutBookingHostsNestedInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutBookingHostsInput, Prisma.BookingUncheckedCreateWithoutBookingHostsInput>
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutBookingHostsInput
+  upsert?: Prisma.BookingUpsertWithoutBookingHostsInput
+  connect?: Prisma.BookingWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BookingUpdateToOneWithWhereWithoutBookingHostsInput, Prisma.BookingUpdateWithoutBookingHostsInput>, Prisma.BookingUncheckedUpdateWithoutBookingHostsInput>
+}
+
 export type BookingCreateWithoutFoodItemsInput = {
   startTime: Date | string
   endTime: Date | string
@@ -504,6 +525,7 @@ export type BookingCreateWithoutFoodItemsInput = {
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  bookingHosts?: Prisma.BookingHostCreateNestedManyWithoutBookingInput
 }
 
 export type BookingUncheckedCreateWithoutFoodItemsInput = {
@@ -517,6 +539,7 @@ export type BookingUncheckedCreateWithoutFoodItemsInput = {
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  bookingHosts?: Prisma.BookingHostUncheckedCreateNestedManyWithoutBookingInput
 }
 
 export type BookingCreateOrConnectWithoutFoodItemsInput = {
@@ -545,6 +568,7 @@ export type BookingUpdateWithoutFoodItemsInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bookingHosts?: Prisma.BookingHostUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutFoodItemsInput = {
@@ -558,6 +582,77 @@ export type BookingUncheckedUpdateWithoutFoodItemsInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bookingHosts?: Prisma.BookingHostUncheckedUpdateManyWithoutBookingNestedInput
+}
+
+export type BookingCreateWithoutBookingHostsInput = {
+  startTime: Date | string
+  endTime: Date | string
+  playersCount: number
+  hostsRequired: number
+  food_required: boolean
+  is_b2b: boolean
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  foodItems?: Prisma.BookingFoodItemCreateNestedManyWithoutBookingInput
+}
+
+export type BookingUncheckedCreateWithoutBookingHostsInput = {
+  id?: number
+  startTime: Date | string
+  endTime: Date | string
+  playersCount: number
+  hostsRequired: number
+  food_required: boolean
+  is_b2b: boolean
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  foodItems?: Prisma.BookingFoodItemUncheckedCreateNestedManyWithoutBookingInput
+}
+
+export type BookingCreateOrConnectWithoutBookingHostsInput = {
+  where: Prisma.BookingWhereUniqueInput
+  create: Prisma.XOR<Prisma.BookingCreateWithoutBookingHostsInput, Prisma.BookingUncheckedCreateWithoutBookingHostsInput>
+}
+
+export type BookingUpsertWithoutBookingHostsInput = {
+  update: Prisma.XOR<Prisma.BookingUpdateWithoutBookingHostsInput, Prisma.BookingUncheckedUpdateWithoutBookingHostsInput>
+  create: Prisma.XOR<Prisma.BookingCreateWithoutBookingHostsInput, Prisma.BookingUncheckedCreateWithoutBookingHostsInput>
+  where?: Prisma.BookingWhereInput
+}
+
+export type BookingUpdateToOneWithWhereWithoutBookingHostsInput = {
+  where?: Prisma.BookingWhereInput
+  data: Prisma.XOR<Prisma.BookingUpdateWithoutBookingHostsInput, Prisma.BookingUncheckedUpdateWithoutBookingHostsInput>
+}
+
+export type BookingUpdateWithoutBookingHostsInput = {
+  startTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  playersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hostsRequired?: Prisma.IntFieldUpdateOperationsInput | number
+  food_required?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  foodItems?: Prisma.BookingFoodItemUpdateManyWithoutBookingNestedInput
+}
+
+export type BookingUncheckedUpdateWithoutBookingHostsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  startTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  playersCount?: Prisma.IntFieldUpdateOperationsInput | number
+  hostsRequired?: Prisma.IntFieldUpdateOperationsInput | number
+  food_required?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  foodItems?: Prisma.BookingFoodItemUncheckedUpdateManyWithoutBookingNestedInput
 }
 
 
@@ -567,10 +662,12 @@ export type BookingUncheckedUpdateWithoutFoodItemsInput = {
 
 export type BookingCountOutputType = {
   foodItems: number
+  bookingHosts: number
 }
 
 export type BookingCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   foodItems?: boolean | BookingCountOutputTypeCountFoodItemsArgs
+  bookingHosts?: boolean | BookingCountOutputTypeCountBookingHostsArgs
 }
 
 /**
@@ -590,6 +687,13 @@ export type BookingCountOutputTypeCountFoodItemsArgs<ExtArgs extends runtime.Typ
   where?: Prisma.BookingFoodItemWhereInput
 }
 
+/**
+ * BookingCountOutputType without action
+ */
+export type BookingCountOutputTypeCountBookingHostsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BookingHostWhereInput
+}
+
 
 export type BookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -603,6 +707,7 @@ export type BookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   createdAt?: boolean
   updatedAt?: boolean
   foodItems?: boolean | Prisma.Booking$foodItemsArgs<ExtArgs>
+  bookingHosts?: boolean | Prisma.Booking$bookingHostsArgs<ExtArgs>
   _count?: boolean | Prisma.BookingCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["booking"]>
 
@@ -648,6 +753,7 @@ export type BookingSelectScalar = {
 export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "startTime" | "endTime" | "playersCount" | "hostsRequired" | "food_required" | "is_b2b" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
 export type BookingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   foodItems?: boolean | Prisma.Booking$foodItemsArgs<ExtArgs>
+  bookingHosts?: boolean | Prisma.Booking$bookingHostsArgs<ExtArgs>
   _count?: boolean | Prisma.BookingCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BookingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -657,6 +763,7 @@ export type $BookingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "Booking"
   objects: {
     foodItems: Prisma.$BookingFoodItemPayload<ExtArgs>[]
+    bookingHosts: Prisma.$BookingHostPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1064,6 +1171,7 @@ readonly fields: BookingFieldRefs;
 export interface Prisma__BookingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   foodItems<T extends Prisma.Booking$foodItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$foodItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookingFoodItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  bookingHosts<T extends Prisma.Booking$bookingHostsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$bookingHostsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookingHostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1512,6 +1620,30 @@ export type Booking$foodItemsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.BookingFoodItemScalarFieldEnum | Prisma.BookingFoodItemScalarFieldEnum[]
+}
+
+/**
+ * Booking.bookingHosts
+ */
+export type Booking$bookingHostsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BookingHost
+   */
+  select?: Prisma.BookingHostSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BookingHost
+   */
+  omit?: Prisma.BookingHostOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookingHostInclude<ExtArgs> | null
+  where?: Prisma.BookingHostWhereInput
+  orderBy?: Prisma.BookingHostOrderByWithRelationInput | Prisma.BookingHostOrderByWithRelationInput[]
+  cursor?: Prisma.BookingHostWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BookingHostScalarFieldEnum | Prisma.BookingHostScalarFieldEnum[]
 }
 
 /**

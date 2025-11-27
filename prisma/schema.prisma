@@ -46,6 +46,8 @@ model Host {
   active    Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  bookingHosts BookingHost[]
 }
 
 model Shift {
@@ -77,6 +79,7 @@ model Booking {
   updatedAt  DateTime @updatedAt
 
   foodItems BookingFoodItem[]
+  bookingHosts BookingHost[]
 }
 
 model Package {

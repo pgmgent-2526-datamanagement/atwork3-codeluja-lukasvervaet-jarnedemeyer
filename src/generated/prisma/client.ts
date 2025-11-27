@@ -91,3 +91,8 @@ export type FoodItem = Prisma.FoodItemModel
  * 
  */
 export type BookingFoodItem = Prisma.BookingFoodItemModel
+/**
+ * Model BookingHost
+ * 
+ */
+export type BookingHost = Prisma.BookingHostModel

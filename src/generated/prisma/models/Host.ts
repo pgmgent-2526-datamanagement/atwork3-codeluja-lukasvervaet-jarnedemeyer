@@ -240,6 +240,7 @@ export type HostWhereInput = {
   active?: Prisma.BoolFilter<"Host"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Host"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Host"> | Date | string
+  bookingHosts?: Prisma.BookingHostListRelationFilter
 }
 
 export type HostOrderByWithRelationInput = {
@@ -251,6 +252,7 @@ export type HostOrderByWithRelationInput = {
   active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  bookingHosts?: Prisma.BookingHostOrderByRelationAggregateInput
 }
 
 export type HostWhereUniqueInput = Prisma.AtLeast<{
@@ -265,6 +267,7 @@ export type HostWhereUniqueInput = Prisma.AtLeast<{
   active?: Prisma.BoolFilter<"Host"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Host"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Host"> | Date | string
+  bookingHosts?: Prisma.BookingHostListRelationFilter
 }, "id" | "email">
 
 export type HostOrderByWithAggregationInput = {
@@ -305,6 +308,7 @@ export type HostCreateInput = {
   active?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  bookingHosts?: Prisma.BookingHostCreateNestedManyWithoutHostInput
 }
 
 export type HostUncheckedCreateInput = {
@@ -316,6 +320,7 @@ export type HostUncheckedCreateInput = {
   active?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  bookingHosts?: Prisma.BookingHostUncheckedCreateNestedManyWithoutHostInput
 }
 
 export type HostUpdateInput = {
@@ -326,6 +331,7 @@ export type HostUpdateInput = {
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bookingHosts?: Prisma.BookingHostUpdateManyWithoutHostNestedInput
 }
 
 export type HostUncheckedUpdateInput = {
@@ -337,6 +343,7 @@ export type HostUncheckedUpdateInput = {
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bookingHosts?: Prisma.BookingHostUncheckedUpdateManyWithoutHostNestedInput
 }
 
 export type HostCreateManyInput = {
@@ -412,6 +419,112 @@ export type HostSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
+export type HostScalarRelationFilter = {
+  is?: Prisma.HostWhereInput
+  isNot?: Prisma.HostWhereInput
+}
+
+export type HostCreateNestedOneWithoutBookingHostsInput = {
+  create?: Prisma.XOR<Prisma.HostCreateWithoutBookingHostsInput, Prisma.HostUncheckedCreateWithoutBookingHostsInput>
+  connectOrCreate?: Prisma.HostCreateOrConnectWithoutBookingHostsInput
+  connect?: Prisma.HostWhereUniqueInput
+}
+
+export type HostUpdateOneRequiredWithoutBookingHostsNestedInput = {
+  create?: Prisma.XOR<Prisma.HostCreateWithoutBookingHostsInput, Prisma.HostUncheckedCreateWithoutBookingHostsInput>
+  connectOrCreate?: Prisma.HostCreateOrConnectWithoutBookingHostsInput
+  upsert?: Prisma.HostUpsertWithoutBookingHostsInput
+  connect?: Prisma.HostWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.HostUpdateToOneWithWhereWithoutBookingHostsInput, Prisma.HostUpdateWithoutBookingHostsInput>, Prisma.HostUncheckedUpdateWithoutBookingHostsInput>
+}
+
+export type HostCreateWithoutBookingHostsInput = {
+  firstName: string
+  lastName: string
+  email: string
+  phone?: string | null
+  active?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type HostUncheckedCreateWithoutBookingHostsInput = {
+  id?: number
+  firstName: string
+  lastName: string
+  email: string
+  phone?: string | null
+  active?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type HostCreateOrConnectWithoutBookingHostsInput = {
+  where: Prisma.HostWhereUniqueInput
+  create: Prisma.XOR<Prisma.HostCreateWithoutBookingHostsInput, Prisma.HostUncheckedCreateWithoutBookingHostsInput>
+}
+
+export type HostUpsertWithoutBookingHostsInput = {
+  update: Prisma.XOR<Prisma.HostUpdateWithoutBookingHostsInput, Prisma.HostUncheckedUpdateWithoutBookingHostsInput>
+  create: Prisma.XOR<Prisma.HostCreateWithoutBookingHostsInput, Prisma.HostUncheckedCreateWithoutBookingHostsInput>
+  where?: Prisma.HostWhereInput
+}
+
+export type HostUpdateToOneWithWhereWithoutBookingHostsInput = {
+  where?: Prisma.HostWhereInput
+  data: Prisma.XOR<Prisma.HostUpdateWithoutBookingHostsInput, Prisma.HostUncheckedUpdateWithoutBookingHostsInput>
+}
+
+export type HostUpdateWithoutBookingHostsInput = {
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type HostUncheckedUpdateWithoutBookingHostsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type HostCountOutputType
+ */
+
+export type HostCountOutputType = {
+  bookingHosts: number
+}
+
+export type HostCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  bookingHosts?: boolean | HostCountOutputTypeCountBookingHostsArgs
+}
+
+/**
+ * HostCountOutputType without action
+ */
+export type HostCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HostCountOutputType
+   */
+  select?: Prisma.HostCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * HostCountOutputType without action
+ */
+export type HostCountOutputTypeCountBookingHostsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BookingHostWhereInput
+}
 
 
 export type HostSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -423,6 +536,8 @@ export type HostSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   active?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  bookingHosts?: boolean | Prisma.Host$bookingHostsArgs<ExtArgs>
+  _count?: boolean | Prisma.HostCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["host"]>
 
 export type HostSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -459,10 +574,18 @@ export type HostSelectScalar = {
 }
 
 export type HostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "phone" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["host"]>
+export type HostInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  bookingHosts?: boolean | Prisma.Host$bookingHostsArgs<ExtArgs>
+  _count?: boolean | Prisma.HostCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type HostIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type HostIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $HostPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Host"
-  objects: {}
+  objects: {
+    bookingHosts: Prisma.$BookingHostPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     firstName: string
@@ -866,6 +989,7 @@ readonly fields: HostFieldRefs;
  */
 export interface Prisma__HostClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  bookingHosts<T extends Prisma.Host$bookingHostsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Host$bookingHostsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookingHostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -920,6 +1044,10 @@ export type HostFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.HostOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HostInclude<ExtArgs> | null
+  /**
    * Filter, which Host to fetch.
    */
   where: Prisma.HostWhereUniqueInput
@@ -938,6 +1066,10 @@ export type HostFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.HostOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HostInclude<ExtArgs> | null
+  /**
    * Filter, which Host to fetch.
    */
   where: Prisma.HostWhereUniqueInput
@@ -955,6 +1087,10 @@ export type HostFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Host
    */
   omit?: Prisma.HostOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HostInclude<ExtArgs> | null
   /**
    * Filter, which Host to fetch.
    */
@@ -1004,6 +1140,10 @@ export type HostFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   omit?: Prisma.HostOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HostInclude<ExtArgs> | null
+  /**
    * Filter, which Host to fetch.
    */
   where?: Prisma.HostWhereInput
@@ -1052,6 +1192,10 @@ export type HostFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   omit?: Prisma.HostOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HostInclude<ExtArgs> | null
+  /**
    * Filter, which Hosts to fetch.
    */
   where?: Prisma.HostWhereInput
@@ -1094,6 +1238,10 @@ export type HostCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    * Omit specific fields from the Host
    */
   omit?: Prisma.HostOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HostInclude<ExtArgs> | null
   /**
    * The data needed to create a Host.
    */
@@ -1142,6 +1290,10 @@ export type HostUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    * Omit specific fields from the Host
    */
   omit?: Prisma.HostOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HostInclude<ExtArgs> | null
   /**
    * The data needed to update a Host.
    */
@@ -1209,6 +1361,10 @@ export type HostUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    */
   omit?: Prisma.HostOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HostInclude<ExtArgs> | null
+  /**
    * The filter to search for the Host to update in case it exists.
    */
   where: Prisma.HostWhereUniqueInput
@@ -1235,6 +1391,10 @@ export type HostDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    */
   omit?: Prisma.HostOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HostInclude<ExtArgs> | null
+  /**
    * Filter which Host to delete.
    */
   where: Prisma.HostWhereUniqueInput
@@ -1255,6 +1415,30 @@ export type HostDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
+ * Host.bookingHosts
+ */
+export type Host$bookingHostsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BookingHost
+   */
+  select?: Prisma.BookingHostSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BookingHost
+   */
+  omit?: Prisma.BookingHostOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookingHostInclude<ExtArgs> | null
+  where?: Prisma.BookingHostWhereInput
+  orderBy?: Prisma.BookingHostOrderByWithRelationInput | Prisma.BookingHostOrderByWithRelationInput[]
+  cursor?: Prisma.BookingHostWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BookingHostScalarFieldEnum | Prisma.BookingHostScalarFieldEnum[]
+}
+
+/**
  * Host without action
  */
 export type HostDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1266,4 +1450,8 @@ export type HostDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    * Omit specific fields from the Host
    */
   omit?: Prisma.HostOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HostInclude<ExtArgs> | null
 }
