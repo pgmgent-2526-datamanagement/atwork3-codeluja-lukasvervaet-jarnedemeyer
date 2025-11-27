@@ -57,6 +57,11 @@ export type UserRole = Prisma.UserRoleModel
  */
 export type Host = Prisma.HostModel
 /**
+ * Model shift
+ * 
+ */
+export type shift = Prisma.shiftModel
+/**
  * Model Booking
  * 
  */

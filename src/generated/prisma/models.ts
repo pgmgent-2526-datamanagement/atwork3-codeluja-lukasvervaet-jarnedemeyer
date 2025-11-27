@@ -11,6 +11,7 @@
 export type * from './models/User'
 export type * from './models/UserRole'
 export type * from './models/Host'
+export type * from './models/shift'
 export type * from './models/Booking'
 export type * from './models/Package'
 export type * from './models/Customer'
