@@ -57,6 +57,11 @@ export type UserRole = Prisma.UserRoleModel
  */
 export type Host = Prisma.HostModel
 /**
+ * Model Bookings
+ * 
+ */
+export type Bookings = Prisma.BookingsModel
+/**
  * Model Customer
  * 
  */

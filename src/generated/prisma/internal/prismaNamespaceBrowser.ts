@@ -52,6 +52,7 @@ export const ModelName = {
   User: 'User',
   UserRole: 'UserRole',
   Host: 'Host',
+  Bookings: 'Bookings',
   Customer: 'Customer'
 } as const
 
@@ -109,6 +110,22 @@ export const HostScalarFieldEnum = {
 } as const
 
 export type HostScalarFieldEnum = (typeof HostScalarFieldEnum)[keyof typeof HostScalarFieldEnum]
+
+
+export const BookingsScalarFieldEnum = {
+  id: 'id',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  playersCount: 'playersCount',
+  hostsRequired: 'hostsRequired',
+  food_required: 'food_required',
+  is_b2b: 'is_b2b',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BookingsScalarFieldEnum = (typeof BookingsScalarFieldEnum)[keyof typeof BookingsScalarFieldEnum]
 
 
 export const CustomerScalarFieldEnum = {

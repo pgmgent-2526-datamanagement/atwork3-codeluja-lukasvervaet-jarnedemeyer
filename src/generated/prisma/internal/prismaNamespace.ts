@@ -393,6 +393,7 @@ export const ModelName = {
   User: 'User',
   UserRole: 'UserRole',
   Host: 'Host',
+  Bookings: 'Bookings',
   Customer: 'Customer'
 } as const
 
@@ -409,7 +410,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userRole" | "host" | "customer"
+    modelProps: "user" | "userRole" | "host" | "bookings" | "customer"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -635,6 +636,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Bookings: {
+      payload: Prisma.$BookingsPayload<ExtArgs>
+      fields: Prisma.BookingsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BookingsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BookingsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingsPayload>
+        }
+        findFirst: {
+          args: Prisma.BookingsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BookingsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingsPayload>
+        }
+        findMany: {
+          args: Prisma.BookingsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingsPayload>[]
+        }
+        create: {
+          args: Prisma.BookingsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingsPayload>
+        }
+        createMany: {
+          args: Prisma.BookingsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BookingsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingsPayload>[]
+        }
+        delete: {
+          args: Prisma.BookingsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingsPayload>
+        }
+        update: {
+          args: Prisma.BookingsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingsPayload>
+        }
+        deleteMany: {
+          args: Prisma.BookingsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BookingsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BookingsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingsPayload>[]
+        }
+        upsert: {
+          args: Prisma.BookingsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BookingsPayload>
+        }
+        aggregate: {
+          args: Prisma.BookingsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBookings>
+        }
+        groupBy: {
+          args: Prisma.BookingsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BookingsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BookingsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BookingsCountAggregateOutputType> | number
+        }
+      }
+    }
     Customer: {
       payload: Prisma.$CustomerPayload<ExtArgs>
       fields: Prisma.CustomerFieldRefs
@@ -786,6 +861,22 @@ export const HostScalarFieldEnum = {
 } as const
 
 export type HostScalarFieldEnum = (typeof HostScalarFieldEnum)[keyof typeof HostScalarFieldEnum]
+
+
+export const BookingsScalarFieldEnum = {
+  id: 'id',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  playersCount: 'playersCount',
+  hostsRequired: 'hostsRequired',
+  food_required: 'food_required',
+  is_b2b: 'is_b2b',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BookingsScalarFieldEnum = (typeof BookingsScalarFieldEnum)[keyof typeof BookingsScalarFieldEnum]
 
 
 export const CustomerScalarFieldEnum = {
@@ -985,6 +1076,7 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   userRole?: Prisma.UserRoleOmit
   host?: Prisma.HostOmit
+  bookings?: Prisma.BookingsOmit
   customer?: Prisma.CustomerOmit
 }
 
