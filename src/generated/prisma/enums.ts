@@ -9,7 +9,19 @@
 * 🟢 You can import this file directly.
 */
 
+export const PackageCategory = {
+  VR: 'VR',
+  VR_BATTLE: 'VR_BATTLE',
+  KIDS: 'KIDS',
+  SCHOOL: 'SCHOOL'
+} as const
+
+export type PackageCategory = (typeof PackageCategory)[keyof typeof PackageCategory]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const GroupType = {
+  NORMAL: 'NORMAL',
+  LARGE_GROUP: 'LARGE_GROUP'
+} as const
+
+export type GroupType = (typeof GroupType)[keyof typeof GroupType]

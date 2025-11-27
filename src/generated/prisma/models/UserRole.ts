@@ -321,6 +321,11 @@ export type UserRoleUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type UserRoleScalarRelationFilter = {
+  is?: Prisma.UserRoleWhereInput
+  isNot?: Prisma.UserRoleWhereInput
+}
+
 export type UserRoleCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
@@ -351,31 +356,6 @@ export type UserRoleMinOrderByAggregateInput = {
 
 export type UserRoleSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-}
-
-export type UserRoleScalarRelationFilter = {
-  is?: Prisma.UserRoleWhereInput
-  isNot?: Prisma.UserRoleWhereInput
-}
-
-export type StringFieldUpdateOperationsInput = {
-  set?: string
-}
-
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
-}
-
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
 }
 
 export type UserRoleCreateNestedOneWithoutUsersInput = {

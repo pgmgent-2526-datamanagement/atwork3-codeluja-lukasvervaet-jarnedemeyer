@@ -29,8 +29,8 @@ export * from "./enums"
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more UserRoles
- * const userRoles = await prisma.userRole.findMany()
+ * // Fetch zero or more Users
+ * const users = await prisma.user.findMany()
  * ```
  * 
  * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
@@ -40,17 +40,59 @@ export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts exten
 export { Prisma }
 
 
-// file annotations for bundling tools to include these files
-path.join(__dirname, "libquery_engine-darwin-arm64.dylib.node")
-path.join(process.cwd(), "src/generated/prisma/libquery_engine-darwin-arm64.dylib.node")
 
+/**
+ * Model User
+ * 
+ */
+export type User = Prisma.UserModel
 /**
  * Model UserRole
  * 
  */
 export type UserRole = Prisma.UserRoleModel
 /**
- * Model User
+ * Model Host
  * 
  */
-export type User = Prisma.UserModel
+export type Host = Prisma.HostModel
+/**
+ * Model Shift
+ * 
+ */
+export type Shift = Prisma.ShiftModel
+/**
+ * Model ShiftRole
+ * 
+ */
+export type ShiftRole = Prisma.ShiftRoleModel
+/**
+ * Model Booking
+ * 
+ */
+export type Booking = Prisma.BookingModel
+/**
+ * Model Package
+ * 
+ */
+export type Package = Prisma.PackageModel
+/**
+ * Model Customer
+ * 
+ */
+export type Customer = Prisma.CustomerModel
+/**
+ * Model FoodItem
+ * 
+ */
+export type FoodItem = Prisma.FoodItemModel
+/**
+ * Model BookingFoodItem
+ * 
+ */
+export type BookingFoodItem = Prisma.BookingFoodItemModel
+/**
+ * Model BookingHost
+ * 
+ */
+export type BookingHost = Prisma.BookingHostModel
