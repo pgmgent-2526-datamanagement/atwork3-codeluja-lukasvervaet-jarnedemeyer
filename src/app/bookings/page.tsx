@@ -1,11 +1,18 @@
 export default function Bookings() {
   return (
     <div>
-      <h1>Your Bookings</h1>
-      <p>Bekijk en beheer uw boekingen</p>
+      <header className="flex flex-col p-5 justify-between space-y-3">
+        <h1 className="mt-3 text-2xl font-semibold flex justify-center items-center underline -underline-offset-[-3px] saira-font">
+          {" "}
+          {/*text-[#05d8c8]*/}
+          Your Bookings
+        </h1>
+        <p className="bg-[#05d8c8]/40 text-sm p-2 rounded-md shadow-md flex m-auto w-max text-slate-500">
+          Bekijk en beheer uw boekingen
+        </p>
+      </header>
 
       <div className="overflow-x-auto bg-white p-4 rounded-lg shadow-md mt-6 text-black flex flex-col justify-center items-center m-auto w-6xl">
-        {/* Hier zou je een lijst van boekingen kunnen weergeven */}
         <table className="border-separate border-spacing-2 border border-gray-400 dark:border-gray-500 table-auto w-full max-w-7xl">
           <thead>
             <tr>
