@@ -47,7 +47,7 @@ model Host {
   updatedAt DateTime @updatedAt
 }
 
-model Bookings {
+model Booking {
   id         Int      @id @default(autoincrement())
   startTime  DateTime
   endTime    DateTime
@@ -58,6 +58,33 @@ model Bookings {
   notes      String?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+}
+
+model Package {
+  id                Int       @id @default(autoincrement())
+  name              String
+  category          PackageCategory      // VR, VR_BATTLE, KIDS, SCHOOL
+  groupType         GroupType            // NORMAL or LARGE_GROUP
+  playTimeMin       Int
+  visitDurationMin  Int
+  pricePerPlayer    Decimal @db.Decimal(10, 2)
+  gameSelection     String?             // "Choose in venue", "NanoClash Focus", ...
+  freeDrink         Boolean @default(false)
+  freeSupervisor    Boolean @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+enum PackageCategory {
+  VR
+  VR_BATTLE
+  KIDS
+  SCHOOL
+}
+
+enum GroupType {
+  NORMAL
+  LARGE_GROUP
 }
 
 model Customer {
