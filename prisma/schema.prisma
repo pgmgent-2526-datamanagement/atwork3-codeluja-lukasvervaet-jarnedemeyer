@@ -21,6 +21,18 @@ model User {
   email     String   @unique
   phone     String?
   password  String
+  role_id   Int
+  role      UserRole @relation(fields: [role_id], references: [id])
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserRole {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  description String?
+  users     User[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
