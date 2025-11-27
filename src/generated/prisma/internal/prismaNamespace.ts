@@ -1226,6 +1226,7 @@ export type UserRoleScalarFieldEnum = (typeof UserRoleScalarFieldEnum)[keyof typ
 
 
 export const HostScalarFieldEnum = {
+  id: 'id',
   firstName: 'firstName',
   lastName: 'lastName',
   email: 'email',

@@ -38,6 +38,7 @@ model UserRole {
 }
 
 model Host {
+  id        Int      @id @default(autoincrement())
   firstName String
   lastName  String
   email     String   @unique
@@ -135,4 +136,13 @@ model BookingFoodItem {
 
   booking    Booking   @relation(fields: [bookingId], references: [id])
   foodItem   FoodItem  @relation(fields: [foodItemId], references: [id])
+}
+
+model BookingHost {
+  id        Int      @id @default(autoincrement())
+  bookingId Int
+  hostId    Int
+
+  booking   Booking @relation(fields: [bookingId], references: [id])
+  host      Host    @relation(fields: [hostId], references: [id])
 }

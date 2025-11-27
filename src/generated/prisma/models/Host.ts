@@ -20,11 +20,22 @@ export type HostModel = runtime.Types.Result.DefaultSelection<Prisma.$HostPayloa
 
 export type AggregateHost = {
   _count: HostCountAggregateOutputType | null
+  _avg: HostAvgAggregateOutputType | null
+  _sum: HostSumAggregateOutputType | null
   _min: HostMinAggregateOutputType | null
   _max: HostMaxAggregateOutputType | null
 }
 
+export type HostAvgAggregateOutputType = {
+  id: number | null
+}
+
+export type HostSumAggregateOutputType = {
+  id: number | null
+}
+
 export type HostMinAggregateOutputType = {
+  id: number | null
   firstName: string | null
   lastName: string | null
   email: string | null
@@ -35,6 +46,7 @@ export type HostMinAggregateOutputType = {
 }
 
 export type HostMaxAggregateOutputType = {
+  id: number | null
   firstName: string | null
   lastName: string | null
   email: string | null
@@ -45,6 +57,7 @@ export type HostMaxAggregateOutputType = {
 }
 
 export type HostCountAggregateOutputType = {
+  id: number
   firstName: number
   lastName: number
   email: number
@@ -56,7 +69,16 @@ export type HostCountAggregateOutputType = {
 }
 
 
+export type HostAvgAggregateInputType = {
+  id?: true
+}
+
+export type HostSumAggregateInputType = {
+  id?: true
+}
+
 export type HostMinAggregateInputType = {
+  id?: true
   firstName?: true
   lastName?: true
   email?: true
@@ -67,6 +89,7 @@ export type HostMinAggregateInputType = {
 }
 
 export type HostMaxAggregateInputType = {
+  id?: true
   firstName?: true
   lastName?: true
   email?: true
@@ -77,6 +100,7 @@ export type HostMaxAggregateInputType = {
 }
 
 export type HostCountAggregateInputType = {
+  id?: true
   firstName?: true
   lastName?: true
   email?: true
@@ -125,6 +149,18 @@ export type HostAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: HostAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: HostSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: HostMinAggregateInputType
@@ -155,11 +191,14 @@ export type HostGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: HostCountAggregateInputType | true
+  _avg?: HostAvgAggregateInputType
+  _sum?: HostSumAggregateInputType
   _min?: HostMinAggregateInputType
   _max?: HostMaxAggregateInputType
 }
 
 export type HostGroupByOutputType = {
+  id: number
   firstName: string
   lastName: string
   email: string
@@ -168,6 +207,8 @@ export type HostGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   _count: HostCountAggregateOutputType | null
+  _avg: HostAvgAggregateOutputType | null
+  _sum: HostSumAggregateOutputType | null
   _min: HostMinAggregateOutputType | null
   _max: HostMaxAggregateOutputType | null
 }
@@ -191,6 +232,7 @@ export type HostWhereInput = {
   AND?: Prisma.HostWhereInput | Prisma.HostWhereInput[]
   OR?: Prisma.HostWhereInput[]
   NOT?: Prisma.HostWhereInput | Prisma.HostWhereInput[]
+  id?: Prisma.IntFilter<"Host"> | number
   firstName?: Prisma.StringFilter<"Host"> | string
   lastName?: Prisma.StringFilter<"Host"> | string
   email?: Prisma.StringFilter<"Host"> | string
@@ -201,6 +243,7 @@ export type HostWhereInput = {
 }
 
 export type HostOrderByWithRelationInput = {
+  id?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
   email?: Prisma.SortOrder
@@ -211,6 +254,7 @@ export type HostOrderByWithRelationInput = {
 }
 
 export type HostWhereUniqueInput = Prisma.AtLeast<{
+  id?: number
   email?: string
   AND?: Prisma.HostWhereInput | Prisma.HostWhereInput[]
   OR?: Prisma.HostWhereInput[]
@@ -221,9 +265,10 @@ export type HostWhereUniqueInput = Prisma.AtLeast<{
   active?: Prisma.BoolFilter<"Host"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Host"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Host"> | Date | string
-}, "email">
+}, "id" | "email">
 
 export type HostOrderByWithAggregationInput = {
+  id?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
   email?: Prisma.SortOrder
@@ -232,14 +277,17 @@ export type HostOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.HostCountOrderByAggregateInput
+  _avg?: Prisma.HostAvgOrderByAggregateInput
   _max?: Prisma.HostMaxOrderByAggregateInput
   _min?: Prisma.HostMinOrderByAggregateInput
+  _sum?: Prisma.HostSumOrderByAggregateInput
 }
 
 export type HostScalarWhereWithAggregatesInput = {
   AND?: Prisma.HostScalarWhereWithAggregatesInput | Prisma.HostScalarWhereWithAggregatesInput[]
   OR?: Prisma.HostScalarWhereWithAggregatesInput[]
   NOT?: Prisma.HostScalarWhereWithAggregatesInput | Prisma.HostScalarWhereWithAggregatesInput[]
+  id?: Prisma.IntWithAggregatesFilter<"Host"> | number
   firstName?: Prisma.StringWithAggregatesFilter<"Host"> | string
   lastName?: Prisma.StringWithAggregatesFilter<"Host"> | string
   email?: Prisma.StringWithAggregatesFilter<"Host"> | string
@@ -260,6 +308,7 @@ export type HostCreateInput = {
 }
 
 export type HostUncheckedCreateInput = {
+  id?: number
   firstName: string
   lastName: string
   email: string
@@ -280,6 +329,7 @@ export type HostUpdateInput = {
 }
 
 export type HostUncheckedUpdateInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -290,6 +340,7 @@ export type HostUncheckedUpdateInput = {
 }
 
 export type HostCreateManyInput = {
+  id?: number
   firstName: string
   lastName: string
   email: string
@@ -310,6 +361,7 @@ export type HostUpdateManyMutationInput = {
 }
 
 export type HostUncheckedUpdateManyInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -320,6 +372,7 @@ export type HostUncheckedUpdateManyInput = {
 }
 
 export type HostCountOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
   email?: Prisma.SortOrder
@@ -329,7 +382,12 @@ export type HostCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type HostAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+}
+
 export type HostMaxOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
   email?: Prisma.SortOrder
@@ -340,6 +398,7 @@ export type HostMaxOrderByAggregateInput = {
 }
 
 export type HostMinOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
   email?: Prisma.SortOrder
@@ -349,9 +408,14 @@ export type HostMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type HostSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+}
+
 
 
 export type HostSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
   firstName?: boolean
   lastName?: boolean
   email?: boolean
@@ -362,6 +426,7 @@ export type HostSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 }, ExtArgs["result"]["host"]>
 
 export type HostSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
   firstName?: boolean
   lastName?: boolean
   email?: boolean
@@ -372,6 +437,7 @@ export type HostSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 }, ExtArgs["result"]["host"]>
 
 export type HostSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
   firstName?: boolean
   lastName?: boolean
   email?: boolean
@@ -382,6 +448,7 @@ export type HostSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 }, ExtArgs["result"]["host"]>
 
 export type HostSelectScalar = {
+  id?: boolean
   firstName?: boolean
   lastName?: boolean
   email?: boolean
@@ -391,12 +458,13 @@ export type HostSelectScalar = {
   updatedAt?: boolean
 }
 
-export type HostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"firstName" | "lastName" | "email" | "phone" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["host"]>
+export type HostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "phone" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["host"]>
 
 export type $HostPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Host"
   objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
+    id: number
     firstName: string
     lastName: string
     email: string
@@ -487,8 +555,8 @@ export interface HostDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
    * // Get first 10 Hosts
    * const hosts = await prisma.host.findMany({ take: 10 })
    * 
-   * // Only select the `firstName`
-   * const hostWithFirstNameOnly = await prisma.host.findMany({ select: { firstName: true } })
+   * // Only select the `id`
+   * const hostWithIdOnly = await prisma.host.findMany({ select: { id: true } })
    * 
    */
   findMany<T extends HostFindManyArgs>(args?: Prisma.SelectSubset<T, HostFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -532,9 +600,9 @@ export interface HostDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
    *   ]
    * })
    * 
-   * // Create many Hosts and only return the `firstName`
-   * const hostWithFirstNameOnly = await prisma.host.createManyAndReturn({
-   *   select: { firstName: true },
+   * // Create many Hosts and only return the `id`
+   * const hostWithIdOnly = await prisma.host.createManyAndReturn({
+   *   select: { id: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -623,9 +691,9 @@ export interface HostDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
    *   ]
    * })
    * 
-   * // Update zero or more Hosts and only return the `firstName`
-   * const hostWithFirstNameOnly = await prisma.host.updateManyAndReturn({
-   *   select: { firstName: true },
+   * // Update zero or more Hosts and only return the `id`
+   * const hostWithIdOnly = await prisma.host.updateManyAndReturn({
+   *   select: { id: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -827,6 +895,7 @@ export interface Prisma__HostClient<T, Null = never, ExtArgs extends runtime.Typ
  * Fields of the Host model
  */
 export interface HostFieldRefs {
+  readonly id: Prisma.FieldRef<"Host", 'Int'>
   readonly firstName: Prisma.FieldRef<"Host", 'String'>
   readonly lastName: Prisma.FieldRef<"Host", 'String'>
   readonly email: Prisma.FieldRef<"Host", 'String'>

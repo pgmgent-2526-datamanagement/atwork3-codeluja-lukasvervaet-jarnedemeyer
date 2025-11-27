@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Host" ADD COLUMN     "id" SERIAL NOT NULL,
+ADD CONSTRAINT "Host_pkey" PRIMARY KEY ("id");
