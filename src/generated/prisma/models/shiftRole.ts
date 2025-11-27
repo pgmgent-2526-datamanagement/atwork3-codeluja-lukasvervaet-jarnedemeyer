@@ -4,7 +4,7 @@
 // biome-ignore-all lint: generated file
 // @ts-nocheck 
 /*
- * This file exports the `shiftRole` model and its related types.
+ * This file exports the `ShiftRole` model and its related types.
  *
  * 🟢 You can import this file directly.
  */
@@ -13,10 +13,10 @@ import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
 /**
- * Model shiftRole
+ * Model ShiftRole
  * 
  */
-export type shiftRoleModel = runtime.Types.Result.DefaultSelection<Prisma.$shiftRolePayload>
+export type ShiftRoleModel = runtime.Types.Result.DefaultSelection<Prisma.$ShiftRolePayload>
 
 export type AggregateShiftRole = {
   _count: ShiftRoleCountAggregateOutputType | null
@@ -95,37 +95,37 @@ export type ShiftRoleCountAggregateInputType = {
 
 export type ShiftRoleAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Filter which shiftRole to aggregate.
+   * Filter which ShiftRole to aggregate.
    */
-  where?: Prisma.shiftRoleWhereInput
+  where?: Prisma.ShiftRoleWhereInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    * 
-   * Determine the order of shiftRoles to fetch.
+   * Determine the order of ShiftRoles to fetch.
    */
-  orderBy?: Prisma.shiftRoleOrderByWithRelationInput | Prisma.shiftRoleOrderByWithRelationInput[]
+  orderBy?: Prisma.ShiftRoleOrderByWithRelationInput | Prisma.ShiftRoleOrderByWithRelationInput[]
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    * 
    * Sets the start position
    */
-  cursor?: Prisma.shiftRoleWhereUniqueInput
+  cursor?: Prisma.ShiftRoleWhereUniqueInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Take `±n` shiftRoles from the position of the cursor.
+   * Take `±n` ShiftRoles from the position of the cursor.
    */
   take?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Skip the first `n` shiftRoles.
+   * Skip the first `n` ShiftRoles.
    */
   skip?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Count returned shiftRoles
+   * Count returned ShiftRoles
   **/
   _count?: true | ShiftRoleCountAggregateInputType
   /**
@@ -165,11 +165,11 @@ export type GetShiftRoleAggregateType<T extends ShiftRoleAggregateArgs> = {
 
 
 
-export type shiftRoleGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.shiftRoleWhereInput
-  orderBy?: Prisma.shiftRoleOrderByWithAggregationInput | Prisma.shiftRoleOrderByWithAggregationInput[]
+export type ShiftRoleGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ShiftRoleWhereInput
+  orderBy?: Prisma.ShiftRoleOrderByWithAggregationInput | Prisma.ShiftRoleOrderByWithAggregationInput[]
   by: Prisma.ShiftRoleScalarFieldEnum[] | Prisma.ShiftRoleScalarFieldEnum
-  having?: Prisma.shiftRoleScalarWhereWithAggregatesInput
+  having?: Prisma.ShiftRoleScalarWhereWithAggregatesInput
   take?: number
   skip?: number
   _count?: ShiftRoleCountAggregateInputType | true
@@ -192,7 +192,7 @@ export type ShiftRoleGroupByOutputType = {
   _max: ShiftRoleMaxAggregateOutputType | null
 }
 
-type GetShiftRoleGroupByPayload<T extends shiftRoleGroupByArgs> = Prisma.PrismaPromise<
+type GetShiftRoleGroupByPayload<T extends ShiftRoleGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<ShiftRoleGroupByOutputType, T['by']> &
       {
@@ -207,18 +207,18 @@ type GetShiftRoleGroupByPayload<T extends shiftRoleGroupByArgs> = Prisma.PrismaP
 
 
 
-export type shiftRoleWhereInput = {
-  AND?: Prisma.shiftRoleWhereInput | Prisma.shiftRoleWhereInput[]
-  OR?: Prisma.shiftRoleWhereInput[]
-  NOT?: Prisma.shiftRoleWhereInput | Prisma.shiftRoleWhereInput[]
-  id?: Prisma.IntFilter<"shiftRole"> | number
-  name?: Prisma.StringFilter<"shiftRole"> | string
-  description?: Prisma.StringNullableFilter<"shiftRole"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"shiftRole"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"shiftRole"> | Date | string
+export type ShiftRoleWhereInput = {
+  AND?: Prisma.ShiftRoleWhereInput | Prisma.ShiftRoleWhereInput[]
+  OR?: Prisma.ShiftRoleWhereInput[]
+  NOT?: Prisma.ShiftRoleWhereInput | Prisma.ShiftRoleWhereInput[]
+  id?: Prisma.IntFilter<"ShiftRole"> | number
+  name?: Prisma.StringFilter<"ShiftRole"> | string
+  description?: Prisma.StringNullableFilter<"ShiftRole"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"ShiftRole"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"ShiftRole"> | Date | string
 }
 
-export type shiftRoleOrderByWithRelationInput = {
+export type ShiftRoleOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -226,49 +226,49 @@ export type shiftRoleOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type shiftRoleWhereUniqueInput = Prisma.AtLeast<{
+export type ShiftRoleWhereUniqueInput = Prisma.AtLeast<{
   id?: number
   name?: string
-  AND?: Prisma.shiftRoleWhereInput | Prisma.shiftRoleWhereInput[]
-  OR?: Prisma.shiftRoleWhereInput[]
-  NOT?: Prisma.shiftRoleWhereInput | Prisma.shiftRoleWhereInput[]
-  description?: Prisma.StringNullableFilter<"shiftRole"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"shiftRole"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"shiftRole"> | Date | string
+  AND?: Prisma.ShiftRoleWhereInput | Prisma.ShiftRoleWhereInput[]
+  OR?: Prisma.ShiftRoleWhereInput[]
+  NOT?: Prisma.ShiftRoleWhereInput | Prisma.ShiftRoleWhereInput[]
+  description?: Prisma.StringNullableFilter<"ShiftRole"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"ShiftRole"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"ShiftRole"> | Date | string
 }, "id" | "name">
 
-export type shiftRoleOrderByWithAggregationInput = {
+export type ShiftRoleOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  _count?: Prisma.shiftRoleCountOrderByAggregateInput
-  _avg?: Prisma.shiftRoleAvgOrderByAggregateInput
-  _max?: Prisma.shiftRoleMaxOrderByAggregateInput
-  _min?: Prisma.shiftRoleMinOrderByAggregateInput
-  _sum?: Prisma.shiftRoleSumOrderByAggregateInput
+  _count?: Prisma.ShiftRoleCountOrderByAggregateInput
+  _avg?: Prisma.ShiftRoleAvgOrderByAggregateInput
+  _max?: Prisma.ShiftRoleMaxOrderByAggregateInput
+  _min?: Prisma.ShiftRoleMinOrderByAggregateInput
+  _sum?: Prisma.ShiftRoleSumOrderByAggregateInput
 }
 
-export type shiftRoleScalarWhereWithAggregatesInput = {
-  AND?: Prisma.shiftRoleScalarWhereWithAggregatesInput | Prisma.shiftRoleScalarWhereWithAggregatesInput[]
-  OR?: Prisma.shiftRoleScalarWhereWithAggregatesInput[]
-  NOT?: Prisma.shiftRoleScalarWhereWithAggregatesInput | Prisma.shiftRoleScalarWhereWithAggregatesInput[]
-  id?: Prisma.IntWithAggregatesFilter<"shiftRole"> | number
-  name?: Prisma.StringWithAggregatesFilter<"shiftRole"> | string
-  description?: Prisma.StringNullableWithAggregatesFilter<"shiftRole"> | string | null
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"shiftRole"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"shiftRole"> | Date | string
+export type ShiftRoleScalarWhereWithAggregatesInput = {
+  AND?: Prisma.ShiftRoleScalarWhereWithAggregatesInput | Prisma.ShiftRoleScalarWhereWithAggregatesInput[]
+  OR?: Prisma.ShiftRoleScalarWhereWithAggregatesInput[]
+  NOT?: Prisma.ShiftRoleScalarWhereWithAggregatesInput | Prisma.ShiftRoleScalarWhereWithAggregatesInput[]
+  id?: Prisma.IntWithAggregatesFilter<"ShiftRole"> | number
+  name?: Prisma.StringWithAggregatesFilter<"ShiftRole"> | string
+  description?: Prisma.StringNullableWithAggregatesFilter<"ShiftRole"> | string | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"ShiftRole"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"ShiftRole"> | Date | string
 }
 
-export type shiftRoleCreateInput = {
+export type ShiftRoleCreateInput = {
   name: string
   description?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
-export type shiftRoleUncheckedCreateInput = {
+export type ShiftRoleUncheckedCreateInput = {
   id?: number
   name: string
   description?: string | null
@@ -276,14 +276,14 @@ export type shiftRoleUncheckedCreateInput = {
   updatedAt?: Date | string
 }
 
-export type shiftRoleUpdateInput = {
+export type ShiftRoleUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type shiftRoleUncheckedUpdateInput = {
+export type ShiftRoleUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -291,7 +291,7 @@ export type shiftRoleUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type shiftRoleCreateManyInput = {
+export type ShiftRoleCreateManyInput = {
   id?: number
   name: string
   description?: string | null
@@ -299,14 +299,14 @@ export type shiftRoleCreateManyInput = {
   updatedAt?: Date | string
 }
 
-export type shiftRoleUpdateManyMutationInput = {
+export type ShiftRoleUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type shiftRoleUncheckedUpdateManyInput = {
+export type ShiftRoleUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -314,7 +314,7 @@ export type shiftRoleUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type shiftRoleCountOrderByAggregateInput = {
+export type ShiftRoleCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
@@ -322,19 +322,11 @@ export type shiftRoleCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type shiftRoleAvgOrderByAggregateInput = {
+export type ShiftRoleAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
-export type shiftRoleMaxOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
-}
-
-export type shiftRoleMinOrderByAggregateInput = {
+export type ShiftRoleMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
@@ -342,13 +334,21 @@ export type shiftRoleMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type shiftRoleSumOrderByAggregateInput = {
+export type ShiftRoleMinOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  name?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+}
+
+export type ShiftRoleSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
 
 
-export type shiftRoleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+export type ShiftRoleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   description?: boolean
@@ -356,7 +356,7 @@ export type shiftRoleSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   updatedAt?: boolean
 }, ExtArgs["result"]["shiftRole"]>
 
-export type shiftRoleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+export type ShiftRoleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   description?: boolean
@@ -364,7 +364,7 @@ export type shiftRoleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   updatedAt?: boolean
 }, ExtArgs["result"]["shiftRole"]>
 
-export type shiftRoleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+export type ShiftRoleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   description?: boolean
@@ -372,7 +372,7 @@ export type shiftRoleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   updatedAt?: boolean
 }, ExtArgs["result"]["shiftRole"]>
 
-export type shiftRoleSelectScalar = {
+export type ShiftRoleSelectScalar = {
   id?: boolean
   name?: boolean
   description?: boolean
@@ -380,10 +380,10 @@ export type shiftRoleSelectScalar = {
   updatedAt?: boolean
 }
 
-export type shiftRoleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["shiftRole"]>
+export type ShiftRoleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["shiftRole"]>
 
-export type $shiftRolePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  name: "shiftRole"
+export type $ShiftRolePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  name: "ShiftRole"
   objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -395,18 +395,18 @@ export type $shiftRolePayload<ExtArgs extends runtime.Types.Extensions.InternalA
   composites: {}
 }
 
-export type shiftRoleGetPayload<S extends boolean | null | undefined | shiftRoleDefaultArgs> = runtime.Types.Result.GetResult<Prisma.$shiftRolePayload, S>
+export type ShiftRoleGetPayload<S extends boolean | null | undefined | ShiftRoleDefaultArgs> = runtime.Types.Result.GetResult<Prisma.$ShiftRolePayload, S>
 
-export type shiftRoleCountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
-  Omit<shiftRoleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+export type ShiftRoleCountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
+  Omit<ShiftRoleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
     select?: ShiftRoleCountAggregateInputType | true
   }
 
-export interface shiftRoleDelegate<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['shiftRole'], meta: { name: 'shiftRole' } }
+export interface ShiftRoleDelegate<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ShiftRole'], meta: { name: 'ShiftRole' } }
   /**
    * Find zero or one ShiftRole that matches the filter.
-   * @param {shiftRoleFindUniqueArgs} args - Arguments to find a ShiftRole
+   * @param {ShiftRoleFindUniqueArgs} args - Arguments to find a ShiftRole
    * @example
    * // Get one ShiftRole
    * const shiftRole = await prisma.shiftRole.findUnique({
@@ -415,12 +415,12 @@ export interface shiftRoleDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    *   }
    * })
    */
-  findUnique<T extends shiftRoleFindUniqueArgs>(args: Prisma.SelectSubset<T, shiftRoleFindUniqueArgs<ExtArgs>>): Prisma.Prisma__shiftRoleClient<runtime.Types.Result.GetResult<Prisma.$shiftRolePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  findUnique<T extends ShiftRoleFindUniqueArgs>(args: Prisma.SelectSubset<T, ShiftRoleFindUniqueArgs<ExtArgs>>): Prisma.Prisma__ShiftRoleClient<runtime.Types.Result.GetResult<Prisma.$ShiftRolePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
   /**
    * Find one ShiftRole that matches the filter or throw an error with `error.code='P2025'`
    * if no matches were found.
-   * @param {shiftRoleFindUniqueOrThrowArgs} args - Arguments to find a ShiftRole
+   * @param {ShiftRoleFindUniqueOrThrowArgs} args - Arguments to find a ShiftRole
    * @example
    * // Get one ShiftRole
    * const shiftRole = await prisma.shiftRole.findUniqueOrThrow({
@@ -429,13 +429,13 @@ export interface shiftRoleDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    *   }
    * })
    */
-  findUniqueOrThrow<T extends shiftRoleFindUniqueOrThrowArgs>(args: Prisma.SelectSubset<T, shiftRoleFindUniqueOrThrowArgs<ExtArgs>>): Prisma.Prisma__shiftRoleClient<runtime.Types.Result.GetResult<Prisma.$shiftRolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  findUniqueOrThrow<T extends ShiftRoleFindUniqueOrThrowArgs>(args: Prisma.SelectSubset<T, ShiftRoleFindUniqueOrThrowArgs<ExtArgs>>): Prisma.Prisma__ShiftRoleClient<runtime.Types.Result.GetResult<Prisma.$ShiftRolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Find the first ShiftRole that matches the filter.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {shiftRoleFindFirstArgs} args - Arguments to find a ShiftRole
+   * @param {ShiftRoleFindFirstArgs} args - Arguments to find a ShiftRole
    * @example
    * // Get one ShiftRole
    * const shiftRole = await prisma.shiftRole.findFirst({
@@ -444,14 +444,14 @@ export interface shiftRoleDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    *   }
    * })
    */
-  findFirst<T extends shiftRoleFindFirstArgs>(args?: Prisma.SelectSubset<T, shiftRoleFindFirstArgs<ExtArgs>>): Prisma.Prisma__shiftRoleClient<runtime.Types.Result.GetResult<Prisma.$shiftRolePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  findFirst<T extends ShiftRoleFindFirstArgs>(args?: Prisma.SelectSubset<T, ShiftRoleFindFirstArgs<ExtArgs>>): Prisma.Prisma__ShiftRoleClient<runtime.Types.Result.GetResult<Prisma.$ShiftRolePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
   /**
    * Find the first ShiftRole that matches the filter or
    * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {shiftRoleFindFirstOrThrowArgs} args - Arguments to find a ShiftRole
+   * @param {ShiftRoleFindFirstOrThrowArgs} args - Arguments to find a ShiftRole
    * @example
    * // Get one ShiftRole
    * const shiftRole = await prisma.shiftRole.findFirstOrThrow({
@@ -460,13 +460,13 @@ export interface shiftRoleDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    *   }
    * })
    */
-  findFirstOrThrow<T extends shiftRoleFindFirstOrThrowArgs>(args?: Prisma.SelectSubset<T, shiftRoleFindFirstOrThrowArgs<ExtArgs>>): Prisma.Prisma__shiftRoleClient<runtime.Types.Result.GetResult<Prisma.$shiftRolePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  findFirstOrThrow<T extends ShiftRoleFindFirstOrThrowArgs>(args?: Prisma.SelectSubset<T, ShiftRoleFindFirstOrThrowArgs<ExtArgs>>): Prisma.Prisma__ShiftRoleClient<runtime.Types.Result.GetResult<Prisma.$ShiftRolePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Find zero or more ShiftRoles that matches the filter.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {shiftRoleFindManyArgs} args - Arguments to filter and select certain fields only.
+   * @param {ShiftRoleFindManyArgs} args - Arguments to filter and select certain fields only.
    * @example
    * // Get all ShiftRoles
    * const shiftRoles = await prisma.shiftRole.findMany()
@@ -478,11 +478,11 @@ export interface shiftRoleDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    * const shiftRoleWithIdOnly = await prisma.shiftRole.findMany({ select: { id: true } })
    * 
    */
-  findMany<T extends shiftRoleFindManyArgs>(args?: Prisma.SelectSubset<T, shiftRoleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$shiftRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+  findMany<T extends ShiftRoleFindManyArgs>(args?: Prisma.SelectSubset<T, ShiftRoleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShiftRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
   /**
    * Create a ShiftRole.
-   * @param {shiftRoleCreateArgs} args - Arguments to create a ShiftRole.
+   * @param {ShiftRoleCreateArgs} args - Arguments to create a ShiftRole.
    * @example
    * // Create one ShiftRole
    * const ShiftRole = await prisma.shiftRole.create({
@@ -492,11 +492,11 @@ export interface shiftRoleDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    * })
    * 
    */
-  create<T extends shiftRoleCreateArgs>(args: Prisma.SelectSubset<T, shiftRoleCreateArgs<ExtArgs>>): Prisma.Prisma__shiftRoleClient<runtime.Types.Result.GetResult<Prisma.$shiftRolePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  create<T extends ShiftRoleCreateArgs>(args: Prisma.SelectSubset<T, ShiftRoleCreateArgs<ExtArgs>>): Prisma.Prisma__ShiftRoleClient<runtime.Types.Result.GetResult<Prisma.$ShiftRolePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Create many ShiftRoles.
-   * @param {shiftRoleCreateManyArgs} args - Arguments to create many ShiftRoles.
+   * @param {ShiftRoleCreateManyArgs} args - Arguments to create many ShiftRoles.
    * @example
    * // Create many ShiftRoles
    * const shiftRole = await prisma.shiftRole.createMany({
@@ -506,11 +506,11 @@ export interface shiftRoleDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    * })
    *     
    */
-  createMany<T extends shiftRoleCreateManyArgs>(args?: Prisma.SelectSubset<T, shiftRoleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+  createMany<T extends ShiftRoleCreateManyArgs>(args?: Prisma.SelectSubset<T, ShiftRoleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
    * Create many ShiftRoles and returns the data saved in the database.
-   * @param {shiftRoleCreateManyAndReturnArgs} args - Arguments to create many ShiftRoles.
+   * @param {ShiftRoleCreateManyAndReturnArgs} args - Arguments to create many ShiftRoles.
    * @example
    * // Create many ShiftRoles
    * const shiftRole = await prisma.shiftRole.createManyAndReturn({
@@ -530,11 +530,11 @@ export interface shiftRoleDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    * Read more here: https://pris.ly/d/null-undefined
    * 
    */
-  createManyAndReturn<T extends shiftRoleCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, shiftRoleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$shiftRolePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+  createManyAndReturn<T extends ShiftRoleCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, ShiftRoleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShiftRolePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Delete a ShiftRole.
-   * @param {shiftRoleDeleteArgs} args - Arguments to delete one ShiftRole.
+   * @param {ShiftRoleDeleteArgs} args - Arguments to delete one ShiftRole.
    * @example
    * // Delete one ShiftRole
    * const ShiftRole = await prisma.shiftRole.delete({
@@ -544,11 +544,11 @@ export interface shiftRoleDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    * })
    * 
    */
-  delete<T extends shiftRoleDeleteArgs>(args: Prisma.SelectSubset<T, shiftRoleDeleteArgs<ExtArgs>>): Prisma.Prisma__shiftRoleClient<runtime.Types.Result.GetResult<Prisma.$shiftRolePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  delete<T extends ShiftRoleDeleteArgs>(args: Prisma.SelectSubset<T, ShiftRoleDeleteArgs<ExtArgs>>): Prisma.Prisma__ShiftRoleClient<runtime.Types.Result.GetResult<Prisma.$ShiftRolePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Update one ShiftRole.
-   * @param {shiftRoleUpdateArgs} args - Arguments to update one ShiftRole.
+   * @param {ShiftRoleUpdateArgs} args - Arguments to update one ShiftRole.
    * @example
    * // Update one ShiftRole
    * const shiftRole = await prisma.shiftRole.update({
@@ -561,11 +561,11 @@ export interface shiftRoleDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    * })
    * 
    */
-  update<T extends shiftRoleUpdateArgs>(args: Prisma.SelectSubset<T, shiftRoleUpdateArgs<ExtArgs>>): Prisma.Prisma__shiftRoleClient<runtime.Types.Result.GetResult<Prisma.$shiftRolePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  update<T extends ShiftRoleUpdateArgs>(args: Prisma.SelectSubset<T, ShiftRoleUpdateArgs<ExtArgs>>): Prisma.Prisma__ShiftRoleClient<runtime.Types.Result.GetResult<Prisma.$ShiftRolePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Delete zero or more ShiftRoles.
-   * @param {shiftRoleDeleteManyArgs} args - Arguments to filter ShiftRoles to delete.
+   * @param {ShiftRoleDeleteManyArgs} args - Arguments to filter ShiftRoles to delete.
    * @example
    * // Delete a few ShiftRoles
    * const { count } = await prisma.shiftRole.deleteMany({
@@ -575,13 +575,13 @@ export interface shiftRoleDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    * })
    * 
    */
-  deleteMany<T extends shiftRoleDeleteManyArgs>(args?: Prisma.SelectSubset<T, shiftRoleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+  deleteMany<T extends ShiftRoleDeleteManyArgs>(args?: Prisma.SelectSubset<T, ShiftRoleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
    * Update zero or more ShiftRoles.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {shiftRoleUpdateManyArgs} args - Arguments to update one or more rows.
+   * @param {ShiftRoleUpdateManyArgs} args - Arguments to update one or more rows.
    * @example
    * // Update many ShiftRoles
    * const shiftRole = await prisma.shiftRole.updateMany({
@@ -594,11 +594,11 @@ export interface shiftRoleDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    * })
    * 
    */
-  updateMany<T extends shiftRoleUpdateManyArgs>(args: Prisma.SelectSubset<T, shiftRoleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+  updateMany<T extends ShiftRoleUpdateManyArgs>(args: Prisma.SelectSubset<T, ShiftRoleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
    * Update zero or more ShiftRoles and returns the data updated in the database.
-   * @param {shiftRoleUpdateManyAndReturnArgs} args - Arguments to update many ShiftRoles.
+   * @param {ShiftRoleUpdateManyAndReturnArgs} args - Arguments to update many ShiftRoles.
    * @example
    * // Update many ShiftRoles
    * const shiftRole = await prisma.shiftRole.updateManyAndReturn({
@@ -624,11 +624,11 @@ export interface shiftRoleDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    * Read more here: https://pris.ly/d/null-undefined
    * 
    */
-  updateManyAndReturn<T extends shiftRoleUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, shiftRoleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$shiftRolePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+  updateManyAndReturn<T extends ShiftRoleUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, ShiftRoleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShiftRolePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one ShiftRole.
-   * @param {shiftRoleUpsertArgs} args - Arguments to update or create a ShiftRole.
+   * @param {ShiftRoleUpsertArgs} args - Arguments to update or create a ShiftRole.
    * @example
    * // Update or create a ShiftRole
    * const shiftRole = await prisma.shiftRole.upsert({
@@ -643,14 +643,14 @@ export interface shiftRoleDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    *   }
    * })
    */
-  upsert<T extends shiftRoleUpsertArgs>(args: Prisma.SelectSubset<T, shiftRoleUpsertArgs<ExtArgs>>): Prisma.Prisma__shiftRoleClient<runtime.Types.Result.GetResult<Prisma.$shiftRolePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  upsert<T extends ShiftRoleUpsertArgs>(args: Prisma.SelectSubset<T, ShiftRoleUpsertArgs<ExtArgs>>): Prisma.Prisma__ShiftRoleClient<runtime.Types.Result.GetResult<Prisma.$ShiftRolePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
   /**
    * Count the number of ShiftRoles.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {shiftRoleCountArgs} args - Arguments to filter ShiftRoles to count.
+   * @param {ShiftRoleCountArgs} args - Arguments to filter ShiftRoles to count.
    * @example
    * // Count the number of ShiftRoles
    * const count = await prisma.shiftRole.count({
@@ -659,8 +659,8 @@ export interface shiftRoleDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    *   }
    * })
   **/
-  count<T extends shiftRoleCountArgs>(
-    args?: Prisma.Subset<T, shiftRoleCountArgs>,
+  count<T extends ShiftRoleCountArgs>(
+    args?: Prisma.Subset<T, ShiftRoleCountArgs>,
   ): Prisma.PrismaPromise<
     T extends runtime.Types.Utils.Record<'select', any>
       ? T['select'] extends true
@@ -699,7 +699,7 @@ export interface shiftRoleDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    * Group by ShiftRole.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {shiftRoleGroupByArgs} args - Group by arguments.
+   * @param {ShiftRoleGroupByArgs} args - Group by arguments.
    * @example
    * // Group by city, order by createdAt, get count
    * const result = await prisma.user.groupBy({
@@ -714,14 +714,14 @@ export interface shiftRoleDelegate<ExtArgs extends runtime.Types.Extensions.Inte
    * 
   **/
   groupBy<
-    T extends shiftRoleGroupByArgs,
+    T extends ShiftRoleGroupByArgs,
     HasSelectOrTake extends Prisma.Or<
       Prisma.Extends<'skip', Prisma.Keys<T>>,
       Prisma.Extends<'take', Prisma.Keys<T>>
     >,
     OrderByArg extends Prisma.True extends HasSelectOrTake
-      ? { orderBy: shiftRoleGroupByArgs['orderBy'] }
-      : { orderBy?: shiftRoleGroupByArgs['orderBy'] },
+      ? { orderBy: ShiftRoleGroupByArgs['orderBy'] }
+      : { orderBy?: ShiftRoleGroupByArgs['orderBy'] },
     OrderFields extends Prisma.ExcludeUnderscoreKeys<Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>>,
     ByFields extends Prisma.MaybeTupleToUnion<T['by']>,
     ByValid extends Prisma.Has<ByFields, OrderFields>,
@@ -770,20 +770,20 @@ export interface shiftRoleDelegate<ExtArgs extends runtime.Types.Extensions.Inte
           ? never
           : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
       }[OrderFields]
-  >(args: Prisma.SubsetIntersection<T, shiftRoleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetShiftRoleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  >(args: Prisma.SubsetIntersection<T, ShiftRoleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetShiftRoleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
 /**
- * Fields of the shiftRole model
+ * Fields of the ShiftRole model
  */
-readonly fields: shiftRoleFieldRefs;
+readonly fields: ShiftRoleFieldRefs;
 }
 
 /**
- * The delegate class that acts as a "Promise-like" for shiftRole.
+ * The delegate class that acts as a "Promise-like" for ShiftRole.
  * Why is this prefixed with `Prisma__`?
  * Because we want to prevent naming conflicts as mentioned in
  * https://github.com/prisma/prisma-client-js/issues/707
  */
-export interface Prisma__shiftRoleClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+export interface Prisma__ShiftRoleClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -811,375 +811,375 @@ export interface Prisma__shiftRoleClient<T, Null = never, ExtArgs extends runtim
 
 
 /**
- * Fields of the shiftRole model
+ * Fields of the ShiftRole model
  */
-export interface shiftRoleFieldRefs {
-  readonly id: Prisma.FieldRef<"shiftRole", 'Int'>
-  readonly name: Prisma.FieldRef<"shiftRole", 'String'>
-  readonly description: Prisma.FieldRef<"shiftRole", 'String'>
-  readonly createdAt: Prisma.FieldRef<"shiftRole", 'DateTime'>
-  readonly updatedAt: Prisma.FieldRef<"shiftRole", 'DateTime'>
+export interface ShiftRoleFieldRefs {
+  readonly id: Prisma.FieldRef<"ShiftRole", 'Int'>
+  readonly name: Prisma.FieldRef<"ShiftRole", 'String'>
+  readonly description: Prisma.FieldRef<"ShiftRole", 'String'>
+  readonly createdAt: Prisma.FieldRef<"ShiftRole", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"ShiftRole", 'DateTime'>
 }
     
 
 // Custom InputTypes
 /**
- * shiftRole findUnique
+ * ShiftRole findUnique
  */
-export type shiftRoleFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ShiftRoleFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the shiftRole
+   * Select specific fields to fetch from the ShiftRole
    */
-  select?: Prisma.shiftRoleSelect<ExtArgs> | null
+  select?: Prisma.ShiftRoleSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the shiftRole
+   * Omit specific fields from the ShiftRole
    */
-  omit?: Prisma.shiftRoleOmit<ExtArgs> | null
+  omit?: Prisma.ShiftRoleOmit<ExtArgs> | null
   /**
-   * Filter, which shiftRole to fetch.
+   * Filter, which ShiftRole to fetch.
    */
-  where: Prisma.shiftRoleWhereUniqueInput
+  where: Prisma.ShiftRoleWhereUniqueInput
 }
 
 /**
- * shiftRole findUniqueOrThrow
+ * ShiftRole findUniqueOrThrow
  */
-export type shiftRoleFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ShiftRoleFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the shiftRole
+   * Select specific fields to fetch from the ShiftRole
    */
-  select?: Prisma.shiftRoleSelect<ExtArgs> | null
+  select?: Prisma.ShiftRoleSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the shiftRole
+   * Omit specific fields from the ShiftRole
    */
-  omit?: Prisma.shiftRoleOmit<ExtArgs> | null
+  omit?: Prisma.ShiftRoleOmit<ExtArgs> | null
   /**
-   * Filter, which shiftRole to fetch.
+   * Filter, which ShiftRole to fetch.
    */
-  where: Prisma.shiftRoleWhereUniqueInput
+  where: Prisma.ShiftRoleWhereUniqueInput
 }
 
 /**
- * shiftRole findFirst
+ * ShiftRole findFirst
  */
-export type shiftRoleFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ShiftRoleFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the shiftRole
+   * Select specific fields to fetch from the ShiftRole
    */
-  select?: Prisma.shiftRoleSelect<ExtArgs> | null
+  select?: Prisma.ShiftRoleSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the shiftRole
+   * Omit specific fields from the ShiftRole
    */
-  omit?: Prisma.shiftRoleOmit<ExtArgs> | null
+  omit?: Prisma.ShiftRoleOmit<ExtArgs> | null
   /**
-   * Filter, which shiftRole to fetch.
+   * Filter, which ShiftRole to fetch.
    */
-  where?: Prisma.shiftRoleWhereInput
+  where?: Prisma.ShiftRoleWhereInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    * 
-   * Determine the order of shiftRoles to fetch.
+   * Determine the order of ShiftRoles to fetch.
    */
-  orderBy?: Prisma.shiftRoleOrderByWithRelationInput | Prisma.shiftRoleOrderByWithRelationInput[]
+  orderBy?: Prisma.ShiftRoleOrderByWithRelationInput | Prisma.ShiftRoleOrderByWithRelationInput[]
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    * 
-   * Sets the position for searching for shiftRoles.
+   * Sets the position for searching for ShiftRoles.
    */
-  cursor?: Prisma.shiftRoleWhereUniqueInput
+  cursor?: Prisma.ShiftRoleWhereUniqueInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Take `±n` shiftRoles from the position of the cursor.
+   * Take `±n` ShiftRoles from the position of the cursor.
    */
   take?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Skip the first `n` shiftRoles.
+   * Skip the first `n` ShiftRoles.
    */
   skip?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
    * 
-   * Filter by unique combinations of shiftRoles.
+   * Filter by unique combinations of ShiftRoles.
    */
   distinct?: Prisma.ShiftRoleScalarFieldEnum | Prisma.ShiftRoleScalarFieldEnum[]
 }
 
 /**
- * shiftRole findFirstOrThrow
+ * ShiftRole findFirstOrThrow
  */
-export type shiftRoleFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ShiftRoleFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the shiftRole
+   * Select specific fields to fetch from the ShiftRole
    */
-  select?: Prisma.shiftRoleSelect<ExtArgs> | null
+  select?: Prisma.ShiftRoleSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the shiftRole
+   * Omit specific fields from the ShiftRole
    */
-  omit?: Prisma.shiftRoleOmit<ExtArgs> | null
+  omit?: Prisma.ShiftRoleOmit<ExtArgs> | null
   /**
-   * Filter, which shiftRole to fetch.
+   * Filter, which ShiftRole to fetch.
    */
-  where?: Prisma.shiftRoleWhereInput
+  where?: Prisma.ShiftRoleWhereInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    * 
-   * Determine the order of shiftRoles to fetch.
+   * Determine the order of ShiftRoles to fetch.
    */
-  orderBy?: Prisma.shiftRoleOrderByWithRelationInput | Prisma.shiftRoleOrderByWithRelationInput[]
+  orderBy?: Prisma.ShiftRoleOrderByWithRelationInput | Prisma.ShiftRoleOrderByWithRelationInput[]
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    * 
-   * Sets the position for searching for shiftRoles.
+   * Sets the position for searching for ShiftRoles.
    */
-  cursor?: Prisma.shiftRoleWhereUniqueInput
+  cursor?: Prisma.ShiftRoleWhereUniqueInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Take `±n` shiftRoles from the position of the cursor.
+   * Take `±n` ShiftRoles from the position of the cursor.
    */
   take?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Skip the first `n` shiftRoles.
+   * Skip the first `n` ShiftRoles.
    */
   skip?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
    * 
-   * Filter by unique combinations of shiftRoles.
+   * Filter by unique combinations of ShiftRoles.
    */
   distinct?: Prisma.ShiftRoleScalarFieldEnum | Prisma.ShiftRoleScalarFieldEnum[]
 }
 
 /**
- * shiftRole findMany
+ * ShiftRole findMany
  */
-export type shiftRoleFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ShiftRoleFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the shiftRole
+   * Select specific fields to fetch from the ShiftRole
    */
-  select?: Prisma.shiftRoleSelect<ExtArgs> | null
+  select?: Prisma.ShiftRoleSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the shiftRole
+   * Omit specific fields from the ShiftRole
    */
-  omit?: Prisma.shiftRoleOmit<ExtArgs> | null
+  omit?: Prisma.ShiftRoleOmit<ExtArgs> | null
   /**
-   * Filter, which shiftRoles to fetch.
+   * Filter, which ShiftRoles to fetch.
    */
-  where?: Prisma.shiftRoleWhereInput
+  where?: Prisma.ShiftRoleWhereInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    * 
-   * Determine the order of shiftRoles to fetch.
+   * Determine the order of ShiftRoles to fetch.
    */
-  orderBy?: Prisma.shiftRoleOrderByWithRelationInput | Prisma.shiftRoleOrderByWithRelationInput[]
+  orderBy?: Prisma.ShiftRoleOrderByWithRelationInput | Prisma.ShiftRoleOrderByWithRelationInput[]
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    * 
-   * Sets the position for listing shiftRoles.
+   * Sets the position for listing ShiftRoles.
    */
-  cursor?: Prisma.shiftRoleWhereUniqueInput
+  cursor?: Prisma.ShiftRoleWhereUniqueInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Take `±n` shiftRoles from the position of the cursor.
+   * Take `±n` ShiftRoles from the position of the cursor.
    */
   take?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Skip the first `n` shiftRoles.
+   * Skip the first `n` ShiftRoles.
    */
   skip?: number
   distinct?: Prisma.ShiftRoleScalarFieldEnum | Prisma.ShiftRoleScalarFieldEnum[]
 }
 
 /**
- * shiftRole create
+ * ShiftRole create
  */
-export type shiftRoleCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ShiftRoleCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the shiftRole
+   * Select specific fields to fetch from the ShiftRole
    */
-  select?: Prisma.shiftRoleSelect<ExtArgs> | null
+  select?: Prisma.ShiftRoleSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the shiftRole
+   * Omit specific fields from the ShiftRole
    */
-  omit?: Prisma.shiftRoleOmit<ExtArgs> | null
+  omit?: Prisma.ShiftRoleOmit<ExtArgs> | null
   /**
-   * The data needed to create a shiftRole.
+   * The data needed to create a ShiftRole.
    */
-  data: Prisma.XOR<Prisma.shiftRoleCreateInput, Prisma.shiftRoleUncheckedCreateInput>
+  data: Prisma.XOR<Prisma.ShiftRoleCreateInput, Prisma.ShiftRoleUncheckedCreateInput>
 }
 
 /**
- * shiftRole createMany
+ * ShiftRole createMany
  */
-export type shiftRoleCreateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ShiftRoleCreateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * The data used to create many shiftRoles.
+   * The data used to create many ShiftRoles.
    */
-  data: Prisma.shiftRoleCreateManyInput | Prisma.shiftRoleCreateManyInput[]
+  data: Prisma.ShiftRoleCreateManyInput | Prisma.ShiftRoleCreateManyInput[]
   skipDuplicates?: boolean
 }
 
 /**
- * shiftRole createManyAndReturn
+ * ShiftRole createManyAndReturn
  */
-export type shiftRoleCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ShiftRoleCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the shiftRole
+   * Select specific fields to fetch from the ShiftRole
    */
-  select?: Prisma.shiftRoleSelectCreateManyAndReturn<ExtArgs> | null
+  select?: Prisma.ShiftRoleSelectCreateManyAndReturn<ExtArgs> | null
   /**
-   * Omit specific fields from the shiftRole
+   * Omit specific fields from the ShiftRole
    */
-  omit?: Prisma.shiftRoleOmit<ExtArgs> | null
+  omit?: Prisma.ShiftRoleOmit<ExtArgs> | null
   /**
-   * The data used to create many shiftRoles.
+   * The data used to create many ShiftRoles.
    */
-  data: Prisma.shiftRoleCreateManyInput | Prisma.shiftRoleCreateManyInput[]
+  data: Prisma.ShiftRoleCreateManyInput | Prisma.ShiftRoleCreateManyInput[]
   skipDuplicates?: boolean
 }
 
 /**
- * shiftRole update
+ * ShiftRole update
  */
-export type shiftRoleUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ShiftRoleUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the shiftRole
+   * Select specific fields to fetch from the ShiftRole
    */
-  select?: Prisma.shiftRoleSelect<ExtArgs> | null
+  select?: Prisma.ShiftRoleSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the shiftRole
+   * Omit specific fields from the ShiftRole
    */
-  omit?: Prisma.shiftRoleOmit<ExtArgs> | null
+  omit?: Prisma.ShiftRoleOmit<ExtArgs> | null
   /**
-   * The data needed to update a shiftRole.
+   * The data needed to update a ShiftRole.
    */
-  data: Prisma.XOR<Prisma.shiftRoleUpdateInput, Prisma.shiftRoleUncheckedUpdateInput>
+  data: Prisma.XOR<Prisma.ShiftRoleUpdateInput, Prisma.ShiftRoleUncheckedUpdateInput>
   /**
-   * Choose, which shiftRole to update.
+   * Choose, which ShiftRole to update.
    */
-  where: Prisma.shiftRoleWhereUniqueInput
+  where: Prisma.ShiftRoleWhereUniqueInput
 }
 
 /**
- * shiftRole updateMany
+ * ShiftRole updateMany
  */
-export type shiftRoleUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ShiftRoleUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * The data used to update shiftRoles.
+   * The data used to update ShiftRoles.
    */
-  data: Prisma.XOR<Prisma.shiftRoleUpdateManyMutationInput, Prisma.shiftRoleUncheckedUpdateManyInput>
+  data: Prisma.XOR<Prisma.ShiftRoleUpdateManyMutationInput, Prisma.ShiftRoleUncheckedUpdateManyInput>
   /**
-   * Filter which shiftRoles to update
+   * Filter which ShiftRoles to update
    */
-  where?: Prisma.shiftRoleWhereInput
+  where?: Prisma.ShiftRoleWhereInput
   /**
-   * Limit how many shiftRoles to update.
+   * Limit how many ShiftRoles to update.
    */
   limit?: number
 }
 
 /**
- * shiftRole updateManyAndReturn
+ * ShiftRole updateManyAndReturn
  */
-export type shiftRoleUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ShiftRoleUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the shiftRole
+   * Select specific fields to fetch from the ShiftRole
    */
-  select?: Prisma.shiftRoleSelectUpdateManyAndReturn<ExtArgs> | null
+  select?: Prisma.ShiftRoleSelectUpdateManyAndReturn<ExtArgs> | null
   /**
-   * Omit specific fields from the shiftRole
+   * Omit specific fields from the ShiftRole
    */
-  omit?: Prisma.shiftRoleOmit<ExtArgs> | null
+  omit?: Prisma.ShiftRoleOmit<ExtArgs> | null
   /**
-   * The data used to update shiftRoles.
+   * The data used to update ShiftRoles.
    */
-  data: Prisma.XOR<Prisma.shiftRoleUpdateManyMutationInput, Prisma.shiftRoleUncheckedUpdateManyInput>
+  data: Prisma.XOR<Prisma.ShiftRoleUpdateManyMutationInput, Prisma.ShiftRoleUncheckedUpdateManyInput>
   /**
-   * Filter which shiftRoles to update
+   * Filter which ShiftRoles to update
    */
-  where?: Prisma.shiftRoleWhereInput
+  where?: Prisma.ShiftRoleWhereInput
   /**
-   * Limit how many shiftRoles to update.
+   * Limit how many ShiftRoles to update.
    */
   limit?: number
 }
 
 /**
- * shiftRole upsert
+ * ShiftRole upsert
  */
-export type shiftRoleUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ShiftRoleUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the shiftRole
+   * Select specific fields to fetch from the ShiftRole
    */
-  select?: Prisma.shiftRoleSelect<ExtArgs> | null
+  select?: Prisma.ShiftRoleSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the shiftRole
+   * Omit specific fields from the ShiftRole
    */
-  omit?: Prisma.shiftRoleOmit<ExtArgs> | null
+  omit?: Prisma.ShiftRoleOmit<ExtArgs> | null
   /**
-   * The filter to search for the shiftRole to update in case it exists.
+   * The filter to search for the ShiftRole to update in case it exists.
    */
-  where: Prisma.shiftRoleWhereUniqueInput
+  where: Prisma.ShiftRoleWhereUniqueInput
   /**
-   * In case the shiftRole found by the `where` argument doesn't exist, create a new shiftRole with this data.
+   * In case the ShiftRole found by the `where` argument doesn't exist, create a new ShiftRole with this data.
    */
-  create: Prisma.XOR<Prisma.shiftRoleCreateInput, Prisma.shiftRoleUncheckedCreateInput>
+  create: Prisma.XOR<Prisma.ShiftRoleCreateInput, Prisma.ShiftRoleUncheckedCreateInput>
   /**
-   * In case the shiftRole was found with the provided `where` argument, update it with this data.
+   * In case the ShiftRole was found with the provided `where` argument, update it with this data.
    */
-  update: Prisma.XOR<Prisma.shiftRoleUpdateInput, Prisma.shiftRoleUncheckedUpdateInput>
+  update: Prisma.XOR<Prisma.ShiftRoleUpdateInput, Prisma.ShiftRoleUncheckedUpdateInput>
 }
 
 /**
- * shiftRole delete
+ * ShiftRole delete
  */
-export type shiftRoleDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ShiftRoleDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the shiftRole
+   * Select specific fields to fetch from the ShiftRole
    */
-  select?: Prisma.shiftRoleSelect<ExtArgs> | null
+  select?: Prisma.ShiftRoleSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the shiftRole
+   * Omit specific fields from the ShiftRole
    */
-  omit?: Prisma.shiftRoleOmit<ExtArgs> | null
+  omit?: Prisma.ShiftRoleOmit<ExtArgs> | null
   /**
-   * Filter which shiftRole to delete.
+   * Filter which ShiftRole to delete.
    */
-  where: Prisma.shiftRoleWhereUniqueInput
+  where: Prisma.ShiftRoleWhereUniqueInput
 }
 
 /**
- * shiftRole deleteMany
+ * ShiftRole deleteMany
  */
-export type shiftRoleDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ShiftRoleDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Filter which shiftRoles to delete
+   * Filter which ShiftRoles to delete
    */
-  where?: Prisma.shiftRoleWhereInput
+  where?: Prisma.ShiftRoleWhereInput
   /**
-   * Limit how many shiftRoles to delete.
+   * Limit how many ShiftRoles to delete.
    */
   limit?: number
 }
 
 /**
- * shiftRole without action
+ * ShiftRole without action
  */
-export type shiftRoleDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ShiftRoleDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the shiftRole
+   * Select specific fields to fetch from the ShiftRole
    */
-  select?: Prisma.shiftRoleSelect<ExtArgs> | null
+  select?: Prisma.ShiftRoleSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the shiftRole
+   * Omit specific fields from the ShiftRole
    */
-  omit?: Prisma.shiftRoleOmit<ExtArgs> | null
+  omit?: Prisma.ShiftRoleOmit<ExtArgs> | null
 }

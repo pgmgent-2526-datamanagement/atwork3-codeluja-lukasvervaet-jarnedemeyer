@@ -47,7 +47,7 @@ model Host {
   updatedAt DateTime @updatedAt
 }
 
-model shift {
+model Shift {
   id        Int      @id @default(autoincrement())
   startTime DateTime
   endTime   DateTime
@@ -55,7 +55,7 @@ model shift {
   updatedAt DateTime @updatedAt
 }
 
-model shiftRole {
+model ShiftRole {
   id        Int      @id @default(autoincrement())
   name      String   @unique
   description String?
@@ -117,7 +117,7 @@ model Customer {
   updatedAt DateTime @updatedAt
 }
 
-model foodItem {
+model FoodItem {
   id        Int      @id @default(autoincrement())
   name      String
   description String?
@@ -134,5 +134,5 @@ model BookingFoodItem {
   quantity   Int      @default(1)
 
   booking    Booking   @relation(fields: [bookingId], references: [id])
-  foodItem   foodItem  @relation(fields: [foodItemId], references: [id])
+  foodItem   FoodItem  @relation(fields: [foodItemId], references: [id])
 }

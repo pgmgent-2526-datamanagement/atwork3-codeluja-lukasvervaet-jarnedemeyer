@@ -33,15 +33,15 @@ export type UserRole = Prisma.UserRoleModel
  */
 export type Host = Prisma.HostModel
 /**
- * Model shift
+ * Model Shift
  * 
  */
-export type shift = Prisma.shiftModel
+export type Shift = Prisma.ShiftModel
 /**
- * Model shiftRole
+ * Model ShiftRole
  * 
  */
-export type shiftRole = Prisma.shiftRoleModel
+export type ShiftRole = Prisma.ShiftRoleModel
 /**
  * Model Booking
  * 
@@ -58,10 +58,10 @@ export type Package = Prisma.PackageModel
  */
 export type Customer = Prisma.CustomerModel
 /**
- * Model foodItem
+ * Model FoodItem
  * 
  */
-export type foodItem = Prisma.foodItemModel
+export type FoodItem = Prisma.FoodItemModel
 /**
  * Model BookingFoodItem
  * 

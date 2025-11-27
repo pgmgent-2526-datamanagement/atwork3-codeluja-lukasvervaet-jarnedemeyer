@@ -52,12 +52,12 @@ export const ModelName = {
   User: 'User',
   UserRole: 'UserRole',
   Host: 'Host',
-  shift: 'shift',
-  shiftRole: 'shiftRole',
+  Shift: 'Shift',
+  ShiftRole: 'ShiftRole',
   Booking: 'Booking',
   Package: 'Package',
   Customer: 'Customer',
-  foodItem: 'foodItem',
+  FoodItem: 'FoodItem',
   BookingFoodItem: 'BookingFoodItem'
 } as const
 

@@ -393,12 +393,12 @@ export const ModelName = {
   User: 'User',
   UserRole: 'UserRole',
   Host: 'Host',
-  shift: 'shift',
-  shiftRole: 'shiftRole',
+  Shift: 'Shift',
+  ShiftRole: 'ShiftRole',
   Booking: 'Booking',
   Package: 'Package',
   Customer: 'Customer',
-  foodItem: 'foodItem',
+  FoodItem: 'FoodItem',
   BookingFoodItem: 'BookingFoodItem'
 } as const
 
@@ -641,150 +641,150 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    shift: {
-      payload: Prisma.$shiftPayload<ExtArgs>
-      fields: Prisma.shiftFieldRefs
+    Shift: {
+      payload: Prisma.$ShiftPayload<ExtArgs>
+      fields: Prisma.ShiftFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.shiftFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftPayload> | null
+          args: Prisma.ShiftFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.shiftFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftPayload>
+          args: Prisma.ShiftFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftPayload>
         }
         findFirst: {
-          args: Prisma.shiftFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftPayload> | null
+          args: Prisma.ShiftFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.shiftFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftPayload>
+          args: Prisma.ShiftFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftPayload>
         }
         findMany: {
-          args: Prisma.shiftFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftPayload>[]
+          args: Prisma.ShiftFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftPayload>[]
         }
         create: {
-          args: Prisma.shiftCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftPayload>
+          args: Prisma.ShiftCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftPayload>
         }
         createMany: {
-          args: Prisma.shiftCreateManyArgs<ExtArgs>
+          args: Prisma.ShiftCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.shiftCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftPayload>[]
+          args: Prisma.ShiftCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftPayload>[]
         }
         delete: {
-          args: Prisma.shiftDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftPayload>
+          args: Prisma.ShiftDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftPayload>
         }
         update: {
-          args: Prisma.shiftUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftPayload>
+          args: Prisma.ShiftUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftPayload>
         }
         deleteMany: {
-          args: Prisma.shiftDeleteManyArgs<ExtArgs>
+          args: Prisma.ShiftDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.shiftUpdateManyArgs<ExtArgs>
+          args: Prisma.ShiftUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.shiftUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftPayload>[]
+          args: Prisma.ShiftUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftPayload>[]
         }
         upsert: {
-          args: Prisma.shiftUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftPayload>
+          args: Prisma.ShiftUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftPayload>
         }
         aggregate: {
           args: Prisma.ShiftAggregateArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.AggregateShift>
         }
         groupBy: {
-          args: Prisma.shiftGroupByArgs<ExtArgs>
+          args: Prisma.ShiftGroupByArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ShiftGroupByOutputType>[]
         }
         count: {
-          args: Prisma.shiftCountArgs<ExtArgs>
+          args: Prisma.ShiftCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ShiftCountAggregateOutputType> | number
         }
       }
     }
-    shiftRole: {
-      payload: Prisma.$shiftRolePayload<ExtArgs>
-      fields: Prisma.shiftRoleFieldRefs
+    ShiftRole: {
+      payload: Prisma.$ShiftRolePayload<ExtArgs>
+      fields: Prisma.ShiftRoleFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.shiftRoleFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftRolePayload> | null
+          args: Prisma.ShiftRoleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftRolePayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.shiftRoleFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftRolePayload>
+          args: Prisma.ShiftRoleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftRolePayload>
         }
         findFirst: {
-          args: Prisma.shiftRoleFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftRolePayload> | null
+          args: Prisma.ShiftRoleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftRolePayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.shiftRoleFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftRolePayload>
+          args: Prisma.ShiftRoleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftRolePayload>
         }
         findMany: {
-          args: Prisma.shiftRoleFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftRolePayload>[]
+          args: Prisma.ShiftRoleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftRolePayload>[]
         }
         create: {
-          args: Prisma.shiftRoleCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftRolePayload>
+          args: Prisma.ShiftRoleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftRolePayload>
         }
         createMany: {
-          args: Prisma.shiftRoleCreateManyArgs<ExtArgs>
+          args: Prisma.ShiftRoleCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.shiftRoleCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftRolePayload>[]
+          args: Prisma.ShiftRoleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftRolePayload>[]
         }
         delete: {
-          args: Prisma.shiftRoleDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftRolePayload>
+          args: Prisma.ShiftRoleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftRolePayload>
         }
         update: {
-          args: Prisma.shiftRoleUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftRolePayload>
+          args: Prisma.ShiftRoleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftRolePayload>
         }
         deleteMany: {
-          args: Prisma.shiftRoleDeleteManyArgs<ExtArgs>
+          args: Prisma.ShiftRoleDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.shiftRoleUpdateManyArgs<ExtArgs>
+          args: Prisma.ShiftRoleUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.shiftRoleUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftRolePayload>[]
+          args: Prisma.ShiftRoleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftRolePayload>[]
         }
         upsert: {
-          args: Prisma.shiftRoleUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftRolePayload>
+          args: Prisma.ShiftRoleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShiftRolePayload>
         }
         aggregate: {
           args: Prisma.ShiftRoleAggregateArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.AggregateShiftRole>
         }
         groupBy: {
-          args: Prisma.shiftRoleGroupByArgs<ExtArgs>
+          args: Prisma.ShiftRoleGroupByArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ShiftRoleGroupByOutputType>[]
         }
         count: {
-          args: Prisma.shiftRoleCountArgs<ExtArgs>
+          args: Prisma.ShiftRoleCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ShiftRoleCountAggregateOutputType> | number
         }
       }
@@ -1011,76 +1011,76 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    foodItem: {
-      payload: Prisma.$foodItemPayload<ExtArgs>
-      fields: Prisma.foodItemFieldRefs
+    FoodItem: {
+      payload: Prisma.$FoodItemPayload<ExtArgs>
+      fields: Prisma.FoodItemFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.foodItemFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$foodItemPayload> | null
+          args: Prisma.FoodItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FoodItemPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.foodItemFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$foodItemPayload>
+          args: Prisma.FoodItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FoodItemPayload>
         }
         findFirst: {
-          args: Prisma.foodItemFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$foodItemPayload> | null
+          args: Prisma.FoodItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FoodItemPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.foodItemFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$foodItemPayload>
+          args: Prisma.FoodItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FoodItemPayload>
         }
         findMany: {
-          args: Prisma.foodItemFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$foodItemPayload>[]
+          args: Prisma.FoodItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FoodItemPayload>[]
         }
         create: {
-          args: Prisma.foodItemCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$foodItemPayload>
+          args: Prisma.FoodItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FoodItemPayload>
         }
         createMany: {
-          args: Prisma.foodItemCreateManyArgs<ExtArgs>
+          args: Prisma.FoodItemCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.foodItemCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$foodItemPayload>[]
+          args: Prisma.FoodItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FoodItemPayload>[]
         }
         delete: {
-          args: Prisma.foodItemDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$foodItemPayload>
+          args: Prisma.FoodItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FoodItemPayload>
         }
         update: {
-          args: Prisma.foodItemUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$foodItemPayload>
+          args: Prisma.FoodItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FoodItemPayload>
         }
         deleteMany: {
-          args: Prisma.foodItemDeleteManyArgs<ExtArgs>
+          args: Prisma.FoodItemDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.foodItemUpdateManyArgs<ExtArgs>
+          args: Prisma.FoodItemUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.foodItemUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$foodItemPayload>[]
+          args: Prisma.FoodItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FoodItemPayload>[]
         }
         upsert: {
-          args: Prisma.foodItemUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$foodItemPayload>
+          args: Prisma.FoodItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FoodItemPayload>
         }
         aggregate: {
           args: Prisma.FoodItemAggregateArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.AggregateFoodItem>
         }
         groupBy: {
-          args: Prisma.foodItemGroupByArgs<ExtArgs>
+          args: Prisma.FoodItemGroupByArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.FoodItemGroupByOutputType>[]
         }
         count: {
-          args: Prisma.foodItemCountArgs<ExtArgs>
+          args: Prisma.FoodItemCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.FoodItemCountAggregateOutputType> | number
         }
       }
@@ -1554,12 +1554,12 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   userRole?: Prisma.UserRoleOmit
   host?: Prisma.HostOmit
-  shift?: Prisma.shiftOmit
-  shiftRole?: Prisma.shiftRoleOmit
+  shift?: Prisma.ShiftOmit
+  shiftRole?: Prisma.ShiftRoleOmit
   booking?: Prisma.BookingOmit
   package?: Prisma.PackageOmit
   customer?: Prisma.CustomerOmit
-  foodItem?: Prisma.foodItemOmit
+  foodItem?: Prisma.FoodItemOmit
   bookingFoodItem?: Prisma.BookingFoodItemOmit
 }
 
