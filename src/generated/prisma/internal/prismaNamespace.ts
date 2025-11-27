@@ -394,6 +394,7 @@ export const ModelName = {
   UserRole: 'UserRole',
   Host: 'Host',
   shift: 'shift',
+  shiftRole: 'shiftRole',
   Booking: 'Booking',
   Package: 'Package',
   Customer: 'Customer',
@@ -413,7 +414,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userRole" | "host" | "shift" | "booking" | "package" | "customer" | "foodItem"
+    modelProps: "user" | "userRole" | "host" | "shift" | "shiftRole" | "booking" | "package" | "customer" | "foodItem"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -710,6 +711,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.shiftCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ShiftCountAggregateOutputType> | number
+        }
+      }
+    }
+    shiftRole: {
+      payload: Prisma.$shiftRolePayload<ExtArgs>
+      fields: Prisma.shiftRoleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.shiftRoleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftRolePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.shiftRoleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftRolePayload>
+        }
+        findFirst: {
+          args: Prisma.shiftRoleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftRolePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.shiftRoleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftRolePayload>
+        }
+        findMany: {
+          args: Prisma.shiftRoleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftRolePayload>[]
+        }
+        create: {
+          args: Prisma.shiftRoleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftRolePayload>
+        }
+        createMany: {
+          args: Prisma.shiftRoleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.shiftRoleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftRolePayload>[]
+        }
+        delete: {
+          args: Prisma.shiftRoleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftRolePayload>
+        }
+        update: {
+          args: Prisma.shiftRoleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftRolePayload>
+        }
+        deleteMany: {
+          args: Prisma.shiftRoleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.shiftRoleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.shiftRoleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftRolePayload>[]
+        }
+        upsert: {
+          args: Prisma.shiftRoleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$shiftRolePayload>
+        }
+        aggregate: {
+          args: Prisma.ShiftRoleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateShiftRole>
+        }
+        groupBy: {
+          args: Prisma.shiftRoleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShiftRoleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.shiftRoleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShiftRoleCountAggregateOutputType> | number
         }
       }
     }
@@ -1099,6 +1174,17 @@ export const ShiftScalarFieldEnum = {
 export type ShiftScalarFieldEnum = (typeof ShiftScalarFieldEnum)[keyof typeof ShiftScalarFieldEnum]
 
 
+export const ShiftRoleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ShiftRoleScalarFieldEnum = (typeof ShiftRoleScalarFieldEnum)[keyof typeof ShiftRoleScalarFieldEnum]
+
+
 export const BookingScalarFieldEnum = {
   id: 'id',
   startTime: 'startTime',
@@ -1384,6 +1470,7 @@ export type GlobalOmitConfig = {
   userRole?: Prisma.UserRoleOmit
   host?: Prisma.HostOmit
   shift?: Prisma.shiftOmit
+  shiftRole?: Prisma.shiftRoleOmit
   booking?: Prisma.BookingOmit
   package?: Prisma.PackageOmit
   customer?: Prisma.CustomerOmit

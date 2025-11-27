@@ -38,6 +38,11 @@ export type Host = Prisma.HostModel
  */
 export type shift = Prisma.shiftModel
 /**
+ * Model shiftRole
+ * 
+ */
+export type shiftRole = Prisma.shiftRoleModel
+/**
  * Model Booking
  * 
  */
