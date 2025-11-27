@@ -10,4 +10,5 @@
  */
 export type * from './models/User'
 export type * from './models/UserRole'
+export type * from './models/Host'
 export type * from './commonInputTypes'

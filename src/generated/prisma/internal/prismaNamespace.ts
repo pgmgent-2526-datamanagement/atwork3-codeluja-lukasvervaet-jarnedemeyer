@@ -391,7 +391,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   User: 'User',
-  UserRole: 'UserRole'
+  UserRole: 'UserRole',
+  Host: 'Host'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -407,7 +408,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "userRole"
+    modelProps: "user" | "userRole" | "host"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -559,6 +560,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Host: {
+      payload: Prisma.$HostPayload<ExtArgs>
+      fields: Prisma.HostFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.HostFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HostPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.HostFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HostPayload>
+        }
+        findFirst: {
+          args: Prisma.HostFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HostPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.HostFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HostPayload>
+        }
+        findMany: {
+          args: Prisma.HostFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HostPayload>[]
+        }
+        create: {
+          args: Prisma.HostCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HostPayload>
+        }
+        createMany: {
+          args: Prisma.HostCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.HostCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HostPayload>[]
+        }
+        delete: {
+          args: Prisma.HostDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HostPayload>
+        }
+        update: {
+          args: Prisma.HostUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HostPayload>
+        }
+        deleteMany: {
+          args: Prisma.HostDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.HostUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.HostUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HostPayload>[]
+        }
+        upsert: {
+          args: Prisma.HostUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HostPayload>
+        }
+        aggregate: {
+          args: Prisma.HostAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateHost>
+        }
+        groupBy: {
+          args: Prisma.HostGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.HostGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.HostCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.HostCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -623,6 +698,19 @@ export const UserRoleScalarFieldEnum = {
 } as const
 
 export type UserRoleScalarFieldEnum = (typeof UserRoleScalarFieldEnum)[keyof typeof UserRoleScalarFieldEnum]
+
+
+export const HostScalarFieldEnum = {
+  firstName: 'firstName',
+  lastName: 'lastName',
+  email: 'email',
+  phone: 'phone',
+  active: 'active',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type HostScalarFieldEnum = (typeof HostScalarFieldEnum)[keyof typeof HostScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -806,6 +894,7 @@ export interface PrismaClientOptions {
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   userRole?: Prisma.UserRoleOmit
+  host?: Prisma.HostOmit
 }
 
 /* Types for Logging */

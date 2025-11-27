@@ -27,3 +27,8 @@ export type User = Prisma.UserModel
  * 
  */
 export type UserRole = Prisma.UserRoleModel
+/**
+ * Model Host
+ * 
+ */
+export type Host = Prisma.HostModel
