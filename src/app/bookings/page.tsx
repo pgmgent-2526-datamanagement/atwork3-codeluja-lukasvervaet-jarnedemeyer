@@ -3,7 +3,6 @@ export default function Bookings() {
     <div>
       <header className="flex flex-col p-5 justify-between space-y-3">
         <h1 className="mt-3 text-2xl font-semibold flex justify-center items-center underline -underline-offset-[-3px] saira-font">
-          {" "}
           {/*text-[#05d8c8]*/}
           Your Bookings
         </h1>
