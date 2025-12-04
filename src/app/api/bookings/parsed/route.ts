@@ -3,7 +3,7 @@ import { readSheet } from "@/lib/googleSheets";
 
 export async function GET() {
   try {
-    const rawData = await readSheet("Gent_KPI", "A1:Z500");
+    const rawData = await readSheet("Gent_KPI", "A1:Z26");
 
     if (!Array.isArray(rawData) || rawData.length === 0) {
       return Response.json(
