@@ -1,4 +1,4 @@
-import { parseBookings } from "@/lib/bookingParser";
+import { parseBookings } from "@/lib/bookings/bookingParser";
 import { readSheet } from "@/lib/googleSheets";
 
 export async function GET() {
