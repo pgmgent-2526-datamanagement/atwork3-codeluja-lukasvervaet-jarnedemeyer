@@ -2,6 +2,7 @@
 import AddBookingButton from "@/components/AddBookingButton";
 
 export default async function Bookings() {
+  const bookings = true;
   return (
     <div>
       <header className="flex flex-col p-5 justify-between space-y-3">
@@ -14,41 +15,222 @@ export default async function Bookings() {
       </header>
       <AddBookingButton />
 
-      <div className="overflow-x-auto bg-white p-4 rounded-lg shadow-md mt-6 text-black flex flex-col justify-center items-center m-auto w-6xl">
-        <table className="border-separate border-spacing-2 border border-gray-400 dark:border-gray-500 table-auto w-full max-w-7xl">
-          <thead>
-            <tr>
-              <th className="border border-black">Booking Name</th>
-              <th className="border border-black">Experience</th>
-              <th className="border border-black">Date</th>
-              <th className="border border-black">Start uur</th>
-              <th className="border border-black">Eind uur</th>
-              <th className="border border-black">Spelers</th>
-              <th className="border border-black">Nodig Personeel</th>
-              <th className="border border-black">B2B</th>
-              <th className="border border-black">Food</th>
-              <th className="border border-black">Hosts</th>
-              <th className="border border-black">Opmerkingen</th>
-            </tr>
-          </thead>
-          <tbody className="text-center ">
-            <tr>
-              <td className="border-x border-black px-2">John Doe</td>
-              <td className="border-x border-black px-2">Escape Room</td>
-              <td className="border-x border-black px-2">2024-07-15</td>
-              <td className="border-x border-black px-2">14:00</td>
-              <td className="border-x border-black px-2">15:00</td>
-              <td className="border-x border-black px-2">4</td>
-              <td className="border-x border-black px-2">2</td>
-              <td className="border-x border-black px-2">Ja</td>
-              <td className="border-x border-black px-2">Vegetarisch</td>
-              <td className="border-x border-black px-2">
-                Anna, Mark, mauro, kevin
-              </td>
-              <td className="border-x border-black">Geen opmerkingen</td>
-            </tr>
-          </tbody>
-        </table>
+      {/*  */}
+      <div className="overflow-y-scroll bg-white border shadow-md border-gray-100 p-4 rounded-lg  mt-6 text-black flex flex-col flex-row-2  m-auto w-312 h-128">
+        {bookings ? (
+          <div>
+            <div className="flex flex-col w-full justify-start border border-gray-100 p-4 rounded-md space-y-2 shadow-sm mt-2">
+              <div className="flex justify-between items-center w-full">
+                <h2 className="text-xl font-semibold">Jarne De Meyer</h2>
+                <select
+                  name="status"
+                  id="status"
+                  className="border border-gray-300 rounded-md p-2 h-10 w-40"
+                >
+                  <option value="completed">Completed</option>
+                  <option value="pending">Pending</option>
+                  <option value="canceled">Canceled</option>
+                </select>
+              </div>
+
+              <div className="flex justify-between w-[50%] text-gray-500">
+                <p>email@example.com</p>
+                <p>04/12/2025</p>
+                <p>14:00 - 15:00</p>
+              </div>
+
+              <div>
+                <p>
+                  <span className="font-bold">Service: </span>VR ROOM
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col w-full justify-start border border-gray-100 p-4 rounded-md space-y-2 shadow-sm mt-2">
+              <div className="flex justify-between items-center w-full">
+                <h2 className="text-xl font-semibold">Jarne De Meyer</h2>
+                <select
+                  name="status"
+                  id="status"
+                  className="border border-gray-300 rounded-md p-2 h-10 w-40"
+                >
+                  <option value="completed">Completed</option>
+                  <option value="pending">Pending</option>
+                  <option value="canceled">Canceled</option>
+                </select>
+              </div>
+
+              <div className="flex justify-between w-[50%] text-gray-500">
+                <p>email@example.com</p>
+                <p>04/12/2025</p>
+                <p>14:00 - 15:00</p>
+              </div>
+
+              <div>
+                <p>
+                  <span className="font-bold">Service: </span>VR ROOM
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col w-full justify-start border border-gray-100 p-4 rounded-md space-y-2 shadow-sm mt-2">
+              <div className="flex justify-between items-center w-full">
+                <h2 className="text-xl font-semibold">Jarne De Meyer</h2>
+                <select
+                  name="status"
+                  id="status"
+                  className="border border-gray-300 rounded-md p-2 h-10 w-40"
+                >
+                  <option value="completed">Completed</option>
+                  <option value="pending">Pending</option>
+                  <option value="canceled">Canceled</option>
+                </select>
+              </div>
+
+              <div className="flex justify-between w-[50%] text-gray-500">
+                <p>email@example.com</p>
+                <p>04/12/2025</p>
+                <p>14:00 - 15:00</p>
+              </div>
+
+              <div>
+                <p>
+                  <span className="font-bold">Service: </span>VR ROOM
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col w-full justify-start border border-gray-100 p-4 rounded-md space-y-2 shadow-sm mt-2">
+              <div className="flex justify-between items-center w-full">
+                <h2 className="text-xl font-semibold">Jarne De Meyer</h2>
+                <select
+                  name="status"
+                  id="status"
+                  className="border border-gray-300 rounded-md p-2 h-10 w-40"
+                >
+                  <option value="completed">Completed</option>
+                  <option value="pending">Pending</option>
+                  <option value="canceled">Canceled</option>
+                </select>
+              </div>
+
+              <div className="flex justify-between w-[50%] text-gray-500">
+                <p>email@example.com</p>
+                <p>04/12/2025</p>
+                <p>14:00 - 15:00</p>
+              </div>
+
+              <div>
+                <p>
+                  <span className="font-bold">Service: </span>VR ROOM
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col w-full justify-start border border-gray-100 p-4 rounded-md space-y-2 shadow-sm mt-2">
+              <div className="flex justify-between items-center w-full">
+                <h2 className="text-xl font-semibold">Jarne De Meyer</h2>
+                <select
+                  name="status"
+                  id="status"
+                  className="border border-gray-300 rounded-md p-2 h-10 w-40"
+                >
+                  <option value="completed">Completed</option>
+                  <option value="pending">Pending</option>
+                  <option value="canceled">Canceled</option>
+                </select>
+              </div>
+
+              <div className="flex justify-between w-[50%] text-gray-500">
+                <p>email@example.com</p>
+                <p>04/12/2025</p>
+                <p>14:00 - 15:00</p>
+              </div>
+
+              <div>
+                <p>
+                  <span className="font-bold">Service: </span>VR ROOM
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col w-full justify-start border border-gray-100 p-4 rounded-md space-y-2 shadow-sm mt-2">
+              <div className="flex justify-between items-center w-full">
+                <h2 className="text-xl font-semibold">Jarne De Meyer</h2>
+                <select
+                  name="status"
+                  id="status"
+                  className="border border-gray-300 rounded-md p-2 h-10 w-40"
+                >
+                  <option value="completed">Completed</option>
+                  <option value="pending">Pending</option>
+                  <option value="canceled">Canceled</option>
+                </select>
+              </div>
+
+              <div className="flex justify-between w-[50%] text-gray-500">
+                <p>email@example.com</p>
+                <p>04/12/2025</p>
+                <p>14:00 - 15:00</p>
+              </div>
+
+              <div>
+                <p>
+                  <span className="font-bold">Service: </span>VR ROOM
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col w-full justify-start border border-gray-100 p-4 rounded-md space-y-2 shadow-sm mt-2">
+              <div className="flex justify-between items-center w-full">
+                <h2 className="text-xl font-semibold">Jarne De Meyer</h2>
+                <select
+                  name="status"
+                  id="status"
+                  className="border border-gray-300 rounded-md p-2 h-10 w-40"
+                >
+                  <option value="completed">Completed</option>
+                  <option value="pending">Pending</option>
+                  <option value="canceled">Canceled</option>
+                </select>
+              </div>
+
+              <div className="flex justify-between w-[50%] text-gray-500">
+                <p>email@example.com</p>
+                <p>04/12/2025</p>
+                <p>14:00 - 15:00</p>
+              </div>
+
+              <div>
+                <p>
+                  <span className="font-bold">Service: </span>VR ROOM
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col w-full justify-start border border-gray-100 p-4 rounded-md space-y-2 shadow-sm mt-2">
+              <div className="flex justify-between items-center w-full">
+                <h2 className="text-xl font-semibold">Jarne De Meyer</h2>
+                <select
+                  name="status"
+                  id="status"
+                  className="border border-gray-300 rounded-md p-2 h-10 w-40"
+                >
+                  <option value="completed">Completed</option>
+                  <option value="pending">Pending</option>
+                  <option value="canceled">Canceled</option>
+                </select>
+              </div>
+
+              <div className="flex justify-between w-[50%] text-gray-500">
+                <p>email@example.com</p>
+                <p>04/12/2025</p>
+                <p>14:00 - 15:00</p>
+              </div>
+
+              <div>
+                <p>
+                  <span className="font-bold">Service: </span>VR ROOM
+                </p>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <p>No bookings available.</p>
+        )}
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ const Button: React.FC<ButtonProps> = ({ width = "32", title, onClick }) => {
   return (
     <button
       type="button"
-      className={`${widthClass} cursor-pointer flex justify-center items-center bg-[#05d8c8] text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-[#04b3aa] transition-colors duration-300`}
+      className={`${widthClass} h-10 cursor-pointer flex justify-center items-center bg-[#05d8c8] text-sm text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-[#04b3aa] transition-colors duration-300`}
       onClick={onClick}
     >
       {title}
