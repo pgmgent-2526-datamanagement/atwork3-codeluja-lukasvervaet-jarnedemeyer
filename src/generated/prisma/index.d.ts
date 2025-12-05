@@ -7755,6 +7755,7 @@ export namespace Prisma {
     is_b2b: boolean | null
     status: string | null
     eposFamily: string | null
+    packageName: string | null
     bookingDescription: string | null
     notes: string | null
     customerId: number | null
@@ -7774,6 +7775,7 @@ export namespace Prisma {
     is_b2b: boolean | null
     status: string | null
     eposFamily: string | null
+    packageName: string | null
     bookingDescription: string | null
     notes: string | null
     customerId: number | null
@@ -7793,6 +7795,7 @@ export namespace Prisma {
     is_b2b: number
     status: number
     eposFamily: number
+    packageName: number
     bookingDescription: number
     notes: number
     customerId: number
@@ -7828,6 +7831,7 @@ export namespace Prisma {
     is_b2b?: true
     status?: true
     eposFamily?: true
+    packageName?: true
     bookingDescription?: true
     notes?: true
     customerId?: true
@@ -7847,6 +7851,7 @@ export namespace Prisma {
     is_b2b?: true
     status?: true
     eposFamily?: true
+    packageName?: true
     bookingDescription?: true
     notes?: true
     customerId?: true
@@ -7866,6 +7871,7 @@ export namespace Prisma {
     is_b2b?: true
     status?: true
     eposFamily?: true
+    packageName?: true
     bookingDescription?: true
     notes?: true
     customerId?: true
@@ -7972,6 +7978,7 @@ export namespace Prisma {
     is_b2b: boolean
     status: string | null
     eposFamily: string | null
+    packageName: string | null
     bookingDescription: string | null
     notes: string | null
     customerId: number | null
@@ -8010,6 +8017,7 @@ export namespace Prisma {
     is_b2b?: boolean
     status?: boolean
     eposFamily?: boolean
+    packageName?: boolean
     bookingDescription?: boolean
     notes?: boolean
     customerId?: boolean
@@ -8033,6 +8041,7 @@ export namespace Prisma {
     is_b2b?: boolean
     status?: boolean
     eposFamily?: boolean
+    packageName?: boolean
     bookingDescription?: boolean
     notes?: boolean
     customerId?: boolean
@@ -8053,6 +8062,7 @@ export namespace Prisma {
     is_b2b?: boolean
     status?: boolean
     eposFamily?: boolean
+    packageName?: boolean
     bookingDescription?: boolean
     notes?: boolean
     customerId?: boolean
@@ -8073,6 +8083,7 @@ export namespace Prisma {
     is_b2b?: boolean
     status?: boolean
     eposFamily?: boolean
+    packageName?: boolean
     bookingDescription?: boolean
     notes?: boolean
     customerId?: boolean
@@ -8080,7 +8091,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type BookingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "venue" | "dayOfWeek" | "startTime" | "endTime" | "playersCount" | "hostsRequired" | "food_required" | "is_b2b" | "status" | "eposFamily" | "bookingDescription" | "notes" | "customerId" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
+  export type BookingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "venue" | "dayOfWeek" | "startTime" | "endTime" | "playersCount" | "hostsRequired" | "food_required" | "is_b2b" | "status" | "eposFamily" | "packageName" | "bookingDescription" | "notes" | "customerId" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
   export type BookingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     customer?: boolean | Booking$customerArgs<ExtArgs>
     foodItems?: boolean | Booking$foodItemsArgs<ExtArgs>
@@ -8113,6 +8124,7 @@ export namespace Prisma {
       is_b2b: boolean
       status: string | null
       eposFamily: string | null
+      packageName: string | null
       bookingDescription: string | null
       notes: string | null
       customerId: number | null
@@ -8555,6 +8567,7 @@ export namespace Prisma {
     readonly is_b2b: FieldRef<"Booking", 'Boolean'>
     readonly status: FieldRef<"Booking", 'String'>
     readonly eposFamily: FieldRef<"Booking", 'String'>
+    readonly packageName: FieldRef<"Booking", 'String'>
     readonly bookingDescription: FieldRef<"Booking", 'String'>
     readonly notes: FieldRef<"Booking", 'String'>
     readonly customerId: FieldRef<"Booking", 'Int'>
@@ -14705,6 +14718,7 @@ export namespace Prisma {
     is_b2b: 'is_b2b',
     status: 'status',
     eposFamily: 'eposFamily',
+    packageName: 'packageName',
     bookingDescription: 'bookingDescription',
     notes: 'notes',
     customerId: 'customerId',
@@ -15271,6 +15285,7 @@ export namespace Prisma {
     is_b2b?: BoolFilter<"Booking"> | boolean
     status?: StringNullableFilter<"Booking"> | string | null
     eposFamily?: StringNullableFilter<"Booking"> | string | null
+    packageName?: StringNullableFilter<"Booking"> | string | null
     bookingDescription?: StringNullableFilter<"Booking"> | string | null
     notes?: StringNullableFilter<"Booking"> | string | null
     customerId?: IntNullableFilter<"Booking"> | number | null
@@ -15293,6 +15308,7 @@ export namespace Prisma {
     is_b2b?: SortOrder
     status?: SortOrderInput | SortOrder
     eposFamily?: SortOrderInput | SortOrder
+    packageName?: SortOrderInput | SortOrder
     bookingDescription?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
     customerId?: SortOrderInput | SortOrder
@@ -15318,6 +15334,7 @@ export namespace Prisma {
     is_b2b?: BoolFilter<"Booking"> | boolean
     status?: StringNullableFilter<"Booking"> | string | null
     eposFamily?: StringNullableFilter<"Booking"> | string | null
+    packageName?: StringNullableFilter<"Booking"> | string | null
     bookingDescription?: StringNullableFilter<"Booking"> | string | null
     notes?: StringNullableFilter<"Booking"> | string | null
     customerId?: IntNullableFilter<"Booking"> | number | null
@@ -15340,6 +15357,7 @@ export namespace Prisma {
     is_b2b?: SortOrder
     status?: SortOrderInput | SortOrder
     eposFamily?: SortOrderInput | SortOrder
+    packageName?: SortOrderInput | SortOrder
     bookingDescription?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
     customerId?: SortOrderInput | SortOrder
@@ -15367,6 +15385,7 @@ export namespace Prisma {
     is_b2b?: BoolWithAggregatesFilter<"Booking"> | boolean
     status?: StringNullableWithAggregatesFilter<"Booking"> | string | null
     eposFamily?: StringNullableWithAggregatesFilter<"Booking"> | string | null
+    packageName?: StringNullableWithAggregatesFilter<"Booking"> | string | null
     bookingDescription?: StringNullableWithAggregatesFilter<"Booking"> | string | null
     notes?: StringNullableWithAggregatesFilter<"Booking"> | string | null
     customerId?: IntNullableWithAggregatesFilter<"Booking"> | number | null
@@ -16061,6 +16080,7 @@ export namespace Prisma {
     is_b2b?: boolean
     status?: string | null
     eposFamily?: string | null
+    packageName?: string | null
     bookingDescription?: string | null
     notes?: string | null
     createdAt?: Date | string
@@ -16082,6 +16102,7 @@ export namespace Prisma {
     is_b2b?: boolean
     status?: string | null
     eposFamily?: string | null
+    packageName?: string | null
     bookingDescription?: string | null
     notes?: string | null
     customerId?: number | null
@@ -16102,6 +16123,7 @@ export namespace Prisma {
     is_b2b?: BoolFieldUpdateOperationsInput | boolean
     status?: NullableStringFieldUpdateOperationsInput | string | null
     eposFamily?: NullableStringFieldUpdateOperationsInput | string | null
+    packageName?: NullableStringFieldUpdateOperationsInput | string | null
     bookingDescription?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16123,6 +16145,7 @@ export namespace Prisma {
     is_b2b?: BoolFieldUpdateOperationsInput | boolean
     status?: NullableStringFieldUpdateOperationsInput | string | null
     eposFamily?: NullableStringFieldUpdateOperationsInput | string | null
+    packageName?: NullableStringFieldUpdateOperationsInput | string | null
     bookingDescription?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     customerId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -16144,6 +16167,7 @@ export namespace Prisma {
     is_b2b?: boolean
     status?: string | null
     eposFamily?: string | null
+    packageName?: string | null
     bookingDescription?: string | null
     notes?: string | null
     customerId?: number | null
@@ -16162,6 +16186,7 @@ export namespace Prisma {
     is_b2b?: BoolFieldUpdateOperationsInput | boolean
     status?: NullableStringFieldUpdateOperationsInput | string | null
     eposFamily?: NullableStringFieldUpdateOperationsInput | string | null
+    packageName?: NullableStringFieldUpdateOperationsInput | string | null
     bookingDescription?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16180,6 +16205,7 @@ export namespace Prisma {
     is_b2b?: BoolFieldUpdateOperationsInput | boolean
     status?: NullableStringFieldUpdateOperationsInput | string | null
     eposFamily?: NullableStringFieldUpdateOperationsInput | string | null
+    packageName?: NullableStringFieldUpdateOperationsInput | string | null
     bookingDescription?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     customerId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -16944,6 +16970,7 @@ export namespace Prisma {
     is_b2b?: SortOrder
     status?: SortOrder
     eposFamily?: SortOrder
+    packageName?: SortOrder
     bookingDescription?: SortOrder
     notes?: SortOrder
     customerId?: SortOrder
@@ -16970,6 +16997,7 @@ export namespace Prisma {
     is_b2b?: SortOrder
     status?: SortOrder
     eposFamily?: SortOrder
+    packageName?: SortOrder
     bookingDescription?: SortOrder
     notes?: SortOrder
     customerId?: SortOrder
@@ -16989,6 +17017,7 @@ export namespace Prisma {
     is_b2b?: SortOrder
     status?: SortOrder
     eposFamily?: SortOrder
+    packageName?: SortOrder
     bookingDescription?: SortOrder
     notes?: SortOrder
     customerId?: SortOrder
@@ -18545,6 +18574,7 @@ export namespace Prisma {
     is_b2b?: boolean
     status?: string | null
     eposFamily?: string | null
+    packageName?: string | null
     bookingDescription?: string | null
     notes?: string | null
     createdAt?: Date | string
@@ -18565,6 +18595,7 @@ export namespace Prisma {
     is_b2b?: boolean
     status?: string | null
     eposFamily?: string | null
+    packageName?: string | null
     bookingDescription?: string | null
     notes?: string | null
     createdAt?: Date | string
@@ -18614,6 +18645,7 @@ export namespace Prisma {
     is_b2b?: BoolFilter<"Booking"> | boolean
     status?: StringNullableFilter<"Booking"> | string | null
     eposFamily?: StringNullableFilter<"Booking"> | string | null
+    packageName?: StringNullableFilter<"Booking"> | string | null
     bookingDescription?: StringNullableFilter<"Booking"> | string | null
     notes?: StringNullableFilter<"Booking"> | string | null
     customerId?: IntNullableFilter<"Booking"> | number | null
@@ -18669,6 +18701,7 @@ export namespace Prisma {
     is_b2b?: boolean
     status?: string | null
     eposFamily?: string | null
+    packageName?: string | null
     bookingDescription?: string | null
     notes?: string | null
     createdAt?: Date | string
@@ -18689,6 +18722,7 @@ export namespace Prisma {
     is_b2b?: boolean
     status?: string | null
     eposFamily?: string | null
+    packageName?: string | null
     bookingDescription?: string | null
     notes?: string | null
     customerId?: number | null
@@ -18744,6 +18778,7 @@ export namespace Prisma {
     is_b2b?: BoolFieldUpdateOperationsInput | boolean
     status?: NullableStringFieldUpdateOperationsInput | string | null
     eposFamily?: NullableStringFieldUpdateOperationsInput | string | null
+    packageName?: NullableStringFieldUpdateOperationsInput | string | null
     bookingDescription?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18764,6 +18799,7 @@ export namespace Prisma {
     is_b2b?: BoolFieldUpdateOperationsInput | boolean
     status?: NullableStringFieldUpdateOperationsInput | string | null
     eposFamily?: NullableStringFieldUpdateOperationsInput | string | null
+    packageName?: NullableStringFieldUpdateOperationsInput | string | null
     bookingDescription?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     customerId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -18809,6 +18845,7 @@ export namespace Prisma {
     is_b2b?: boolean
     status?: string | null
     eposFamily?: string | null
+    packageName?: string | null
     bookingDescription?: string | null
     notes?: string | null
     createdAt?: Date | string
@@ -18829,6 +18866,7 @@ export namespace Prisma {
     is_b2b?: boolean
     status?: string | null
     eposFamily?: string | null
+    packageName?: string | null
     bookingDescription?: string | null
     notes?: string | null
     customerId?: number | null
@@ -18892,6 +18930,7 @@ export namespace Prisma {
     is_b2b?: BoolFieldUpdateOperationsInput | boolean
     status?: NullableStringFieldUpdateOperationsInput | string | null
     eposFamily?: NullableStringFieldUpdateOperationsInput | string | null
+    packageName?: NullableStringFieldUpdateOperationsInput | string | null
     bookingDescription?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18912,6 +18951,7 @@ export namespace Prisma {
     is_b2b?: BoolFieldUpdateOperationsInput | boolean
     status?: NullableStringFieldUpdateOperationsInput | string | null
     eposFamily?: NullableStringFieldUpdateOperationsInput | string | null
+    packageName?: NullableStringFieldUpdateOperationsInput | string | null
     bookingDescription?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     customerId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -19144,6 +19184,7 @@ export namespace Prisma {
     is_b2b?: boolean
     status?: string | null
     eposFamily?: string | null
+    packageName?: string | null
     bookingDescription?: string | null
     notes?: string | null
     createdAt?: Date | string
@@ -19161,6 +19202,7 @@ export namespace Prisma {
     is_b2b?: BoolFieldUpdateOperationsInput | boolean
     status?: NullableStringFieldUpdateOperationsInput | string | null
     eposFamily?: NullableStringFieldUpdateOperationsInput | string | null
+    packageName?: NullableStringFieldUpdateOperationsInput | string | null
     bookingDescription?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19181,6 +19223,7 @@ export namespace Prisma {
     is_b2b?: BoolFieldUpdateOperationsInput | boolean
     status?: NullableStringFieldUpdateOperationsInput | string | null
     eposFamily?: NullableStringFieldUpdateOperationsInput | string | null
+    packageName?: NullableStringFieldUpdateOperationsInput | string | null
     bookingDescription?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19201,6 +19244,7 @@ export namespace Prisma {
     is_b2b?: BoolFieldUpdateOperationsInput | boolean
     status?: NullableStringFieldUpdateOperationsInput | string | null
     eposFamily?: NullableStringFieldUpdateOperationsInput | string | null
+    packageName?: NullableStringFieldUpdateOperationsInput | string | null
     bookingDescription?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

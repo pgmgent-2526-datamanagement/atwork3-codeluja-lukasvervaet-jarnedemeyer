@@ -183,6 +183,7 @@ exports.Prisma.BookingScalarFieldEnum = {
   is_b2b: 'is_b2b',
   status: 'status',
   eposFamily: 'eposFamily',
+  packageName: 'packageName',
   bookingDescription: 'bookingDescription',
   notes: 'notes',
   customerId: 'customerId',

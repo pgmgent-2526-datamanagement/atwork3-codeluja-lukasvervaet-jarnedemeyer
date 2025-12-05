@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 
 export async function POST() {
   try {
-    const rawData = await readSheet("Gent_KPI", "A1:Z26");
+    const rawData = await readSheet("Gent_KPI", "A:Z201");
 
     if (!Array.isArray(rawData) || rawData.length === 0) {
       return Response.json({ error: "No data found" }, { status: 404 });
@@ -15,7 +15,7 @@ export async function POST() {
 
     const parsedBookings = parseBookings(rawData);
     const transformedBookings = transformBookings(parsedBookings);
-    const bookingsToInsert = transformedBookings.slice(0, 20);
+    const bookingsToInsert = transformedBookings;
 
     await prisma.booking.deleteMany(); // Clear test data
 

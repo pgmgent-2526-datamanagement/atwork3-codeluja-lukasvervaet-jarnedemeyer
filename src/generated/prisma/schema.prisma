@@ -86,6 +86,7 @@ model Booking {
   is_b2b             Boolean  @default(false)
   status             String?
   eposFamily         String?
+  packageName        String?
   bookingDescription String?
   notes              String?
   customerId         Int?
