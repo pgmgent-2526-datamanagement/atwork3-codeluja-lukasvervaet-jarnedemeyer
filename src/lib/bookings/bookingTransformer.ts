@@ -10,28 +10,11 @@ export interface TransformedBooking {
   food_required: boolean;
   is_b2b: boolean;
   status: string | null;
+  packageName: string;
   eposFamily: string | null;
   bookingDescription: string | null;
   notes: string | null;
 }
-
-export interface Package {
-  name: string;
-  durationMinutes: number;
-}
-
-const PACKAGES: Record<string, Package> = {
-  bronze: { name: "Bronze", durationMinutes: 45 },
-  silver: { name: "Silver", durationMinutes: 90 },
-  gold: { name: "Gold", durationMinutes: 120 },
-  kids_party: { name: "Kids Party", durationMinutes: 90 },
-  battle_bronze: { name: "Battle Bronze", durationMinutes: 45 },
-  battle_silver: { name: "Battle Silver", durationMinutes: 90 },
-  battle_gold: { name: "Battle Gold", durationMinutes: 120 },
-  meeting: { name: "Meeting", durationMinutes: 90 },
-  vr_experiences: { name: "VR Experiences", durationMinutes: 90 },
-  vr_battle: { name: "VR Battle", durationMinutes: 90 },
-};
 
 function parseDateTime(dateString: string, timeString: string): Date {
   try {
@@ -49,10 +32,58 @@ function parseDateTime(dateString: string, timeString: string): Date {
   }
 }
 
-function getPackageDuration(eposFamily: string): number {
-  const packageKey = eposFamily.toLowerCase().replace(/\s+/g, "_");
-  const pkg = PACKAGES[packageKey];
-  return pkg ? pkg.durationMinutes : 90; // Default to 90 minutes if not found
+function extractPackageFromDescription(description: string): {
+  name: string;
+  duration: number;
+} {
+  const desc = description.toLowerCase();
+
+  // Check for VR packages
+  if (desc.includes("vr gold") || desc.includes("gold package")) {
+    return { name: "Gold", duration: 120 };
+  }
+  if (desc.includes("vr bronze") || desc.includes("bronze package")) {
+    return { name: "Bronze", duration: 45 };
+  }
+  if (desc.includes("vr silver") || desc.includes("silver package")) {
+    return { name: "Silver", duration: 90 };
+  }
+
+  // Check for Battle packages
+  if (desc.includes("battle gold")) {
+    return { name: "Battle Gold", duration: 120 };
+  }
+  if (desc.includes("battle bronze")) {
+    return { name: "Battle Bronze", duration: 45 };
+  }
+  if (desc.includes("battle silver")) {
+    return { name: "Battle Silver", duration: 90 };
+  }
+
+  // Check for Team Building
+  if (desc.includes("team building - gold")) {
+    return { name: "Gold", duration: 120 };
+  }
+  if (desc.includes("team building - bronze")) {
+    return { name: "Bronze", duration: 45 };
+  }
+  if (desc.includes("team building - silver")) {
+    return { name: "Silver", duration: 90 };
+  }
+
+  // Check for other package types
+  if (desc.includes("kids party")) {
+    return { name: "Kids Party", duration: 90 };
+  }
+  if (desc.includes("meeting")) {
+    return { name: "Meeting", duration: 90 };
+  }
+  if (desc.includes("walk-in")) {
+    return { name: "Bronze", duration: 45 };
+  }
+
+  // Default to Silver (90 minutes) if no match
+  return { name: "Silver", duration: 90 };
 }
 
 function calculateEndTime(startTime: Date, durationMinutes: number): Date {
@@ -122,8 +153,10 @@ export function transformBooking(
   }
 
   const startTime = parseDateTime(parsed.date, parsed.time);
-  const packageDuration = getPackageDuration(parsed.eposFamily);
-  const endTime = calculateEndTime(startTime, packageDuration);
+
+  // Extract package info from booking description
+  const packageInfo = extractPackageFromDescription(parsed.bookingDescription);
+  const endTime = calculateEndTime(startTime, packageInfo.duration);
 
   const hasOvenFood = detectOvenFood(parsed.bookingDescription);
   const isB2B = detectB2B(parsed.eposFamily, parsed.bookingDescription);
@@ -138,6 +171,7 @@ export function transformBooking(
     food_required: hasOvenFood,
     is_b2b: isB2B,
     status: parsed.status || null,
+    packageName: packageInfo.name,
     eposFamily: parsed.eposFamily || null,
     bookingDescription: parsed.bookingDescription || null,
     notes: `[${parsed.eposFamily}] ${parsed.bookingDescription}`,

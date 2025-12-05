@@ -9,7 +9,7 @@ export interface ParsedBooking {
   status: string;
 }
 
-export function parseBookings(data: unknown[][]): ParsedBooking[] {
+export function parseBookings(data: unknown[]): ParsedBooking[] {
   const dataRows = data.slice(1); // Skip header row
 
   const bookings: ParsedBooking[] = dataRows.map((row) => {
