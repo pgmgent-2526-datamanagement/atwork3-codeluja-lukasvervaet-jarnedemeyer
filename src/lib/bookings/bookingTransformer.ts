@@ -148,6 +148,11 @@ function calculateHostsRequired(
 export function transformBooking(
   parsed: ParsedBooking
 ): TransformedBooking | null {
+  // Filter out non-VR bookings (no time = food/drink orders only)
+  if (!parsed.time || parsed.time.trim() === "") {
+    return null;
+  }
+
   // Filter out only invalid quantities (negative or zero)
   if (parsed.quantity <= 0) {
     return null;
