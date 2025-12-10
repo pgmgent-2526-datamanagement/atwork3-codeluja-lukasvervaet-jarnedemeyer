@@ -177,6 +177,7 @@ exports.Prisma.BookingScalarFieldEnum = {
   dayOfWeek: 'dayOfWeek',
   startTime: 'startTime',
   endTime: 'endTime',
+  bookingDate: 'bookingDate',
   playersCount: 'playersCount',
   hostsRequired: 'hostsRequired',
   food_required: 'food_required',
