@@ -7749,6 +7749,7 @@ export namespace Prisma {
     dayOfWeek: string | null
     startTime: Date | null
     endTime: Date | null
+    bookingDate: Date | null
     playersCount: number | null
     hostsRequired: number | null
     food_required: boolean | null
@@ -7769,6 +7770,7 @@ export namespace Prisma {
     dayOfWeek: string | null
     startTime: Date | null
     endTime: Date | null
+    bookingDate: Date | null
     playersCount: number | null
     hostsRequired: number | null
     food_required: boolean | null
@@ -7789,6 +7791,7 @@ export namespace Prisma {
     dayOfWeek: number
     startTime: number
     endTime: number
+    bookingDate: number
     playersCount: number
     hostsRequired: number
     food_required: number
@@ -7825,6 +7828,7 @@ export namespace Prisma {
     dayOfWeek?: true
     startTime?: true
     endTime?: true
+    bookingDate?: true
     playersCount?: true
     hostsRequired?: true
     food_required?: true
@@ -7845,6 +7849,7 @@ export namespace Prisma {
     dayOfWeek?: true
     startTime?: true
     endTime?: true
+    bookingDate?: true
     playersCount?: true
     hostsRequired?: true
     food_required?: true
@@ -7865,6 +7870,7 @@ export namespace Prisma {
     dayOfWeek?: true
     startTime?: true
     endTime?: true
+    bookingDate?: true
     playersCount?: true
     hostsRequired?: true
     food_required?: true
@@ -7972,6 +7978,7 @@ export namespace Prisma {
     dayOfWeek: string | null
     startTime: Date
     endTime: Date
+    bookingDate: Date
     playersCount: number
     hostsRequired: number
     food_required: boolean
@@ -8011,6 +8018,7 @@ export namespace Prisma {
     dayOfWeek?: boolean
     startTime?: boolean
     endTime?: boolean
+    bookingDate?: boolean
     playersCount?: boolean
     hostsRequired?: boolean
     food_required?: boolean
@@ -8035,6 +8043,7 @@ export namespace Prisma {
     dayOfWeek?: boolean
     startTime?: boolean
     endTime?: boolean
+    bookingDate?: boolean
     playersCount?: boolean
     hostsRequired?: boolean
     food_required?: boolean
@@ -8056,6 +8065,7 @@ export namespace Prisma {
     dayOfWeek?: boolean
     startTime?: boolean
     endTime?: boolean
+    bookingDate?: boolean
     playersCount?: boolean
     hostsRequired?: boolean
     food_required?: boolean
@@ -8077,6 +8087,7 @@ export namespace Prisma {
     dayOfWeek?: boolean
     startTime?: boolean
     endTime?: boolean
+    bookingDate?: boolean
     playersCount?: boolean
     hostsRequired?: boolean
     food_required?: boolean
@@ -8091,7 +8102,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type BookingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "venue" | "dayOfWeek" | "startTime" | "endTime" | "playersCount" | "hostsRequired" | "food_required" | "is_b2b" | "status" | "eposFamily" | "packageName" | "bookingDescription" | "notes" | "customerId" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
+  export type BookingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "venue" | "dayOfWeek" | "startTime" | "endTime" | "bookingDate" | "playersCount" | "hostsRequired" | "food_required" | "is_b2b" | "status" | "eposFamily" | "packageName" | "bookingDescription" | "notes" | "customerId" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
   export type BookingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     customer?: boolean | Booking$customerArgs<ExtArgs>
     foodItems?: boolean | Booking$foodItemsArgs<ExtArgs>
@@ -8118,6 +8129,7 @@ export namespace Prisma {
       dayOfWeek: string | null
       startTime: Date
       endTime: Date
+      bookingDate: Date
       playersCount: number
       hostsRequired: number
       food_required: boolean
@@ -8561,6 +8573,7 @@ export namespace Prisma {
     readonly dayOfWeek: FieldRef<"Booking", 'String'>
     readonly startTime: FieldRef<"Booking", 'DateTime'>
     readonly endTime: FieldRef<"Booking", 'DateTime'>
+    readonly bookingDate: FieldRef<"Booking", 'DateTime'>
     readonly playersCount: FieldRef<"Booking", 'Int'>
     readonly hostsRequired: FieldRef<"Booking", 'Int'>
     readonly food_required: FieldRef<"Booking", 'Boolean'>
@@ -14712,6 +14725,7 @@ export namespace Prisma {
     dayOfWeek: 'dayOfWeek',
     startTime: 'startTime',
     endTime: 'endTime',
+    bookingDate: 'bookingDate',
     playersCount: 'playersCount',
     hostsRequired: 'hostsRequired',
     food_required: 'food_required',
@@ -15279,6 +15293,7 @@ export namespace Prisma {
     dayOfWeek?: StringNullableFilter<"Booking"> | string | null
     startTime?: DateTimeFilter<"Booking"> | Date | string
     endTime?: DateTimeFilter<"Booking"> | Date | string
+    bookingDate?: DateTimeFilter<"Booking"> | Date | string
     playersCount?: IntFilter<"Booking"> | number
     hostsRequired?: IntFilter<"Booking"> | number
     food_required?: BoolFilter<"Booking"> | boolean
@@ -15302,6 +15317,7 @@ export namespace Prisma {
     dayOfWeek?: SortOrderInput | SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
+    bookingDate?: SortOrder
     playersCount?: SortOrder
     hostsRequired?: SortOrder
     food_required?: SortOrder
@@ -15328,6 +15344,7 @@ export namespace Prisma {
     dayOfWeek?: StringNullableFilter<"Booking"> | string | null
     startTime?: DateTimeFilter<"Booking"> | Date | string
     endTime?: DateTimeFilter<"Booking"> | Date | string
+    bookingDate?: DateTimeFilter<"Booking"> | Date | string
     playersCount?: IntFilter<"Booking"> | number
     hostsRequired?: IntFilter<"Booking"> | number
     food_required?: BoolFilter<"Booking"> | boolean
@@ -15351,6 +15368,7 @@ export namespace Prisma {
     dayOfWeek?: SortOrderInput | SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
+    bookingDate?: SortOrder
     playersCount?: SortOrder
     hostsRequired?: SortOrder
     food_required?: SortOrder
@@ -15379,6 +15397,7 @@ export namespace Prisma {
     dayOfWeek?: StringNullableWithAggregatesFilter<"Booking"> | string | null
     startTime?: DateTimeWithAggregatesFilter<"Booking"> | Date | string
     endTime?: DateTimeWithAggregatesFilter<"Booking"> | Date | string
+    bookingDate?: DateTimeWithAggregatesFilter<"Booking"> | Date | string
     playersCount?: IntWithAggregatesFilter<"Booking"> | number
     hostsRequired?: IntWithAggregatesFilter<"Booking"> | number
     food_required?: BoolWithAggregatesFilter<"Booking"> | boolean
@@ -16074,6 +16093,7 @@ export namespace Prisma {
     dayOfWeek?: string | null
     startTime: Date | string
     endTime: Date | string
+    bookingDate: Date | string
     playersCount: number
     hostsRequired: number
     food_required?: boolean
@@ -16096,6 +16116,7 @@ export namespace Prisma {
     dayOfWeek?: string | null
     startTime: Date | string
     endTime: Date | string
+    bookingDate: Date | string
     playersCount: number
     hostsRequired: number
     food_required?: boolean
@@ -16117,6 +16138,7 @@ export namespace Prisma {
     dayOfWeek?: NullableStringFieldUpdateOperationsInput | string | null
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     playersCount?: IntFieldUpdateOperationsInput | number
     hostsRequired?: IntFieldUpdateOperationsInput | number
     food_required?: BoolFieldUpdateOperationsInput | boolean
@@ -16139,6 +16161,7 @@ export namespace Prisma {
     dayOfWeek?: NullableStringFieldUpdateOperationsInput | string | null
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     playersCount?: IntFieldUpdateOperationsInput | number
     hostsRequired?: IntFieldUpdateOperationsInput | number
     food_required?: BoolFieldUpdateOperationsInput | boolean
@@ -16161,6 +16184,7 @@ export namespace Prisma {
     dayOfWeek?: string | null
     startTime: Date | string
     endTime: Date | string
+    bookingDate: Date | string
     playersCount: number
     hostsRequired: number
     food_required?: boolean
@@ -16180,6 +16204,7 @@ export namespace Prisma {
     dayOfWeek?: NullableStringFieldUpdateOperationsInput | string | null
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     playersCount?: IntFieldUpdateOperationsInput | number
     hostsRequired?: IntFieldUpdateOperationsInput | number
     food_required?: BoolFieldUpdateOperationsInput | boolean
@@ -16199,6 +16224,7 @@ export namespace Prisma {
     dayOfWeek?: NullableStringFieldUpdateOperationsInput | string | null
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     playersCount?: IntFieldUpdateOperationsInput | number
     hostsRequired?: IntFieldUpdateOperationsInput | number
     food_required?: BoolFieldUpdateOperationsInput | boolean
@@ -16964,6 +16990,7 @@ export namespace Prisma {
     dayOfWeek?: SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
+    bookingDate?: SortOrder
     playersCount?: SortOrder
     hostsRequired?: SortOrder
     food_required?: SortOrder
@@ -16991,6 +17018,7 @@ export namespace Prisma {
     dayOfWeek?: SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
+    bookingDate?: SortOrder
     playersCount?: SortOrder
     hostsRequired?: SortOrder
     food_required?: SortOrder
@@ -17011,6 +17039,7 @@ export namespace Prisma {
     dayOfWeek?: SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
+    bookingDate?: SortOrder
     playersCount?: SortOrder
     hostsRequired?: SortOrder
     food_required?: SortOrder
@@ -18568,6 +18597,7 @@ export namespace Prisma {
     dayOfWeek?: string | null
     startTime: Date | string
     endTime: Date | string
+    bookingDate: Date | string
     playersCount: number
     hostsRequired: number
     food_required?: boolean
@@ -18589,6 +18619,7 @@ export namespace Prisma {
     dayOfWeek?: string | null
     startTime: Date | string
     endTime: Date | string
+    bookingDate: Date | string
     playersCount: number
     hostsRequired: number
     food_required?: boolean
@@ -18639,6 +18670,7 @@ export namespace Prisma {
     dayOfWeek?: StringNullableFilter<"Booking"> | string | null
     startTime?: DateTimeFilter<"Booking"> | Date | string
     endTime?: DateTimeFilter<"Booking"> | Date | string
+    bookingDate?: DateTimeFilter<"Booking"> | Date | string
     playersCount?: IntFilter<"Booking"> | number
     hostsRequired?: IntFilter<"Booking"> | number
     food_required?: BoolFilter<"Booking"> | boolean
@@ -18695,6 +18727,7 @@ export namespace Prisma {
     dayOfWeek?: string | null
     startTime: Date | string
     endTime: Date | string
+    bookingDate: Date | string
     playersCount: number
     hostsRequired: number
     food_required?: boolean
@@ -18716,6 +18749,7 @@ export namespace Prisma {
     dayOfWeek?: string | null
     startTime: Date | string
     endTime: Date | string
+    bookingDate: Date | string
     playersCount: number
     hostsRequired: number
     food_required?: boolean
@@ -18772,6 +18806,7 @@ export namespace Prisma {
     dayOfWeek?: NullableStringFieldUpdateOperationsInput | string | null
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     playersCount?: IntFieldUpdateOperationsInput | number
     hostsRequired?: IntFieldUpdateOperationsInput | number
     food_required?: BoolFieldUpdateOperationsInput | boolean
@@ -18793,6 +18828,7 @@ export namespace Prisma {
     dayOfWeek?: NullableStringFieldUpdateOperationsInput | string | null
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     playersCount?: IntFieldUpdateOperationsInput | number
     hostsRequired?: IntFieldUpdateOperationsInput | number
     food_required?: BoolFieldUpdateOperationsInput | boolean
@@ -18839,6 +18875,7 @@ export namespace Prisma {
     dayOfWeek?: string | null
     startTime: Date | string
     endTime: Date | string
+    bookingDate: Date | string
     playersCount: number
     hostsRequired: number
     food_required?: boolean
@@ -18860,6 +18897,7 @@ export namespace Prisma {
     dayOfWeek?: string | null
     startTime: Date | string
     endTime: Date | string
+    bookingDate: Date | string
     playersCount: number
     hostsRequired: number
     food_required?: boolean
@@ -18924,6 +18962,7 @@ export namespace Prisma {
     dayOfWeek?: NullableStringFieldUpdateOperationsInput | string | null
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     playersCount?: IntFieldUpdateOperationsInput | number
     hostsRequired?: IntFieldUpdateOperationsInput | number
     food_required?: BoolFieldUpdateOperationsInput | boolean
@@ -18945,6 +18984,7 @@ export namespace Prisma {
     dayOfWeek?: NullableStringFieldUpdateOperationsInput | string | null
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     playersCount?: IntFieldUpdateOperationsInput | number
     hostsRequired?: IntFieldUpdateOperationsInput | number
     food_required?: BoolFieldUpdateOperationsInput | boolean
@@ -19178,6 +19218,7 @@ export namespace Prisma {
     dayOfWeek?: string | null
     startTime: Date | string
     endTime: Date | string
+    bookingDate: Date | string
     playersCount: number
     hostsRequired: number
     food_required?: boolean
@@ -19196,6 +19237,7 @@ export namespace Prisma {
     dayOfWeek?: NullableStringFieldUpdateOperationsInput | string | null
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     playersCount?: IntFieldUpdateOperationsInput | number
     hostsRequired?: IntFieldUpdateOperationsInput | number
     food_required?: BoolFieldUpdateOperationsInput | boolean
@@ -19217,6 +19259,7 @@ export namespace Prisma {
     dayOfWeek?: NullableStringFieldUpdateOperationsInput | string | null
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     playersCount?: IntFieldUpdateOperationsInput | number
     hostsRequired?: IntFieldUpdateOperationsInput | number
     food_required?: BoolFieldUpdateOperationsInput | boolean
@@ -19238,6 +19281,7 @@ export namespace Prisma {
     dayOfWeek?: NullableStringFieldUpdateOperationsInput | string | null
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookingDate?: DateTimeFieldUpdateOperationsInput | Date | string
     playersCount?: IntFieldUpdateOperationsInput | number
     hostsRequired?: IntFieldUpdateOperationsInput | number
     food_required?: BoolFieldUpdateOperationsInput | boolean

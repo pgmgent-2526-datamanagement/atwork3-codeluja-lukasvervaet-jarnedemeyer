@@ -78,8 +78,9 @@ model Booking {
   id                 Int      @id @default(autoincrement())
   venue              String?
   dayOfWeek          String?
-  startTime          DateTime
-  endTime            DateTime
+  startTime          DateTime @db.Time
+  endTime            DateTime @db.Time
+  bookingDate        DateTime @db.Date
   playersCount       Int
   hostsRequired      Int
   food_required      Boolean  @default(false)
