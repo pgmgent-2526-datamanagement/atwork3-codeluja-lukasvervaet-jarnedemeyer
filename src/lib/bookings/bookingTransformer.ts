@@ -5,6 +5,7 @@ export interface TransformedBooking {
   dayOfWeek: string | null;
   startTime: Date;
   endTime: Date;
+  bookingDate: Date;
   playersCount: number;
   hostsRequired: number;
   food_required: boolean;
@@ -154,6 +155,9 @@ export function transformBooking(
 
   const startTime = parseDateTime(parsed.date, parsed.time);
 
+  // Extract just the date for bookingDate (set time to midnight)
+  const bookingDate = parseDateTime(parsed.date, "00:00");
+
   // Extract package info from booking description
   const packageInfo = extractPackageFromDescription(parsed.bookingDescription);
   const endTime = calculateEndTime(startTime, packageInfo.duration);
@@ -166,6 +170,7 @@ export function transformBooking(
     dayOfWeek: parsed.dayOfWeek || null,
     startTime,
     endTime,
+    bookingDate,
     playersCount: parsed.quantity,
     hostsRequired: calculateHostsRequired(parsed.quantity, hasOvenFood),
     food_required: hasOvenFood,
