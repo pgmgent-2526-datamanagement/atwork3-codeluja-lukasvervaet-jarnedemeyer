@@ -29,12 +29,12 @@ model User {
 }
 
 model UserRole {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
   description String?
-  users     User[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  users       User[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Host {
@@ -60,8 +60,8 @@ model Shift {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  host      Host?      @relation(fields: [hostId], references: [id])
-  role      ShiftRole? @relation(fields: [roleId], references: [id])
+  host Host?      @relation(fields: [hostId], references: [id])
+  role ShiftRole? @relation(fields: [roleId], references: [id])
 }
 
 model ShiftRole {
@@ -71,7 +71,7 @@ model ShiftRole {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  shifts      Shift[]
+  shifts Shift[]
 }
 
 model Booking {
@@ -100,18 +100,18 @@ model Booking {
 }
 
 model Package {
-  id                Int       @id @default(autoincrement())
-  name              String
-  category          PackageCategory      // VR, VR_BATTLE, KIDS, SCHOOL
-  groupType         GroupType            // NORMAL or LARGE_GROUP
-  playTimeMin       Int
-  visitDurationMin  Int
-  pricePerPlayer    Decimal @db.Decimal(10, 2)
-  gameSelection     String?             // "Choose in venue", "NanoClash Focus", ...
-  freeDrink         Boolean @default(false)
-  freeSupervisor    Boolean @default(false)
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  id               Int             @id @default(autoincrement())
+  name             String
+  category         PackageCategory // VR, VR_BATTLE, KIDS, SCHOOL
+  groupType        GroupType // NORMAL or LARGE_GROUP
+  playTimeMin      Int
+  visitDurationMin Int
+  pricePerPlayer   Decimal         @db.Decimal(10, 2)
+  gameSelection    String? // "Choose in venue", "NanoClash Focus", ...
+  freeDrink        Boolean         @default(false)
+  freeSupervisor   Boolean         @default(false)
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
 }
 
 enum PackageCategory {
@@ -137,34 +137,34 @@ model Customer {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  bookings  Booking[]
+  bookings Booking[]
 }
 
 model FoodItem {
-  id        Int      @id @default(autoincrement())
-  name      String
+  id          Int      @id @default(autoincrement())
+  name        String
   description String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
-  bookings  BookingFoodItem[]
+  bookings BookingFoodItem[]
 }
 
 model BookingFoodItem {
-  id         Int      @id @default(autoincrement())
+  id         Int @id @default(autoincrement())
   bookingId  Int
   foodItemId Int
-  quantity   Int      @default(1)
+  quantity   Int @default(1)
 
-  booking    Booking   @relation(fields: [bookingId], references: [id])
-  foodItem   FoodItem  @relation(fields: [foodItemId], references: [id])
+  booking  Booking  @relation(fields: [bookingId], references: [id])
+  foodItem FoodItem @relation(fields: [foodItemId], references: [id])
 }
 
 model BookingHost {
-  id        Int      @id @default(autoincrement())
+  id        Int @id @default(autoincrement())
   bookingId Int
   hostId    Int
 
-  booking   Booking @relation(fields: [bookingId], references: [id])
-  host      Host    @relation(fields: [hostId], references: [id])
+  booking Booking @relation(fields: [bookingId], references: [id])
+  host    Host    @relation(fields: [hostId], references: [id])
 }
