@@ -6,27 +6,44 @@ import { useEffect, useState } from "react";
 interface Booking {
   id: number;
   playersCount: number;
-  startTime: Date;
-  endTime: Date;
+  startTime: string;
+  endTime: string;
   bookingDescription: string;
   hostsRequired: number;
   food_required: boolean;
   is_b2b: boolean;
   packageName: string;
   notes: string;
+  status: string;
 }
 
-interface BookingsData {
-  bookings: Booking[];
-}
+//! display bookings in calender style view with date, time, playersCount, packageName, hostsRequired, bookingDescription
+//* https://www.untitledui.com/react/components/calendars
 
 export default function Bookings() {
-  const [bookings, setBookings] = useState({});
+  const [bookings, setBookings] = useState<Booking[]>([]);
   const fetchBookings = async () => {
     const res = await fetch("/api/bookings/db", { cache: "no-store" });
+    if (!res.ok) {
+      console.error("Failed to fetch bookings", res.status);
+      setBookings([]);
+      return [];
+    }
     const data = await res.json();
-    setBookings(data);
-    return data;
+    if (Array.isArray(data)) {
+      setBookings(data as Booking[]);
+      return data as Booking[];
+    }
+    setBookings([]);
+    return [];
+  };
+
+  const isValidDate = (dateString: string) => {
+    const date = new Date(dateString);
+    // Checks if the date object is valid AND is not the Epoch Time (plus or minus a few hours for timezone offset)
+    return (
+      date instanceof Date && !isNaN(date.getTime()) && date.getTime() > 3600000
+    ); // Check if time is greater than 1 hour after Epoch
   };
 
   useEffect(() => {
@@ -46,11 +63,17 @@ export default function Bookings() {
           Bekijk en beheer uw boekingen
         </p>
       </header>
-      <AddBookingButton />
+      {/* <AddBookingButton /> */}
+      <div>
+        <select name="filter" id="filter">
+          <option value="list">List View (today)</option>
+          <option value="calendar">Calendar View</option>
+        </select>
+      </div>
 
       <div className="overflow-y-scroll bg-white border shadow-md border-gray-100 p-4 rounded-lg  mt-6 text-black flex flex-col flex-row-2  m-auto w-312 h-128">
-        {Array.isArray(bookings) && bookings.length > 0 ? (
-          (bookings as Booking[]).map((booking: Booking) => {
+        {bookings.length > 0 ? (
+          bookings.map((booking: Booking) => {
             return (
               <div key={booking.id} className="mb-4">
                 <div className="flex flex-col w-full justify-start border border-gray-100 p-4 rounded-md space-y-2 shadow-sm mt-2">
@@ -75,14 +98,41 @@ export default function Bookings() {
 
                   <div className="flex justify-between w-[50%] text-gray-500">
                     <p>email@example.com</p>
-                    <p>{booking.startTime.toString()}</p>
-                    <p>{booking.endTime.toString()}</p>
+                    <p>
+                      {isValidDate(booking.startTime) ? (
+                        new Date(booking.startTime).toLocaleDateString(
+                          "nl-NL",
+                          { day: "2-digit", month: "short", year: "numeric" }
+                        )
+                      ) : (
+                        <span className="text-red-500 font-semibold">
+                          Missing Date
+                        </span>
+                      )}
+                    </p>
+                    <p>
+                      {isValidDate(booking.startTime) &&
+                      isValidDate(booking.endTime) ? (
+                        `${new Date(booking.startTime).toLocaleTimeString(
+                          "nl-NL",
+                          { hour: "2-digit", minute: "2-digit" }
+                        )} - ${new Date(booking.endTime).toLocaleTimeString(
+                          "nl-NL",
+                          { hour: "2-digit", minute: "2-digit" }
+                        )}`
+                      ) : (
+                        <span className="text-red-500 font-semibold">
+                          Missing Time
+                        </span>
+                      )}
+                    </p>
                   </div>
                   <div>
                     <p>
                       <span className="font-bold">Package: </span>
                       {booking.packageName}
                     </p>
+                    <p>Status: {booking.status}</p>
                   </div>
                 </div>
               </div>

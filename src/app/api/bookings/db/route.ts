@@ -4,13 +4,13 @@ const prisma = new PrismaClient();
 
 export async function GET() {
   try {
-    const filteredRes = await prisma.booking.findMany({
+    const res = await prisma.booking.findMany({
       where: {
         status: "Booked",
-        startTime: {
-          gte: new Date(),
-          lt: new Date(new Date().setMonth(new Date().getMonth() + 1)),
-        },
+        // startTime: {
+        //   gte: new Date(),
+        //   lt: new Date(new Date().setMonth(new Date().getMonth() + 1)),
+        // },
       },
       select: {
         id: true,
@@ -24,19 +24,26 @@ export async function GET() {
         packageName: true,
         bookingDescription: true,
         notes: true,
+        status: true,
       },
       orderBy: {
         startTime: "asc",
       },
     });
 
-    if (filteredRes.length === 0) {
-      return new Response("No active bookings found", { status: 200 });
+    //! now convert the date, startTime and endTime to a string and slice that string to get the clean version
+
+    if (res.length === 0) {
+      return Response.json([]);
     }
 
-    return Response.json(filteredRes);
+    console.log("Fetched bookings from database:", res);
+
+    return Response.json(res);
   } catch (error) {
     console.error("Database error fetching bookings:", error);
     return new Response("Internal Server Error", { status: 500 });
+  } finally {
+    await prisma.$disconnect();
   }
 }
