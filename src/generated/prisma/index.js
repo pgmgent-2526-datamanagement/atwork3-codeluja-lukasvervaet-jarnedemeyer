@@ -263,7 +263,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/vervaet/Documents/Artevelde/Year 2/AtWork-3/atwork3-codeluja-lukasvervaet-jarnedemeyer/src/generated/prisma",
+      "value": "C:\\Users\\jarne\\Desktop\\Artevelde\\jaar2\\WORK3\\atwork3-codeluja-lukasvervaet-jarnedemeyer\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -272,12 +272,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "darwin-arm64",
+        "value": "windows",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/vervaet/Documents/Artevelde/Year 2/AtWork-3/atwork3-codeluja-lukasvervaet-jarnedemeyer/prisma/schema.prisma",
+    "sourceFilePath": "C:\\Users\\jarne\\Desktop\\Artevelde\\jaar2\\WORK3\\atwork3-codeluja-lukasvervaet-jarnedemeyer\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -291,6 +291,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -301,7 +302,7 @@ const config = {
   },
   "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        Int      @id @default(autoincrement())\n  firstName String\n  lastName  String\n  email     String   @unique\n  phone     String?\n  password  String\n  role_id   Int\n  role      UserRole @relation(fields: [role_id], references: [id])\n  active    Boolean  @default(true)\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel UserRole {\n  id          Int      @id @default(autoincrement())\n  name        String   @unique\n  description String?\n  users       User[]\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n}\n\nmodel Host {\n  id        Int      @id @default(autoincrement())\n  firstName String\n  lastName  String\n  email     String   @unique\n  phone     String?\n  active    Boolean  @default(true)\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  bookingHosts BookingHost[]\n  shifts       Shift[]\n}\n\nmodel Shift {\n  id        Int      @id @default(autoincrement())\n  hostId    Int?\n  startTime DateTime\n  endTime   DateTime\n  roleId    Int?\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  host Host?      @relation(fields: [hostId], references: [id])\n  role ShiftRole? @relation(fields: [roleId], references: [id])\n}\n\nmodel ShiftRole {\n  id          Int      @id @default(autoincrement())\n  name        String   @unique\n  description String?\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n\n  shifts Shift[]\n}\n\nmodel Booking {\n  id                 Int      @id @default(autoincrement())\n  venue              String?\n  dayOfWeek          String?\n  startTime          DateTime @db.Time\n  endTime            DateTime @db.Time\n  bookingDate        DateTime @db.Date\n  playersCount       Int\n  hostsRequired      Int\n  food_required      Boolean  @default(false)\n  is_b2b             Boolean  @default(false)\n  status             String?\n  eposFamily         String?\n  packageName        String?\n  bookingDescription String?\n  notes              String?\n  customerId         Int?\n  createdAt          DateTime @default(now())\n  updatedAt          DateTime @updatedAt\n\n  customer     Customer?         @relation(fields: [customerId], references: [id])\n  foodItems    BookingFoodItem[]\n  bookingHosts BookingHost[]\n}\n\nmodel Package {\n  id               Int             @id @default(autoincrement())\n  name             String\n  category         PackageCategory // VR, VR_BATTLE, KIDS, SCHOOL\n  groupType        GroupType // NORMAL or LARGE_GROUP\n  playTimeMin      Int\n  visitDurationMin Int\n  pricePerPlayer   Decimal         @db.Decimal(10, 2)\n  gameSelection    String? // \"Choose in venue\", \"NanoClash Focus\", ...\n  freeDrink        Boolean         @default(false)\n  freeSupervisor   Boolean         @default(false)\n  createdAt        DateTime        @default(now())\n  updatedAt        DateTime        @updatedAt\n}\n\nenum PackageCategory {\n  VR\n  VR_BATTLE\n  KIDS\n  SCHOOL\n}\n\nenum GroupType {\n  NORMAL\n  LARGE_GROUP\n}\n\nmodel Customer {\n  id        Int      @id @default(autoincrement())\n  firstName String\n  lastName  String\n  email     String   @unique\n  phone     String?\n  company   String?\n  vatNumber String?\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  bookings Booking[]\n}\n\nmodel FoodItem {\n  id          Int      @id @default(autoincrement())\n  name        String\n  description String?\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n\n  bookings BookingFoodItem[]\n}\n\nmodel BookingFoodItem {\n  id         Int @id @default(autoincrement())\n  bookingId  Int\n  foodItemId Int\n  quantity   Int @default(1)\n\n  booking  Booking  @relation(fields: [bookingId], references: [id])\n  foodItem FoodItem @relation(fields: [foodItemId], references: [id])\n}\n\nmodel BookingHost {\n  id        Int @id @default(autoincrement())\n  bookingId Int\n  hostId    Int\n\n  booking Booking @relation(fields: [bookingId], references: [id])\n  host    Host    @relation(fields: [hostId], references: [id])\n}\n",
   "inlineSchemaHash": "1374ab3ae11da4685e57adfd77e1fa8f7489e2830aa986c8eda99aa8aeb3f214",
-  "copyEngine": false
+  "copyEngine": true
 }
 
 const fs = require('fs')
@@ -338,3 +339,9 @@ const PrismaClient = getPrismaClient(config)
 exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
+// file annotations for bundling tools to include these files
+path.join(__dirname, "query_engine-windows.dll.node");
+path.join(process.cwd(), "src/generated/prisma/query_engine-windows.dll.node")
+// file annotations for bundling tools to include these files
+path.join(__dirname, "schema.prisma");
+path.join(process.cwd(), "src/generated/prisma/schema.prisma")
