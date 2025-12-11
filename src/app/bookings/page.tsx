@@ -19,13 +19,9 @@ interface Booking {
   status: string;
 }
 
-//! display bookings in calender style view with date, time, playersCount, packageName, hostsRequired, bookingDescription
-//* https://www.untitledui.com/react/components/calendars
-
 export default function Bookings() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [viewMode, setViewMode] = useState<"list" | "calendar">("list");
-  const [todayBookings, setTodayBookings] = useState<Booking[]>([]);
 
   const fetchBookings = async () => {
     const res = await fetch("/api/bookings/db", { cache: "no-store" });
@@ -91,7 +87,6 @@ export default function Bookings() {
           <option value="calendar">Calendar View</option>
         </select>
       </header>
-      {/* <AddBookingButton /> */}
 
       {viewMode === "list" && (
         <div className="overflow-y-scroll bg-white border shadow-md border-gray-100 p-4 rounded-lg  mt-6 text-black flex flex-col flex-row-2  m-auto w-238 h-150">
@@ -101,15 +96,6 @@ export default function Bookings() {
                 <div className="flex flex-col w-[95%] justify-start border border-gray-100 p-4 rounded-md space-y-1 shadow-sm mt-2 h-auto">
                   <div className="flex justify-between items-center w-full">
                     <h2 className="text-xl font-semibold">Naam Klant</h2>
-                    {/* <select
-                      name="status"
-                      id="status"
-                      className="border border-gray-300 rounded-md p-2 h-10 w-40"
-                    >
-                      <option value="completed">Completed</option>
-                      <option value="pending">Pending</option>
-                      <option value="canceled">Canceled</option>
-                    </select> */}
                   </div>
 
                   <p>
@@ -168,7 +154,6 @@ export default function Bookings() {
       )}
 
       {viewMode === "calendar" && (
-        // Pass the fetched bookings to the new calendar component
         <div className="h-[40rem] overflow-y-scroll">
           <BookingsCalendar bookings={bookings} />
         </div>
