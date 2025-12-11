@@ -44,6 +44,11 @@ export type ShiftRole = $Result.DefaultSelection<Prisma.$ShiftRolePayload>
  */
 export type Booking = $Result.DefaultSelection<Prisma.$BookingPayload>
 /**
+ * Model BookingHost
+ * 
+ */
+export type BookingHost = $Result.DefaultSelection<Prisma.$BookingHostPayload>
+/**
  * Model Package
  * 
  */
@@ -63,17 +68,28 @@ export type FoodItem = $Result.DefaultSelection<Prisma.$FoodItemPayload>
  * 
  */
 export type BookingFoodItem = $Result.DefaultSelection<Prisma.$BookingFoodItemPayload>
-/**
- * Model BookingHost
- * 
- */
-export type BookingHost = $Result.DefaultSelection<Prisma.$BookingHostPayload>
 
 /**
  * Enums
  */
 export namespace $Enums {
-  export const PackageCategory: {
+  export const HostStatus: {
+  MEDEWERKER: 'MEDEWERKER',
+  STUDENT: 'STUDENT'
+};
+
+export type HostStatus = (typeof HostStatus)[keyof typeof HostStatus]
+
+
+export const HostLabel: {
+  EXPERIENCED: 'EXPERIENCED',
+  TRAINING: 'TRAINING'
+};
+
+export type HostLabel = (typeof HostLabel)[keyof typeof HostLabel]
+
+
+export const PackageCategory: {
   VR: 'VR',
   VR_BATTLE: 'VR_BATTLE',
   KIDS: 'KIDS',
@@ -91,6 +107,14 @@ export const GroupType: {
 export type GroupType = (typeof GroupType)[keyof typeof GroupType]
 
 }
+
+export type HostStatus = $Enums.HostStatus
+
+export const HostStatus: typeof $Enums.HostStatus
+
+export type HostLabel = $Enums.HostLabel
+
+export const HostLabel: typeof $Enums.HostLabel
 
 export type PackageCategory = $Enums.PackageCategory
 
@@ -279,6 +303,16 @@ export class PrismaClient<
   get booking(): Prisma.BookingDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.bookingHost`: Exposes CRUD operations for the **BookingHost** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BookingHosts
+    * const bookingHosts = await prisma.bookingHost.findMany()
+    * ```
+    */
+  get bookingHost(): Prisma.BookingHostDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.package`: Exposes CRUD operations for the **Package** model.
     * Example usage:
     * ```ts
@@ -317,16 +351,6 @@ export class PrismaClient<
     * ```
     */
   get bookingFoodItem(): Prisma.BookingFoodItemDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.bookingHost`: Exposes CRUD operations for the **BookingHost** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more BookingHosts
-    * const bookingHosts = await prisma.bookingHost.findMany()
-    * ```
-    */
-  get bookingHost(): Prisma.BookingHostDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -774,11 +798,11 @@ export namespace Prisma {
     Shift: 'Shift',
     ShiftRole: 'ShiftRole',
     Booking: 'Booking',
+    BookingHost: 'BookingHost',
     Package: 'Package',
     Customer: 'Customer',
     FoodItem: 'FoodItem',
-    BookingFoodItem: 'BookingFoodItem',
-    BookingHost: 'BookingHost'
+    BookingFoodItem: 'BookingFoodItem'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -797,7 +821,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "userRole" | "host" | "shift" | "shiftRole" | "booking" | "package" | "customer" | "foodItem" | "bookingFoodItem" | "bookingHost"
+      modelProps: "user" | "userRole" | "host" | "shift" | "shiftRole" | "booking" | "bookingHost" | "package" | "customer" | "foodItem" | "bookingFoodItem"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1245,6 +1269,80 @@ export namespace Prisma {
           }
         }
       }
+      BookingHost: {
+        payload: Prisma.$BookingHostPayload<ExtArgs>
+        fields: Prisma.BookingHostFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BookingHostFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BookingHostPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BookingHostFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BookingHostPayload>
+          }
+          findFirst: {
+            args: Prisma.BookingHostFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BookingHostPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BookingHostFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BookingHostPayload>
+          }
+          findMany: {
+            args: Prisma.BookingHostFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BookingHostPayload>[]
+          }
+          create: {
+            args: Prisma.BookingHostCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BookingHostPayload>
+          }
+          createMany: {
+            args: Prisma.BookingHostCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BookingHostCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BookingHostPayload>[]
+          }
+          delete: {
+            args: Prisma.BookingHostDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BookingHostPayload>
+          }
+          update: {
+            args: Prisma.BookingHostUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BookingHostPayload>
+          }
+          deleteMany: {
+            args: Prisma.BookingHostDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BookingHostUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BookingHostUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BookingHostPayload>[]
+          }
+          upsert: {
+            args: Prisma.BookingHostUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BookingHostPayload>
+          }
+          aggregate: {
+            args: Prisma.BookingHostAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBookingHost>
+          }
+          groupBy: {
+            args: Prisma.BookingHostGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BookingHostGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BookingHostCountArgs<ExtArgs>
+            result: $Utils.Optional<BookingHostCountAggregateOutputType> | number
+          }
+        }
+      }
       Package: {
         payload: Prisma.$PackagePayload<ExtArgs>
         fields: Prisma.PackageFieldRefs
@@ -1541,80 +1639,6 @@ export namespace Prisma {
           }
         }
       }
-      BookingHost: {
-        payload: Prisma.$BookingHostPayload<ExtArgs>
-        fields: Prisma.BookingHostFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.BookingHostFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BookingHostPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.BookingHostFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BookingHostPayload>
-          }
-          findFirst: {
-            args: Prisma.BookingHostFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BookingHostPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.BookingHostFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BookingHostPayload>
-          }
-          findMany: {
-            args: Prisma.BookingHostFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BookingHostPayload>[]
-          }
-          create: {
-            args: Prisma.BookingHostCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BookingHostPayload>
-          }
-          createMany: {
-            args: Prisma.BookingHostCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.BookingHostCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BookingHostPayload>[]
-          }
-          delete: {
-            args: Prisma.BookingHostDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BookingHostPayload>
-          }
-          update: {
-            args: Prisma.BookingHostUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BookingHostPayload>
-          }
-          deleteMany: {
-            args: Prisma.BookingHostDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.BookingHostUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.BookingHostUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BookingHostPayload>[]
-          }
-          upsert: {
-            args: Prisma.BookingHostUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BookingHostPayload>
-          }
-          aggregate: {
-            args: Prisma.BookingHostAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateBookingHost>
-          }
-          groupBy: {
-            args: Prisma.BookingHostGroupByArgs<ExtArgs>
-            result: $Utils.Optional<BookingHostGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.BookingHostCountArgs<ExtArgs>
-            result: $Utils.Optional<BookingHostCountAggregateOutputType> | number
-          }
-        }
-      }
     }
   } & {
     other: {
@@ -1717,11 +1741,11 @@ export namespace Prisma {
     shift?: ShiftOmit
     shiftRole?: ShiftRoleOmit
     booking?: BookingOmit
+    bookingHost?: BookingHostOmit
     package?: PackageOmit
     customer?: CustomerOmit
     foodItem?: FoodItemOmit
     bookingFoodItem?: BookingFoodItemOmit
-    bookingHost?: BookingHostOmit
   }
 
   /* Types for Logging */
@@ -4294,8 +4318,8 @@ export namespace Prisma {
     id: number | null
     firstName: string | null
     lastName: string | null
-    email: string | null
-    phone: string | null
+    status: $Enums.HostStatus | null
+    label: $Enums.HostLabel | null
     active: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -4305,8 +4329,8 @@ export namespace Prisma {
     id: number | null
     firstName: string | null
     lastName: string | null
-    email: string | null
-    phone: string | null
+    status: $Enums.HostStatus | null
+    label: $Enums.HostLabel | null
     active: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -4316,8 +4340,8 @@ export namespace Prisma {
     id: number
     firstName: number
     lastName: number
-    email: number
-    phone: number
+    status: number
+    label: number
     active: number
     createdAt: number
     updatedAt: number
@@ -4337,8 +4361,8 @@ export namespace Prisma {
     id?: true
     firstName?: true
     lastName?: true
-    email?: true
-    phone?: true
+    status?: true
+    label?: true
     active?: true
     createdAt?: true
     updatedAt?: true
@@ -4348,8 +4372,8 @@ export namespace Prisma {
     id?: true
     firstName?: true
     lastName?: true
-    email?: true
-    phone?: true
+    status?: true
+    label?: true
     active?: true
     createdAt?: true
     updatedAt?: true
@@ -4359,8 +4383,8 @@ export namespace Prisma {
     id?: true
     firstName?: true
     lastName?: true
-    email?: true
-    phone?: true
+    status?: true
+    label?: true
     active?: true
     createdAt?: true
     updatedAt?: true
@@ -4457,8 +4481,8 @@ export namespace Prisma {
     id: number
     firstName: string
     lastName: string
-    email: string
-    phone: string | null
+    status: $Enums.HostStatus
+    label: $Enums.HostLabel | null
     active: boolean
     createdAt: Date
     updatedAt: Date
@@ -4487,8 +4511,8 @@ export namespace Prisma {
     id?: boolean
     firstName?: boolean
     lastName?: boolean
-    email?: boolean
-    phone?: boolean
+    status?: boolean
+    label?: boolean
     active?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -4501,8 +4525,8 @@ export namespace Prisma {
     id?: boolean
     firstName?: boolean
     lastName?: boolean
-    email?: boolean
-    phone?: boolean
+    status?: boolean
+    label?: boolean
     active?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -4512,8 +4536,8 @@ export namespace Prisma {
     id?: boolean
     firstName?: boolean
     lastName?: boolean
-    email?: boolean
-    phone?: boolean
+    status?: boolean
+    label?: boolean
     active?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -4523,14 +4547,14 @@ export namespace Prisma {
     id?: boolean
     firstName?: boolean
     lastName?: boolean
-    email?: boolean
-    phone?: boolean
+    status?: boolean
+    label?: boolean
     active?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type HostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "phone" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["host"]>
+  export type HostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "lastName" | "status" | "label" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["host"]>
   export type HostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     bookingHosts?: boolean | Host$bookingHostsArgs<ExtArgs>
     shifts?: boolean | Host$shiftsArgs<ExtArgs>
@@ -4549,8 +4573,8 @@ export namespace Prisma {
       id: number
       firstName: string
       lastName: string
-      email: string
-      phone: string | null
+      status: $Enums.HostStatus
+      label: $Enums.HostLabel | null
       active: boolean
       createdAt: Date
       updatedAt: Date
@@ -4982,8 +5006,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Host", 'Int'>
     readonly firstName: FieldRef<"Host", 'String'>
     readonly lastName: FieldRef<"Host", 'String'>
-    readonly email: FieldRef<"Host", 'String'>
-    readonly phone: FieldRef<"Host", 'String'>
+    readonly status: FieldRef<"Host", 'HostStatus'>
+    readonly label: FieldRef<"Host", 'HostLabel'>
     readonly active: FieldRef<"Host", 'Boolean'>
     readonly createdAt: FieldRef<"Host", 'DateTime'>
     readonly updatedAt: FieldRef<"Host", 'DateTime'>
@@ -9064,6 +9088,1088 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: BookingInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model BookingHost
+   */
+
+  export type AggregateBookingHost = {
+    _count: BookingHostCountAggregateOutputType | null
+    _avg: BookingHostAvgAggregateOutputType | null
+    _sum: BookingHostSumAggregateOutputType | null
+    _min: BookingHostMinAggregateOutputType | null
+    _max: BookingHostMaxAggregateOutputType | null
+  }
+
+  export type BookingHostAvgAggregateOutputType = {
+    id: number | null
+    bookingId: number | null
+    hostId: number | null
+  }
+
+  export type BookingHostSumAggregateOutputType = {
+    id: number | null
+    bookingId: number | null
+    hostId: number | null
+  }
+
+  export type BookingHostMinAggregateOutputType = {
+    id: number | null
+    bookingId: number | null
+    hostId: number | null
+  }
+
+  export type BookingHostMaxAggregateOutputType = {
+    id: number | null
+    bookingId: number | null
+    hostId: number | null
+  }
+
+  export type BookingHostCountAggregateOutputType = {
+    id: number
+    bookingId: number
+    hostId: number
+    _all: number
+  }
+
+
+  export type BookingHostAvgAggregateInputType = {
+    id?: true
+    bookingId?: true
+    hostId?: true
+  }
+
+  export type BookingHostSumAggregateInputType = {
+    id?: true
+    bookingId?: true
+    hostId?: true
+  }
+
+  export type BookingHostMinAggregateInputType = {
+    id?: true
+    bookingId?: true
+    hostId?: true
+  }
+
+  export type BookingHostMaxAggregateInputType = {
+    id?: true
+    bookingId?: true
+    hostId?: true
+  }
+
+  export type BookingHostCountAggregateInputType = {
+    id?: true
+    bookingId?: true
+    hostId?: true
+    _all?: true
+  }
+
+  export type BookingHostAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BookingHost to aggregate.
+     */
+    where?: BookingHostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BookingHosts to fetch.
+     */
+    orderBy?: BookingHostOrderByWithRelationInput | BookingHostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BookingHostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BookingHosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BookingHosts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BookingHosts
+    **/
+    _count?: true | BookingHostCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BookingHostAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BookingHostSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BookingHostMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BookingHostMaxAggregateInputType
+  }
+
+  export type GetBookingHostAggregateType<T extends BookingHostAggregateArgs> = {
+        [P in keyof T & keyof AggregateBookingHost]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBookingHost[P]>
+      : GetScalarType<T[P], AggregateBookingHost[P]>
+  }
+
+
+
+
+  export type BookingHostGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BookingHostWhereInput
+    orderBy?: BookingHostOrderByWithAggregationInput | BookingHostOrderByWithAggregationInput[]
+    by: BookingHostScalarFieldEnum[] | BookingHostScalarFieldEnum
+    having?: BookingHostScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BookingHostCountAggregateInputType | true
+    _avg?: BookingHostAvgAggregateInputType
+    _sum?: BookingHostSumAggregateInputType
+    _min?: BookingHostMinAggregateInputType
+    _max?: BookingHostMaxAggregateInputType
+  }
+
+  export type BookingHostGroupByOutputType = {
+    id: number
+    bookingId: number
+    hostId: number
+    _count: BookingHostCountAggregateOutputType | null
+    _avg: BookingHostAvgAggregateOutputType | null
+    _sum: BookingHostSumAggregateOutputType | null
+    _min: BookingHostMinAggregateOutputType | null
+    _max: BookingHostMaxAggregateOutputType | null
+  }
+
+  type GetBookingHostGroupByPayload<T extends BookingHostGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BookingHostGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BookingHostGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BookingHostGroupByOutputType[P]>
+            : GetScalarType<T[P], BookingHostGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BookingHostSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    bookingId?: boolean
+    hostId?: boolean
+    booking?: boolean | BookingDefaultArgs<ExtArgs>
+    host?: boolean | HostDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bookingHost"]>
+
+  export type BookingHostSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    bookingId?: boolean
+    hostId?: boolean
+    booking?: boolean | BookingDefaultArgs<ExtArgs>
+    host?: boolean | HostDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bookingHost"]>
+
+  export type BookingHostSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    bookingId?: boolean
+    hostId?: boolean
+    booking?: boolean | BookingDefaultArgs<ExtArgs>
+    host?: boolean | HostDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["bookingHost"]>
+
+  export type BookingHostSelectScalar = {
+    id?: boolean
+    bookingId?: boolean
+    hostId?: boolean
+  }
+
+  export type BookingHostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bookingId" | "hostId", ExtArgs["result"]["bookingHost"]>
+  export type BookingHostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    booking?: boolean | BookingDefaultArgs<ExtArgs>
+    host?: boolean | HostDefaultArgs<ExtArgs>
+  }
+  export type BookingHostIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    booking?: boolean | BookingDefaultArgs<ExtArgs>
+    host?: boolean | HostDefaultArgs<ExtArgs>
+  }
+  export type BookingHostIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    booking?: boolean | BookingDefaultArgs<ExtArgs>
+    host?: boolean | HostDefaultArgs<ExtArgs>
+  }
+
+  export type $BookingHostPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BookingHost"
+    objects: {
+      booking: Prisma.$BookingPayload<ExtArgs>
+      host: Prisma.$HostPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      bookingId: number
+      hostId: number
+    }, ExtArgs["result"]["bookingHost"]>
+    composites: {}
+  }
+
+  type BookingHostGetPayload<S extends boolean | null | undefined | BookingHostDefaultArgs> = $Result.GetResult<Prisma.$BookingHostPayload, S>
+
+  type BookingHostCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BookingHostFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BookingHostCountAggregateInputType | true
+    }
+
+  export interface BookingHostDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BookingHost'], meta: { name: 'BookingHost' } }
+    /**
+     * Find zero or one BookingHost that matches the filter.
+     * @param {BookingHostFindUniqueArgs} args - Arguments to find a BookingHost
+     * @example
+     * // Get one BookingHost
+     * const bookingHost = await prisma.bookingHost.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BookingHostFindUniqueArgs>(args: SelectSubset<T, BookingHostFindUniqueArgs<ExtArgs>>): Prisma__BookingHostClient<$Result.GetResult<Prisma.$BookingHostPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BookingHost that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BookingHostFindUniqueOrThrowArgs} args - Arguments to find a BookingHost
+     * @example
+     * // Get one BookingHost
+     * const bookingHost = await prisma.bookingHost.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BookingHostFindUniqueOrThrowArgs>(args: SelectSubset<T, BookingHostFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BookingHostClient<$Result.GetResult<Prisma.$BookingHostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BookingHost that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BookingHostFindFirstArgs} args - Arguments to find a BookingHost
+     * @example
+     * // Get one BookingHost
+     * const bookingHost = await prisma.bookingHost.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BookingHostFindFirstArgs>(args?: SelectSubset<T, BookingHostFindFirstArgs<ExtArgs>>): Prisma__BookingHostClient<$Result.GetResult<Prisma.$BookingHostPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BookingHost that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BookingHostFindFirstOrThrowArgs} args - Arguments to find a BookingHost
+     * @example
+     * // Get one BookingHost
+     * const bookingHost = await prisma.bookingHost.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BookingHostFindFirstOrThrowArgs>(args?: SelectSubset<T, BookingHostFindFirstOrThrowArgs<ExtArgs>>): Prisma__BookingHostClient<$Result.GetResult<Prisma.$BookingHostPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BookingHosts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BookingHostFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BookingHosts
+     * const bookingHosts = await prisma.bookingHost.findMany()
+     * 
+     * // Get first 10 BookingHosts
+     * const bookingHosts = await prisma.bookingHost.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const bookingHostWithIdOnly = await prisma.bookingHost.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BookingHostFindManyArgs>(args?: SelectSubset<T, BookingHostFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookingHostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BookingHost.
+     * @param {BookingHostCreateArgs} args - Arguments to create a BookingHost.
+     * @example
+     * // Create one BookingHost
+     * const BookingHost = await prisma.bookingHost.create({
+     *   data: {
+     *     // ... data to create a BookingHost
+     *   }
+     * })
+     * 
+     */
+    create<T extends BookingHostCreateArgs>(args: SelectSubset<T, BookingHostCreateArgs<ExtArgs>>): Prisma__BookingHostClient<$Result.GetResult<Prisma.$BookingHostPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BookingHosts.
+     * @param {BookingHostCreateManyArgs} args - Arguments to create many BookingHosts.
+     * @example
+     * // Create many BookingHosts
+     * const bookingHost = await prisma.bookingHost.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BookingHostCreateManyArgs>(args?: SelectSubset<T, BookingHostCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BookingHosts and returns the data saved in the database.
+     * @param {BookingHostCreateManyAndReturnArgs} args - Arguments to create many BookingHosts.
+     * @example
+     * // Create many BookingHosts
+     * const bookingHost = await prisma.bookingHost.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BookingHosts and only return the `id`
+     * const bookingHostWithIdOnly = await prisma.bookingHost.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BookingHostCreateManyAndReturnArgs>(args?: SelectSubset<T, BookingHostCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookingHostPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BookingHost.
+     * @param {BookingHostDeleteArgs} args - Arguments to delete one BookingHost.
+     * @example
+     * // Delete one BookingHost
+     * const BookingHost = await prisma.bookingHost.delete({
+     *   where: {
+     *     // ... filter to delete one BookingHost
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BookingHostDeleteArgs>(args: SelectSubset<T, BookingHostDeleteArgs<ExtArgs>>): Prisma__BookingHostClient<$Result.GetResult<Prisma.$BookingHostPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BookingHost.
+     * @param {BookingHostUpdateArgs} args - Arguments to update one BookingHost.
+     * @example
+     * // Update one BookingHost
+     * const bookingHost = await prisma.bookingHost.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BookingHostUpdateArgs>(args: SelectSubset<T, BookingHostUpdateArgs<ExtArgs>>): Prisma__BookingHostClient<$Result.GetResult<Prisma.$BookingHostPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BookingHosts.
+     * @param {BookingHostDeleteManyArgs} args - Arguments to filter BookingHosts to delete.
+     * @example
+     * // Delete a few BookingHosts
+     * const { count } = await prisma.bookingHost.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BookingHostDeleteManyArgs>(args?: SelectSubset<T, BookingHostDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BookingHosts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BookingHostUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BookingHosts
+     * const bookingHost = await prisma.bookingHost.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BookingHostUpdateManyArgs>(args: SelectSubset<T, BookingHostUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BookingHosts and returns the data updated in the database.
+     * @param {BookingHostUpdateManyAndReturnArgs} args - Arguments to update many BookingHosts.
+     * @example
+     * // Update many BookingHosts
+     * const bookingHost = await prisma.bookingHost.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BookingHosts and only return the `id`
+     * const bookingHostWithIdOnly = await prisma.bookingHost.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BookingHostUpdateManyAndReturnArgs>(args: SelectSubset<T, BookingHostUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookingHostPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BookingHost.
+     * @param {BookingHostUpsertArgs} args - Arguments to update or create a BookingHost.
+     * @example
+     * // Update or create a BookingHost
+     * const bookingHost = await prisma.bookingHost.upsert({
+     *   create: {
+     *     // ... data to create a BookingHost
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BookingHost we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BookingHostUpsertArgs>(args: SelectSubset<T, BookingHostUpsertArgs<ExtArgs>>): Prisma__BookingHostClient<$Result.GetResult<Prisma.$BookingHostPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BookingHosts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BookingHostCountArgs} args - Arguments to filter BookingHosts to count.
+     * @example
+     * // Count the number of BookingHosts
+     * const count = await prisma.bookingHost.count({
+     *   where: {
+     *     // ... the filter for the BookingHosts we want to count
+     *   }
+     * })
+    **/
+    count<T extends BookingHostCountArgs>(
+      args?: Subset<T, BookingHostCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BookingHostCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BookingHost.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BookingHostAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BookingHostAggregateArgs>(args: Subset<T, BookingHostAggregateArgs>): Prisma.PrismaPromise<GetBookingHostAggregateType<T>>
+
+    /**
+     * Group by BookingHost.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BookingHostGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BookingHostGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BookingHostGroupByArgs['orderBy'] }
+        : { orderBy?: BookingHostGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BookingHostGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBookingHostGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BookingHost model
+   */
+  readonly fields: BookingHostFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BookingHost.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BookingHostClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    booking<T extends BookingDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BookingDefaultArgs<ExtArgs>>): Prisma__BookingClient<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    host<T extends HostDefaultArgs<ExtArgs> = {}>(args?: Subset<T, HostDefaultArgs<ExtArgs>>): Prisma__HostClient<$Result.GetResult<Prisma.$HostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BookingHost model
+   */
+  interface BookingHostFieldRefs {
+    readonly id: FieldRef<"BookingHost", 'Int'>
+    readonly bookingId: FieldRef<"BookingHost", 'Int'>
+    readonly hostId: FieldRef<"BookingHost", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BookingHost findUnique
+   */
+  export type BookingHostFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookingHost
+     */
+    select?: BookingHostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookingHost
+     */
+    omit?: BookingHostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingHostInclude<ExtArgs> | null
+    /**
+     * Filter, which BookingHost to fetch.
+     */
+    where: BookingHostWhereUniqueInput
+  }
+
+  /**
+   * BookingHost findUniqueOrThrow
+   */
+  export type BookingHostFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookingHost
+     */
+    select?: BookingHostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookingHost
+     */
+    omit?: BookingHostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingHostInclude<ExtArgs> | null
+    /**
+     * Filter, which BookingHost to fetch.
+     */
+    where: BookingHostWhereUniqueInput
+  }
+
+  /**
+   * BookingHost findFirst
+   */
+  export type BookingHostFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookingHost
+     */
+    select?: BookingHostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookingHost
+     */
+    omit?: BookingHostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingHostInclude<ExtArgs> | null
+    /**
+     * Filter, which BookingHost to fetch.
+     */
+    where?: BookingHostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BookingHosts to fetch.
+     */
+    orderBy?: BookingHostOrderByWithRelationInput | BookingHostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BookingHosts.
+     */
+    cursor?: BookingHostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BookingHosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BookingHosts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BookingHosts.
+     */
+    distinct?: BookingHostScalarFieldEnum | BookingHostScalarFieldEnum[]
+  }
+
+  /**
+   * BookingHost findFirstOrThrow
+   */
+  export type BookingHostFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookingHost
+     */
+    select?: BookingHostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookingHost
+     */
+    omit?: BookingHostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingHostInclude<ExtArgs> | null
+    /**
+     * Filter, which BookingHost to fetch.
+     */
+    where?: BookingHostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BookingHosts to fetch.
+     */
+    orderBy?: BookingHostOrderByWithRelationInput | BookingHostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BookingHosts.
+     */
+    cursor?: BookingHostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BookingHosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BookingHosts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BookingHosts.
+     */
+    distinct?: BookingHostScalarFieldEnum | BookingHostScalarFieldEnum[]
+  }
+
+  /**
+   * BookingHost findMany
+   */
+  export type BookingHostFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookingHost
+     */
+    select?: BookingHostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookingHost
+     */
+    omit?: BookingHostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingHostInclude<ExtArgs> | null
+    /**
+     * Filter, which BookingHosts to fetch.
+     */
+    where?: BookingHostWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BookingHosts to fetch.
+     */
+    orderBy?: BookingHostOrderByWithRelationInput | BookingHostOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BookingHosts.
+     */
+    cursor?: BookingHostWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BookingHosts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BookingHosts.
+     */
+    skip?: number
+    distinct?: BookingHostScalarFieldEnum | BookingHostScalarFieldEnum[]
+  }
+
+  /**
+   * BookingHost create
+   */
+  export type BookingHostCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookingHost
+     */
+    select?: BookingHostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookingHost
+     */
+    omit?: BookingHostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingHostInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BookingHost.
+     */
+    data: XOR<BookingHostCreateInput, BookingHostUncheckedCreateInput>
+  }
+
+  /**
+   * BookingHost createMany
+   */
+  export type BookingHostCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BookingHosts.
+     */
+    data: BookingHostCreateManyInput | BookingHostCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BookingHost createManyAndReturn
+   */
+  export type BookingHostCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookingHost
+     */
+    select?: BookingHostSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookingHost
+     */
+    omit?: BookingHostOmit<ExtArgs> | null
+    /**
+     * The data used to create many BookingHosts.
+     */
+    data: BookingHostCreateManyInput | BookingHostCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingHostIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BookingHost update
+   */
+  export type BookingHostUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookingHost
+     */
+    select?: BookingHostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookingHost
+     */
+    omit?: BookingHostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingHostInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BookingHost.
+     */
+    data: XOR<BookingHostUpdateInput, BookingHostUncheckedUpdateInput>
+    /**
+     * Choose, which BookingHost to update.
+     */
+    where: BookingHostWhereUniqueInput
+  }
+
+  /**
+   * BookingHost updateMany
+   */
+  export type BookingHostUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BookingHosts.
+     */
+    data: XOR<BookingHostUpdateManyMutationInput, BookingHostUncheckedUpdateManyInput>
+    /**
+     * Filter which BookingHosts to update
+     */
+    where?: BookingHostWhereInput
+    /**
+     * Limit how many BookingHosts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BookingHost updateManyAndReturn
+   */
+  export type BookingHostUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookingHost
+     */
+    select?: BookingHostSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookingHost
+     */
+    omit?: BookingHostOmit<ExtArgs> | null
+    /**
+     * The data used to update BookingHosts.
+     */
+    data: XOR<BookingHostUpdateManyMutationInput, BookingHostUncheckedUpdateManyInput>
+    /**
+     * Filter which BookingHosts to update
+     */
+    where?: BookingHostWhereInput
+    /**
+     * Limit how many BookingHosts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingHostIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BookingHost upsert
+   */
+  export type BookingHostUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookingHost
+     */
+    select?: BookingHostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookingHost
+     */
+    omit?: BookingHostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingHostInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BookingHost to update in case it exists.
+     */
+    where: BookingHostWhereUniqueInput
+    /**
+     * In case the BookingHost found by the `where` argument doesn't exist, create a new BookingHost with this data.
+     */
+    create: XOR<BookingHostCreateInput, BookingHostUncheckedCreateInput>
+    /**
+     * In case the BookingHost was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BookingHostUpdateInput, BookingHostUncheckedUpdateInput>
+  }
+
+  /**
+   * BookingHost delete
+   */
+  export type BookingHostDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookingHost
+     */
+    select?: BookingHostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookingHost
+     */
+    omit?: BookingHostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingHostInclude<ExtArgs> | null
+    /**
+     * Filter which BookingHost to delete.
+     */
+    where: BookingHostWhereUniqueInput
+  }
+
+  /**
+   * BookingHost deleteMany
+   */
+  export type BookingHostDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BookingHosts to delete
+     */
+    where?: BookingHostWhereInput
+    /**
+     * Limit how many BookingHosts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BookingHost without action
+   */
+  export type BookingHostDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BookingHost
+     */
+    select?: BookingHostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BookingHost
+     */
+    omit?: BookingHostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingHostInclude<ExtArgs> | null
   }
 
 
@@ -13559,1088 +14665,6 @@ export namespace Prisma {
 
 
   /**
-   * Model BookingHost
-   */
-
-  export type AggregateBookingHost = {
-    _count: BookingHostCountAggregateOutputType | null
-    _avg: BookingHostAvgAggregateOutputType | null
-    _sum: BookingHostSumAggregateOutputType | null
-    _min: BookingHostMinAggregateOutputType | null
-    _max: BookingHostMaxAggregateOutputType | null
-  }
-
-  export type BookingHostAvgAggregateOutputType = {
-    id: number | null
-    bookingId: number | null
-    hostId: number | null
-  }
-
-  export type BookingHostSumAggregateOutputType = {
-    id: number | null
-    bookingId: number | null
-    hostId: number | null
-  }
-
-  export type BookingHostMinAggregateOutputType = {
-    id: number | null
-    bookingId: number | null
-    hostId: number | null
-  }
-
-  export type BookingHostMaxAggregateOutputType = {
-    id: number | null
-    bookingId: number | null
-    hostId: number | null
-  }
-
-  export type BookingHostCountAggregateOutputType = {
-    id: number
-    bookingId: number
-    hostId: number
-    _all: number
-  }
-
-
-  export type BookingHostAvgAggregateInputType = {
-    id?: true
-    bookingId?: true
-    hostId?: true
-  }
-
-  export type BookingHostSumAggregateInputType = {
-    id?: true
-    bookingId?: true
-    hostId?: true
-  }
-
-  export type BookingHostMinAggregateInputType = {
-    id?: true
-    bookingId?: true
-    hostId?: true
-  }
-
-  export type BookingHostMaxAggregateInputType = {
-    id?: true
-    bookingId?: true
-    hostId?: true
-  }
-
-  export type BookingHostCountAggregateInputType = {
-    id?: true
-    bookingId?: true
-    hostId?: true
-    _all?: true
-  }
-
-  export type BookingHostAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which BookingHost to aggregate.
-     */
-    where?: BookingHostWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BookingHosts to fetch.
-     */
-    orderBy?: BookingHostOrderByWithRelationInput | BookingHostOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: BookingHostWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BookingHosts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BookingHosts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned BookingHosts
-    **/
-    _count?: true | BookingHostCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: BookingHostAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: BookingHostSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: BookingHostMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: BookingHostMaxAggregateInputType
-  }
-
-  export type GetBookingHostAggregateType<T extends BookingHostAggregateArgs> = {
-        [P in keyof T & keyof AggregateBookingHost]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateBookingHost[P]>
-      : GetScalarType<T[P], AggregateBookingHost[P]>
-  }
-
-
-
-
-  export type BookingHostGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: BookingHostWhereInput
-    orderBy?: BookingHostOrderByWithAggregationInput | BookingHostOrderByWithAggregationInput[]
-    by: BookingHostScalarFieldEnum[] | BookingHostScalarFieldEnum
-    having?: BookingHostScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: BookingHostCountAggregateInputType | true
-    _avg?: BookingHostAvgAggregateInputType
-    _sum?: BookingHostSumAggregateInputType
-    _min?: BookingHostMinAggregateInputType
-    _max?: BookingHostMaxAggregateInputType
-  }
-
-  export type BookingHostGroupByOutputType = {
-    id: number
-    bookingId: number
-    hostId: number
-    _count: BookingHostCountAggregateOutputType | null
-    _avg: BookingHostAvgAggregateOutputType | null
-    _sum: BookingHostSumAggregateOutputType | null
-    _min: BookingHostMinAggregateOutputType | null
-    _max: BookingHostMaxAggregateOutputType | null
-  }
-
-  type GetBookingHostGroupByPayload<T extends BookingHostGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<BookingHostGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof BookingHostGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], BookingHostGroupByOutputType[P]>
-            : GetScalarType<T[P], BookingHostGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type BookingHostSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    bookingId?: boolean
-    hostId?: boolean
-    booking?: boolean | BookingDefaultArgs<ExtArgs>
-    host?: boolean | HostDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["bookingHost"]>
-
-  export type BookingHostSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    bookingId?: boolean
-    hostId?: boolean
-    booking?: boolean | BookingDefaultArgs<ExtArgs>
-    host?: boolean | HostDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["bookingHost"]>
-
-  export type BookingHostSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    bookingId?: boolean
-    hostId?: boolean
-    booking?: boolean | BookingDefaultArgs<ExtArgs>
-    host?: boolean | HostDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["bookingHost"]>
-
-  export type BookingHostSelectScalar = {
-    id?: boolean
-    bookingId?: boolean
-    hostId?: boolean
-  }
-
-  export type BookingHostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bookingId" | "hostId", ExtArgs["result"]["bookingHost"]>
-  export type BookingHostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    booking?: boolean | BookingDefaultArgs<ExtArgs>
-    host?: boolean | HostDefaultArgs<ExtArgs>
-  }
-  export type BookingHostIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    booking?: boolean | BookingDefaultArgs<ExtArgs>
-    host?: boolean | HostDefaultArgs<ExtArgs>
-  }
-  export type BookingHostIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    booking?: boolean | BookingDefaultArgs<ExtArgs>
-    host?: boolean | HostDefaultArgs<ExtArgs>
-  }
-
-  export type $BookingHostPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "BookingHost"
-    objects: {
-      booking: Prisma.$BookingPayload<ExtArgs>
-      host: Prisma.$HostPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      bookingId: number
-      hostId: number
-    }, ExtArgs["result"]["bookingHost"]>
-    composites: {}
-  }
-
-  type BookingHostGetPayload<S extends boolean | null | undefined | BookingHostDefaultArgs> = $Result.GetResult<Prisma.$BookingHostPayload, S>
-
-  type BookingHostCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<BookingHostFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: BookingHostCountAggregateInputType | true
-    }
-
-  export interface BookingHostDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BookingHost'], meta: { name: 'BookingHost' } }
-    /**
-     * Find zero or one BookingHost that matches the filter.
-     * @param {BookingHostFindUniqueArgs} args - Arguments to find a BookingHost
-     * @example
-     * // Get one BookingHost
-     * const bookingHost = await prisma.bookingHost.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends BookingHostFindUniqueArgs>(args: SelectSubset<T, BookingHostFindUniqueArgs<ExtArgs>>): Prisma__BookingHostClient<$Result.GetResult<Prisma.$BookingHostPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one BookingHost that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {BookingHostFindUniqueOrThrowArgs} args - Arguments to find a BookingHost
-     * @example
-     * // Get one BookingHost
-     * const bookingHost = await prisma.bookingHost.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends BookingHostFindUniqueOrThrowArgs>(args: SelectSubset<T, BookingHostFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BookingHostClient<$Result.GetResult<Prisma.$BookingHostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first BookingHost that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BookingHostFindFirstArgs} args - Arguments to find a BookingHost
-     * @example
-     * // Get one BookingHost
-     * const bookingHost = await prisma.bookingHost.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends BookingHostFindFirstArgs>(args?: SelectSubset<T, BookingHostFindFirstArgs<ExtArgs>>): Prisma__BookingHostClient<$Result.GetResult<Prisma.$BookingHostPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first BookingHost that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BookingHostFindFirstOrThrowArgs} args - Arguments to find a BookingHost
-     * @example
-     * // Get one BookingHost
-     * const bookingHost = await prisma.bookingHost.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends BookingHostFindFirstOrThrowArgs>(args?: SelectSubset<T, BookingHostFindFirstOrThrowArgs<ExtArgs>>): Prisma__BookingHostClient<$Result.GetResult<Prisma.$BookingHostPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more BookingHosts that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BookingHostFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all BookingHosts
-     * const bookingHosts = await prisma.bookingHost.findMany()
-     * 
-     * // Get first 10 BookingHosts
-     * const bookingHosts = await prisma.bookingHost.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const bookingHostWithIdOnly = await prisma.bookingHost.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends BookingHostFindManyArgs>(args?: SelectSubset<T, BookingHostFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookingHostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a BookingHost.
-     * @param {BookingHostCreateArgs} args - Arguments to create a BookingHost.
-     * @example
-     * // Create one BookingHost
-     * const BookingHost = await prisma.bookingHost.create({
-     *   data: {
-     *     // ... data to create a BookingHost
-     *   }
-     * })
-     * 
-     */
-    create<T extends BookingHostCreateArgs>(args: SelectSubset<T, BookingHostCreateArgs<ExtArgs>>): Prisma__BookingHostClient<$Result.GetResult<Prisma.$BookingHostPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many BookingHosts.
-     * @param {BookingHostCreateManyArgs} args - Arguments to create many BookingHosts.
-     * @example
-     * // Create many BookingHosts
-     * const bookingHost = await prisma.bookingHost.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends BookingHostCreateManyArgs>(args?: SelectSubset<T, BookingHostCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many BookingHosts and returns the data saved in the database.
-     * @param {BookingHostCreateManyAndReturnArgs} args - Arguments to create many BookingHosts.
-     * @example
-     * // Create many BookingHosts
-     * const bookingHost = await prisma.bookingHost.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many BookingHosts and only return the `id`
-     * const bookingHostWithIdOnly = await prisma.bookingHost.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends BookingHostCreateManyAndReturnArgs>(args?: SelectSubset<T, BookingHostCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookingHostPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a BookingHost.
-     * @param {BookingHostDeleteArgs} args - Arguments to delete one BookingHost.
-     * @example
-     * // Delete one BookingHost
-     * const BookingHost = await prisma.bookingHost.delete({
-     *   where: {
-     *     // ... filter to delete one BookingHost
-     *   }
-     * })
-     * 
-     */
-    delete<T extends BookingHostDeleteArgs>(args: SelectSubset<T, BookingHostDeleteArgs<ExtArgs>>): Prisma__BookingHostClient<$Result.GetResult<Prisma.$BookingHostPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one BookingHost.
-     * @param {BookingHostUpdateArgs} args - Arguments to update one BookingHost.
-     * @example
-     * // Update one BookingHost
-     * const bookingHost = await prisma.bookingHost.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends BookingHostUpdateArgs>(args: SelectSubset<T, BookingHostUpdateArgs<ExtArgs>>): Prisma__BookingHostClient<$Result.GetResult<Prisma.$BookingHostPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more BookingHosts.
-     * @param {BookingHostDeleteManyArgs} args - Arguments to filter BookingHosts to delete.
-     * @example
-     * // Delete a few BookingHosts
-     * const { count } = await prisma.bookingHost.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends BookingHostDeleteManyArgs>(args?: SelectSubset<T, BookingHostDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more BookingHosts.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BookingHostUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many BookingHosts
-     * const bookingHost = await prisma.bookingHost.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends BookingHostUpdateManyArgs>(args: SelectSubset<T, BookingHostUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more BookingHosts and returns the data updated in the database.
-     * @param {BookingHostUpdateManyAndReturnArgs} args - Arguments to update many BookingHosts.
-     * @example
-     * // Update many BookingHosts
-     * const bookingHost = await prisma.bookingHost.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more BookingHosts and only return the `id`
-     * const bookingHostWithIdOnly = await prisma.bookingHost.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends BookingHostUpdateManyAndReturnArgs>(args: SelectSubset<T, BookingHostUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookingHostPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one BookingHost.
-     * @param {BookingHostUpsertArgs} args - Arguments to update or create a BookingHost.
-     * @example
-     * // Update or create a BookingHost
-     * const bookingHost = await prisma.bookingHost.upsert({
-     *   create: {
-     *     // ... data to create a BookingHost
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the BookingHost we want to update
-     *   }
-     * })
-     */
-    upsert<T extends BookingHostUpsertArgs>(args: SelectSubset<T, BookingHostUpsertArgs<ExtArgs>>): Prisma__BookingHostClient<$Result.GetResult<Prisma.$BookingHostPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of BookingHosts.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BookingHostCountArgs} args - Arguments to filter BookingHosts to count.
-     * @example
-     * // Count the number of BookingHosts
-     * const count = await prisma.bookingHost.count({
-     *   where: {
-     *     // ... the filter for the BookingHosts we want to count
-     *   }
-     * })
-    **/
-    count<T extends BookingHostCountArgs>(
-      args?: Subset<T, BookingHostCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], BookingHostCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a BookingHost.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BookingHostAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends BookingHostAggregateArgs>(args: Subset<T, BookingHostAggregateArgs>): Prisma.PrismaPromise<GetBookingHostAggregateType<T>>
-
-    /**
-     * Group by BookingHost.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BookingHostGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends BookingHostGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: BookingHostGroupByArgs['orderBy'] }
-        : { orderBy?: BookingHostGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, BookingHostGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBookingHostGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the BookingHost model
-   */
-  readonly fields: BookingHostFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for BookingHost.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__BookingHostClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    booking<T extends BookingDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BookingDefaultArgs<ExtArgs>>): Prisma__BookingClient<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    host<T extends HostDefaultArgs<ExtArgs> = {}>(args?: Subset<T, HostDefaultArgs<ExtArgs>>): Prisma__HostClient<$Result.GetResult<Prisma.$HostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the BookingHost model
-   */
-  interface BookingHostFieldRefs {
-    readonly id: FieldRef<"BookingHost", 'Int'>
-    readonly bookingId: FieldRef<"BookingHost", 'Int'>
-    readonly hostId: FieldRef<"BookingHost", 'Int'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * BookingHost findUnique
-   */
-  export type BookingHostFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BookingHost
-     */
-    select?: BookingHostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BookingHost
-     */
-    omit?: BookingHostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BookingHostInclude<ExtArgs> | null
-    /**
-     * Filter, which BookingHost to fetch.
-     */
-    where: BookingHostWhereUniqueInput
-  }
-
-  /**
-   * BookingHost findUniqueOrThrow
-   */
-  export type BookingHostFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BookingHost
-     */
-    select?: BookingHostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BookingHost
-     */
-    omit?: BookingHostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BookingHostInclude<ExtArgs> | null
-    /**
-     * Filter, which BookingHost to fetch.
-     */
-    where: BookingHostWhereUniqueInput
-  }
-
-  /**
-   * BookingHost findFirst
-   */
-  export type BookingHostFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BookingHost
-     */
-    select?: BookingHostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BookingHost
-     */
-    omit?: BookingHostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BookingHostInclude<ExtArgs> | null
-    /**
-     * Filter, which BookingHost to fetch.
-     */
-    where?: BookingHostWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BookingHosts to fetch.
-     */
-    orderBy?: BookingHostOrderByWithRelationInput | BookingHostOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for BookingHosts.
-     */
-    cursor?: BookingHostWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BookingHosts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BookingHosts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of BookingHosts.
-     */
-    distinct?: BookingHostScalarFieldEnum | BookingHostScalarFieldEnum[]
-  }
-
-  /**
-   * BookingHost findFirstOrThrow
-   */
-  export type BookingHostFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BookingHost
-     */
-    select?: BookingHostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BookingHost
-     */
-    omit?: BookingHostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BookingHostInclude<ExtArgs> | null
-    /**
-     * Filter, which BookingHost to fetch.
-     */
-    where?: BookingHostWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BookingHosts to fetch.
-     */
-    orderBy?: BookingHostOrderByWithRelationInput | BookingHostOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for BookingHosts.
-     */
-    cursor?: BookingHostWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BookingHosts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BookingHosts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of BookingHosts.
-     */
-    distinct?: BookingHostScalarFieldEnum | BookingHostScalarFieldEnum[]
-  }
-
-  /**
-   * BookingHost findMany
-   */
-  export type BookingHostFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BookingHost
-     */
-    select?: BookingHostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BookingHost
-     */
-    omit?: BookingHostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BookingHostInclude<ExtArgs> | null
-    /**
-     * Filter, which BookingHosts to fetch.
-     */
-    where?: BookingHostWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BookingHosts to fetch.
-     */
-    orderBy?: BookingHostOrderByWithRelationInput | BookingHostOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing BookingHosts.
-     */
-    cursor?: BookingHostWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BookingHosts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BookingHosts.
-     */
-    skip?: number
-    distinct?: BookingHostScalarFieldEnum | BookingHostScalarFieldEnum[]
-  }
-
-  /**
-   * BookingHost create
-   */
-  export type BookingHostCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BookingHost
-     */
-    select?: BookingHostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BookingHost
-     */
-    omit?: BookingHostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BookingHostInclude<ExtArgs> | null
-    /**
-     * The data needed to create a BookingHost.
-     */
-    data: XOR<BookingHostCreateInput, BookingHostUncheckedCreateInput>
-  }
-
-  /**
-   * BookingHost createMany
-   */
-  export type BookingHostCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many BookingHosts.
-     */
-    data: BookingHostCreateManyInput | BookingHostCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * BookingHost createManyAndReturn
-   */
-  export type BookingHostCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BookingHost
-     */
-    select?: BookingHostSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the BookingHost
-     */
-    omit?: BookingHostOmit<ExtArgs> | null
-    /**
-     * The data used to create many BookingHosts.
-     */
-    data: BookingHostCreateManyInput | BookingHostCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BookingHostIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * BookingHost update
-   */
-  export type BookingHostUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BookingHost
-     */
-    select?: BookingHostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BookingHost
-     */
-    omit?: BookingHostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BookingHostInclude<ExtArgs> | null
-    /**
-     * The data needed to update a BookingHost.
-     */
-    data: XOR<BookingHostUpdateInput, BookingHostUncheckedUpdateInput>
-    /**
-     * Choose, which BookingHost to update.
-     */
-    where: BookingHostWhereUniqueInput
-  }
-
-  /**
-   * BookingHost updateMany
-   */
-  export type BookingHostUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update BookingHosts.
-     */
-    data: XOR<BookingHostUpdateManyMutationInput, BookingHostUncheckedUpdateManyInput>
-    /**
-     * Filter which BookingHosts to update
-     */
-    where?: BookingHostWhereInput
-    /**
-     * Limit how many BookingHosts to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * BookingHost updateManyAndReturn
-   */
-  export type BookingHostUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BookingHost
-     */
-    select?: BookingHostSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the BookingHost
-     */
-    omit?: BookingHostOmit<ExtArgs> | null
-    /**
-     * The data used to update BookingHosts.
-     */
-    data: XOR<BookingHostUpdateManyMutationInput, BookingHostUncheckedUpdateManyInput>
-    /**
-     * Filter which BookingHosts to update
-     */
-    where?: BookingHostWhereInput
-    /**
-     * Limit how many BookingHosts to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BookingHostIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * BookingHost upsert
-   */
-  export type BookingHostUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BookingHost
-     */
-    select?: BookingHostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BookingHost
-     */
-    omit?: BookingHostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BookingHostInclude<ExtArgs> | null
-    /**
-     * The filter to search for the BookingHost to update in case it exists.
-     */
-    where: BookingHostWhereUniqueInput
-    /**
-     * In case the BookingHost found by the `where` argument doesn't exist, create a new BookingHost with this data.
-     */
-    create: XOR<BookingHostCreateInput, BookingHostUncheckedCreateInput>
-    /**
-     * In case the BookingHost was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<BookingHostUpdateInput, BookingHostUncheckedUpdateInput>
-  }
-
-  /**
-   * BookingHost delete
-   */
-  export type BookingHostDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BookingHost
-     */
-    select?: BookingHostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BookingHost
-     */
-    omit?: BookingHostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BookingHostInclude<ExtArgs> | null
-    /**
-     * Filter which BookingHost to delete.
-     */
-    where: BookingHostWhereUniqueInput
-  }
-
-  /**
-   * BookingHost deleteMany
-   */
-  export type BookingHostDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which BookingHosts to delete
-     */
-    where?: BookingHostWhereInput
-    /**
-     * Limit how many BookingHosts to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * BookingHost without action
-   */
-  export type BookingHostDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BookingHost
-     */
-    select?: BookingHostSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BookingHost
-     */
-    omit?: BookingHostOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BookingHostInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Enums
    */
 
@@ -14685,8 +14709,8 @@ export namespace Prisma {
     id: 'id',
     firstName: 'firstName',
     lastName: 'lastName',
-    email: 'email',
-    phone: 'phone',
+    status: 'status',
+    label: 'label',
     active: 'active',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -14743,6 +14767,15 @@ export namespace Prisma {
   export type BookingScalarFieldEnum = (typeof BookingScalarFieldEnum)[keyof typeof BookingScalarFieldEnum]
 
 
+  export const BookingHostScalarFieldEnum: {
+    id: 'id',
+    bookingId: 'bookingId',
+    hostId: 'hostId'
+  };
+
+  export type BookingHostScalarFieldEnum = (typeof BookingHostScalarFieldEnum)[keyof typeof BookingHostScalarFieldEnum]
+
+
   export const PackageScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -14795,15 +14828,6 @@ export namespace Prisma {
   };
 
   export type BookingFoodItemScalarFieldEnum = (typeof BookingFoodItemScalarFieldEnum)[keyof typeof BookingFoodItemScalarFieldEnum]
-
-
-  export const BookingHostScalarFieldEnum: {
-    id: 'id',
-    bookingId: 'bookingId',
-    hostId: 'hostId'
-  };
-
-  export type BookingHostScalarFieldEnum = (typeof BookingHostScalarFieldEnum)[keyof typeof BookingHostScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -14881,6 +14905,34 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'HostStatus'
+   */
+  export type EnumHostStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HostStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'HostStatus[]'
+   */
+  export type ListEnumHostStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HostStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'HostLabel'
+   */
+  export type EnumHostLabelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HostLabel'>
+    
+
+
+  /**
+   * Reference to a field of type 'HostLabel[]'
+   */
+  export type ListEnumHostLabelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HostLabel[]'>
     
 
 
@@ -15089,8 +15141,8 @@ export namespace Prisma {
     id?: IntFilter<"Host"> | number
     firstName?: StringFilter<"Host"> | string
     lastName?: StringFilter<"Host"> | string
-    email?: StringFilter<"Host"> | string
-    phone?: StringNullableFilter<"Host"> | string | null
+    status?: EnumHostStatusFilter<"Host"> | $Enums.HostStatus
+    label?: EnumHostLabelNullableFilter<"Host"> | $Enums.HostLabel | null
     active?: BoolFilter<"Host"> | boolean
     createdAt?: DateTimeFilter<"Host"> | Date | string
     updatedAt?: DateTimeFilter<"Host"> | Date | string
@@ -15102,8 +15154,8 @@ export namespace Prisma {
     id?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
-    email?: SortOrder
-    phone?: SortOrderInput | SortOrder
+    status?: SortOrder
+    label?: SortOrderInput | SortOrder
     active?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -15113,26 +15165,26 @@ export namespace Prisma {
 
   export type HostWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    email?: string
     AND?: HostWhereInput | HostWhereInput[]
     OR?: HostWhereInput[]
     NOT?: HostWhereInput | HostWhereInput[]
     firstName?: StringFilter<"Host"> | string
     lastName?: StringFilter<"Host"> | string
-    phone?: StringNullableFilter<"Host"> | string | null
+    status?: EnumHostStatusFilter<"Host"> | $Enums.HostStatus
+    label?: EnumHostLabelNullableFilter<"Host"> | $Enums.HostLabel | null
     active?: BoolFilter<"Host"> | boolean
     createdAt?: DateTimeFilter<"Host"> | Date | string
     updatedAt?: DateTimeFilter<"Host"> | Date | string
     bookingHosts?: BookingHostListRelationFilter
     shifts?: ShiftListRelationFilter
-  }, "id" | "email">
+  }, "id">
 
   export type HostOrderByWithAggregationInput = {
     id?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
-    email?: SortOrder
-    phone?: SortOrderInput | SortOrder
+    status?: SortOrder
+    label?: SortOrderInput | SortOrder
     active?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -15150,8 +15202,8 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Host"> | number
     firstName?: StringWithAggregatesFilter<"Host"> | string
     lastName?: StringWithAggregatesFilter<"Host"> | string
-    email?: StringWithAggregatesFilter<"Host"> | string
-    phone?: StringNullableWithAggregatesFilter<"Host"> | string | null
+    status?: EnumHostStatusWithAggregatesFilter<"Host"> | $Enums.HostStatus
+    label?: EnumHostLabelNullableWithAggregatesFilter<"Host"> | $Enums.HostLabel | null
     active?: BoolWithAggregatesFilter<"Host"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Host"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Host"> | Date | string
@@ -15410,6 +15462,56 @@ export namespace Prisma {
     customerId?: IntNullableWithAggregatesFilter<"Booking"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"Booking"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Booking"> | Date | string
+  }
+
+  export type BookingHostWhereInput = {
+    AND?: BookingHostWhereInput | BookingHostWhereInput[]
+    OR?: BookingHostWhereInput[]
+    NOT?: BookingHostWhereInput | BookingHostWhereInput[]
+    id?: IntFilter<"BookingHost"> | number
+    bookingId?: IntFilter<"BookingHost"> | number
+    hostId?: IntFilter<"BookingHost"> | number
+    booking?: XOR<BookingScalarRelationFilter, BookingWhereInput>
+    host?: XOR<HostScalarRelationFilter, HostWhereInput>
+  }
+
+  export type BookingHostOrderByWithRelationInput = {
+    id?: SortOrder
+    bookingId?: SortOrder
+    hostId?: SortOrder
+    booking?: BookingOrderByWithRelationInput
+    host?: HostOrderByWithRelationInput
+  }
+
+  export type BookingHostWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: BookingHostWhereInput | BookingHostWhereInput[]
+    OR?: BookingHostWhereInput[]
+    NOT?: BookingHostWhereInput | BookingHostWhereInput[]
+    bookingId?: IntFilter<"BookingHost"> | number
+    hostId?: IntFilter<"BookingHost"> | number
+    booking?: XOR<BookingScalarRelationFilter, BookingWhereInput>
+    host?: XOR<HostScalarRelationFilter, HostWhereInput>
+  }, "id">
+
+  export type BookingHostOrderByWithAggregationInput = {
+    id?: SortOrder
+    bookingId?: SortOrder
+    hostId?: SortOrder
+    _count?: BookingHostCountOrderByAggregateInput
+    _avg?: BookingHostAvgOrderByAggregateInput
+    _max?: BookingHostMaxOrderByAggregateInput
+    _min?: BookingHostMinOrderByAggregateInput
+    _sum?: BookingHostSumOrderByAggregateInput
+  }
+
+  export type BookingHostScalarWhereWithAggregatesInput = {
+    AND?: BookingHostScalarWhereWithAggregatesInput | BookingHostScalarWhereWithAggregatesInput[]
+    OR?: BookingHostScalarWhereWithAggregatesInput[]
+    NOT?: BookingHostScalarWhereWithAggregatesInput | BookingHostScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"BookingHost"> | number
+    bookingId?: IntWithAggregatesFilter<"BookingHost"> | number
+    hostId?: IntWithAggregatesFilter<"BookingHost"> | number
   }
 
   export type PackageWhereInput = {
@@ -15690,56 +15792,6 @@ export namespace Prisma {
     quantity?: IntWithAggregatesFilter<"BookingFoodItem"> | number
   }
 
-  export type BookingHostWhereInput = {
-    AND?: BookingHostWhereInput | BookingHostWhereInput[]
-    OR?: BookingHostWhereInput[]
-    NOT?: BookingHostWhereInput | BookingHostWhereInput[]
-    id?: IntFilter<"BookingHost"> | number
-    bookingId?: IntFilter<"BookingHost"> | number
-    hostId?: IntFilter<"BookingHost"> | number
-    booking?: XOR<BookingScalarRelationFilter, BookingWhereInput>
-    host?: XOR<HostScalarRelationFilter, HostWhereInput>
-  }
-
-  export type BookingHostOrderByWithRelationInput = {
-    id?: SortOrder
-    bookingId?: SortOrder
-    hostId?: SortOrder
-    booking?: BookingOrderByWithRelationInput
-    host?: HostOrderByWithRelationInput
-  }
-
-  export type BookingHostWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: BookingHostWhereInput | BookingHostWhereInput[]
-    OR?: BookingHostWhereInput[]
-    NOT?: BookingHostWhereInput | BookingHostWhereInput[]
-    bookingId?: IntFilter<"BookingHost"> | number
-    hostId?: IntFilter<"BookingHost"> | number
-    booking?: XOR<BookingScalarRelationFilter, BookingWhereInput>
-    host?: XOR<HostScalarRelationFilter, HostWhereInput>
-  }, "id">
-
-  export type BookingHostOrderByWithAggregationInput = {
-    id?: SortOrder
-    bookingId?: SortOrder
-    hostId?: SortOrder
-    _count?: BookingHostCountOrderByAggregateInput
-    _avg?: BookingHostAvgOrderByAggregateInput
-    _max?: BookingHostMaxOrderByAggregateInput
-    _min?: BookingHostMinOrderByAggregateInput
-    _sum?: BookingHostSumOrderByAggregateInput
-  }
-
-  export type BookingHostScalarWhereWithAggregatesInput = {
-    AND?: BookingHostScalarWhereWithAggregatesInput | BookingHostScalarWhereWithAggregatesInput[]
-    OR?: BookingHostScalarWhereWithAggregatesInput[]
-    NOT?: BookingHostScalarWhereWithAggregatesInput | BookingHostScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"BookingHost"> | number
-    bookingId?: IntWithAggregatesFilter<"BookingHost"> | number
-    hostId?: IntWithAggregatesFilter<"BookingHost"> | number
-  }
-
   export type UserCreateInput = {
     firstName: string
     lastName: string
@@ -15887,8 +15939,8 @@ export namespace Prisma {
   export type HostCreateInput = {
     firstName: string
     lastName: string
-    email: string
-    phone?: string | null
+    status?: $Enums.HostStatus
+    label?: $Enums.HostLabel | null
     active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15900,8 +15952,8 @@ export namespace Prisma {
     id?: number
     firstName: string
     lastName: string
-    email: string
-    phone?: string | null
+    status?: $Enums.HostStatus
+    label?: $Enums.HostLabel | null
     active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15912,8 +15964,8 @@ export namespace Prisma {
   export type HostUpdateInput = {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHostStatusFieldUpdateOperationsInput | $Enums.HostStatus
+    label?: NullableEnumHostLabelFieldUpdateOperationsInput | $Enums.HostLabel | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15925,8 +15977,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHostStatusFieldUpdateOperationsInput | $Enums.HostStatus
+    label?: NullableEnumHostLabelFieldUpdateOperationsInput | $Enums.HostLabel | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15938,8 +15990,8 @@ export namespace Prisma {
     id?: number
     firstName: string
     lastName: string
-    email: string
-    phone?: string | null
+    status?: $Enums.HostStatus
+    label?: $Enums.HostLabel | null
     active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15948,8 +16000,8 @@ export namespace Prisma {
   export type HostUpdateManyMutationInput = {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHostStatusFieldUpdateOperationsInput | $Enums.HostStatus
+    label?: NullableEnumHostLabelFieldUpdateOperationsInput | $Enums.HostLabel | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15959,8 +16011,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHostStatusFieldUpdateOperationsInput | $Enums.HostStatus
+    label?: NullableEnumHostLabelFieldUpdateOperationsInput | $Enums.HostLabel | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16237,6 +16289,44 @@ export namespace Prisma {
     customerId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BookingHostCreateInput = {
+    booking: BookingCreateNestedOneWithoutBookingHostsInput
+    host: HostCreateNestedOneWithoutBookingHostsInput
+  }
+
+  export type BookingHostUncheckedCreateInput = {
+    id?: number
+    bookingId: number
+    hostId: number
+  }
+
+  export type BookingHostUpdateInput = {
+    booking?: BookingUpdateOneRequiredWithoutBookingHostsNestedInput
+    host?: HostUpdateOneRequiredWithoutBookingHostsNestedInput
+  }
+
+  export type BookingHostUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    bookingId?: IntFieldUpdateOperationsInput | number
+    hostId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type BookingHostCreateManyInput = {
+    id?: number
+    bookingId: number
+    hostId: number
+  }
+
+  export type BookingHostUpdateManyMutationInput = {
+
+  }
+
+  export type BookingHostUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    bookingId?: IntFieldUpdateOperationsInput | number
+    hostId?: IntFieldUpdateOperationsInput | number
   }
 
   export type PackageCreateInput = {
@@ -16527,44 +16617,6 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
   }
 
-  export type BookingHostCreateInput = {
-    booking: BookingCreateNestedOneWithoutBookingHostsInput
-    host: HostCreateNestedOneWithoutBookingHostsInput
-  }
-
-  export type BookingHostUncheckedCreateInput = {
-    id?: number
-    bookingId: number
-    hostId: number
-  }
-
-  export type BookingHostUpdateInput = {
-    booking?: BookingUpdateOneRequiredWithoutBookingHostsNestedInput
-    host?: HostUpdateOneRequiredWithoutBookingHostsNestedInput
-  }
-
-  export type BookingHostUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    bookingId?: IntFieldUpdateOperationsInput | number
-    hostId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type BookingHostCreateManyInput = {
-    id?: number
-    bookingId: number
-    hostId: number
-  }
-
-  export type BookingHostUpdateManyMutationInput = {
-
-  }
-
-  export type BookingHostUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    bookingId?: IntFieldUpdateOperationsInput | number
-    hostId?: IntFieldUpdateOperationsInput | number
-  }
-
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -16797,6 +16849,20 @@ export namespace Prisma {
     id?: SortOrder
   }
 
+  export type EnumHostStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.HostStatus | EnumHostStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.HostStatus[] | ListEnumHostStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.HostStatus[] | ListEnumHostStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumHostStatusFilter<$PrismaModel> | $Enums.HostStatus
+  }
+
+  export type EnumHostLabelNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.HostLabel | EnumHostLabelFieldRefInput<$PrismaModel> | null
+    in?: $Enums.HostLabel[] | ListEnumHostLabelFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.HostLabel[] | ListEnumHostLabelFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumHostLabelNullableFilter<$PrismaModel> | $Enums.HostLabel | null
+  }
+
   export type BookingHostListRelationFilter = {
     every?: BookingHostWhereInput
     some?: BookingHostWhereInput
@@ -16821,8 +16887,8 @@ export namespace Prisma {
     id?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
-    email?: SortOrder
-    phone?: SortOrder
+    status?: SortOrder
+    label?: SortOrder
     active?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -16836,8 +16902,8 @@ export namespace Prisma {
     id?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
-    email?: SortOrder
-    phone?: SortOrder
+    status?: SortOrder
+    label?: SortOrder
     active?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -16847,8 +16913,8 @@ export namespace Prisma {
     id?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
-    email?: SortOrder
-    phone?: SortOrder
+    status?: SortOrder
+    label?: SortOrder
     active?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -16856,6 +16922,26 @@ export namespace Prisma {
 
   export type HostSumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type EnumHostStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.HostStatus | EnumHostStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.HostStatus[] | ListEnumHostStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.HostStatus[] | ListEnumHostStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumHostStatusWithAggregatesFilter<$PrismaModel> | $Enums.HostStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumHostStatusFilter<$PrismaModel>
+    _max?: NestedEnumHostStatusFilter<$PrismaModel>
+  }
+
+  export type EnumHostLabelNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.HostLabel | EnumHostLabelFieldRefInput<$PrismaModel> | null
+    in?: $Enums.HostLabel[] | ListEnumHostLabelFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.HostLabel[] | ListEnumHostLabelFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumHostLabelNullableWithAggregatesFilter<$PrismaModel> | $Enums.HostLabel | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumHostLabelNullableFilter<$PrismaModel>
+    _max?: NestedEnumHostLabelNullableFilter<$PrismaModel>
   }
 
   export type IntNullableFilter<$PrismaModel = never> = {
@@ -17059,6 +17145,46 @@ export namespace Prisma {
     playersCount?: SortOrder
     hostsRequired?: SortOrder
     customerId?: SortOrder
+  }
+
+  export type BookingScalarRelationFilter = {
+    is?: BookingWhereInput
+    isNot?: BookingWhereInput
+  }
+
+  export type HostScalarRelationFilter = {
+    is?: HostWhereInput
+    isNot?: HostWhereInput
+  }
+
+  export type BookingHostCountOrderByAggregateInput = {
+    id?: SortOrder
+    bookingId?: SortOrder
+    hostId?: SortOrder
+  }
+
+  export type BookingHostAvgOrderByAggregateInput = {
+    id?: SortOrder
+    bookingId?: SortOrder
+    hostId?: SortOrder
+  }
+
+  export type BookingHostMaxOrderByAggregateInput = {
+    id?: SortOrder
+    bookingId?: SortOrder
+    hostId?: SortOrder
+  }
+
+  export type BookingHostMinOrderByAggregateInput = {
+    id?: SortOrder
+    bookingId?: SortOrder
+    hostId?: SortOrder
+  }
+
+  export type BookingHostSumOrderByAggregateInput = {
+    id?: SortOrder
+    bookingId?: SortOrder
+    hostId?: SortOrder
   }
 
   export type EnumPackageCategoryFilter<$PrismaModel = never> = {
@@ -17267,11 +17393,6 @@ export namespace Prisma {
     id?: SortOrder
   }
 
-  export type BookingScalarRelationFilter = {
-    is?: BookingWhereInput
-    isNot?: BookingWhereInput
-  }
-
   export type FoodItemScalarRelationFilter = {
     is?: FoodItemWhereInput
     isNot?: FoodItemWhereInput
@@ -17310,41 +17431,6 @@ export namespace Prisma {
     bookingId?: SortOrder
     foodItemId?: SortOrder
     quantity?: SortOrder
-  }
-
-  export type HostScalarRelationFilter = {
-    is?: HostWhereInput
-    isNot?: HostWhereInput
-  }
-
-  export type BookingHostCountOrderByAggregateInput = {
-    id?: SortOrder
-    bookingId?: SortOrder
-    hostId?: SortOrder
-  }
-
-  export type BookingHostAvgOrderByAggregateInput = {
-    id?: SortOrder
-    bookingId?: SortOrder
-    hostId?: SortOrder
-  }
-
-  export type BookingHostMaxOrderByAggregateInput = {
-    id?: SortOrder
-    bookingId?: SortOrder
-    hostId?: SortOrder
-  }
-
-  export type BookingHostMinOrderByAggregateInput = {
-    id?: SortOrder
-    bookingId?: SortOrder
-    hostId?: SortOrder
-  }
-
-  export type BookingHostSumOrderByAggregateInput = {
-    id?: SortOrder
-    bookingId?: SortOrder
-    hostId?: SortOrder
   }
 
   export type UserRoleCreateNestedOneWithoutUsersInput = {
@@ -17453,6 +17539,14 @@ export namespace Prisma {
     connectOrCreate?: ShiftCreateOrConnectWithoutHostInput | ShiftCreateOrConnectWithoutHostInput[]
     createMany?: ShiftCreateManyHostInputEnvelope
     connect?: ShiftWhereUniqueInput | ShiftWhereUniqueInput[]
+  }
+
+  export type EnumHostStatusFieldUpdateOperationsInput = {
+    set?: $Enums.HostStatus
+  }
+
+  export type NullableEnumHostLabelFieldUpdateOperationsInput = {
+    set?: $Enums.HostLabel | null
   }
 
   export type BookingHostUpdateManyWithoutHostNestedInput = {
@@ -17693,6 +17787,34 @@ export namespace Prisma {
     deleteMany?: BookingHostScalarWhereInput | BookingHostScalarWhereInput[]
   }
 
+  export type BookingCreateNestedOneWithoutBookingHostsInput = {
+    create?: XOR<BookingCreateWithoutBookingHostsInput, BookingUncheckedCreateWithoutBookingHostsInput>
+    connectOrCreate?: BookingCreateOrConnectWithoutBookingHostsInput
+    connect?: BookingWhereUniqueInput
+  }
+
+  export type HostCreateNestedOneWithoutBookingHostsInput = {
+    create?: XOR<HostCreateWithoutBookingHostsInput, HostUncheckedCreateWithoutBookingHostsInput>
+    connectOrCreate?: HostCreateOrConnectWithoutBookingHostsInput
+    connect?: HostWhereUniqueInput
+  }
+
+  export type BookingUpdateOneRequiredWithoutBookingHostsNestedInput = {
+    create?: XOR<BookingCreateWithoutBookingHostsInput, BookingUncheckedCreateWithoutBookingHostsInput>
+    connectOrCreate?: BookingCreateOrConnectWithoutBookingHostsInput
+    upsert?: BookingUpsertWithoutBookingHostsInput
+    connect?: BookingWhereUniqueInput
+    update?: XOR<XOR<BookingUpdateToOneWithWhereWithoutBookingHostsInput, BookingUpdateWithoutBookingHostsInput>, BookingUncheckedUpdateWithoutBookingHostsInput>
+  }
+
+  export type HostUpdateOneRequiredWithoutBookingHostsNestedInput = {
+    create?: XOR<HostCreateWithoutBookingHostsInput, HostUncheckedCreateWithoutBookingHostsInput>
+    connectOrCreate?: HostCreateOrConnectWithoutBookingHostsInput
+    upsert?: HostUpsertWithoutBookingHostsInput
+    connect?: HostWhereUniqueInput
+    update?: XOR<XOR<HostUpdateToOneWithWhereWithoutBookingHostsInput, HostUpdateWithoutBookingHostsInput>, HostUncheckedUpdateWithoutBookingHostsInput>
+  }
+
   export type EnumPackageCategoryFieldUpdateOperationsInput = {
     set?: $Enums.PackageCategory
   }
@@ -17819,34 +17941,6 @@ export namespace Prisma {
     upsert?: FoodItemUpsertWithoutBookingsInput
     connect?: FoodItemWhereUniqueInput
     update?: XOR<XOR<FoodItemUpdateToOneWithWhereWithoutBookingsInput, FoodItemUpdateWithoutBookingsInput>, FoodItemUncheckedUpdateWithoutBookingsInput>
-  }
-
-  export type BookingCreateNestedOneWithoutBookingHostsInput = {
-    create?: XOR<BookingCreateWithoutBookingHostsInput, BookingUncheckedCreateWithoutBookingHostsInput>
-    connectOrCreate?: BookingCreateOrConnectWithoutBookingHostsInput
-    connect?: BookingWhereUniqueInput
-  }
-
-  export type HostCreateNestedOneWithoutBookingHostsInput = {
-    create?: XOR<HostCreateWithoutBookingHostsInput, HostUncheckedCreateWithoutBookingHostsInput>
-    connectOrCreate?: HostCreateOrConnectWithoutBookingHostsInput
-    connect?: HostWhereUniqueInput
-  }
-
-  export type BookingUpdateOneRequiredWithoutBookingHostsNestedInput = {
-    create?: XOR<BookingCreateWithoutBookingHostsInput, BookingUncheckedCreateWithoutBookingHostsInput>
-    connectOrCreate?: BookingCreateOrConnectWithoutBookingHostsInput
-    upsert?: BookingUpsertWithoutBookingHostsInput
-    connect?: BookingWhereUniqueInput
-    update?: XOR<XOR<BookingUpdateToOneWithWhereWithoutBookingHostsInput, BookingUpdateWithoutBookingHostsInput>, BookingUncheckedUpdateWithoutBookingHostsInput>
-  }
-
-  export type HostUpdateOneRequiredWithoutBookingHostsNestedInput = {
-    create?: XOR<HostCreateWithoutBookingHostsInput, HostUncheckedCreateWithoutBookingHostsInput>
-    connectOrCreate?: HostCreateOrConnectWithoutBookingHostsInput
-    upsert?: HostUpsertWithoutBookingHostsInput
-    connect?: HostWhereUniqueInput
-    update?: XOR<XOR<HostUpdateToOneWithWhereWithoutBookingHostsInput, HostUpdateWithoutBookingHostsInput>, HostUncheckedUpdateWithoutBookingHostsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -17996,6 +18090,40 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumHostStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.HostStatus | EnumHostStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.HostStatus[] | ListEnumHostStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.HostStatus[] | ListEnumHostStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumHostStatusFilter<$PrismaModel> | $Enums.HostStatus
+  }
+
+  export type NestedEnumHostLabelNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.HostLabel | EnumHostLabelFieldRefInput<$PrismaModel> | null
+    in?: $Enums.HostLabel[] | ListEnumHostLabelFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.HostLabel[] | ListEnumHostLabelFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumHostLabelNullableFilter<$PrismaModel> | $Enums.HostLabel | null
+  }
+
+  export type NestedEnumHostStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.HostStatus | EnumHostStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.HostStatus[] | ListEnumHostStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.HostStatus[] | ListEnumHostStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumHostStatusWithAggregatesFilter<$PrismaModel> | $Enums.HostStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumHostStatusFilter<$PrismaModel>
+    _max?: NestedEnumHostStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumHostLabelNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.HostLabel | EnumHostLabelFieldRefInput<$PrismaModel> | null
+    in?: $Enums.HostLabel[] | ListEnumHostLabelFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.HostLabel[] | ListEnumHostLabelFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumHostLabelNullableWithAggregatesFilter<$PrismaModel> | $Enums.HostLabel | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumHostLabelNullableFilter<$PrismaModel>
+    _max?: NestedEnumHostLabelNullableFilter<$PrismaModel>
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -18300,8 +18428,8 @@ export namespace Prisma {
   export type HostCreateWithoutShiftsInput = {
     firstName: string
     lastName: string
-    email: string
-    phone?: string | null
+    status?: $Enums.HostStatus
+    label?: $Enums.HostLabel | null
     active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -18312,8 +18440,8 @@ export namespace Prisma {
     id?: number
     firstName: string
     lastName: string
-    email: string
-    phone?: string | null
+    status?: $Enums.HostStatus
+    label?: $Enums.HostLabel | null
     active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -18359,8 +18487,8 @@ export namespace Prisma {
   export type HostUpdateWithoutShiftsInput = {
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHostStatusFieldUpdateOperationsInput | $Enums.HostStatus
+    label?: NullableEnumHostLabelFieldUpdateOperationsInput | $Enums.HostLabel | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18371,8 +18499,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHostStatusFieldUpdateOperationsInput | $Enums.HostStatus
+    label?: NullableEnumHostLabelFieldUpdateOperationsInput | $Enums.HostLabel | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18590,6 +18718,170 @@ export namespace Prisma {
   export type BookingHostUpdateManyWithWhereWithoutBookingInput = {
     where: BookingHostScalarWhereInput
     data: XOR<BookingHostUpdateManyMutationInput, BookingHostUncheckedUpdateManyWithoutBookingInput>
+  }
+
+  export type BookingCreateWithoutBookingHostsInput = {
+    venue?: string | null
+    dayOfWeek?: string | null
+    startTime: Date | string
+    endTime: Date | string
+    bookingDate: Date | string
+    playersCount: number
+    hostsRequired: number
+    food_required?: boolean
+    is_b2b?: boolean
+    status?: string | null
+    eposFamily?: string | null
+    packageName?: string | null
+    bookingDescription?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    customer?: CustomerCreateNestedOneWithoutBookingsInput
+    foodItems?: BookingFoodItemCreateNestedManyWithoutBookingInput
+  }
+
+  export type BookingUncheckedCreateWithoutBookingHostsInput = {
+    id?: number
+    venue?: string | null
+    dayOfWeek?: string | null
+    startTime: Date | string
+    endTime: Date | string
+    bookingDate: Date | string
+    playersCount: number
+    hostsRequired: number
+    food_required?: boolean
+    is_b2b?: boolean
+    status?: string | null
+    eposFamily?: string | null
+    packageName?: string | null
+    bookingDescription?: string | null
+    notes?: string | null
+    customerId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    foodItems?: BookingFoodItemUncheckedCreateNestedManyWithoutBookingInput
+  }
+
+  export type BookingCreateOrConnectWithoutBookingHostsInput = {
+    where: BookingWhereUniqueInput
+    create: XOR<BookingCreateWithoutBookingHostsInput, BookingUncheckedCreateWithoutBookingHostsInput>
+  }
+
+  export type HostCreateWithoutBookingHostsInput = {
+    firstName: string
+    lastName: string
+    status?: $Enums.HostStatus
+    label?: $Enums.HostLabel | null
+    active?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    shifts?: ShiftCreateNestedManyWithoutHostInput
+  }
+
+  export type HostUncheckedCreateWithoutBookingHostsInput = {
+    id?: number
+    firstName: string
+    lastName: string
+    status?: $Enums.HostStatus
+    label?: $Enums.HostLabel | null
+    active?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    shifts?: ShiftUncheckedCreateNestedManyWithoutHostInput
+  }
+
+  export type HostCreateOrConnectWithoutBookingHostsInput = {
+    where: HostWhereUniqueInput
+    create: XOR<HostCreateWithoutBookingHostsInput, HostUncheckedCreateWithoutBookingHostsInput>
+  }
+
+  export type BookingUpsertWithoutBookingHostsInput = {
+    update: XOR<BookingUpdateWithoutBookingHostsInput, BookingUncheckedUpdateWithoutBookingHostsInput>
+    create: XOR<BookingCreateWithoutBookingHostsInput, BookingUncheckedCreateWithoutBookingHostsInput>
+    where?: BookingWhereInput
+  }
+
+  export type BookingUpdateToOneWithWhereWithoutBookingHostsInput = {
+    where?: BookingWhereInput
+    data: XOR<BookingUpdateWithoutBookingHostsInput, BookingUncheckedUpdateWithoutBookingHostsInput>
+  }
+
+  export type BookingUpdateWithoutBookingHostsInput = {
+    venue?: NullableStringFieldUpdateOperationsInput | string | null
+    dayOfWeek?: NullableStringFieldUpdateOperationsInput | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    playersCount?: IntFieldUpdateOperationsInput | number
+    hostsRequired?: IntFieldUpdateOperationsInput | number
+    food_required?: BoolFieldUpdateOperationsInput | boolean
+    is_b2b?: BoolFieldUpdateOperationsInput | boolean
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    eposFamily?: NullableStringFieldUpdateOperationsInput | string | null
+    packageName?: NullableStringFieldUpdateOperationsInput | string | null
+    bookingDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    customer?: CustomerUpdateOneWithoutBookingsNestedInput
+    foodItems?: BookingFoodItemUpdateManyWithoutBookingNestedInput
+  }
+
+  export type BookingUncheckedUpdateWithoutBookingHostsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    venue?: NullableStringFieldUpdateOperationsInput | string | null
+    dayOfWeek?: NullableStringFieldUpdateOperationsInput | string | null
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    playersCount?: IntFieldUpdateOperationsInput | number
+    hostsRequired?: IntFieldUpdateOperationsInput | number
+    food_required?: BoolFieldUpdateOperationsInput | boolean
+    is_b2b?: BoolFieldUpdateOperationsInput | boolean
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    eposFamily?: NullableStringFieldUpdateOperationsInput | string | null
+    packageName?: NullableStringFieldUpdateOperationsInput | string | null
+    bookingDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    customerId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    foodItems?: BookingFoodItemUncheckedUpdateManyWithoutBookingNestedInput
+  }
+
+  export type HostUpsertWithoutBookingHostsInput = {
+    update: XOR<HostUpdateWithoutBookingHostsInput, HostUncheckedUpdateWithoutBookingHostsInput>
+    create: XOR<HostCreateWithoutBookingHostsInput, HostUncheckedCreateWithoutBookingHostsInput>
+    where?: HostWhereInput
+  }
+
+  export type HostUpdateToOneWithWhereWithoutBookingHostsInput = {
+    where?: HostWhereInput
+    data: XOR<HostUpdateWithoutBookingHostsInput, HostUncheckedUpdateWithoutBookingHostsInput>
+  }
+
+  export type HostUpdateWithoutBookingHostsInput = {
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    status?: EnumHostStatusFieldUpdateOperationsInput | $Enums.HostStatus
+    label?: NullableEnumHostLabelFieldUpdateOperationsInput | $Enums.HostLabel | null
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    shifts?: ShiftUpdateManyWithoutHostNestedInput
+  }
+
+  export type HostUncheckedUpdateWithoutBookingHostsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    status?: EnumHostStatusFieldUpdateOperationsInput | $Enums.HostStatus
+    label?: NullableEnumHostLabelFieldUpdateOperationsInput | $Enums.HostLabel | null
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    shifts?: ShiftUncheckedUpdateManyWithoutHostNestedInput
   }
 
   export type BookingCreateWithoutCustomerInput = {
@@ -18868,170 +19160,6 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BookingCreateWithoutBookingHostsInput = {
-    venue?: string | null
-    dayOfWeek?: string | null
-    startTime: Date | string
-    endTime: Date | string
-    bookingDate: Date | string
-    playersCount: number
-    hostsRequired: number
-    food_required?: boolean
-    is_b2b?: boolean
-    status?: string | null
-    eposFamily?: string | null
-    packageName?: string | null
-    bookingDescription?: string | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    customer?: CustomerCreateNestedOneWithoutBookingsInput
-    foodItems?: BookingFoodItemCreateNestedManyWithoutBookingInput
-  }
-
-  export type BookingUncheckedCreateWithoutBookingHostsInput = {
-    id?: number
-    venue?: string | null
-    dayOfWeek?: string | null
-    startTime: Date | string
-    endTime: Date | string
-    bookingDate: Date | string
-    playersCount: number
-    hostsRequired: number
-    food_required?: boolean
-    is_b2b?: boolean
-    status?: string | null
-    eposFamily?: string | null
-    packageName?: string | null
-    bookingDescription?: string | null
-    notes?: string | null
-    customerId?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    foodItems?: BookingFoodItemUncheckedCreateNestedManyWithoutBookingInput
-  }
-
-  export type BookingCreateOrConnectWithoutBookingHostsInput = {
-    where: BookingWhereUniqueInput
-    create: XOR<BookingCreateWithoutBookingHostsInput, BookingUncheckedCreateWithoutBookingHostsInput>
-  }
-
-  export type HostCreateWithoutBookingHostsInput = {
-    firstName: string
-    lastName: string
-    email: string
-    phone?: string | null
-    active?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    shifts?: ShiftCreateNestedManyWithoutHostInput
-  }
-
-  export type HostUncheckedCreateWithoutBookingHostsInput = {
-    id?: number
-    firstName: string
-    lastName: string
-    email: string
-    phone?: string | null
-    active?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    shifts?: ShiftUncheckedCreateNestedManyWithoutHostInput
-  }
-
-  export type HostCreateOrConnectWithoutBookingHostsInput = {
-    where: HostWhereUniqueInput
-    create: XOR<HostCreateWithoutBookingHostsInput, HostUncheckedCreateWithoutBookingHostsInput>
-  }
-
-  export type BookingUpsertWithoutBookingHostsInput = {
-    update: XOR<BookingUpdateWithoutBookingHostsInput, BookingUncheckedUpdateWithoutBookingHostsInput>
-    create: XOR<BookingCreateWithoutBookingHostsInput, BookingUncheckedCreateWithoutBookingHostsInput>
-    where?: BookingWhereInput
-  }
-
-  export type BookingUpdateToOneWithWhereWithoutBookingHostsInput = {
-    where?: BookingWhereInput
-    data: XOR<BookingUpdateWithoutBookingHostsInput, BookingUncheckedUpdateWithoutBookingHostsInput>
-  }
-
-  export type BookingUpdateWithoutBookingHostsInput = {
-    venue?: NullableStringFieldUpdateOperationsInput | string | null
-    dayOfWeek?: NullableStringFieldUpdateOperationsInput | string | null
-    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    bookingDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    playersCount?: IntFieldUpdateOperationsInput | number
-    hostsRequired?: IntFieldUpdateOperationsInput | number
-    food_required?: BoolFieldUpdateOperationsInput | boolean
-    is_b2b?: BoolFieldUpdateOperationsInput | boolean
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    eposFamily?: NullableStringFieldUpdateOperationsInput | string | null
-    packageName?: NullableStringFieldUpdateOperationsInput | string | null
-    bookingDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    customer?: CustomerUpdateOneWithoutBookingsNestedInput
-    foodItems?: BookingFoodItemUpdateManyWithoutBookingNestedInput
-  }
-
-  export type BookingUncheckedUpdateWithoutBookingHostsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    venue?: NullableStringFieldUpdateOperationsInput | string | null
-    dayOfWeek?: NullableStringFieldUpdateOperationsInput | string | null
-    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    bookingDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    playersCount?: IntFieldUpdateOperationsInput | number
-    hostsRequired?: IntFieldUpdateOperationsInput | number
-    food_required?: BoolFieldUpdateOperationsInput | boolean
-    is_b2b?: BoolFieldUpdateOperationsInput | boolean
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    eposFamily?: NullableStringFieldUpdateOperationsInput | string | null
-    packageName?: NullableStringFieldUpdateOperationsInput | string | null
-    bookingDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    customerId?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    foodItems?: BookingFoodItemUncheckedUpdateManyWithoutBookingNestedInput
-  }
-
-  export type HostUpsertWithoutBookingHostsInput = {
-    update: XOR<HostUpdateWithoutBookingHostsInput, HostUncheckedUpdateWithoutBookingHostsInput>
-    create: XOR<HostCreateWithoutBookingHostsInput, HostUncheckedCreateWithoutBookingHostsInput>
-    where?: HostWhereInput
-  }
-
-  export type HostUpdateToOneWithWhereWithoutBookingHostsInput = {
-    where?: HostWhereInput
-    data: XOR<HostUpdateWithoutBookingHostsInput, HostUncheckedUpdateWithoutBookingHostsInput>
-  }
-
-  export type HostUpdateWithoutBookingHostsInput = {
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    active?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    shifts?: ShiftUpdateManyWithoutHostNestedInput
-  }
-
-  export type HostUncheckedUpdateWithoutBookingHostsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    active?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    shifts?: ShiftUncheckedUpdateManyWithoutHostNestedInput
   }
 
   export type UserCreateManyRoleInput = {
