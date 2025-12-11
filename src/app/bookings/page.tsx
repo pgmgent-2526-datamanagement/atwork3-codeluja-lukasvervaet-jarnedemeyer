@@ -1,5 +1,6 @@
 "use client";
 import AddBookingButton from "@/components/AddBookingButton";
+import BookingsCalendar from "@/components/BookingsCalendar";
 // import { randomUUID } from "crypto";
 import { useEffect, useState } from "react";
 
@@ -18,11 +19,10 @@ interface Booking {
   status: string;
 }
 
-//! display bookings in calender style view with date, time, playersCount, packageName, hostsRequired, bookingDescription
-//* https://www.untitledui.com/react/components/calendars
-
 export default function Bookings() {
   const [bookings, setBookings] = useState<Booking[]>([]);
+  const [viewMode, setViewMode] = useState<"list" | "calendar">("list");
+
   const fetchBookings = async () => {
     const res = await fetch("/api/bookings/db", { cache: "no-store" });
     if (!res.ok) {
@@ -37,6 +37,22 @@ export default function Bookings() {
     }
     setBookings([]);
     return [];
+  };
+
+  const filteredTodayBookings = (allBookings: Booking[]) => {
+    const today = new Date();
+    return allBookings.filter((booking) => {
+      const bookingDate = new Date(booking.bookingDate);
+      return (
+        bookingDate.getDate() === today.getDate() &&
+        bookingDate.getMonth() === today.getMonth() &&
+        bookingDate.getFullYear() === today.getFullYear()
+      );
+    });
+  };
+
+  const handleViewChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setViewMode(e.target.value as "list" | "calendar");
   };
 
   const isValidDate = (dateString: string) => {
@@ -55,40 +71,31 @@ export default function Bookings() {
   }, []);
 
   return (
-    <div>
-      <header className="flex flex-col p-5 justify-between space-y-3">
-        <h1 className="mt-3 text-2xl font-semibold flex justify-center items-center underline -underline-offset-[-3px] saira-font">
+    <div className="flex flex-col justify-center items-center ml-32">
+      <header className="flex p-5 justify-between space-x-3 items-center text-center w-full h-min">
+        <h1 className="text-2xl font-semibold flex justify-center text-center underline -underline-offset-[-3px] saira-font">
           Your Bookings
         </h1>
-        <p className="bg-gray-200 items-center text-sm p-1 rounded-md shadow-md flex m-auto w-max text-slate-800">
-          Bekijk en beheer uw boekingen
-        </p>
-      </header>
-      {/* <AddBookingButton /> */}
-      <div>
-        <select name="filter" id="filter">
-          <option value="list">List View (today)</option>
+        <select
+          className="h-7 m-auto border border-gray-300 rounded-md px-2"
+          name="filter"
+          id="filter"
+          value={viewMode}
+          onChange={handleViewChange}
+        >
+          <option value="list">List View (Today)</option>
           <option value="calendar">Calendar View</option>
         </select>
-      </div>
+      </header>
 
-      <div className="overflow-y-scroll bg-white border shadow-md border-gray-100 p-4 rounded-lg  mt-6 text-black flex flex-col flex-row-2  m-auto w-312 h-128">
-        {bookings.length > 0 ? (
-          bookings.map((booking: Booking) => {
+      {viewMode === "list" && (
+        <div className="overflow-y-scroll bg-white border shadow-md border-gray-100 p-4 rounded-lg  mt-6 text-black flex flex-col flex-row-2  m-auto w-238 h-150">
+          {filteredTodayBookings(bookings).map((booking: Booking) => {
             return (
               <div key={booking.id} className="mb-4">
-                <div className="flex flex-col w-full justify-start border border-gray-100 p-4 rounded-md space-y-2 shadow-sm mt-2">
+                <div className="flex flex-col w-[95%] justify-start border border-gray-100 p-4 rounded-md space-y-1 shadow-sm mt-2 h-auto">
                   <div className="flex justify-between items-center w-full">
                     <h2 className="text-xl font-semibold">Naam Klant</h2>
-                    {/* <select
-                      name="status"
-                      id="status"
-                      className="border border-gray-300 rounded-md p-2 h-10 w-40"
-                    >
-                      <option value="completed">Completed</option>
-                      <option value="pending">Pending</option>
-                      <option value="canceled">Canceled</option>
-                    </select> */}
                   </div>
 
                   <p>
@@ -103,7 +110,11 @@ export default function Bookings() {
                       {isValidDate(booking.bookingDate) ? (
                         new Date(booking.bookingDate).toLocaleDateString(
                           "nl-NL",
-                          { day: "2-digit", month: "short", year: "numeric" }
+                          {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric",
+                          }
                         )
                       ) : (
                         <span className="text-red-500 font-semibold">
@@ -138,11 +149,15 @@ export default function Bookings() {
                 </div>
               </div>
             );
-          })
-        ) : (
-          <p>No bookings available.</p>
-        )}
-      </div>
+          })}
+        </div>
+      )}
+
+      {viewMode === "calendar" && (
+        <div className="h-[40rem] overflow-y-scroll">
+          <BookingsCalendar bookings={bookings} />
+        </div>
+      )}
     </div>
   );
 }
