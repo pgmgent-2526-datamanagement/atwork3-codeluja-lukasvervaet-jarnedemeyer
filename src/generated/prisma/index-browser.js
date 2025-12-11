@@ -146,8 +146,8 @@ exports.Prisma.HostScalarFieldEnum = {
   id: 'id',
   firstName: 'firstName',
   lastName: 'lastName',
-  email: 'email',
-  phone: 'phone',
+  status: 'status',
+  label: 'label',
   active: 'active',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -192,6 +192,12 @@ exports.Prisma.BookingScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.BookingHostScalarFieldEnum = {
+  id: 'id',
+  bookingId: 'bookingId',
+  hostId: 'hostId'
+};
+
 exports.Prisma.PackageScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -234,12 +240,6 @@ exports.Prisma.BookingFoodItemScalarFieldEnum = {
   quantity: 'quantity'
 };
 
-exports.Prisma.BookingHostScalarFieldEnum = {
-  id: 'id',
-  bookingId: 'bookingId',
-  hostId: 'hostId'
-};
-
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -254,6 +254,16 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.HostStatus = exports.$Enums.HostStatus = {
+  MEDEWERKER: 'MEDEWERKER',
+  STUDENT: 'STUDENT'
+};
+
+exports.HostLabel = exports.$Enums.HostLabel = {
+  EXPERIENCED: 'EXPERIENCED',
+  TRAINING: 'TRAINING'
+};
+
 exports.PackageCategory = exports.$Enums.PackageCategory = {
   VR: 'VR',
   VR_BATTLE: 'VR_BATTLE',
@@ -273,11 +283,11 @@ exports.Prisma.ModelName = {
   Shift: 'Shift',
   ShiftRole: 'ShiftRole',
   Booking: 'Booking',
+  BookingHost: 'BookingHost',
   Package: 'Package',
   Customer: 'Customer',
   FoodItem: 'FoodItem',
-  BookingFoodItem: 'BookingFoodItem',
-  BookingHost: 'BookingHost'
+  BookingFoodItem: 'BookingFoodItem'
 };
 
 /**

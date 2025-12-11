@@ -5,6 +5,8 @@ import { parse } from "csv-parse/sync";
 const prisma = new PrismaClient();
 
 async function main() {
+  await prisma.host.deleteMany({});
+
   const file = fs.readFileSync("scripts/hosts.csv");
   const records = parse(file, { columns: true, delimiter: ";" });
 
@@ -13,6 +15,8 @@ async function main() {
       data: {
         firstName: record.VOORNAAM,
         lastName: record.ACHTERNAAM,
+        status:
+          record.GEBRUIKERSSTATUS === "Medewerker" ? "MEDEWERKER" : "STUDENT",
         active: true,
       },
     });
