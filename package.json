@@ -11,8 +11,9 @@
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@prisma/adapter-pg": "^7.0.1",
-    "@prisma/client": "^6.19.0",
+    "@prisma/client": "^6.19.1",
     "@prisma/extension-accelerate": "^2.0.2",
+    "csv-parse": "^6.1.0",
     "dotenv": "^17.2.3",
     "googleapis": "^166.0.0",
     "lucide-react": "^0.555.0",
