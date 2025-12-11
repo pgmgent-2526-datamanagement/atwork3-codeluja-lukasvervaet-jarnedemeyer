@@ -8,6 +8,7 @@ interface Booking {
   playersCount: number;
   startTime: string;
   endTime: string;
+  bookingDate: string;
   bookingDescription: string;
   hostsRequired: number;
   food_required: boolean;
@@ -99,8 +100,8 @@ export default function Bookings() {
                   <div className="flex justify-between w-[50%] text-gray-500">
                     <p>email@example.com</p>
                     <p>
-                      {isValidDate(booking.startTime) ? (
-                        new Date(booking.startTime).toLocaleDateString(
+                      {isValidDate(booking.bookingDate) ? (
+                        new Date(booking.bookingDate).toLocaleDateString(
                           "nl-NL",
                           { day: "2-digit", month: "short", year: "numeric" }
                         )

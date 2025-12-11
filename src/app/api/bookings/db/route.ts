@@ -7,16 +7,17 @@ export async function GET() {
     const res = await prisma.booking.findMany({
       where: {
         status: "Booked",
-        // startTime: {
-        //   gte: new Date(),
-        //   lt: new Date(new Date().setMonth(new Date().getMonth() + 1)),
-        // },
+        bookingDate: {
+          gte: new Date(),
+          lt: new Date(new Date().setMonth(new Date().getMonth() + 1)),
+        },
       },
       select: {
         id: true,
         dayOfWeek: true,
         startTime: true,
         endTime: true,
+        bookingDate: true,
         playersCount: true,
         hostsRequired: true,
         food_required: true,
@@ -26,9 +27,7 @@ export async function GET() {
         notes: true,
         status: true,
       },
-      orderBy: {
-        startTime: "asc",
-      },
+      orderBy: [{ bookingDate: "asc" }, { startTime: "asc" }],
     });
 
     //! now convert the date, startTime and endTime to a string and slice that string to get the clean version
@@ -37,7 +36,7 @@ export async function GET() {
       return Response.json([]);
     }
 
-    console.log("Fetched bookings from database:", res);
+    // console.log("Fetched bookings from database:", res[0]);
 
     return Response.json(res);
   } catch (error) {
