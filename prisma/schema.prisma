@@ -50,7 +50,7 @@ model Host {
   firstName String
   lastName  String
   status    HostStatus @default(STUDENT)
-  label     HostLabel?  
+  label     HostLabel? 
   active    Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
