@@ -9,6 +9,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 // ============================================
@@ -46,11 +47,8 @@ model UserRole {
 
 model Host {
   id        Int      @id @default(autoincrement())
-  shyfterId Int?     @unique
   firstName String
   lastName  String
-  email     String   @unique
-  phone     String?
   active    Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -61,7 +59,6 @@ model Host {
 
 model Shift {
   id        Int      @id @default(autoincrement())
-  shyfterId Int?     @unique
   hostId    Int?
   startTime DateTime
   endTime   DateTime
