@@ -70,6 +70,13 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
               <span className="font-semibold">Notes:</span> {booking.notes}
             </p>
           )}
+
+          {booking.food_required !== undefined && (
+            <p>
+              <span className="font-semibold">Food Required:</span>
+              {booking.food_required ? "Yes" : "No"}
+            </p>
+          )}
         </div>
 
         <button

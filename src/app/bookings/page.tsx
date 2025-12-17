@@ -1,6 +1,10 @@
 "use client";
 // import AddBookingButton from "@/components/AddBookingButton";
 import BookingsCalendar from "@/components/BookingsCalendar";
+import {
+  SkeletonBookingItem,
+  SkeletonCalendarContainer,
+} from "@/components/Loader";
 // import { randomUUID } from "crypto";
 import { useEffect, useState } from "react";
 
@@ -19,27 +23,37 @@ interface Booking {
   status: string;
 }
 
+interface Filter {
+  type: "all" | "b2b" | "food" | "bronze" | "silver" | "gold";
+}
+
 export default function Bookings() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [viewMode, setViewMode] = useState<"list" | "calendar">("list");
+  const [loading, setLoading] = useState<boolean>(true);
+  const [filter, setFilter] = useState<Filter>({ type: "all" });
 
   const fetchBookings = async () => {
+    setLoading(true);
     const res = await fetch("/api/bookings/db", { cache: "no-store" });
     if (!res.ok) {
       console.error("Failed to fetch bookings", res.status);
       setBookings([]);
+      setLoading(false);
       return [];
     }
     const data = await res.json();
     if (Array.isArray(data)) {
       setBookings(data as Booking[]);
+      setLoading(false);
       return data as Booking[];
     }
     setBookings([]);
+    setLoading(false);
     return [];
   };
 
-  const filteredTodayBookings = (allBookings: Booking[]) => {
+  const TodayBookings = (allBookings: Booking[]) => {
     const today = new Date();
     return allBookings.filter((booking) => {
       const bookingDate = new Date(booking.bookingDate);
@@ -49,6 +63,60 @@ export default function Bookings() {
         bookingDate.getFullYear() === today.getFullYear()
       );
     });
+  };
+
+  const bookingsToday = TodayBookings(bookings);
+
+  const filteredBookings = () => {
+    if (viewMode === "list") {
+      switch (filter.type) {
+        case "all":
+          return bookingsToday;
+          break;
+        case "b2b":
+          return bookingsToday.filter((b) => b.is_b2b);
+          break;
+        case "food":
+          return bookingsToday.filter((b) => b.food_required);
+          break;
+        case "bronze":
+          return bookingsToday.filter((b) => b.packageName === "Bronze");
+          break;
+        case "silver":
+          return bookingsToday.filter((b) => b.packageName === "Silver");
+          break;
+        case "gold":
+          return bookingsToday.filter((b) => b.packageName === "Gold");
+          break;
+        default:
+          return bookingsToday;
+          break;
+      }
+    } else {
+      switch (filter.type) {
+        case "all":
+          return bookings;
+          break;
+        case "b2b":
+          return bookings.filter((b) => b.is_b2b);
+          break;
+        case "food":
+          return bookings.filter((b) => b.food_required);
+          break;
+        case "bronze":
+          return bookings.filter((b) => b.packageName === "Bronze");
+          break;
+        case "silver":
+          return bookings.filter((b) => b.packageName === "Silver");
+          break;
+        case "gold":
+          return bookings.filter((b) => b.packageName === "Gold");
+          break;
+        default:
+          return bookings;
+          break;
+      }
+    }
   };
 
   const handleViewChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -86,78 +154,108 @@ export default function Bookings() {
           <option value="list">List View (Today)</option>
           <option value="calendar">Calendar View</option>
         </select>
+        <select
+          value={filter.type}
+          onChange={(e) =>
+            setFilter({ type: e.target.value as Filter["type"] })
+          }
+        >
+          <option value="all">All Bookings</option>
+          <option value="b2b">B2B Bookings</option>
+          <option value="food">Require food</option>
+          <option value="bronze">Bronze Package</option>
+          <option value="silver">Silver Package</option>
+          <option value="gold">Gold Package</option>
+        </select>
       </header>
 
-      {viewMode === "list" && (
-        <div className="overflow-y-scroll bg-white border shadow-md border-gray-100 p-4 rounded-lg  mt-6 text-black flex flex-col flex-row-2  m-auto w-238 h-150">
-          {filteredTodayBookings(bookings).map((booking: Booking) => {
-            return (
-              <div key={booking.id} className="mb-4">
-                <div className="flex flex-col w-[95%] justify-start border border-gray-100 p-4 rounded-md space-y-1 shadow-sm mt-2 h-auto">
-                  <div className="flex justify-between items-center w-full">
-                    <h2 className="text-xl font-semibold">Naam Klant</h2>
-                  </div>
+      {viewMode === "list" &&
+        (loading ? (
+          <div className="overflow-y-scroll bg-white border shadow-md border-gray-100 p-4 rounded-lg mt-6 text-black flex flex-col w-238 h-150">
+            <SkeletonBookingItem />
+            <SkeletonBookingItem />
+            <SkeletonBookingItem />
+            <SkeletonBookingItem />
+          </div>
+        ) : (
+          <div className="overflow-y-scroll bg-white border shadow-md border-gray-100 p-4 rounded-lg  mt-6 text-black flex flex-col flex-row-2  m-auto w-238 h-150">
+            {filteredBookings(TodayBookings(bookings)).map(
+              (booking: Booking) => {
+                return (
+                  <div key={booking.id} className="mb-4">
+                    <div className="flex flex-col w-[95%] justify-start border border-gray-100 p-4 rounded-md space-y-1 shadow-sm mt-2 h-auto">
+                      <p>
+                        <span className="font-bold">Players: </span>
+                        {booking.playersCount}
+                      </p>
+                      <p>Hosts: {booking.hostsRequired}</p>
 
-                  <p>
-                    <span className="font-bold">Players: </span>
-                    {booking.playersCount}
-                  </p>
-                  <p>Hosts: {booking.hostsRequired}</p>
+                      <div className="flex justify-between w-[50%] text-gray-500">
+                        <p>
+                          {isValidDate(booking.bookingDate) ? (
+                            new Date(booking.bookingDate).toLocaleDateString(
+                              "nl-NL",
+                              {
+                                day: "2-digit",
+                                month: "short",
+                                year: "numeric",
+                              }
+                            )
+                          ) : (
+                            <span className="text-red-500 font-semibold">
+                              Missing Date
+                            </span>
+                          )}
+                        </p>
+                        <p>
+                          {isValidDate(booking.startTime) &&
+                          isValidDate(booking.endTime) ? (
+                            `${new Date(booking.startTime).toLocaleTimeString(
+                              "nl-NL",
+                              { hour: "2-digit", minute: "2-digit" }
+                            )} - ${new Date(booking.endTime).toLocaleTimeString(
+                              "nl-NL",
+                              { hour: "2-digit", minute: "2-digit" }
+                            )}`
+                          ) : (
+                            <span className="text-red-500 font-semibold">
+                              Missing Time
+                            </span>
+                          )}
+                        </p>
+                      </div>
+                      <div>
+                        <p>
+                          <span className="font-bold">Package: </span>
+                          {booking.packageName}
+                        </p>
 
-                  <div className="flex justify-between w-[50%] text-gray-500">
-                    <p>email@example.com</p>
-                    <p>
-                      {isValidDate(booking.bookingDate) ? (
-                        new Date(booking.bookingDate).toLocaleDateString(
-                          "nl-NL",
-                          {
-                            day: "2-digit",
-                            month: "short",
-                            year: "numeric",
-                          }
-                        )
-                      ) : (
-                        <span className="text-red-500 font-semibold">
-                          Missing Date
-                        </span>
-                      )}
-                    </p>
-                    <p>
-                      {isValidDate(booking.startTime) &&
-                      isValidDate(booking.endTime) ? (
-                        `${new Date(booking.startTime).toLocaleTimeString(
-                          "nl-NL",
-                          { hour: "2-digit", minute: "2-digit" }
-                        )} - ${new Date(booking.endTime).toLocaleTimeString(
-                          "nl-NL",
-                          { hour: "2-digit", minute: "2-digit" }
-                        )}`
-                      ) : (
-                        <span className="text-red-500 font-semibold">
-                          Missing Time
-                        </span>
-                      )}
-                    </p>
-                  </div>
-                  <div>
-                    <p>
-                      <span className="font-bold">Package: </span>
-                      {booking.packageName}
-                    </p>
-                    <p>Status: {booking.status}</p>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
+                        <p>
+                          <span className="font-semibold">Food Required:</span>
+                          {booking.food_required ? "Yes" : "No"}
+                        </p>
 
-      {viewMode === "calendar" && (
-        <div className="h-[40rem] overflow-y-scroll">
-          <BookingsCalendar bookings={bookings} />
-        </div>
-      )}
+                        <p>
+                          <span className="font-semibold">Is B2B: </span>
+                          {booking.is_b2b ? "Yes" : "No"}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+            )}
+          </div>
+        ))}
+
+      {viewMode === "calendar" &&
+        (loading ? (
+          <SkeletonCalendarContainer />
+        ) : (
+          <div className="h-160 overflow-y-scroll">
+            <BookingsCalendar bookings={filteredBookings(bookings)} />
+          </div>
+        ))}
     </div>
   );
 }

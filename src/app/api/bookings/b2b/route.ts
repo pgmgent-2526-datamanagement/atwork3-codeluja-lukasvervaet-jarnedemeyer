@@ -6,12 +6,14 @@ export async function GET() {
   try {
     const res = await prisma.booking.findMany({
       where: {
-        status: "Booked",
+        is_b2b: true,
         bookingDate: {
           gte: new Date(
             new Date().setDate(new Date().getDate() - new Date().getDay() + 1)
           ),
-          lt: new Date(new Date().setMonth(new Date().getMonth() + 1)),
+          lt: new Date(
+            new Date().setDate(new Date().getDate() - new Date().getDay() + 7)
+          ),
         },
       },
       select: {

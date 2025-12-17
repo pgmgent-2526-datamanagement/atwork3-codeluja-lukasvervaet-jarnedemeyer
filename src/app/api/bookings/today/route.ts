@@ -8,10 +8,8 @@ export async function GET() {
       where: {
         status: "Booked",
         bookingDate: {
-          gte: new Date(
-            new Date().setDate(new Date().getDate() - new Date().getDay() + 1)
-          ),
-          lt: new Date(new Date().setMonth(new Date().getMonth() + 1)),
+          gte: new Date(),
+          lt: new Date(new Date().setDate(new Date().getDate() + 1)),
         },
       },
       select: {
@@ -32,13 +30,9 @@ export async function GET() {
       orderBy: [{ bookingDate: "asc" }, { startTime: "asc" }],
     });
 
-    //! now convert the date, startTime and endTime to a string and slice that string to get the clean version
-
     if (res.length === 0) {
       return Response.json([]);
     }
-
-    // console.log("Fetched bookings from database:", res[0]);
 
     return Response.json(res);
   } catch (error) {
