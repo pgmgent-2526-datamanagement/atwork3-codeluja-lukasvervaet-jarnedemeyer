@@ -111,10 +111,6 @@ export default function Bookings() {
               return (
                 <div key={booking.id} className="mb-4">
                   <div className="flex flex-col w-[95%] justify-start border border-gray-100 p-4 rounded-md space-y-1 shadow-sm mt-2 h-auto">
-                    <div className="flex justify-between items-center w-full">
-                      <h2 className="text-xl font-semibold">Naam Klant</h2>
-                    </div>
-
                     <p>
                       <span className="font-bold">Players: </span>
                       {booking.playersCount}
@@ -122,7 +118,6 @@ export default function Bookings() {
                     <p>Hosts: {booking.hostsRequired}</p>
 
                     <div className="flex justify-between w-[50%] text-gray-500">
-                      <p>email@example.com</p>
                       <p>
                         {isValidDate(booking.bookingDate) ? (
                           new Date(booking.bookingDate).toLocaleDateString(
@@ -161,7 +156,16 @@ export default function Bookings() {
                         <span className="font-bold">Package: </span>
                         {booking.packageName}
                       </p>
-                      <p>Status: {booking.status}</p>
+
+                      <p>
+                        <span className="font-semibold">Food Required:</span>
+                        {booking.food_required ? "Yes" : "No"}
+                      </p>
+
+                      <p>
+                        <span className="font-semibold">Is B2B: </span>
+                        {booking.is_b2b ? "Yes" : "No"}
+                      </p>
                     </div>
                   </div>
                 </div>
