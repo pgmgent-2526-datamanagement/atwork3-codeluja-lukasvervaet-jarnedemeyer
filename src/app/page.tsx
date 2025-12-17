@@ -10,6 +10,7 @@ import {
 
 import LargeCard from "../components/LargeCard";
 import StatsCard from "../components/StatsCard";
+import RefreshBookings from "@/components/AddBookingButton";
 
 export default function Home() {
   const [bookings, setBookings] = useState<any[]>([]);
@@ -84,6 +85,8 @@ export default function Home() {
             <p>No staff members yet</p>
           </LargeCard>
         </div>
+
+        <RefreshBookings onRefresh={fetchData} />
       </div>
     </main>
   );
