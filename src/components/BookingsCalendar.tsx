@@ -69,6 +69,7 @@ export default function BookingsCalendar({ bookings }: BookingsCalendarProps) {
 
   const events = mapBookingsToEvents(bookings);
 
+  // eslint-disable-next-line
   const handleEventClick = (clickInfo: any) => {
     const originalBooking = bookings.find(
       (b) => String(b.id) === clickInfo.event.id
@@ -89,6 +90,7 @@ export default function BookingsCalendar({ bookings }: BookingsCalendarProps) {
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin]}
           initialView="timeGridWeek"
+          firstDay={1}
           headerToolbar={{
             left: "prev,next today",
             center: "title",

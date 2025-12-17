@@ -34,8 +34,6 @@ export async function GET() {
       return Response.json([]);
     }
 
-    // console.log("Fetched bookings from database:", res[0]);
-
     return Response.json(res);
   } catch (error) {
     console.error("Database error fetching bookings:", error);

@@ -1,6 +1,10 @@
 "use client";
 // import AddBookingButton from "@/components/AddBookingButton";
 import BookingsCalendar from "@/components/BookingsCalendar";
+import {
+  SkeletonBookingItem,
+  SkeletonCalendarContainer,
+} from "@/components/Loader";
 // import { randomUUID } from "crypto";
 import { useEffect, useState } from "react";
 
@@ -22,20 +26,25 @@ interface Booking {
 export default function Bookings() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [viewMode, setViewMode] = useState<"list" | "calendar">("list");
+  const [loading, setLoading] = useState<boolean>(true);
 
   const fetchBookings = async () => {
+    setLoading(true);
     const res = await fetch("/api/bookings/db", { cache: "no-store" });
     if (!res.ok) {
       console.error("Failed to fetch bookings", res.status);
       setBookings([]);
+      setLoading(false);
       return [];
     }
     const data = await res.json();
     if (Array.isArray(data)) {
       setBookings(data as Booking[]);
+      setLoading(false);
       return data as Booking[];
     }
     setBookings([]);
+    setLoading(false);
     return [];
   };
 
@@ -88,76 +97,87 @@ export default function Bookings() {
         </select>
       </header>
 
-      {viewMode === "list" && (
-        <div className="overflow-y-scroll bg-white border shadow-md border-gray-100 p-4 rounded-lg  mt-6 text-black flex flex-col flex-row-2  m-auto w-238 h-150">
-          {filteredTodayBookings(bookings).map((booking: Booking) => {
-            return (
-              <div key={booking.id} className="mb-4">
-                <div className="flex flex-col w-[95%] justify-start border border-gray-100 p-4 rounded-md space-y-1 shadow-sm mt-2 h-auto">
-                  <div className="flex justify-between items-center w-full">
-                    <h2 className="text-xl font-semibold">Naam Klant</h2>
-                  </div>
+      {viewMode === "list" &&
+        (loading ? (
+          <div className="overflow-y-scroll bg-white border shadow-md border-gray-100 p-4 rounded-lg mt-6 text-black flex flex-col w-238 h-150">
+            <SkeletonBookingItem />
+            <SkeletonBookingItem />
+            <SkeletonBookingItem />
+            <SkeletonBookingItem />
+          </div>
+        ) : (
+          <div className="overflow-y-scroll bg-white border shadow-md border-gray-100 p-4 rounded-lg  mt-6 text-black flex flex-col flex-row-2  m-auto w-238 h-150">
+            {filteredTodayBookings(bookings).map((booking: Booking) => {
+              return (
+                <div key={booking.id} className="mb-4">
+                  <div className="flex flex-col w-[95%] justify-start border border-gray-100 p-4 rounded-md space-y-1 shadow-sm mt-2 h-auto">
+                    <div className="flex justify-between items-center w-full">
+                      <h2 className="text-xl font-semibold">Naam Klant</h2>
+                    </div>
 
-                  <p>
-                    <span className="font-bold">Players: </span>
-                    {booking.playersCount}
-                  </p>
-                  <p>Hosts: {booking.hostsRequired}</p>
+                    <p>
+                      <span className="font-bold">Players: </span>
+                      {booking.playersCount}
+                    </p>
+                    <p>Hosts: {booking.hostsRequired}</p>
 
-                  <div className="flex justify-between w-[50%] text-gray-500">
-                    <p>email@example.com</p>
-                    <p>
-                      {isValidDate(booking.bookingDate) ? (
-                        new Date(booking.bookingDate).toLocaleDateString(
-                          "nl-NL",
-                          {
-                            day: "2-digit",
-                            month: "short",
-                            year: "numeric",
-                          }
-                        )
-                      ) : (
-                        <span className="text-red-500 font-semibold">
-                          Missing Date
-                        </span>
-                      )}
-                    </p>
-                    <p>
-                      {isValidDate(booking.startTime) &&
-                      isValidDate(booking.endTime) ? (
-                        `${new Date(booking.startTime).toLocaleTimeString(
-                          "nl-NL",
-                          { hour: "2-digit", minute: "2-digit" }
-                        )} - ${new Date(booking.endTime).toLocaleTimeString(
-                          "nl-NL",
-                          { hour: "2-digit", minute: "2-digit" }
-                        )}`
-                      ) : (
-                        <span className="text-red-500 font-semibold">
-                          Missing Time
-                        </span>
-                      )}
-                    </p>
-                  </div>
-                  <div>
-                    <p>
-                      <span className="font-bold">Package: </span>
-                      {booking.packageName}
-                    </p>
-                    <p>Status: {booking.status}</p>
+                    <div className="flex justify-between w-[50%] text-gray-500">
+                      <p>email@example.com</p>
+                      <p>
+                        {isValidDate(booking.bookingDate) ? (
+                          new Date(booking.bookingDate).toLocaleDateString(
+                            "nl-NL",
+                            {
+                              day: "2-digit",
+                              month: "short",
+                              year: "numeric",
+                            }
+                          )
+                        ) : (
+                          <span className="text-red-500 font-semibold">
+                            Missing Date
+                          </span>
+                        )}
+                      </p>
+                      <p>
+                        {isValidDate(booking.startTime) &&
+                        isValidDate(booking.endTime) ? (
+                          `${new Date(booking.startTime).toLocaleTimeString(
+                            "nl-NL",
+                            { hour: "2-digit", minute: "2-digit" }
+                          )} - ${new Date(booking.endTime).toLocaleTimeString(
+                            "nl-NL",
+                            { hour: "2-digit", minute: "2-digit" }
+                          )}`
+                        ) : (
+                          <span className="text-red-500 font-semibold">
+                            Missing Time
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                    <div>
+                      <p>
+                        <span className="font-bold">Package: </span>
+                        {booking.packageName}
+                      </p>
+                      <p>Status: {booking.status}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
+              );
+            })}
+          </div>
+        ))}
 
-      {viewMode === "calendar" && (
-        <div className="h-[40rem] overflow-y-scroll">
-          <BookingsCalendar bookings={bookings} />
-        </div>
-      )}
+      {viewMode === "calendar" &&
+        (loading ? (
+          <SkeletonCalendarContainer />
+        ) : (
+          <div className="h-[40rem] overflow-y-scroll">
+            <BookingsCalendar bookings={bookings} />
+          </div>
+        ))}
     </div>
   );
 }

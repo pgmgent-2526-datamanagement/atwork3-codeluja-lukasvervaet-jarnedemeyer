@@ -8,15 +8,18 @@ import {
   // ChartBarSquareIcon,
 } from "@heroicons/react/24/outline";
 
-import LargeCard from "../components/LargeCard";
 import StatsCard from "../components/StatsCard";
 import RefreshBookings from "@/components/AddBookingButton";
+import HomeLoader from "@/components/HomeLoader";
 
 export default function Home() {
-  const [bookings, setBookings] = useState<any[]>([]);
-  const [b2b, setB2b] = useState<any[]>([]);
-  const [todayBookings, setTodayBookings] = useState<any[]>([]);
+  const [bookings, setBookings] = useState<any[]>([]); // eslint-disable-line
+  const [b2b, setB2b] = useState<any[]>([]); // eslint-disable-line
+  const [todayBookings, setTodayBookings] = useState<any[]>([]); // eslint-disable-line
+  const [loading, setLoading] = useState(true);
+
   const fetchData = async () => {
+    setLoading(true);
     const res = await fetch("/api/bookings/week", { cache: "no-store" });
     if (!res.ok) {
       console.error("Failed to fetch data", res.status);
@@ -25,10 +28,12 @@ export default function Home() {
     const data = await res.json();
     console.log("Fetched bookings for the week:", data);
     setBookings(data);
+    setLoading(false);
     return data;
   };
 
   const fetchB2BData = async () => {
+    setLoading(true);
     const res = await fetch("/api/bookings/b2b", { cache: "no-store" });
     if (!res.ok) {
       console.error("Failed to fetch B2B data", res.status);
@@ -37,10 +42,12 @@ export default function Home() {
     const data = await res.json();
     console.log("Fetched B2B bookings for the week:", data);
     setB2b(data);
+    setLoading(false);
     return data;
   };
 
   const fetchTodayBookings = async () => {
+    setLoading(true);
     const res = await fetch("/api/bookings/today", { cache: "no-store" });
     if (!res.ok) {
       console.error("Failed to fetch today's bookings", res.status);
@@ -49,6 +56,7 @@ export default function Home() {
     const data = await res.json();
     console.log("Fetched today's bookings:", data);
     setTodayBookings(data);
+    setLoading(false);
     return data;
   };
 
@@ -59,8 +67,12 @@ export default function Home() {
       await fetchTodayBookings();
     })();
   }, []);
+
+  if (loading) {
+    return <HomeLoader />;
+  }
   return (
-    <main className="min-h-screen p-8 md:p-10 lg:p-12">
+    <main className="min-h-screen md:p-10 lg:p-10">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
         <p className="text-base text-gray-500 mt-1">

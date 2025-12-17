@@ -8,7 +8,9 @@ export async function GET() {
       where: {
         status: "Booked",
         bookingDate: {
-          gte: new Date(),
+          gte: new Date(
+            new Date().setDate(new Date().getDate() - new Date().getDay() + 1)
+          ),
           lt: new Date(new Date().setMonth(new Date().getMonth() + 1)),
         },
       },
