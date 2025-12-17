@@ -14,6 +14,8 @@ import RefreshBookings from "@/components/AddBookingButton";
 
 export default function Home() {
   const [bookings, setBookings] = useState<any[]>([]);
+  const [b2b, setB2b] = useState<any[]>([]);
+  const [todayBookings, setTodayBookings] = useState<any[]>([]);
   const fetchData = async () => {
     const res = await fetch("/api/bookings/week", { cache: "no-store" });
     if (!res.ok) {
@@ -26,9 +28,35 @@ export default function Home() {
     return data;
   };
 
+  const fetchB2BData = async () => {
+    const res = await fetch("/api/bookings/b2b", { cache: "no-store" });
+    if (!res.ok) {
+      console.error("Failed to fetch B2B data", res.status);
+      return [];
+    }
+    const data = await res.json();
+    console.log("Fetched B2B bookings for the week:", data);
+    setB2b(data);
+    return data;
+  };
+
+  const fetchTodayBookings = async () => {
+    const res = await fetch("/api/bookings/today", { cache: "no-store" });
+    if (!res.ok) {
+      console.error("Failed to fetch today's bookings", res.status);
+      return [];
+    }
+    const data = await res.json();
+    console.log("Fetched today's bookings:", data);
+    setTodayBookings(data);
+    return data;
+  };
+
   useEffect(() => {
     (async () => {
       await fetchData();
+      await fetchB2BData();
+      await fetchTodayBookings();
     })();
   }, []);
   return (
@@ -75,19 +103,23 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <LargeCard
-            title="Recent Bookings"
-            subtext="Your latest booking activities"
-          >
-            <p>No bookings yet</p>
-          </LargeCard>
+          <StatsCard
+            title="Today's Bookings"
+            value={String(todayBookings.length)}
+            subtext="Total bookings today"
+            Icon={ClockIcon}
+            iconColor="text-red-500"
+            iconBg="bg-red-50"
+          />
 
-          <LargeCard
-            title="Staff Overview"
-            subtext="Current staff availability"
-          >
-            <p>No staff members yet</p>
-          </LargeCard>
+          <StatsCard
+            title="B2B Bookings"
+            value={String(b2b.length)}
+            subtext="Total B2B bookings this week"
+            Icon={ClockIcon}
+            iconColor="text-yellow-500"
+            iconBg="bg-yellow-50"
+          />
         </div>
       </div>
     </main>
