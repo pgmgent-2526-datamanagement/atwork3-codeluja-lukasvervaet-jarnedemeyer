@@ -40,8 +40,12 @@ export default function Home() {
         </p>
       </div>
 
+      <div className="my-3 flex justify-end">
+        <RefreshBookings onRefresh={fetchData} />
+      </div>
+
       <div className="grid grid-cols-1 gap-6">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
           <StatsCard
             title="This week"
             value={String(bookings.length)}
@@ -85,8 +89,6 @@ export default function Home() {
             <p>No staff members yet</p>
           </LargeCard>
         </div>
-
-        <RefreshBookings onRefresh={fetchData} />
       </div>
     </main>
   );
