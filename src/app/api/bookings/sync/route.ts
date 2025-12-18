@@ -1,7 +1,7 @@
 import { parseBookings } from "@/lib/bookings/bookingParser";
 import { transformBookings } from "@/lib/bookings/bookingTransformer";
 import { readSheet } from "@/lib/googleSheets";
-import { PrismaClient } from "@/generated/prisma";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
