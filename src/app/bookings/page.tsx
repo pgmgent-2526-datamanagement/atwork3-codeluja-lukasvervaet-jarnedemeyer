@@ -179,72 +179,70 @@ export default function Bookings() {
           </div>
         ) : (
           <div className="overflow-y-scroll bg-white border shadow-md border-gray-100 p-4 rounded-lg  mt-6 text-black flex flex-col flex-row-2  m-auto w-238 h-150">
-            {filteredBookings(TodayBookings(bookings)).map(
-              (booking: Booking) => {
-                return (
-                  <div key={booking.id} className="mb-4">
-                    <div className="flex flex-col w-[95%] justify-start border border-gray-100 p-4 rounded-md space-y-1 shadow-sm mt-2 h-auto">
+            {filteredBookings().map((booking: Booking) => {
+              return (
+                <div key={booking.id} className="mb-4">
+                  <div className="flex flex-col w-[95%] justify-start border border-gray-100 p-4 rounded-md space-y-1 shadow-sm mt-2 h-auto">
+                    <p>
+                      <span className="font-bold">Players: </span>
+                      {booking.playersCount}
+                    </p>
+                    <p>Hosts: {booking.hostsRequired}</p>
+
+                    <div className="flex justify-between w-[50%] text-gray-500">
                       <p>
-                        <span className="font-bold">Players: </span>
-                        {booking.playersCount}
+                        {isValidDate(booking.bookingDate) ? (
+                          new Date(booking.bookingDate).toLocaleDateString(
+                            "nl-NL",
+                            {
+                              day: "2-digit",
+                              month: "short",
+                              year: "numeric",
+                            }
+                          )
+                        ) : (
+                          <span className="text-red-500 font-semibold">
+                            Missing Date
+                          </span>
+                        )}
                       </p>
-                      <p>Hosts: {booking.hostsRequired}</p>
+                      <p>
+                        {isValidDate(booking.startTime) &&
+                        isValidDate(booking.endTime) ? (
+                          `${new Date(booking.startTime).toLocaleTimeString(
+                            "nl-NL",
+                            { hour: "2-digit", minute: "2-digit" }
+                          )} - ${new Date(booking.endTime).toLocaleTimeString(
+                            "nl-NL",
+                            { hour: "2-digit", minute: "2-digit" }
+                          )}`
+                        ) : (
+                          <span className="text-red-500 font-semibold">
+                            Missing Time
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                    <div>
+                      <p>
+                        <span className="font-bold">Package: </span>
+                        {booking.packageName}
+                      </p>
 
-                      <div className="flex justify-between w-[50%] text-gray-500">
-                        <p>
-                          {isValidDate(booking.bookingDate) ? (
-                            new Date(booking.bookingDate).toLocaleDateString(
-                              "nl-NL",
-                              {
-                                day: "2-digit",
-                                month: "short",
-                                year: "numeric",
-                              }
-                            )
-                          ) : (
-                            <span className="text-red-500 font-semibold">
-                              Missing Date
-                            </span>
-                          )}
-                        </p>
-                        <p>
-                          {isValidDate(booking.startTime) &&
-                          isValidDate(booking.endTime) ? (
-                            `${new Date(booking.startTime).toLocaleTimeString(
-                              "nl-NL",
-                              { hour: "2-digit", minute: "2-digit" }
-                            )} - ${new Date(booking.endTime).toLocaleTimeString(
-                              "nl-NL",
-                              { hour: "2-digit", minute: "2-digit" }
-                            )}`
-                          ) : (
-                            <span className="text-red-500 font-semibold">
-                              Missing Time
-                            </span>
-                          )}
-                        </p>
-                      </div>
-                      <div>
-                        <p>
-                          <span className="font-bold">Package: </span>
-                          {booking.packageName}
-                        </p>
+                      <p>
+                        <span className="font-semibold">Food Required:</span>
+                        {booking.food_required ? "Yes" : "No"}
+                      </p>
 
-                        <p>
-                          <span className="font-semibold">Food Required:</span>
-                          {booking.food_required ? "Yes" : "No"}
-                        </p>
-
-                        <p>
-                          <span className="font-semibold">Is B2B: </span>
-                          {booking.is_b2b ? "Yes" : "No"}
-                        </p>
-                      </div>
+                      <p>
+                        <span className="font-semibold">Is B2B: </span>
+                        {booking.is_b2b ? "Yes" : "No"}
+                      </p>
                     </div>
                   </div>
-                );
-              }
-            )}
+                </div>
+              );
+            })}
           </div>
         ))}
 
@@ -253,7 +251,7 @@ export default function Bookings() {
           <SkeletonCalendarContainer />
         ) : (
           <div className="h-160 overflow-y-scroll">
-            <BookingsCalendar bookings={filteredBookings(bookings)} />
+            <BookingsCalendar bookings={filteredBookings()} />
           </div>
         ))}
     </div>
