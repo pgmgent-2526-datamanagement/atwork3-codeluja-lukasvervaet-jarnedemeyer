@@ -74,7 +74,7 @@ export default function Home() {
   return (
     <main className="min-h-screen md:p-10 lg:p-10">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Dashboard test</h1>
         <p className="text-base text-gray-500 mt-1">
           Welcome back! Here is your booking overview.
         </p>
