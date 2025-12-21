@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
 import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
- 
+
 export default function LoginPage() {
-  const router = useRouter()
- 
+  const router = useRouter();
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
- 
-    const formData = new FormData(event.currentTarget)
-    const email = formData.get('email')
-    const password = formData.get('password')
- 
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const email = formData.get("email");
+    const password = formData.get("password");
+
     const result = await signIn("credentials", {
       redirect: false,
       email,
@@ -27,12 +27,24 @@ export default function LoginPage() {
       alert("Invalid credentials");
     }
   }
- 
+
   return (
     <form onSubmit={handleSubmit}>
-      <input type="email" name="email" placeholder="Email" required />
-      <input type="password" name="password" placeholder="Password" required />
+      <input
+        id="email"
+        type="email"
+        name="email"
+        placeholder="Email"
+        required
+      />
+      <input
+        id="password"
+        type="password"
+        name="password"
+        placeholder="Password"
+        required
+      />
       <button type="submit">Login</button>
     </form>
-  )
+  );
 }

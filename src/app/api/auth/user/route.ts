@@ -1,19 +1,19 @@
 import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
+// import { getToken } from "next-auth/jwt";
 import { authOptions } from "../[...nextauth]/route";
 import prisma from "@/lib/client";
+import { getServerSession } from "next-auth";
 
 export async function GET(): Promise<Response> {
   try {
     const session = await getServerSession(authOptions);
-
     if (!session?.user?.email) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const user = await prisma.user.findUnique({
-      where: { email: session.user.email },
-      select: { id: true, name: true, email: true},
+      where: { email: String(session.user.email) },
+      select: { id: true, firstName: true, lastName: true, email: true },
     });
 
     if (!user) {

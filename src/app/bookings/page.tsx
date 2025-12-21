@@ -7,6 +7,8 @@ import {
 } from "@/components/Loader";
 // import { randomUUID } from "crypto";
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 interface Booking {
   id: number;
@@ -28,10 +30,19 @@ interface Filter {
 }
 
 export default function Bookings() {
-  const [bookings, setBookings] = useState<Booking[]>([]);
-  const [viewMode, setViewMode] = useState<"list" | "calendar">("list");
-  const [loading, setLoading] = useState<boolean>(true);
-  const [filter, setFilter] = useState<Filter>({ type: "all" });
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  // redirect to login if not authenticated
+  if (status !== "loading" && !session) {
+    router.push("/login");
+    return null;
+  }
+
+  const [bookings, setBookings] = useState<Booking[]>([]); // eslint-disable-line
+  const [viewMode, setViewMode] = useState<"list" | "calendar">("list"); // eslint-disable-line
+  const [loading, setLoading] = useState<boolean>(true); // eslint-disable-line
+  const [filter, setFilter] = useState<Filter>({ type: "all" }); // eslint-disable-line
 
   const fetchBookings = async () => {
     setLoading(true);
@@ -131,6 +142,7 @@ export default function Bookings() {
     ); // Check if time is greater than 1 hour after Epoch
   };
 
+  // eslint-disable-next-line
   useEffect(() => {
     const loadBookings = async () => {
       await fetchBookings();

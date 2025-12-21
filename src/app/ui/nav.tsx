@@ -4,10 +4,22 @@ import Link from "next/link";
 import { Home, Calendar, Users, Smartphone, User } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { signOut, useSession } from "next-auth/react";
 
 export default function Nav() {
   const logo = "/logo-thepark.svg";
   const pathname = usePathname();
+  const { data: session, status } = useSession();
+
+  // while loading session, don't render anything (prevents flicker)
+  if (status === "loading") return null;
+
+  // hide nav if not authenticated
+  if (!session) return null;
+
+  const handleLogOut = async () => {
+    await signOut({ callbackUrl: "/login" });
+  };
 
   const navItems = [
     {
@@ -22,7 +34,12 @@ export default function Nav() {
       title: "Authentication",
       links: [
         { name: "Profile", href: "/profile", icon: User },
-        { name: "Logout", href: "/logout", icon: Smartphone },
+        {
+          name: "Logout",
+          href: "/logout",
+          icon: Smartphone,
+          function: handleLogOut,
+        },
       ],
     },
   ];
@@ -44,26 +61,29 @@ export default function Nav() {
             </h2>
 
             <nav className="space-y-1">
-              {section.links.map(({ name, href, icon: Icon }) => {
-                const active = pathname === href;
+              {section.links.map(
+                ({ name, href, icon: Icon, function: onClick }) => {
+                  const active = pathname === href;
 
-                return (
-                  <Link
-                    key={name}
-                    href={href}
-                    className={`flex items-center gap-3 px-3 py-2 rounded-xl transition-all
+                  return (
+                    <Link
+                      onClick={onClick}
+                      key={name}
+                      href={href}
+                      className={`flex items-center gap-3 px-3 py-2 rounded-xl transition-all
                       ${
                         active
                           ? "bg-[#05d8c8] text-white shadow-sm"
                           : "hover:bg-gray-100 text-gray-700"
                       }
                     `}
-                  >
-                    <Icon size={18} />
-                    <span className="text-sm font-medium">{name}</span>
-                  </Link>
-                );
-              })}
+                    >
+                      <Icon size={18} />
+                      <span className="text-sm font-medium">{name}</span>
+                    </Link>
+                  );
+                }
+              )}
             </nav>
           </div>
         ))}
