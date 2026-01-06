@@ -8,9 +8,17 @@ export async function GET() {
       where: {
         status: "Booked",
         bookingDate: {
-          gte: new Date(
-            new Date().setDate(new Date().getDate() - new Date().getDay() + 1)
-          ),
+          gte: (() => {
+            const now = new Date();
+            const day = now.getDay();
+            const diffToMonday = day === 0 ? 6 : day - 1;
+
+            const lastMonday = new Date(now);
+            lastMonday.setDate(now.getDate() - diffToMonday - 6);
+            lastMonday.setHours(0, 0, 0, 0);
+
+            return lastMonday;
+          })(),
           lt: new Date(new Date().setMonth(new Date().getMonth() + 1)),
         },
       },

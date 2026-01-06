@@ -85,7 +85,7 @@ export default function Home() {
       </div>
 
       <div className="grid grid-cols-1 gap-6">
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <StatsCard
             title="This week"
             value={String(bookings.length)}
@@ -102,15 +102,6 @@ export default function Home() {
             Icon={UsersIcon}
             iconColor="text-green-500"
             iconBg="bg-green-50"
-          />
-
-          <StatsCard
-            title="Pending"
-            value="0"
-            subtext="Awaiting confirmation"
-            Icon={ClockIcon}
-            iconColor="text-yellow-500"
-            iconBg="bg-yellow-50"
           />
         </div>
 
