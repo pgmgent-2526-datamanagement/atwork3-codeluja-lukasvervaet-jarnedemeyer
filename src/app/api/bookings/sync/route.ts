@@ -1,11 +1,11 @@
 import { parseBookings } from "@/lib/bookings/bookingParser";
 import { transformBookings } from "@/lib/bookings/bookingTransformer";
 import { readSheet } from "@/lib/googleSheets";
-import { PrismaClient } from "@/generated/prisma";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function POST() {
+async function syncBookings() {
   try {
     const rawData = await readSheet("Gent_KPI", "A:Z201");
 
@@ -42,4 +42,12 @@ export async function POST() {
   } finally {
     await prisma.$disconnect();
   }
+}
+
+export async function GET() {
+  return await syncBookings();
+}
+
+export async function POST() {
+  return await syncBookings();
 }

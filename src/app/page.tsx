@@ -74,7 +74,7 @@ export default function Home() {
   return (
     <main className="min-h-screen md:p-10 lg:p-10">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Dashboard test</h1>
         <p className="text-base text-gray-500 mt-1">
           Welcome back! Here is your booking overview.
         </p>
@@ -85,7 +85,7 @@ export default function Home() {
       </div>
 
       <div className="grid grid-cols-1 gap-6">
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <StatsCard
             title="This week"
             value={String(bookings.length)}
@@ -102,15 +102,6 @@ export default function Home() {
             Icon={UsersIcon}
             iconColor="text-green-500"
             iconBg="bg-green-50"
-          />
-
-          <StatsCard
-            title="Pending"
-            value="0"
-            subtext="Awaiting confirmation"
-            Icon={ClockIcon}
-            iconColor="text-yellow-500"
-            iconBg="bg-yellow-50"
           />
         </div>
 
