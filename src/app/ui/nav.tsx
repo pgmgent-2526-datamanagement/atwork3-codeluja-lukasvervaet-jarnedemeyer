@@ -5,11 +5,47 @@ import { Home, Calendar, Users, Smartphone, User } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
+import { useState, useEffect } from "react";
 
 export default function Nav() {
+  const [userRole, setUserRole] = useState<number | null>(null);
   const logo = "/logo-thepark.svg";
   const pathname = usePathname();
   const { data: session, status } = useSession();
+  const fetchUser = async () => {
+    try {
+      const res = await fetch("/api/auth/user");
+      if (!res.ok) {
+        console.error("Failed to fetch user, status:", res.status);
+        return null;
+      }
+      const data = await res.json();
+      const user = data?.user ?? null;
+      return user;
+    } catch (err) {
+      console.error("Error fetching user:", err);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    if (!session) {
+      // schedule state update asynchronously to avoid synchronous setState in effect
+      Promise.resolve().then(() => setUserRole(null));
+      return;
+    }
+
+    let mounted = true;
+    (async () => {
+      const user = await fetchUser();
+      if (!mounted) return;
+      setUserRole(user?.role_id ?? null);
+    })();
+
+    return () => {
+      mounted = false;
+    };
+  }, [session]);
 
   // while loading session, don't render anything (prevents flicker)
   if (status === "loading") return null;
@@ -27,7 +63,9 @@ export default function Nav() {
       links: [
         { name: "Home", href: "/", icon: Home },
         { name: "Bookings", href: "/bookings", icon: Calendar },
-        { name: "Staff", href: "/staff", icon: Users },
+        ...(userRole === 1
+          ? [{ name: "Staff", href: "/staff", icon: Users }]
+          : []),
       ],
     },
     {
