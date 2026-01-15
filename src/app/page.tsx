@@ -125,7 +125,7 @@ export default function Home() {
           <StatsCard
             title="B2B Sessions"
             value={String(b2b.length)}
-            subtext="Corporate clients"
+            subtext="Corporate clients this week"
             Icon={BuildingOfficeIcon}
             iconColor="text-purple-600"
             iconBg="bg-purple-100"
@@ -154,11 +154,11 @@ export default function Home() {
         </div>
 
         {todayBookings.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-h-120 overflow-y-auto border-2 border-gray-200 rounded-xl p-6 bg-gray-50">
+          <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-h-120 overflow-y-auto border-2 border-gray-200 rounded-xl p-6 bg-gray-50">
             {todayBookings.map((booking) => (
-              <div
+              <section
                 key={booking.id}
-                className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow p-5 relative overflow-hidden group min-h-fit"
+                className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow p-5 relative overflow-hidden group min-h-fit justify-between flex flex-col"
               >
                 <div
                   className={`absolute top-0 left-0 w-1 h-full ${
@@ -173,7 +173,7 @@ export default function Home() {
                       {booking.playersCount} Players
                     </span>
                   </div>
-                  <div className="flex flex-col items-end gap-1">
+                  <div className="flex items-end gap-1">
                     {booking.is_b2b && (
                       <span className="text-[10px] uppercase tracking-wider font-bold bg-purple-50 text-purple-700 px-2 py-0.5 rounded border border-purple-100">
                         B2B
@@ -212,14 +212,14 @@ export default function Home() {
                 </div>
 
                 <button
-                  className="mt-4 w-full py-2 bg-gray-50 text-gray-600 text-sm font-semibold rounded-lg group-hover:bg-blue-600 group-hover:text-white transition-colors cursor-pointer"
+                  className="mt-4 w-full py-2 bg-gray-50 text-gray-600 text-sm font-semibold rounded-lg hover:bg-blue-600 hover:text-white transition-colors cursor-pointer"
                   onClick={() => openModal(booking)}
                 >
                   View Details
                 </button>
-              </div>
+              </section>
             ))}
-          </div>
+          </section>
         ) : (
           <div className="bg-white border-2 border-dashed border-gray-200 rounded-xl p-12 text-center">
             <CalendarIcon className="w-12 h-12 text-gray-300 mx-auto mb-4" />
