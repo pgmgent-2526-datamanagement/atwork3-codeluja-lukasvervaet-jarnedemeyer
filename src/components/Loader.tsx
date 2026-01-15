@@ -37,23 +37,29 @@ export const SkeletonLargeCard: React.FC = () => (
 );
 
 export const SkeletonBookingItem: React.FC = () => (
-  <div className="overflow-hidden bg-white border shadow-sm border-gray-100 p-4 rounded-lg mt-3 text-black flex flex-col w-full">
-    <div className="flex justify-between items-center w-full mb-2">
-      <Box width="w-40" height="h-6" />
-      <Box width="w-24" height="h-6" />
-    </div>
-    <div className="flex justify-between w-full text-gray-500">
+  <div className="w-full">
+    <div className="flex flex-col justify-start border border-gray-100 p-4 rounded-md gap-2 shadow-sm mt-2 h-auto w-80 bg-white">
       <div>
-        <Box width="w-24" height="h-4" className="mb-2" />
-        <Box width="w-16" height="h-4" />
+        <span className="font-bold">Players: </span>
+        <Box width="w-16" height="h-4" className="inline-block ml-2" />
       </div>
-      <div>
-        <Box width="w-28" height="h-4" className="mb-2" />
-        <Box width="w-36" height="h-4" />
+
+      <div className="flex justify-between w-[50%] text-gray-500">
+        <div>
+          <Box width="w-24" height="h-4" />
+        </div>
       </div>
+
       <div>
-        <Box width="w-24" height="h-4" className="mb-2" />
-        <Box width="w-24" height="h-4" />
+        <div>
+          <span className="font-semibold">Food Required:</span>
+          <Box width="w-12" height="h-4" className="inline-block ml-2" />
+        </div>
+
+        <div>
+          <span className="font-semibold">Is B2B: </span>
+          <Box width="w-12" height="h-4" className="inline-block ml-2" />
+        </div>
       </div>
     </div>
   </div>

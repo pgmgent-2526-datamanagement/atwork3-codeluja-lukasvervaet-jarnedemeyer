@@ -1,4 +1,15 @@
-// Define the Modal component structure (inside the same file for simplicity)
+"use client";
+
+import React from "react";
+import {
+  XMarkIcon,
+  ClockIcon,
+  UsersIcon,
+  UserGroupIcon,
+  CheckBadgeIcon,
+  ChatBubbleBottomCenterTextIcon,
+  ArrowRightIcon,
+} from "@heroicons/react/24/outline";
 
 interface Booking {
   id: number;
@@ -24,67 +35,153 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
   if (!booking) return null;
 
   return (
-    // Simple fixed overlay for the modal
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-75">
-      <div className="bg-white p-6 rounded-lg shadow-2xl w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-4 text-slate-800 border-b pb-2">
-          {booking.packageName}
-        </h2>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-0">
+      <div
+        className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+        onClick={onClose}
+      />
 
-        <div className="space-y-2 text-gray-700">
-          <p>
-            <span className="font-semibold">Date:</span>{" "}
-            {new Date(booking.bookingDate).toLocaleDateString("nl-NL")}
-          </p>
-          <p>
-            <span className="font-semibold">Time:</span>{" "}
-            {new Date(booking.startTime).toLocaleTimeString("nl-NL", {
-              hour: "2-digit",
-              minute: "2-digit",
-            })}{" "}
-            -{" "}
-            {new Date(booking.endTime).toLocaleTimeString("nl-NL", {
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
-          </p>
-          <p>
-            <span className="font-semibold">Players:</span>{" "}
-            {booking.playersCount}
-          </p>
-          <p>
-            <span className="font-semibold">Hosts Required:</span>{" "}
-            {booking.hostsRequired}
-          </p>
-          <p>
-            <span className="font-semibold">Status:</span> {booking.status}
-          </p>
-          {booking.bookingDescription && (
-            <p>
-              <span className="font-semibold">Description:</span>{" "}
-              {booking.bookingDescription}
-            </p>
-          )}
-          {booking.notes && (
-            <p>
-              <span className="font-semibold">Notes:</span> {booking.notes}
-            </p>
-          )}
-
-          {booking.food_required !== undefined && (
-            <p>
-              <span className="font-semibold">Food Required:</span>
-              {booking.food_required ? "Yes" : "No"}
-            </p>
-          )}
+      <div className="relative bg-white h-full md:h-[95vh] w-full max-w-[90%] rounded-lg shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-right duration-300">
+        <div className="flex items-center justify-between px-6 py-4 border-b bg-white">
+          <div className="flex items-center gap-2">
+            <div
+              className={`h-3 w-3 rounded-full ${
+                booking.is_b2b ? "bg-purple-500" : "bg-blue-500"
+              } animate-pulse`}
+            />
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">
+              Booking Ref: #{booking.id}
+            </span>
+          </div>
+          <button
+            onClick={onClose}
+            className="p-2 hover:bg-slate-100 rounded-full transition-colors"
+          >
+            <XMarkIcon className="w-5 h-5 text-slate-500" />
+          </button>
         </div>
 
-        <button
-          onClick={onClose}
-          className="mt-6 w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition"
-        >
-          Close
-        </button>
+        <div className="flex-1 overflow-y-auto">
+          <div className="p-8 bg-slate-50 border-b">
+            <h2 className="text-3xl font-black text-slate-900 mb-2 leading-tight">
+              {booking.packageName}
+            </h2>
+            <div className="flex flex-wrap gap-2 mb-6">
+              {booking.is_b2b && (
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-purple-100 text-purple-800 border border-purple-200">
+                  Corporate Event
+                </span>
+              )}
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-green-100 text-green-800 border border-green-200 uppercase">
+                {booking.status}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
+              <div className="bg-blue-600 p-3 rounded-xl text-white">
+                <ClockIcon className="w-6 h-6" />
+              </div>
+              <div className="flex-1">
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-tighter">
+                  Event Schedule
+                </p>
+                <div className="flex items-center gap-2 font-mono text-lg font-bold text-slate-800">
+                  <span>
+                    {new Date(booking.startTime).toLocaleTimeString("nl-NL", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </span>
+                  <ArrowRightIcon className="w-4 h-4 text-slate-300" />
+                  <span>
+                    {new Date(booking.endTime).toLocaleTimeString("nl-NL", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-8">
+            <div className="grid grid-cols-2 gap-8 mb-10">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2 text-slate-400">
+                  <UserGroupIcon className="w-4 h-4" />
+                  <span className="text-xs font-bold uppercase">
+                    Attendance
+                  </span>
+                </div>
+                <p className="text-xl font-bold text-slate-800">
+                  {booking.playersCount} Players
+                </p>
+              </div>
+
+              <div className="space-y-1">
+                <div className="flex items-center gap-2 text-slate-400">
+                  <UsersIcon className="w-4 h-4" />
+                  <span className="text-xs font-bold uppercase">Staffing</span>
+                </div>
+                <p className="text-xl font-bold text-slate-800">
+                  {booking.hostsRequired} Hosts Required
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <div className="flex items-center justify-between p-4 rounded-xl border-2 border-slate-50 bg-white group hover:border-blue-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <div
+                    className={`p-2 rounded-lg ${
+                      booking.food_required
+                        ? "bg-orange-100 text-orange-600"
+                        : "bg-slate-100 text-slate-400"
+                    }`}
+                  >
+                    <CheckBadgeIcon className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-slate-800">
+                      Catering Service
+                    </p>
+                    <p className="text-xs text-slate-500">
+                      {booking.food_required
+                        ? "Client requested food"
+                        : "No food requirements"}
+                    </p>
+                  </div>
+                </div>
+                {booking.food_required && (
+                  <span className="h-2 w-2 rounded-full bg-orange-500" />
+                )}
+              </div>
+
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 text-slate-400">
+                  <ChatBubbleBottomCenterTextIcon className="w-4 h-4" />
+                  <span className="text-xs font-bold uppercase tracking-widest">
+                    Internal Remarks
+                  </span>
+                </div>
+                <div className="bg-slate-50 rounded-2xl p-5 border border-slate-100 italic text-slate-600 text-sm leading-relaxed">
+                  {booking.notes ||
+                    booking.bookingDescription ||
+                    "No specific instructions provided for this booking."}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="p-6 bg-white border-t flex gap-3">
+          <button
+            onClick={onClose}
+            className="flex-1 py-3 px-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all text-sm"
+          >
+            Acknowledge
+          </button>
+        </div>
       </div>
     </div>
   );
