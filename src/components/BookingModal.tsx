@@ -104,20 +104,68 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
             </div>
           </div>
 
-          <div className="p-8">
-            <div className="grid grid-cols-2 gap-8 mb-10">
-              <div className="space-y-1">
-                <div className="flex items-center gap-2 text-slate-400">
-                  <UserGroupIcon className="w-4 h-4" />
-                  <span className="text-xs font-bold uppercase">
-                    Attendance
-                  </span>
+          <section className="p-8 flex flex-row gap-8 justify-between mx-auto h-[70%] min-h-50">
+            {/* detail div */}
+            <section className="p-8 w-full min-w-[50%] border border-gray-300 rounded-md">
+              <div className="grid grid-cols-2 gap-8 mb-10">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2 text-slate-400">
+                    <UserGroupIcon className="w-4 h-4" />
+                    <span className="text-xs font-bold uppercase">
+                      Attendance
+                    </span>
+                  </div>
+                  <p className="text-xl font-bold text-slate-800">
+                    {booking.playersCount} Players
+                  </p>
                 </div>
-                <p className="text-xl font-bold text-slate-800">
-                  {booking.playersCount} Players
-                </p>
               </div>
 
+              <div className="space-y-6">
+                <div className="flex items-center justify-between p-4 rounded-xl border-2 border-slate-50 bg-white group hover:border-blue-100 transition-colors">
+                  <div className="flex items-center gap-3">
+                    <div
+                      className={`p-2 rounded-lg ${
+                        booking.food_required
+                          ? "bg-orange-100 text-orange-600"
+                          : "bg-slate-100 text-slate-400"
+                      }`}
+                    >
+                      <CheckBadgeIcon className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-slate-800">
+                        Catering Service
+                      </p>
+                      <p className="text-xs text-slate-500">
+                        {booking.food_required
+                          ? "Client requested food"
+                          : "No food requirements"}
+                      </p>
+                    </div>
+                  </div>
+                  {booking.food_required && (
+                    <span className="h-2 w-2 rounded-full bg-orange-500" />
+                  )}
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 text-slate-400">
+                    <ChatBubbleBottomCenterTextIcon className="w-4 h-4" />
+                    <span className="text-xs font-bold uppercase tracking-widest">
+                      Internal Remarks
+                    </span>
+                  </div>
+                  <div className="bg-slate-50 rounded-2xl p-5 border border-slate-100 italic text-slate-600 text-sm leading-relaxed">
+                    {booking.notes ||
+                      booking.bookingDescription ||
+                      "No specific instructions provided for this booking."}
+                  </div>
+                </div>
+              </div>
+            </section>
+            {/* staff div */}
+            <section className="p-8 flex flex-col gap-8 justify-between mx-auto border border-gray-300 rounded-md min-w-[40%]">
               <div className="space-y-1">
                 <div className="flex items-center gap-2 text-slate-400">
                   <UsersIcon className="w-4 h-4" />
@@ -127,57 +175,20 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
                   {booking.hostsRequired} Hosts Required
                 </p>
               </div>
-            </div>
-
-            <div className="space-y-6">
-              <div className="flex items-center justify-between p-4 rounded-xl border-2 border-slate-50 bg-white group hover:border-blue-100 transition-colors">
-                <div className="flex items-center gap-3">
-                  <div
-                    className={`p-2 rounded-lg ${
-                      booking.food_required
-                        ? "bg-orange-100 text-orange-600"
-                        : "bg-slate-100 text-slate-400"
-                    }`}
-                  >
-                    <CheckBadgeIcon className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold text-slate-800">
-                      Catering Service
-                    </p>
-                    <p className="text-xs text-slate-500">
-                      {booking.food_required
-                        ? "Client requested food"
-                        : "No food requirements"}
-                    </p>
-                  </div>
-                </div>
-                {booking.food_required && (
-                  <span className="h-2 w-2 rounded-full bg-orange-500" />
-                )}
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex items-center gap-2 text-slate-400">
-                  <ChatBubbleBottomCenterTextIcon className="w-4 h-4" />
-                  <span className="text-xs font-bold uppercase tracking-widest">
-                    Internal Remarks
-                  </span>
-                </div>
-                <div className="bg-slate-50 rounded-2xl p-5 border border-slate-100 italic text-slate-600 text-sm leading-relaxed">
-                  {booking.notes ||
-                    booking.bookingDescription ||
-                    "No specific instructions provided for this booking."}
-                </div>
-              </div>
-            </div>
-          </div>
+              <h2>Add Staff</h2>
+              <div>here comes a list of the staff added</div>
+              {/* this button opens a modal to add staff */}
+              <button className="py-3 px-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all text-sm w-40 text-center">
+                Add
+              </button>
+            </section>
+          </section>
         </div>
 
-        <div className="p-6 bg-white border-t flex gap-3">
+        <div className="p-6 bg-white flex gap-3 w-80 mx-auto">
           <button
             onClick={onClose}
-            className="flex-1 py-3 px-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all text-sm"
+            className="flex-1 py-3 px-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all text-sm w-40 text-center"
           >
             Acknowledge
           </button>
