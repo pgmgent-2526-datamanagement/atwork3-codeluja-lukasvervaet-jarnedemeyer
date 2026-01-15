@@ -31,7 +31,10 @@ export const authOptions: NextAuthOptions = {
         if (!user) {
           return null;
         }
-        const passwordsMatch = await bcrypt.compare(credentials.password, user.password!);
+        const passwordsMatch = await bcrypt.compare(
+          credentials.password,
+          user.password!
+        );
 
         return passwordsMatch ? { ...user, id: user.id.toString() } : null;
       },
@@ -46,6 +49,6 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 };
 
-const handler: NextAuthOptions = NextAuth(authOptions);
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
