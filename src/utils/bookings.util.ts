@@ -60,12 +60,12 @@ export const mapEventBookings = (bookings: Booking[]): CalendarEvent[] => {
       startDate.setHours(
         startTime.getUTCHours(),
         startTime.getUTCMinutes(),
-        startTime.getUTCSeconds()
+        startTime.getUTCSeconds(),
       );
       endDate.setHours(
         endTime.getUTCHours(),
         endTime.getUTCMinutes(),
-        endTime.getUTCSeconds()
+        endTime.getUTCSeconds(),
       );
 
       return {
