@@ -1,13 +1,6 @@
 "use client";
-
 import React from "react";
-
-interface ButtonProps {
-  width?: string;
-  title: string;
-  onClick?: () => void;
-  loading?: boolean;
-}
+import { ButtonProps } from "@/types/button.type";
 
 const Button: React.FC<ButtonProps> = ({
   width = "32",

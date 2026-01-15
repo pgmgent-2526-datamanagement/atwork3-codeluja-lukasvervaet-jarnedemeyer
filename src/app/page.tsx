@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   CalendarIcon,
   UsersIcon,
@@ -14,20 +14,13 @@ import RefreshBookings from "@/components/AddBookingButton";
 import HomeLoader from "@/components/HomeLoader";
 import BookingModal from "@/components/BookingModal";
 
-interface Booking {
-  id: number;
-  playersCount: number;
-  startTime: string;
-  endTime: string;
-  bookingDate: string;
-  bookingDescription: string;
-  hostsRequired: number;
-  food_required: boolean;
-  is_b2b: boolean;
-  packageName: string;
-  notes: string;
-  status: string;
-}
+import {
+  checkValidDate,
+  getB2BBookings,
+  getTodayBookings,
+  getWeekBookings,
+} from "@/utils/bookings.util";
+import { Booking } from "@/types/booking.type";
 
 export default function Home() {
   const [bookings, setBookings] = useState<Booking[]>([]);
@@ -43,33 +36,18 @@ export default function Home() {
   };
 
   const fetchData = async () => {
-    try {
-      const res = await fetch("/api/bookings/week");
-      const data = await res.json();
-      setBookings(data);
-    } catch (e) {
-      console.error(e);
-    }
+    const bookingData = await getWeekBookings();
+    setBookings(bookingData || []);
   };
 
   const fetchB2BData = async () => {
-    try {
-      const res = await fetch("/api/bookings/b2b");
-      const data = await res.json();
-      setB2b(data);
-    } catch (e) {
-      console.error(e);
-    }
+    const b2bdata = await getB2BBookings();
+    setB2b(b2bdata || []);
   };
 
   const fetchTodayBookings = async () => {
-    try {
-      const res = await fetch("/api/bookings/today");
-      const data = await res.json();
-      setTodayBookings(data);
-    } catch (e) {
-      console.error(e);
-    }
+    const todayData = await getTodayBookings();
+    setTodayBookings(todayData || []);
   };
 
   useEffect(() => {
@@ -80,13 +58,6 @@ export default function Home() {
     };
     loadAll();
   }, []);
-
-  const isValidDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return (
-      date instanceof Date && !isNaN(date.getTime()) && date.getTime() > 3600000
-    );
-  };
 
   if (loading) return <HomeLoader />;
 
@@ -191,7 +162,7 @@ export default function Home() {
                   <div className="flex items-center gap-3 text-sm text-gray-600 bg-gray-50 p-2 rounded-lg">
                     <ClockIcon className="w-4 h-4 text-gray-400" />
                     <span className="font-medium">
-                      {isValidDate(booking.startTime)
+                      {checkValidDate(booking.startTime)
                         ? `${new Date(booking.startTime).toLocaleTimeString(
                             "nl-NL",
                             { hour: "2-digit", minute: "2-digit" }
