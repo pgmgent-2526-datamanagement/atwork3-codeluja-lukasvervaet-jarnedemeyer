@@ -71,7 +71,7 @@ export default function Nav() {
         { name: "Home", href: "/", icon: Home },
         { name: "Bookings", href: "/bookings", icon: Calendar },
         ...(userRole === 1
-          ? [{ name: "Staff", href: "/staff", icon: Users }]
+          ? [{ name: "Hosts", href: "/hosts", icon: Users }]
           : []),
       ] as NavLink[],
     },
@@ -89,7 +89,7 @@ export default function Nav() {
   ];
 
   return (
-    <aside className="w-64 max-h-screen  h-screen lg:block border-r border-gray-100 bg-white mr-3 shadow-md">
+    <aside className="w-64 max-h-screen  h-screen lg:block border-r border-gray-100 bg-white mr-3 shadow-md z-50 relative">
       <Image
         width={100}
         height={100}
