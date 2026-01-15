@@ -162,7 +162,7 @@ export default function Home() {
               >
                 <div
                   className={`absolute top-0 left-0 w-1 h-full ${
-                    booking.is_b2b ? "bg-purple-500" : "bg-blue-500"
+                    booking.is_b2b ? "bg-[#05d8c8]" : "bg-blue-500"
                   }`}
                 />
 
@@ -212,7 +212,7 @@ export default function Home() {
                 </div>
 
                 <button
-                  className="mt-4 w-full py-2 bg-gray-50 text-gray-600 text-sm font-semibold rounded-lg hover:bg-blue-600 hover:text-white transition-colors cursor-pointer"
+                  className="mt-4 w-full py-2 bg-gray-50 text-gray-600 text-sm font-semibold rounded-lg hover:bg-[#05d8c8] hover:text-white transition-colors cursor-pointer"
                   onClick={() => openModal(booking)}
                 >
                   View Details

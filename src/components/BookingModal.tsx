@@ -78,7 +78,7 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
             </div>
 
             <div className="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
-              <div className="bg-blue-600 p-3 rounded-xl text-white">
+              <div className="bg-[#05d8c8] p-3 rounded-xl text-white">
                 <ClockIcon className="w-6 h-6" />
               </div>
               <div className="flex-1">
@@ -178,7 +178,7 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
               <h2>Add Staff</h2>
               <div>here comes a list of the staff added</div>
               {/* this button opens a modal to add staff */}
-              <button className="py-3 px-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all text-sm w-40 text-center">
+              <button className="py-3 px-4 bg-[#05d8c8] text-white font-bold rounded-xl hover:bg-[#04b3a9] shadow-lg shadow-[#05d8c8] transition-all text-sm w-40 text-center">
                 Add
               </button>
             </section>
@@ -188,7 +188,7 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
         <div className="p-6 bg-white flex gap-3 w-80 mx-auto">
           <button
             onClick={onClose}
-            className="flex-1 py-3 px-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all text-sm w-40 text-center"
+            className="flex-1 py-3 px-4 bg-[#05d8c8] text-white font-bold rounded-xl hover:bg-[#04b3a9] shadow-lg shadow-[#05d8c8] transition-all text-sm w-40 text-center"
           >
             Acknowledge
           </button>
