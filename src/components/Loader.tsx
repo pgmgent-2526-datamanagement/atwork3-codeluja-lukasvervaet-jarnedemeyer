@@ -39,27 +39,27 @@ export const SkeletonLargeCard: React.FC = () => (
 export const SkeletonBookingItem: React.FC = () => (
   <div className="w-full">
     <div className="flex flex-col justify-start border border-gray-100 p-4 rounded-md gap-2 shadow-sm mt-2 h-auto w-80 bg-white">
-      <p>
+      <div>
         <span className="font-bold">Players: </span>
         <Box width="w-16" height="h-4" className="inline-block ml-2" />
-      </p>
+      </div>
 
       <div className="flex justify-between w-[50%] text-gray-500">
-        <p>
+        <div>
           <Box width="w-24" height="h-4" />
-        </p>
+        </div>
       </div>
 
       <div>
-        <p>
+        <div>
           <span className="font-semibold">Food Required:</span>
           <Box width="w-12" height="h-4" className="inline-block ml-2" />
-        </p>
+        </div>
 
-        <p>
+        <div>
           <span className="font-semibold">Is B2B: </span>
           <Box width="w-12" height="h-4" className="inline-block ml-2" />
-        </p>
+        </div>
       </div>
     </div>
   </div>
