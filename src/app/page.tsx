@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   CalendarIcon,
   UsersIcon,
@@ -14,20 +14,13 @@ import RefreshBookings from "@/components/AddBookingButton";
 import HomeLoader from "@/components/HomeLoader";
 import BookingModal from "@/components/BookingModal";
 
-interface Booking {
-  id: number;
-  playersCount: number;
-  startTime: string;
-  endTime: string;
-  bookingDate: string;
-  bookingDescription: string;
-  hostsRequired: number;
-  food_required: boolean;
-  is_b2b: boolean;
-  packageName: string;
-  notes: string;
-  status: string;
-}
+import {
+  checkValidDate,
+  getB2BBookings,
+  getTodayBookings,
+  getWeekBookings,
+} from "@/utils/bookings.util";
+import { Booking } from "@/types/booking.type";
 
 export default function Home() {
   const [bookings, setBookings] = useState<Booking[]>([]);
@@ -43,33 +36,18 @@ export default function Home() {
   };
 
   const fetchData = async () => {
-    try {
-      const res = await fetch("/api/bookings/week");
-      const data = await res.json();
-      setBookings(data);
-    } catch (e) {
-      console.error(e);
-    }
+    const bookingData = await getWeekBookings();
+    setBookings(bookingData || []);
   };
 
   const fetchB2BData = async () => {
-    try {
-      const res = await fetch("/api/bookings/b2b");
-      const data = await res.json();
-      setB2b(data);
-    } catch (e) {
-      console.error(e);
-    }
+    const b2bdata = await getB2BBookings();
+    setB2b(b2bdata || []);
   };
 
   const fetchTodayBookings = async () => {
-    try {
-      const res = await fetch("/api/bookings/today");
-      const data = await res.json();
-      setTodayBookings(data);
-    } catch (e) {
-      console.error(e);
-    }
+    const todayData = await getTodayBookings();
+    setTodayBookings(todayData || []);
   };
 
   useEffect(() => {
@@ -80,13 +58,6 @@ export default function Home() {
     };
     loadAll();
   }, []);
-
-  const isValidDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return (
-      date instanceof Date && !isNaN(date.getTime()) && date.getTime() > 3600000
-    );
-  };
 
   if (loading) return <HomeLoader />;
 
@@ -125,7 +96,7 @@ export default function Home() {
           <StatsCard
             title="B2B Sessions"
             value={String(b2b.length)}
-            subtext="Corporate clients"
+            subtext="Corporate clients this week"
             Icon={BuildingOfficeIcon}
             iconColor="text-purple-600"
             iconBg="bg-purple-100"
@@ -154,15 +125,15 @@ export default function Home() {
         </div>
 
         {todayBookings.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-h-120 overflow-y-auto border-2 border-gray-200 rounded-xl p-6 bg-gray-50">
+          <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-h-120 overflow-y-auto border-2 border-gray-200 rounded-xl p-6 bg-gray-50">
             {todayBookings.map((booking) => (
-              <div
+              <section
                 key={booking.id}
-                className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow p-5 relative overflow-hidden group min-h-fit"
+                className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow p-5 relative overflow-hidden group min-h-fit justify-between flex flex-col"
               >
                 <div
                   className={`absolute top-0 left-0 w-1 h-full ${
-                    booking.is_b2b ? "bg-purple-500" : "bg-blue-500"
+                    booking.is_b2b ? "bg-[#05d8c8]" : "bg-blue-500"
                   }`}
                 />
 
@@ -173,7 +144,7 @@ export default function Home() {
                       {booking.playersCount} Players
                     </span>
                   </div>
-                  <div className="flex flex-col items-end gap-1">
+                  <div className="flex items-end gap-1">
                     {booking.is_b2b && (
                       <span className="text-[10px] uppercase tracking-wider font-bold bg-purple-50 text-purple-700 px-2 py-0.5 rounded border border-purple-100">
                         B2B
@@ -191,7 +162,7 @@ export default function Home() {
                   <div className="flex items-center gap-3 text-sm text-gray-600 bg-gray-50 p-2 rounded-lg">
                     <ClockIcon className="w-4 h-4 text-gray-400" />
                     <span className="font-medium">
-                      {isValidDate(booking.startTime)
+                      {checkValidDate(booking.startTime)
                         ? `${new Date(booking.startTime).toLocaleTimeString(
                             "nl-NL",
                             { hour: "2-digit", minute: "2-digit" }
@@ -212,14 +183,14 @@ export default function Home() {
                 </div>
 
                 <button
-                  className="mt-4 w-full py-2 bg-gray-50 text-gray-600 text-sm font-semibold rounded-lg group-hover:bg-blue-600 group-hover:text-white transition-colors cursor-pointer"
+                  className="mt-4 w-full py-2 bg-gray-50 text-gray-600 text-sm font-semibold rounded-lg hover:bg-[#05d8c8] hover:text-white transition-colors cursor-pointer"
                   onClick={() => openModal(booking)}
                 >
                   View Details
                 </button>
-              </div>
+              </section>
             ))}
-          </div>
+          </section>
         ) : (
           <div className="bg-white border-2 border-dashed border-gray-200 rounded-xl p-12 text-center">
             <CalendarIcon className="w-12 h-12 text-gray-300 mx-auto mb-4" />
