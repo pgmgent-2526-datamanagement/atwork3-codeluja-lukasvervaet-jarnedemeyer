@@ -190,7 +190,7 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
             onClick={onClose}
             className="flex-1 py-3 px-4 bg-[#05d8c8] text-white font-bold rounded-xl hover:bg-[#04b3a9] shadow-lg shadow-[#05d8c8] transition-all text-sm w-40 text-center"
           >
-            Acknowledge
+            Close
           </button>
         </div>
       </div>
