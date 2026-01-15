@@ -1,12 +1,5 @@
-interface StatsCardProps {
-  title: string;
-  value: string;
-  subtext: string;
-  Icon: React.ElementType;
-  iconColor: string;
-  iconBg: string;
-  trendIcon?: boolean;
-}
+import React from "react";
+import { StatsCardProps } from "@/types/card.type";
 
 const StatsCard: React.FC<StatsCardProps> = ({
   title,

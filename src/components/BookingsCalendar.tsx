@@ -5,69 +5,14 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useState } from "react";
 import BookingModal from "./BookingModal";
-
-interface Booking {
-  id: number;
-  playersCount: number;
-  startTime: string;
-  endTime: string;
-  bookingDate: string;
-  bookingDescription: string;
-  hostsRequired: number;
-  food_required: boolean;
-  is_b2b: boolean;
-  packageName: string;
-  notes: string;
-  status: string;
-}
-
-interface CalendarEvent {
-  id: string;
-  title: string;
-  start: Date | string;
-  end: Date | string;
-  allDay?: boolean;
-  backgroundColor: string;
-}
-
-interface BookingsCalendarProps {
-  bookings: Booking[];
-}
-
-const mapBookingsToEvents = (bookings: Booking[]): CalendarEvent[] => {
-  return bookings
-    .filter((b) => b.bookingDate && b.startTime && b.endTime)
-    .map((booking) => {
-      const startDate = new Date(booking.bookingDate);
-      const startTime = new Date(booking.startTime);
-      const endDate = new Date(booking.bookingDate);
-      const endTime = new Date(booking.endTime);
-
-      startDate.setHours(
-        startTime.getHours(),
-        startTime.getMinutes(),
-        startTime.getSeconds()
-      );
-      endDate.setHours(
-        endTime.getHours(),
-        endTime.getMinutes(),
-        endTime.getSeconds()
-      );
-
-      return {
-        id: String(booking.id),
-        title: `${booking.packageName} (${booking.playersCount}p)`,
-        start: startDate.toISOString(),
-        end: endDate.toISOString(),
-        backgroundColor: booking.is_b2b ? "#10b981" : "#3b82f6",
-      };
-    });
-};
+import { Booking } from "@/types/booking.type";
+import { BookingsCalendarProps } from "@/types/calendar.type";
+import { mapEventBookings } from "@/utils/bookings.util";
 
 export default function BookingsCalendar({ bookings }: BookingsCalendarProps) {
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
 
-  const events = mapBookingsToEvents(bookings);
+  const events = mapEventBookings(bookings);
 
   // eslint-disable-next-line
   const handleEventClick = (clickInfo: any) => {
@@ -86,7 +31,7 @@ export default function BookingsCalendar({ bookings }: BookingsCalendarProps) {
 
   return (
     <>
-      <div className="p-4 bg-white rounded-lg shadow-xl mt-6 w-full max-w-[850px] mx-auto">
+      <div className="p-4 bg-white rounded-lg shadow-xl mt-6 w-full max-w-212.5 mx-auto">
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin]}
           initialView="timeGridWeek"
