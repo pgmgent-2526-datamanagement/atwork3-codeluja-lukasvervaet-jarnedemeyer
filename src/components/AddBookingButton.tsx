@@ -1,6 +1,7 @@
 "use client";
 
 import Button from "@/components/Button";
+import { refreshData } from "@/utils/refresh.util";
 import { useState } from "react";
 
 export default function RefreshBookings({
@@ -11,20 +12,8 @@ export default function RefreshBookings({
   const [loading, setLoading] = useState(false);
   const handleClick = async () => {
     setLoading(true);
-    const res = await fetch("/api/bookings/sync", {
-      method: "POST",
-    });
-
-    if (!res.ok) {
-      console.error("Failed to sync bookings", res.status);
-      return;
-    } else {
-      console.log("Bookings synced successfully");
-      if (onRefresh) {
-        onRefresh();
-      }
-      setLoading(false);
-    }
+    await refreshData(onRefresh ?? (() => {}));
+    setLoading(false);
   };
 
   return (

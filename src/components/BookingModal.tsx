@@ -10,26 +10,7 @@ import {
   ChatBubbleBottomCenterTextIcon,
   ArrowRightIcon,
 } from "@heroicons/react/24/outline";
-
-interface Booking {
-  id: number;
-  playersCount: number;
-  startTime: string;
-  endTime: string;
-  bookingDate: string;
-  bookingDescription: string;
-  hostsRequired: number;
-  food_required: boolean;
-  is_b2b: boolean;
-  packageName: string;
-  notes: string;
-  status: string;
-}
-
-interface ModalProps {
-  booking: Booking | null;
-  onClose: () => void;
-}
+import { ModalProps } from "@/types/modal.type";
 
 const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
   if (!booking) return null;

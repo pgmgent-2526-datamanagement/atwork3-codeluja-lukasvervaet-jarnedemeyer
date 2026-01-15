@@ -1,9 +1,5 @@
-interface LargeCardProps {
-  title: string;
-  value: string;
-  subtext: string;
-  children: React.ReactNode;
-}
+import React from "react";
+import { LargeCardProps } from "@/types/card.type";
 
 const LargeCard: React.FC<LargeCardProps> = ({
   title,
