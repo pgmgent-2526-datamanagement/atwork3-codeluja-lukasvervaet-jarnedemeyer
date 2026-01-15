@@ -79,67 +79,29 @@ export default function Bookings() {
   const bookingsToday = TodayBookings(bookings);
 
   const filteredBookings = () => {
-    if (viewMode === "list") {
-      switch (filter.type) {
-        case "all":
-          return bookingsToday;
-          break;
-        case "b2b":
-          return bookingsToday.filter((b) => b.is_b2b);
-          break;
-        case "food":
-          return bookingsToday.filter((b) => b.food_required);
-          break;
-        case "bronze":
-          return bookingsToday.filter((b) => b.packageName === "Bronze");
-          break;
-        case "silver":
-          return bookingsToday.filter((b) => b.packageName === "Silver");
-          break;
-        case "gold":
-          return bookingsToday.filter((b) => b.packageName === "Gold");
-          break;
-        default:
-          return bookingsToday;
-          break;
-      }
-    } else {
-      switch (filter.type) {
-        case "all":
-          return bookings;
-          break;
-        case "b2b":
-          return bookings.filter((b) => b.is_b2b);
-          break;
-        case "food":
-          return bookings.filter((b) => b.food_required);
-          break;
-        case "bronze":
-          return bookings.filter((b) => b.packageName === "Bronze");
-          break;
-        case "silver":
-          return bookings.filter((b) => b.packageName === "Silver");
-          break;
-        case "gold":
-          return bookings.filter((b) => b.packageName === "Gold");
-          break;
-        default:
-          return bookings;
-          break;
-      }
+    switch (filter.type) {
+      case "all":
+        return bookings;
+        break;
+      case "b2b":
+        return bookings.filter((b) => b.is_b2b);
+        break;
+      case "food":
+        return bookings.filter((b) => b.food_required);
+        break;
+      case "bronze":
+        return bookings.filter((b) => b.packageName === "Bronze");
+        break;
+      case "silver":
+        return bookings.filter((b) => b.packageName === "Silver");
+        break;
+      case "gold":
+        return bookings.filter((b) => b.packageName === "Gold");
+        break;
+      default:
+        return bookings;
+        break;
     }
-  };
-
-  const handleViewChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setViewMode(e.target.value as "list" | "calendar");
-  };
-
-  const isValidDate = (dateString: string) => {
-    const date = new Date(dateString);
-    // Checks if the date object is valid AND is not the Epoch Time (plus or minus a few hours for timezone offset)
-    return (
-      date instanceof Date && !isNaN(date.getTime()) && date.getTime() > 3600000
-    ); // Check if time is greater than 1 hour after Epoch
   };
 
   // eslint-disable-next-line
@@ -156,16 +118,7 @@ export default function Bookings() {
         <h1 className="text-2xl font-semibold flex justify-center text-center underline -underline-offset-[-3px] saira-font">
           Your Bookings
         </h1>
-        <select
-          className="h-7 m-auto border border-gray-300 rounded-md px-2"
-          name="filter"
-          id="filter"
-          value={viewMode}
-          onChange={handleViewChange}
-        >
-          <option value="list">List View (Today)</option>
-          <option value="calendar">Calendar View</option>
-        </select>
+
         <select
           value={filter.type}
           onChange={(e) =>
@@ -180,92 +133,13 @@ export default function Bookings() {
           <option value="gold">Gold Package</option>
         </select>
       </header>
-
-      {viewMode === "list" &&
-        (loading ? (
-          <div className="overflow-y-scroll bg-white border shadow-md border-gray-100 p-4 rounded-lg mt-6 text-black flex flex-col w-238 h-150">
-            <SkeletonBookingItem />
-            <SkeletonBookingItem />
-            <SkeletonBookingItem />
-            <SkeletonBookingItem />
-          </div>
-        ) : (
-          <div className="overflow-y-scroll bg-white border shadow-md border-gray-100 p-4 rounded-lg  mt-6 text-black flex flex-col flex-row-2  m-auto w-238 h-150">
-            {filteredBookings().map((booking: Booking) => {
-              return (
-                <div key={booking.id} className="mb-4">
-                  <div className="flex flex-col w-[95%] justify-start border border-gray-100 p-4 rounded-md space-y-1 shadow-sm mt-2 h-auto">
-                    <p>
-                      <span className="font-bold">Players: </span>
-                      {booking.playersCount}
-                    </p>
-                    <p>Hosts: {booking.hostsRequired}</p>
-
-                    <div className="flex justify-between w-[50%] text-gray-500">
-                      <p>
-                        {isValidDate(booking.bookingDate) ? (
-                          new Date(booking.bookingDate).toLocaleDateString(
-                            "nl-NL",
-                            {
-                              day: "2-digit",
-                              month: "short",
-                              year: "numeric",
-                            }
-                          )
-                        ) : (
-                          <span className="text-red-500 font-semibold">
-                            Missing Date
-                          </span>
-                        )}
-                      </p>
-                      <p>
-                        {isValidDate(booking.startTime) &&
-                        isValidDate(booking.endTime) ? (
-                          `${new Date(booking.startTime).toLocaleTimeString(
-                            "nl-NL",
-                            { hour: "2-digit", minute: "2-digit" }
-                          )} - ${new Date(booking.endTime).toLocaleTimeString(
-                            "nl-NL",
-                            { hour: "2-digit", minute: "2-digit" }
-                          )}`
-                        ) : (
-                          <span className="text-red-500 font-semibold">
-                            Missing Time
-                          </span>
-                        )}
-                      </p>
-                    </div>
-                    <div>
-                      <p>
-                        <span className="font-bold">Package: </span>
-                        {booking.packageName}
-                      </p>
-
-                      <p>
-                        <span className="font-semibold">Food Required:</span>
-                        {booking.food_required ? "Yes" : "No"}
-                      </p>
-
-                      <p>
-                        <span className="font-semibold">Is B2B: </span>
-                        {booking.is_b2b ? "Yes" : "No"}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        ))}
-
-      {viewMode === "calendar" &&
-        (loading ? (
-          <SkeletonCalendarContainer />
-        ) : (
-          <div className="h-160 overflow-y-scroll">
-            <BookingsCalendar bookings={filteredBookings()} />
-          </div>
-        ))}
+      {loading ? (
+        <SkeletonCalendarContainer />
+      ) : (
+        <div className="h-160 overflow-y-scroll">
+          <BookingsCalendar bookings={filteredBookings()} />
+        </div>
+      )}
     </div>
   );
 }
