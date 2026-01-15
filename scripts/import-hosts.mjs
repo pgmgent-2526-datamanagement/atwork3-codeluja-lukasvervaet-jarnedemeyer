@@ -1,4 +1,4 @@
-import { PrismaClient } from "../src/generated/prisma/index.js";
+import { PrismaClient } from "@prisma/client";
 import fs from "fs";
 import { parse } from "csv-parse/sync";
 
