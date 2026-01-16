@@ -35,7 +35,7 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
   if (!booking) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-0">
+    <div className="fixed inset-0 z-100 flex items-center justify-center p-0">
       <div
         className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
         onClick={onClose}

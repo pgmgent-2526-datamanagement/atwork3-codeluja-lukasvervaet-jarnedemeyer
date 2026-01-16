@@ -13,21 +13,7 @@ import StatsCard from "../components/StatsCard";
 import RefreshBookings from "@/components/AddBookingButton";
 import HomeLoader from "@/components/HomeLoader";
 import BookingModal from "@/components/BookingModal";
-
-interface Booking {
-  id: number;
-  playersCount: number;
-  startTime: string;
-  endTime: string;
-  bookingDate: string;
-  bookingDescription: string;
-  hostsRequired: number;
-  food_required: boolean;
-  is_b2b: boolean;
-  packageName: string;
-  notes: string;
-  status: string;
-}
+import { Booking } from "@/types/booking.type";
 
 export default function Home() {
   const [bookings, setBookings] = useState<Booking[]>([]);
