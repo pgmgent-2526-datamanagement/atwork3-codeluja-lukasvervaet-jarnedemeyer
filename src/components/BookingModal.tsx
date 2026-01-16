@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   XMarkIcon,
   ClockIcon,
@@ -11,24 +11,38 @@ import {
   ArrowRightIcon,
 } from "@heroicons/react/24/outline";
 import { ModalProps } from "@/types/modal.type";
-import { getHosts } from "@/utils/hosts.util";
+import {
+  addHostToBooking,
+  getHosts,
+  getSelectedHostsForBooking,
+} from "@/utils/hosts.util";
 import { Host } from "@/types/host.type";
+// import { getSelectedHostsForBooking } from "@/app/api/hosts/addToBooking/route";
 
 const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
   const [hosts, setHosts] = React.useState<Host[]>([]);
+  // store bookingHost objects returned by the API (contain `host`)
+  const [selectedHosts, setSelectedhosts] = useState<any[]>([]);
 
   useEffect(() => {
+    if (!booking?.id) return;
+
     const fetchHosts = async () => {
       try {
         const data = await getHosts();
         console.log("Fetched data:", data);
         setHosts(data || []);
+
+        const selected = await getSelectedHostsForBooking(booking.id);
+        console.log("Selected hosts for booking:", selected);
+        // store the full bookingHost objects (they include `host`)
+        setSelectedhosts(selected || []);
       } catch (error) {
         console.error("Failed to fetch hosts:", error);
       }
     };
     fetchHosts();
-  }, []);
+  }, [booking?.id]);
 
   if (!booking) return null;
 
