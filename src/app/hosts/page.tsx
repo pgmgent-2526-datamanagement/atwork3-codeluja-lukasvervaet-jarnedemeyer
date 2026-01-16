@@ -62,8 +62,8 @@ export default function HostsPage() {
   }
 
   return (
-    <main className="fixed top-0 right-0 bottom-0 left-64 overflow-y-auto bg-gray-50/50 p-6 lg:p-10 pb-24">
-      <div className="w-full min-h-full">
+    <main className="fixed top-0 right-0 bottom-20 left-64 overflow-y-auto bg-gray-50/50 p-6 lg:p-10">
+      <div className="w-full min-h-full pb-8">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
           <div>
             <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
@@ -75,7 +75,7 @@ export default function HostsPage() {
           </div>
           <button
             onClick={handleAddHost}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-sm font-medium"
+            className="flex items-center gap-2 px-4 py-2 bg-[#05d8c8] text-white rounded-lg hover:bg-[#04b3aa] transition-colors duration-300 shadow-md font-semibold"
           >
             <PlusIcon className="w-5 h-5" />
             Add Host
@@ -91,7 +91,7 @@ export default function HostsPage() {
 
         {hosts.length > 0 ? (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-20 min-h-[600px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 min-h-[600px]">
               {currentHosts.map((host) => (
                 <div
                   key={host.id}
@@ -148,7 +148,7 @@ export default function HostsPage() {
                     </div>
 
                     {/* Footer Button */}
-                    <button className="mt-4 w-full py-2.5 bg-linear-to-r from-blue-50 to-blue-100 text-blue-700 text-sm font-semibold rounded-lg group-hover:from-blue-600 group-hover:to-blue-700 group-hover:text-white transition-all duration-200 border border-blue-200 group-hover:border-blue-600">
+                    <button className="mt-4 w-full py-2.5 bg-[#05d8c8] cursor-pointer text-white text-sm font-semibold rounded-lg hover:bg-[#04b3aa] transition-colors duration-300 shadow-md">
                       View Profile
                     </button>
                   </div>
@@ -165,7 +165,7 @@ export default function HostsPage() {
                       setCurrentPage((prev) => Math.max(prev - 1, 1))
                     }
                     disabled={currentPage === 1}
-                    className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-[#05d8c8] hover:text-white hover:border-[#05d8c8] disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300"
                   >
                     Previous
                   </button>
@@ -174,10 +174,10 @@ export default function HostsPage() {
                       <button
                         key={i}
                         onClick={() => setCurrentPage(i + 1)}
-                        className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                        className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-300 ${
                           currentPage === i + 1
-                            ? "bg-blue-600 text-white"
-                            : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50"
+                            ? "bg-[#05d8c8] text-white shadow-md"
+                            : "bg-white border border-gray-200 text-gray-700 hover:bg-[#05d8c8] hover:text-white hover:border-[#05d8c8]"
                         }`}
                       >
                         {i + 1}
@@ -189,7 +189,7 @@ export default function HostsPage() {
                       setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                     }
                     disabled={currentPage === totalPages}
-                    className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-[#05d8c8] hover:text-white hover:border-[#05d8c8] disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300"
                   >
                     Next
                   </button>
