@@ -5,6 +5,7 @@ import { Host } from "@/types/host.type";
 import BookingModal from "@/components/BookingModal";
 import { BookingHost } from "@/types/booking-host.type";
 import { Booking } from "@/types/booking.type";
+import { HostDetailLoadingSkeleton } from "./HostDetailLoadingSkeleton";
 
 interface HostWithBookings extends Host {
   bookingHosts: BookingHost[];
@@ -15,6 +16,7 @@ export default function HostDetailPage() {
   const [host, setHost] = useState<HostWithBookings | null>(null);
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -23,8 +25,16 @@ export default function HostDetailPage() {
       .then((res) => res.json())
       .then((data) => {
         setHost(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
       });
   }, [id]);
+
+  if (loading) {
+    return <HostDetailLoadingSkeleton />;
+  }
 
   if (!host) {
     return (
