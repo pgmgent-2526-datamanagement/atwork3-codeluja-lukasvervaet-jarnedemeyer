@@ -18,24 +18,43 @@ async function syncBookings(): Promise<Response> {
 
     const parsedBookings = parseBookings(rawData);
     const transformedBookings = transformBookings(parsedBookings);
-    const bookingsToInsert = transformedBookings;
 
-    // Delete related records first to avoid foreign key constraint violations
-    await prisma.bookingHost.deleteMany();
-    await prisma.booking.deleteMany(); // Clear test data
+    // Get all existing bookings that have host assignments
+    const assignedBookings = await prisma.booking.findMany({
+      where: {
+        bookingHosts: {
+          some: {}, // Has at least one host assigned
+        },
+      },
+      select: {
+        id: true,
+      },
+    });
 
-    const result = await prisma.booking.createMany({
-      data: bookingsToInsert,
+    const assignedBookingIds = assignedBookings.map((b) => b.id);
+
+    // Delete ONLY bookings that have NO host assignments
+    const deleteResult = await prisma.booking.deleteMany({
+      where: {
+        id: {
+          notIn: assignedBookingIds,
+        },
+      },
+    });
+
+    // Insert all new bookings from the sheet
+    const insertResult = await prisma.booking.createMany({
+      data: transformedBookings,
+      skipDuplicates: true,
     });
 
     return new Response(
       JSON.stringify({
         success: true,
         parsed: parsedBookings.length,
-        transformed: transformedBookings.length,
-        inserted: result.count,
-        cancelledCount: parsedBookings.filter((b) => b.status === "Cancelled")
-          .length,
+        deleted: deleteResult.count,
+        inserted: insertResult.count,
+        preserved: assignedBookingIds.length,
       }),
       {
         status: 200,
