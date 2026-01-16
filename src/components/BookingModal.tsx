@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   XMarkIcon,
   ClockIcon,
@@ -11,24 +11,38 @@ import {
   ArrowRightIcon,
 } from "@heroicons/react/24/outline";
 import { ModalProps } from "@/types/modal.type";
-import { getHosts } from "@/utils/hosts.util";
+import {
+  addHostToBooking,
+  getHosts,
+  getSelectedHostsForBooking,
+} from "@/utils/hosts.util";
 import { Host } from "@/types/host.type";
+// import { getSelectedHostsForBooking } from "@/app/api/hosts/addToBooking/route";
 
 const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
   const [hosts, setHosts] = React.useState<Host[]>([]);
+  // store bookingHost objects returned by the API (contain `host`)
+  const [selectedHosts, setSelectedhosts] = useState<any[]>([]);
 
   useEffect(() => {
+    if (!booking?.id) return;
+
     const fetchHosts = async () => {
       try {
         const data = await getHosts();
         console.log("Fetched data:", data);
         setHosts(data || []);
+
+        const selected = await getSelectedHostsForBooking(booking.id);
+        console.log("Selected hosts for booking:", selected);
+        // store the full bookingHost objects (they include `host`)
+        setSelectedhosts(selected || []);
       } catch (error) {
         console.error("Failed to fetch hosts:", error);
       }
     };
     fetchHosts();
-  }, []);
+  }, [booking?.id]);
 
   if (!booking) return null;
 
@@ -181,13 +195,24 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
                   className="border rounded-md p-2"
                 >
                   {hosts.map((host: Host) => (
-                    <option key={host.id} value={host.id}>
+                    <option
+                      onSelect={() => addHostToBooking(booking.id, host.id)}
+                      key={host.id}
+                      value={host.id}
+                    >
                       {host.firstName} {host.lastName}
                     </option>
                   ))}
                 </select>
+                <div>
+                  {selectedHosts &&
+                    selectedHosts.map((host: any) => (
+                      <div key={host.host.id}>
+                        {host.host.firstName} {host.host.lastName}
+                      </div>
+                    ))}
+                </div>
               </div>
-              {/* this button opens a modal to add staff */}
               <button className="py-3 px-4 bg-[#05d8c8] text-white font-bold rounded-xl hover:bg-[#04b3a9] shadow-lg shadow-[#05d8c8] transition-all text-sm w-40 text-center">
                 Add
               </button>
