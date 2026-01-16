@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import {
   XMarkIcon,
   ClockIcon,
@@ -11,8 +11,25 @@ import {
   ArrowRightIcon,
 } from "@heroicons/react/24/outline";
 import { ModalProps } from "@/types/modal.type";
+import { getHosts } from "@/utils/hosts.util";
+import { Host } from "@/types/host.type";
 
 const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
+  const [hosts, setHosts] = React.useState<Host[]>([]);
+
+  useEffect(() => {
+    const fetchHosts = async () => {
+      try {
+        const data = await getHosts();
+        console.log("Fetched data:", data);
+        setHosts(data || []);
+      } catch (error) {
+        console.error("Failed to fetch hosts:", error);
+      }
+    };
+    fetchHosts();
+  }, []);
+
   if (!booking) return null;
 
   return (
