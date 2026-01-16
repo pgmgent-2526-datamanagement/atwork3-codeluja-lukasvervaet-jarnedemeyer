@@ -19,3 +19,43 @@ export const getHostById = async (id: string) => {
   }
   return response.json();
 };
+
+export const addHostToBooking = async (bookingId: number, hostId: number) => {
+  const response = await fetch("/api/hosts/addToBooking", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ bookingId, hostId }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to add host to booking");
+  }
+
+  return response.json();
+};
+
+export const getSelectedHostsForBooking = async (bookingId: number) => {
+  try {
+    // Call the filtered API route which returns bookingHost rows for the booking
+    const bookingHostsRes = await fetch(`/api/bookinghosts/${bookingId}`, {
+      cache: "no-store",
+    });
+    if (!bookingHostsRes.ok) {
+      console.warn(
+        "/api/bookinghosts/:bookingId returned",
+        bookingHostsRes.status
+      );
+      return [];
+    }
+
+    const data = await bookingHostsRes.json();
+    console.debug("[GET_SELECTED_HOSTS_RESPONSE] filtered:", data);
+    // Expecting an array of BookingHost objects (possibly with `host` included)
+    return Array.isArray(data) ? data : [];
+  } catch (err) {
+    console.error("[GET_SELECTED_HOSTS_ERROR]", err);
+    return [];
+  }
+};
