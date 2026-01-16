@@ -12,5 +12,14 @@ interface Booking {
   notes: string | null;
   status: string | null;
   venue?: string | null;
+  bookingHosts?: Array<{
+    host: {
+      id: number;
+      firstName: string;
+      lastName: string;
+      status: string;
+      active: boolean;
+    };
+  }>;
 }
 export type { Booking };
