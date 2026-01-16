@@ -2,32 +2,19 @@
 
 import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
 import { useState } from "react";
+import { loginUser } from "@/utils/login.util";
 
 export default function LoginPage({ open }: { open: () => void }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const formData = new FormData(event.currentTarget);
-    const email = formData.get("email");
-    const password = formData.get("password");
     setLoading(true);
-    const result = await signIn("credentials", {
-      redirect: false,
-      email,
-      password,
-    });
-    setLoading(false);
-
-    if (!result?.error) {
-      router.push("/");
-    } else {
-      console.error("Failed to login", result.error);
-      alert("Invalid credentials");
+    const loginData = await loginUser(event);
+    if (loginData) {
+      setLoading(false);
+      router.push("/bookings");
     }
   }
 

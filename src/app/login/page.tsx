@@ -7,14 +7,6 @@ import LoginForm from "@/components/LoginForm";
 export default function LoginPage() {
   const [isCodeModalOpen, setIsCodeModalOpen] = useState(false);
 
-  const TypedCodeModal = CodeModal as unknown as React.ComponentType<{
-    close: () => void;
-  }>;
-
-  const TypedLoginForm = LoginForm as unknown as React.ComponentType<{
-    open: () => void;
-  }>;
-
   const handleOpen = () => {
     setIsCodeModalOpen(true);
   };
@@ -26,9 +18,9 @@ export default function LoginPage() {
   return (
     <div className="flex justify-center items-center h-screen w-full ">
       {!isCodeModalOpen ? (
-        <TypedLoginForm open={handleOpen} />
+        <LoginForm open={handleOpen} />
       ) : (
-        <TypedCodeModal close={handleClose} />
+        <CodeModal close={handleClose} />
       )}
     </div>
   );
