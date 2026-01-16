@@ -54,8 +54,14 @@ export default function Nav() {
     };
   }, [session]);
 
-  // while loading session, show loading skeleton
-  if (status === "loading") {
+  // Check if we're on an auth page (login, logout, etc.)
+  const isAuthPage =
+    pathname === "/login" ||
+    pathname === "/logout" ||
+    pathname.startsWith("/login/");
+
+  // while loading session, show loading skeleton (but not on auth pages)
+  if (status === "loading" && !isAuthPage) {
     return (
       <aside className="w-64 max-h-screen h-screen lg:block border-r border-gray-100 bg-white mr-3 shadow-md z-50 relative">
         <div className="flex justify-center items-center m-auto mt-2 h-[100px]">
