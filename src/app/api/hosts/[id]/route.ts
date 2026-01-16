@@ -15,6 +15,13 @@ export async function GET(
 
   const host = await prisma.host.findUnique({
     where: { id: hostId },
+    include: {
+      bookingHosts: {
+        include: {
+          booking: true,
+        },
+      },
+    },
   });
 
   if (!host) {
