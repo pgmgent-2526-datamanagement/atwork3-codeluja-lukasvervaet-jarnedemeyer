@@ -1,3 +1,5 @@
+import { Host } from "./host.type";
+
 interface BookingHost {
   booking: {
     id: number;
@@ -16,4 +18,7 @@ interface BookingHost {
   };
 }
 
-export type { BookingHost };
+interface HostWithBookings extends Host {
+  bookingHosts: BookingHost[];
+}
+export type { BookingHost, HostWithBookings };

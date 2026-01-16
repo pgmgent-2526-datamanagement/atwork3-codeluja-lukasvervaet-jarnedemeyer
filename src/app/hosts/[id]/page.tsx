@@ -1,15 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { Host } from "@/types/host.type";
 import BookingModal from "@/components/BookingModal";
-import { BookingHost } from "@/types/booking-host.type";
 import { Booking } from "@/types/booking.type";
 import { HostDetailLoadingSkeleton } from "./HostDetailLoadingSkeleton";
-
-interface HostWithBookings extends Host {
-  bookingHosts: BookingHost[];
-}
+import { HostWithBookings } from "@/types/booking-host.type";
 
 export default function HostDetailPage() {
   const { id } = useParams();
@@ -28,6 +23,7 @@ export default function HostDetailPage() {
         setLoading(false);
       })
       .catch(() => {
+        console.error("Failed to fetch host data.");
         setLoading(false);
       });
   }, [id]);
@@ -119,7 +115,7 @@ export default function HostDetailPage() {
                     key={booking.id}
                     className="border border-gray-200 rounded-xl p-6 hover:shadow-lg hover:border-[#05d8c8] transition-all duration-300 cursor-pointer bg-white"
                     onClick={() => {
-                      setSelectedBooking(booking);
+                      setSelectedBooking(booking as unknown as Booking);
                       setIsModalOpen(true);
                     }}
                   >
