@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import {
   XMarkIcon,
   ClockIcon,
@@ -11,8 +11,25 @@ import {
   ArrowRightIcon,
 } from "@heroicons/react/24/outline";
 import { ModalProps } from "@/types/modal.type";
+import { getHosts } from "@/utils/hosts.util";
+import { Host } from "@/types/host.type";
 
 const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
+  const [hosts, setHosts] = React.useState<Host[]>([]);
+
+  useEffect(() => {
+    const fetchHosts = async () => {
+      try {
+        const data = await getHosts();
+        console.log("Fetched data:", data);
+        setHosts(data || []);
+      } catch (error) {
+        console.error("Failed to fetch hosts:", error);
+      }
+    };
+    fetchHosts();
+  }, []);
+
   if (!booking) return null;
 
   return (
@@ -157,7 +174,19 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
                 </p>
               </div>
               <h2>Add Staff</h2>
-              <div>here comes a list of the staff added</div>
+              <div>
+                <select
+                  name="hosts"
+                  id="hosts"
+                  className="border rounded-md p-2"
+                >
+                  {hosts.map((host: Host) => (
+                    <option key={host.id} value={host.id}>
+                      {host.firstName} {host.lastName}
+                    </option>
+                  ))}
+                </select>
+              </div>
               {/* this button opens a modal to add staff */}
               <button className="py-3 px-4 bg-[#05d8c8] text-white font-bold rounded-xl hover:bg-[#04b3a9] shadow-lg shadow-[#05d8c8] transition-all text-sm w-40 text-center">
                 Add
