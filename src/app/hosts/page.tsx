@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { UsersIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { Host } from "@/types/host.type";
+import { HostsLoadingSkeleton } from "./HostsLoadingSkeleton";
 
 export default function HostsPage() {
   const [hosts, setHosts] = useState<Host[]>([]);
@@ -34,21 +35,7 @@ export default function HostsPage() {
   };
 
   if (loading) {
-    return (
-      <main className="fixed top-0 right-0 bottom-0 left-64 overflow-y-auto bg-gray-50/50 p-6 lg:p-10">
-        <div className="w-full min-h-full">
-          <div className="animate-pulse">
-            <div className="h-8 bg-gray-200 rounded w-1/4 mb-4"></div>
-            <div className="h-4 bg-gray-200 rounded w-1/3 mb-8"></div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {[...Array(8)].map((_, i) => (
-                <div key={i} className="h-32 bg-gray-200 rounded-xl"></div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </main>
-    );
+    return <HostsLoadingSkeleton />;
   }
 
   return (
