@@ -1,31 +1,18 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
-import { signIn } from "next-auth/react";
+import { loginWithCode } from "@/utils/login.util";
 
 function CodeModal({ close }: { close: () => void }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const formData = new FormData(event.currentTarget);
-    const code = formData.get("code");
     setLoading(true);
-
-    const result = await signIn("credentials", {
-      redirect: false,
-      email: "personeel@code.com",
-      password: code,
-    });
-    setLoading(false);
-
-    if (!result?.error) {
-      router.push("/");
-    } else {
-      console.error("Failed to login", result.error);
-      alert("Invalid credentials");
+    const loginCodeData = await loginWithCode(event);
+    if (loginCodeData) {
+      setLoading(false);
+      router.push("/bookings");
     }
   }
   return (
