@@ -1,17 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { UsersIcon, PlusIcon } from "@heroicons/react/24/outline";
-
-type Host = {
-  id: number;
-  firstName: string;
-  lastName: string;
-  status: string;
-  label: string | null;
-  active: boolean;
-  createdAt: string;
-  updatedAt: string;
-};
+import { Host } from "@/types/host.type";
 
 export default function HostsPage() {
   const [hosts, setHosts] = useState<Host[]>([]);
@@ -148,9 +138,12 @@ export default function HostsPage() {
                     </div>
 
                     {/* Footer Button */}
-                    <button className="mt-4 w-full py-2.5 bg-[#05d8c8] cursor-pointer text-white text-sm font-semibold rounded-lg hover:bg-[#04b3aa] transition-colors duration-300 shadow-md">
+                    <a
+                      href={`/hosts/${host.id}`}
+                      className="mt-4 w-full py-2.5 bg-[#05d8c8] cursor-pointer text-white text-sm font-semibold rounded-lg hover:bg-[#04b3aa] transition-colors duration-300 shadow-md text-center"
+                    >
                       View Profile
-                    </button>
+                    </a>
                   </div>
                 </div>
               ))}
