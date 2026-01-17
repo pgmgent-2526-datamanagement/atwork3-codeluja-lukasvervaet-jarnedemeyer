@@ -145,22 +145,64 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
                 </div>
               </div>
             </section>
-            {/* staff div */}
-            <section className="p-8 flex flex-col gap-8 justify-between mx-auto border border-gray-300 rounded-md min-w-[40%]">
-              <div className="space-y-1">
+            {/* hosts div */}
+            <section className="p-8 flex flex-col mx-auto border border-gray-300 rounded-md min-w-[40%] max-h-full">
+              <div className="space-y-1 mb-4">
                 <div className="flex items-center gap-2 text-slate-400">
                   <UsersIcon className="w-4 h-4" />
-                  <span className="text-xs font-bold uppercase">Staffing</span>
+                  <span className="text-xs font-bold uppercase">Hosting</span>
                 </div>
                 <p className="text-xl font-bold text-slate-800">
                   {booking.hostsRequired} Hosts Required
                 </p>
               </div>
-              <h2>Add Staff</h2>
-              <div>here comes a list of the staff added</div>
-              {/* this button opens a modal to add staff */}
-              <button className="py-3 px-4 bg-[#05d8c8] text-white font-bold rounded-xl hover:bg-[#04b3a9] shadow-lg shadow-[#05d8c8] transition-all text-sm w-40 text-center">
-                Add
+
+              <div className="mb-3">
+                <h3 className="text-sm font-bold text-slate-700 mb-3">
+                  Assigned Hosts
+                </h3>
+                <div className="overflow-y-auto max-h-[250px] space-y-2 pr-2">
+                  {booking.bookingHosts && booking.bookingHosts.length > 0 ? (
+                    booking.bookingHosts.map(({ host }) => (
+                      <div
+                        key={host.id}
+                        className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-lg hover:border-[#05d8c8] transition-colors"
+                      >
+                        <div
+                          className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0 ${
+                            host.active ? "bg-green-500" : "bg-gray-400"
+                          }`}
+                        >
+                          {host.firstName.charAt(0)}
+                          {host.lastName.charAt(0)}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-bold text-slate-800 truncate">
+                            {host.firstName} {host.lastName}
+                          </p>
+                          <p className="text-xs text-slate-500">
+                            {host.status}
+                          </p>
+                        </div>
+                        {host.active && (
+                          <span className="text-[9px] uppercase tracking-wider font-bold bg-green-50 text-green-700 px-2 py-1 rounded-full border border-green-200">
+                            Active
+                          </span>
+                        )}
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-center py-8 text-slate-400">
+                      <UsersIcon className="w-8 h-8 mx-auto mb-2 opacity-50" />
+                      <p className="text-sm">No hosts assigned yet</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* this button opens a modal to add hosts */}
+              <button className="py-3 px-4 bg-[#05d8c8] text-white font-bold rounded-xl hover:bg-[#04b3a9] shadow-lg shadow-[#05d8c8] transition-all text-sm w-full text-center">
+                Add Hosts
               </button>
             </section>
           </section>
