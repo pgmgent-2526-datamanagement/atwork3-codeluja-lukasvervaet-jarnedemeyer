@@ -30,6 +30,19 @@ export async function GET() {
         bookingDescription: true,
         notes: true,
         status: true,
+        bookingHosts: {
+          select: {
+            host: {
+              select: {
+                id: true,
+                firstName: true,
+                lastName: true,
+                status: true,
+                active: true,
+              },
+            },
+          },
+        },
       },
       orderBy: [{ bookingDate: "asc" }, { startTime: "asc" }],
     });
