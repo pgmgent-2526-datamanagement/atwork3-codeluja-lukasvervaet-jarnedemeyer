@@ -24,10 +24,10 @@ function parseDateTime(dateString: string, timeString: string): Date {
 
     // Handle empty time strings
     if (!timeString || timeString.trim() === "") {
-      return new Date(`${dateOnly}T10:00:00`);
+      return new Date(`${dateOnly}T10:00:00Z`);
     }
     const [hours, minutes] = timeString.split(":");
-    return new Date(`${dateOnly}T${hours}:${minutes}:00`);
+    return new Date(`${dateOnly}T${hours}:${minutes}:00Z`);
   } catch {
     return new Date(0); // Fallback to epoch if parsing fails
   }
@@ -150,6 +150,11 @@ export function transformBooking(
 ): TransformedBooking | null {
   // Filter out non-VR bookings (no time = food/drink orders only)
   if (!parsed.time || parsed.time.trim() === "") {
+    return null;
+  }
+
+  // Filter out cancelled bookings
+  if (parsed.status && parsed.status.toLowerCase() === "cancelled") {
     return null;
   }
 

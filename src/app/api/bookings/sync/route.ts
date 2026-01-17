@@ -19,11 +19,25 @@ async function syncBookings(): Promise<Response> {
     const parsedBookings = parseBookings(rawData);
     const transformedBookings = transformBookings(parsedBookings);
 
-    // Get all existing bookings that have host assignments
+    console.log("Parsed bookings:", parsedBookings.length);
+    console.log("Transformed bookings:", transformedBookings.length);
+    console.log("First transformed booking:", transformedBookings[0]);
+
+    // Get today's date at midnight UTC
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    const startOfToday = new Date(`${year}-${month}-${day}T00:00:00Z`);
+
+    // Get all existing bookings that have host assignments AND are for today or future
     const assignedBookings = await prisma.booking.findMany({
       where: {
         bookingHosts: {
           some: {}, // Has at least one host assigned
+        },
+        bookingDate: {
+          gte: startOfToday, // Only preserve bookings from today onwards
         },
       },
       select: {
@@ -42,11 +56,15 @@ async function syncBookings(): Promise<Response> {
       },
     });
 
+    console.log("Deleted bookings:", deleteResult.count);
+
     // Insert all new bookings from the sheet
     const insertResult = await prisma.booking.createMany({
       data: transformedBookings,
       skipDuplicates: true,
     });
+
+    console.log("Inserted bookings:", insertResult.count);
 
     return new Response(
       JSON.stringify({
