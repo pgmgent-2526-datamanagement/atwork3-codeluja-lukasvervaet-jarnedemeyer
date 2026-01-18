@@ -21,8 +21,34 @@ import { Host } from "@/types/host.type";
 
 const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
   const [hosts, setHosts] = React.useState<Host[]>([]);
-  // store bookingHost objects returned by the API (contain `host`)
-  const [selectedHosts, setSelectedhosts] = useState<any[]>([]);
+  const [selectedHosts, setSelectedhosts] = useState<{ host: Host }[]>([]);
+  const [pendingHostIds, setPendingHostIds] = useState<string[]>([]);
+
+  const handleAddButtonClick = async () => {
+    if (!booking) return;
+
+    try {
+      const promises = pendingHostIds.map((hostId) =>
+        addHostToBooking(booking.id, parseInt(hostId)),
+      );
+
+      await Promise.all(promises);
+
+      const updatedSelected = await getSelectedHostsForBooking(booking.id);
+      setSelectedhosts(updatedSelected || []);
+
+      setPendingHostIds([]);
+    } catch (error) {
+      console.error("Error adding hosts:", error);
+    }
+  };
+
+  const filteredHosts = hosts.filter(
+    (host) =>
+      !selectedHosts.some(
+        (selected: { host: Host }) => selected.host.id === host.id,
+      ),
+  );
 
   useEffect(() => {
     if (!booking?.id) return;
