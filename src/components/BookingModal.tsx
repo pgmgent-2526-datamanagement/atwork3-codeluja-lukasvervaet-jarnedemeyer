@@ -54,6 +54,26 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
     }
   };
 
+  // Check if host has a conflicting booking at the same time
+  const hasConflictingBooking = (host: Host): boolean => {
+    if (!host.bookingHosts || !booking) return false;
+
+    const bookingStart = new Date(booking.startTime).getTime();
+    const bookingEnd = new Date(booking.endTime).getTime();
+    const bookingDate = new Date(booking.bookingDate).toDateString();
+
+    return host.bookingHosts.some(({ booking: otherBooking }) => {
+      if (otherBooking.id === booking.id) return false;
+      if (new Date(otherBooking.bookingDate).toDateString() !== bookingDate)
+        return false;
+
+      const otherStart = new Date(otherBooking.startTime).getTime();
+      const otherEnd = new Date(otherBooking.endTime).getTime();
+
+      return bookingStart < otherEnd && bookingEnd > otherStart;
+    });
+  };
+
   const filteredHosts = hosts.filter(
     (host) =>
       !selectedHosts.some(
@@ -252,19 +272,25 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
                       }}
                       disabled={maxSelectable === 0}
                     >
-                      {filteredHosts.map((host: Host) => (
-                        <option
-                          key={host.id}
-                          value={host.id}
-                          className="p-3 mb-1 hover:bg-[#05d8c8] hover:text-white cursor-pointer rounded-lg"
-                          disabled={
-                            pendingHostIds.length >= maxSelectable &&
-                            !pendingHostIds.includes(host.id.toString())
-                          }
-                        >
-                          {host.firstName} {host.lastName}
-                        </option>
-                      ))}
+                      {filteredHosts.map((host: Host) => {
+                        const isConflicting = hasConflictingBooking(host);
+                        const isDisabled =
+                          isConflicting ||
+                          (pendingHostIds.length >= maxSelectable &&
+                            !pendingHostIds.includes(host.id.toString()));
+
+                        return (
+                          <option
+                            key={host.id}
+                            value={host.id}
+                            className="p-3 mb-1 hover:bg-[#05d8c8] hover:text-white cursor-pointer rounded-lg"
+                            disabled={isDisabled}
+                          >
+                            {host.firstName} {host.lastName}
+                            {isConflicting && " 🔴 Booked"}
+                          </option>
+                        );
+                      })}
                     </select>
                   </div>
                 </div>
