@@ -18,7 +18,23 @@ export async function GET(
     include: {
       bookingHosts: {
         include: {
-          booking: true,
+          booking: {
+            include: {
+              bookingHosts: {
+                include: {
+                  host: {
+                    select: {
+                      id: true,
+                      firstName: true,
+                      lastName: true,
+                      status: true,
+                      active: true,
+                    },
+                  },
+                },
+              },
+            },
+          },
         },
       },
     },
