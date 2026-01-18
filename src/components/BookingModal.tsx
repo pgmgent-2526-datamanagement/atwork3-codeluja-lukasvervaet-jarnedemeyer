@@ -1,5 +1,6 @@
 "use client";
 
+import { Trash } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import {
   XMarkIcon,
@@ -15,6 +16,7 @@ import {
   addHostToBooking,
   getHosts,
   getSelectedHostsForBooking,
+  removeHostFromBooking,
 } from "@/utils/hosts.util";
 import { Host } from "@/types/host.type";
 // import { getSelectedHostsForBooking } from "@/app/api/hosts/addToBooking/route";
@@ -40,6 +42,16 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
       setPendingHostIds([]);
     } catch (error) {
       console.error("Error adding hosts:", error);
+    }
+  };
+
+  const deleteHost = async (hostId: number, bookingId: number) => {
+    try {
+      await removeHostFromBooking(bookingId, hostId);
+      const updatedSelected = await getSelectedHostsForBooking(bookingId);
+      setSelectedhosts(updatedSelected || []);
+    } catch (error) {
+      console.error("Error removing host:", error);
     }
   };
 
@@ -247,7 +259,13 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
                       <h4 className="font-bold">Assigned Hosts:</h4>
                       {selectedHosts.map((host: any) => (
                         <div key={host.host.id}>
-                          {host.host.firstName} {host.host.lastName}
+                          {host.host.firstName} {host.host.lastName}{" "}
+                          <span
+                            className="cursor-pointer"
+                            onClick={() => deleteHost(host.host.id, booking.id)}
+                          >
+                            <Trash className="w-4 h-4 inline-block text-red-500 hover:text-red-700" />
+                          </span>
                         </div>
                       ))}
                     </div>

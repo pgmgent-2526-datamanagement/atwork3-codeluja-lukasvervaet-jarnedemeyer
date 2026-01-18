@@ -59,3 +59,22 @@ export const getSelectedHostsForBooking = async (bookingId: number) => {
     return [];
   }
 };
+
+export const removeHostFromBooking = async (
+  bookingId: number,
+  hostId: number,
+) => {
+  const response = await fetch("/api/hosts/removeFromBooking", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ bookingId, hostId }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to remove host from booking");
+  }
+
+  return response.json();
+};
