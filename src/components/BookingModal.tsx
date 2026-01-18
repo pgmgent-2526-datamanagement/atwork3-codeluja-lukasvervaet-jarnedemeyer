@@ -21,8 +21,34 @@ import { Host } from "@/types/host.type";
 
 const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
   const [hosts, setHosts] = React.useState<Host[]>([]);
-  // store bookingHost objects returned by the API (contain `host`)
-  const [selectedHosts, setSelectedhosts] = useState<any[]>([]);
+  const [selectedHosts, setSelectedhosts] = useState<{ host: Host }[]>([]);
+  const [pendingHostIds, setPendingHostIds] = useState<string[]>([]);
+
+  const handleAddButtonClick = async () => {
+    if (!booking) return;
+
+    try {
+      const promises = pendingHostIds.map((hostId) =>
+        addHostToBooking(booking.id, parseInt(hostId)),
+      );
+
+      await Promise.all(promises);
+
+      const updatedSelected = await getSelectedHostsForBooking(booking.id);
+      setSelectedhosts(updatedSelected || []);
+
+      setPendingHostIds([]);
+    } catch (error) {
+      console.error("Error adding hosts:", error);
+    }
+  };
+
+  const filteredHosts = hosts.filter(
+    (host) =>
+      !selectedHosts.some(
+        (selected: { host: Host }) => selected.host.id === host.id,
+      ),
+  );
 
   useEffect(() => {
     if (!booking?.id) return;
@@ -187,35 +213,55 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
                   {booking.hostsRequired} Hosts Required
                 </p>
               </div>
-              <h2>Add Staff</h2>
               <div>
                 <select
                   name="hosts"
                   id="hosts"
-                  className="border rounded-md p-2"
+                  className="border rounded-md p-2 h-40 w-full mb-2"
+                  multiple
+                  value={pendingHostIds}
+                  onChange={(e) => {
+                    // Correct way to get multiple values from a select element
+                    const values = Array.from(
+                      e.target.selectedOptions,
+                      (option) => option.value,
+                    );
+                    setPendingHostIds(values);
+                  }}
                 >
-                  {hosts.map((host: Host) => (
+                  {filteredHosts.map((host: Host) => (
                     <option
-                      onSelect={() => addHostToBooking(booking.id, host.id)}
                       key={host.id}
                       value={host.id}
+                      className="bg-gray-300 aria-selected:bg-emerald-300 mb-1 p-2 rounded-md"
                     >
                       {host.firstName} {host.lastName}
                     </option>
                   ))}
                 </select>
-                <div>
-                  {selectedHosts &&
-                    selectedHosts.map((host: any) => (
-                      <div key={host.host.id}>
-                        {host.host.firstName} {host.host.lastName}
-                      </div>
-                    ))}
-                </div>
               </div>
-              <button className="py-3 px-4 bg-[#05d8c8] text-white font-bold rounded-xl hover:bg-[#04b3a9] shadow-lg shadow-[#05d8c8] transition-all text-sm w-40 text-center">
-                Add
-              </button>
+              <div className="flex justify-between">
+                {selectedHosts.length > 0 ? (
+                  <>
+                    <div className="flex flex-col overflow-y-scroll h-30 border rounded-md shadow-lg p-2">
+                      <h4 className="font-bold">Assigned Hosts:</h4>
+                      {selectedHosts.map((host: any) => (
+                        <div key={host.host.id}>
+                          {host.host.firstName} {host.host.lastName}
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <div>No hosts assigned yet.</div>
+                )}
+                <button
+                  onClick={handleAddButtonClick}
+                  className="py-3 px-4 bg-[#05d8c8] text-white font-bold rounded-xl hover:bg-[#04b3a9] shadow-lg shadow-[#05d8c8] transition-all text-sm w-40 h-10 items-center justify-center m-auto text-center"
+                >
+                  Add
+                </button>
+              </div>
             </section>
           </section>
         </div>

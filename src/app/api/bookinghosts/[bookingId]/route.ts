@@ -4,7 +4,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function GET(request: Request, context: { params?: { bookingId?: string } }) {
-  const paramsBookingId = context?.params?.bookingId;
+  const paramsBookingId = (await context?.params)?.bookingId;
   // try params first, then fallback to parsing from the URL
   let bookingId = paramsBookingId ? Number(paramsBookingId) : NaN;
   if (Number.isNaN(bookingId)) {
