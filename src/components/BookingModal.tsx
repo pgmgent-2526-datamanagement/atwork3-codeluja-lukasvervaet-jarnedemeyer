@@ -1,5 +1,6 @@
 "use client";
 
+import { Trash } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import {
   XMarkIcon,
@@ -15,6 +16,7 @@ import {
   addHostToBooking,
   getHosts,
   getSelectedHostsForBooking,
+  removeHostFromBooking,
 } from "@/utils/hosts.util";
 import { Host } from "@/types/host.type";
 // import { getSelectedHostsForBooking } from "@/app/api/hosts/addToBooking/route";
@@ -40,6 +42,16 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
       setPendingHostIds([]);
     } catch (error) {
       console.error("Error adding hosts:", error);
+    }
+  };
+
+  const deleteHost = async (hostId: number, bookingId: number) => {
+    try {
+      await removeHostFromBooking(bookingId, hostId);
+      const updatedSelected = await getSelectedHostsForBooking(bookingId);
+      setSelectedhosts(updatedSelected || []);
+    } catch (error) {
+      console.error("Error removing host:", error);
     }
   };
 
