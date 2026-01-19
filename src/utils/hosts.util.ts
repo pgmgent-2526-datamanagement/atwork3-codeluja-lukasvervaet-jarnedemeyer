@@ -12,7 +12,7 @@ export const getHosts = async () => {
   }
 };
 
-export const getHostById = async (id: string) => {
+export const getHostById = async (id: number) => {
   const response = await fetch(`/api/hosts/${id}`, { cache: "no-store" });
   if (!response.ok) {
     throw new Error("Failed to fetch host");
