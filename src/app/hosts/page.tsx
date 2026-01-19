@@ -4,12 +4,15 @@ import { UsersIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { Host } from "@/types/host.type";
 import { HostsLoadingSkeleton } from "./HostsLoadingSkeleton";
 import { AddHostModal } from "@/components/AddHostModal";
+import { Trash } from "lucide-react";
+import { DeleteModal } from "@/components/DeleteModal";
 
 export default function HostsPage() {
   const [hosts, setHosts] = useState<Host[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [openAddModal, setOpenAddModal] = useState(false);
+  const [hostToDelete, setHostToDelete] = useState<Host | null>(null);
   const hostsPerPage = 12;
 
   useEffect(() => {
@@ -39,6 +42,38 @@ export default function HostsPage() {
   if (loading) {
     return <HostsLoadingSkeleton />;
   }
+
+  const openModal = (host: Host) => {
+    setHostToDelete(host);
+  };
+
+  const closeModal = () => {
+    setHostToDelete(null);
+  };
+
+  const handleDeleteHost = async (hostId: number) => {
+    await fetch(`/api/hosts/delete`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: hostId }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          // Remove the deleted host from the state
+          setHosts((prevHosts) =>
+            prevHosts.filter((host) => host.id !== hostId),
+          );
+        } else {
+          console.error("Failed to delete host");
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting host:", error);
+      });
+    window.location.reload();
+  };
 
   // if (openAddModal) {
   //   return (
@@ -142,12 +177,18 @@ export default function HostsPage() {
                     </div>
 
                     {/* Footer Button */}
-                    <a
-                      href={`/hosts/${host.id}`}
-                      className="mt-4 w-full py-2.5 bg-[#05d8c8] cursor-pointer text-white text-sm font-semibold rounded-lg hover:bg-[#04b3aa] transition-colors duration-300 shadow-md text-center"
-                    >
-                      View Profile
-                    </a>
+
+                    <div className="flex justify-between items-center mt-4 gap-4">
+                      <a
+                        href={`/hosts/${host.id}`}
+                        className="flex-1 py-2.5 bg-[#05d8c8] cursor-pointer text-white text-sm font-semibold rounded-lg hover:bg-[#04b3aa] transition-colors duration-300 shadow-md text-center"
+                      >
+                        View Profile
+                      </a>
+                      <button onClick={() => openModal(host)}>
+                        <Trash className="text-red-500 cursor-pointer h-6 w-6 shrink-0" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -201,6 +242,23 @@ export default function HostsPage() {
           </div>
         )}
       </div>
+
+      {hostToDelete && (
+        <DeleteModal
+          firstName={hostToDelete.firstName}
+          lastName={hostToDelete.lastName}
+          id={hostToDelete.id}
+          onClose={closeModal}
+          onDelete={handleDeleteHost}
+        />
+      )}
+
+      {openAddModal && (
+        <AddHostModal
+          isOpen={openAddModal}
+          onClose={() => setOpenAddModal(false)}
+        />
+      )}
     </main>
   );
 }
