@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   CalendarIcon,
   UsersIcon,
@@ -23,6 +24,7 @@ import {
 import { Booking } from "@/types/booking.type";
 
 export default function Home() {
+  const router = useRouter();
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [b2b, setB2b] = useState<Booking[]>([]);
   const [todayBookings, setTodayBookings] = useState<Booking[]>([]);
@@ -50,6 +52,13 @@ export default function Home() {
     setTodayBookings(todayData || []);
   };
 
+  const refreshAllData = async () => {
+    setLoading(true);
+    await Promise.all([fetchData(), fetchB2BData(), fetchTodayBookings()]);
+    setLoading(false);
+    router.refresh();
+  };
+
   useEffect(() => {
     const loadAll = async () => {
       setLoading(true);
@@ -73,7 +82,7 @@ export default function Home() {
               Welcome back! Here is your booking overview for today.
             </p>
           </div>
-          <RefreshBookings onRefresh={fetchData} />
+          <RefreshBookings onRefresh={refreshAllData} />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">

@@ -214,12 +214,12 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
                 </div>
               </div>
             </section>
-            {/* staff div */}
-            <section className="p-8 flex flex-col gap-8 justify-between mx-auto border border-gray-300 rounded-md min-w-[40%]">
-              <div className="space-y-1">
+            {/* hosts div */}
+            <section className="p-8 flex flex-col mx-auto border border-gray-300 rounded-md min-w-[40%] max-h-full">
+              <div className="space-y-1 mb-4">
                 <div className="flex items-center gap-2 text-slate-400">
                   <UsersIcon className="w-4 h-4" />
-                  <span className="text-xs font-bold uppercase">Staffing</span>
+                  <span className="text-xs font-bold uppercase">Hosting</span>
                 </div>
                 <p className="text-xl font-bold text-slate-800">
                   {booking.hostsRequired} Hosts Required

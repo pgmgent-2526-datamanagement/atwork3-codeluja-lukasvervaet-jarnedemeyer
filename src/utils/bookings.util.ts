@@ -58,14 +58,14 @@ export const mapEventBookings = (bookings: Booking[]): CalendarEvent[] => {
       const endTime = new Date(booking.endTime);
 
       startDate.setHours(
-        startTime.getHours(),
-        startTime.getMinutes(),
-        startTime.getSeconds()
+        startTime.getUTCHours(),
+        startTime.getUTCMinutes(),
+        startTime.getUTCSeconds()
       );
       endDate.setHours(
-        endTime.getHours(),
-        endTime.getMinutes(),
-        endTime.getSeconds()
+        endTime.getUTCHours(),
+        endTime.getUTCMinutes(),
+        endTime.getUTCSeconds()
       );
 
       return {
