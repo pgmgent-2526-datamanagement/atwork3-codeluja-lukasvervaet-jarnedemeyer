@@ -19,10 +19,6 @@ async function syncBookings(): Promise<Response> {
     const parsedBookings = parseBookings(rawData);
     const transformedBookings = transformBookings(parsedBookings);
 
-    console.log("Parsed bookings:", parsedBookings.length);
-    console.log("Transformed bookings:", transformedBookings.length);
-    console.log("First transformed booking:", transformedBookings[0]);
-
     // Get today's date at midnight UTC
     const today = new Date();
     const year = today.getFullYear();
