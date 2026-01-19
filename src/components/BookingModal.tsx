@@ -225,54 +225,61 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
                   {booking.hostsRequired} Hosts Required
                 </p>
               </div>
-
-              <div className="mb-3">
-                <h3 className="text-sm font-bold text-slate-700 mb-3">
-                  Assigned Hosts
-                </h3>
-                <div className="overflow-y-auto max-h-[250px] space-y-2 pr-2">
-                  {booking.bookingHosts && booking.bookingHosts.length > 0 ? (
-                    booking.bookingHosts.map(({ host }) => (
-                      <div
-                        key={host.id}
-                        className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-lg hover:border-[#05d8c8] transition-colors"
-                      >
-                        <div
-                          className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0 ${
-                            host.active ? "bg-green-500" : "bg-gray-400"
-                          }`}
-                        >
-                          {host.firstName.charAt(0)}
-                          {host.lastName.charAt(0)}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-bold text-slate-800 truncate">
-                            {host.firstName} {host.lastName}
-                          </p>
-                          <p className="text-xs text-slate-500">
-                            {host.status}
-                          </p>
-                        </div>
-                        {host.active && (
-                          <span className="text-[9px] uppercase tracking-wider font-bold bg-green-50 text-green-700 px-2 py-1 rounded-full border border-green-200">
-                            Active
-                          </span>
-                        )}
-                      </div>
-                    ))
-                  ) : (
-                    <div className="text-center py-8 text-slate-400">
-                      <UsersIcon className="w-8 h-8 mx-auto mb-2 opacity-50" />
-                      <p className="text-sm">No hosts assigned yet</p>
-                    </div>
-                  )}
-                </div>
+              <div>
+                <select
+                  name="hosts"
+                  id="hosts"
+                  className="border rounded-md p-2 h-40 w-full mb-2"
+                  multiple
+                  value={pendingHostIds}
+                  onChange={(e) => {
+                    // Correct way to get multiple values from a select element
+                    const values = Array.from(
+                      e.target.selectedOptions,
+                      (option) => option.value,
+                    );
+                    setPendingHostIds(values);
+                  }}
+                >
+                  {filteredHosts.map((host: Host) => (
+                    <option
+                      key={host.id}
+                      value={host.id}
+                      className="bg-gray-300 aria-selected:bg-emerald-300 mb-1 p-2 rounded-md"
+                    >
+                      {host.firstName} {host.lastName}
+                    </option>
+                  ))}
+                </select>
               </div>
-
-              {/* this button opens a modal to add hosts */}
-              <button className="py-3 px-4 bg-[#05d8c8] text-white font-bold rounded-xl hover:bg-[#04b3a9] shadow-lg shadow-[#05d8c8] transition-all text-sm w-full text-center">
-                Add Hosts
-              </button>
+              <div className="flex justify-between">
+                {selectedHosts.length > 0 ? (
+                  <>
+                    <div className="flex flex-col overflow-y-scroll h-30 border rounded-md shadow-lg p-2">
+                      <h4 className="font-bold">Assigned Hosts:</h4>
+                      {selectedHosts.map((host: any) => (
+                        <div key={host.host.id}>
+                          {host.host.firstName} {host.host.lastName}{" "}
+                          <span
+                            className="cursor-pointer"
+                            onClick={() => deleteHost(host.host.id, booking.id)}
+                          >
+                            <Trash className="w-4 h-4 inline-block text-red-500 hover:text-red-700" />
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <div>No hosts assigned yet.</div>
+                )}
+                <button
+                  onClick={handleAddButtonClick}
+                  className="py-3 px-4 bg-[#05d8c8] text-white font-bold rounded-xl hover:bg-[#04b3a9] shadow-lg shadow-[#05d8c8] transition-all text-sm w-40 h-10 items-center justify-center m-auto text-center"
+                >
+                  Add
+                </button>
+              </div>
             </section>
           </section>
         </div>
