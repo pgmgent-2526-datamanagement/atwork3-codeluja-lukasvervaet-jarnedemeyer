@@ -6,6 +6,7 @@ import BookingModal from "@/components/BookingModal";
 import { BookingHost } from "@/types/booking-host.type";
 import { Booking } from "@/types/booking.type";
 import { HostDetailLoadingSkeleton } from "./HostDetailLoadingSkeleton";
+import { getHostById } from "@/utils/hosts.util";
 
 interface HostWithBookings extends Host {
   bookingHosts: BookingHost[];
@@ -17,19 +18,50 @@ export default function HostDetailPage() {
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [hostActive, setHostActive] = useState<boolean>(false);
   const router = useRouter();
 
-  useEffect(() => {
-    if (!id) return;
-    fetch(`/api/hosts/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setHost(data);
-        setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
+  const handleEditHost = async () => {
+    if (!host) return;
+    try {
+      const response = await fetch(`/api/hosts/edit`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: host.id, active: hostActive }),
       });
+
+      if (response.ok) {
+        router.push("/hosts");
+      }
+    } catch (error) {
+      console.error("Error updating host:", error);
+    }
+  };
+
+  const fetchHostDetails = async (hostId: number) => {
+    try {
+      const data = await getHostById(hostId);
+
+      const hostData = data.host || data;
+
+      setHost(hostData);
+
+      if (hostData && typeof hostData.active !== "undefined") {
+        setHostActive(hostData.active);
+      } else {
+        setHostActive(false);
+      }
+    } catch (error) {
+      console.error("Error fetching host details:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchHostDetails(Number(id));
   }, [id]);
 
   if (loading) {
@@ -55,17 +87,23 @@ export default function HostDetailPage() {
           >
             ← Back
           </button>
+          <button
+            className="px-4 py-2 bg-[#05d8c8] text-white rounded-lg hover:bg-[#04c4b5] transition-colors duration-300 font-semibold ml-4"
+            onClick={handleEditHost}
+          >
+            Save Changes
+          </button>
 
           {/* Host Information Section */}
           <div className="bg-white rounded-xl border border-gray-200 shadow-lg p-8">
             <div className="flex items-center gap-8">
               <div
                 className={`w-32 h-32 rounded-full flex items-center justify-center text-white font-bold text-5xl shadow-lg ${
-                  host.active ? "bg-green-500" : "bg-gray-400"
+                  hostActive ? "bg-green-500" : "bg-gray-400"
                 }`}
               >
-                {host.firstName.charAt(0)}
-                {host.lastName.charAt(0)}
+                {host.firstName?.charAt(0)}
+                {host.lastName?.charAt(0)}
               </div>
 
               <div className="flex-1">
@@ -81,15 +119,21 @@ export default function HostDetailPage() {
                       {host.label}
                     </span>
                   )}
-                  <span
-                    className={`px-5 py-2 rounded-full font-semibold text-sm shadow-sm ${
-                      host.active
-                        ? "bg-[#05d8c8] text-white"
-                        : "bg-gray-300 text-gray-700"
-                    }`}
+                  <button
+                    type="button"
+                    className="bg-none border-none cursor-pointer"
+                    onClick={() => setHostActive(!hostActive)}
                   >
-                    {host.active ? "Active" : "Inactive"}
-                  </span>
+                    <span
+                      className={`px-5 py-2 rounded-full font-semibold text-sm shadow-sm transition-colors ${
+                        hostActive
+                          ? "bg-green-300 text-green-700"
+                          : "bg-[#05d8c8] text-white"
+                      }`}
+                    >
+                      {hostActive ? "Active" : "Inactive"}
+                    </span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -102,11 +146,11 @@ export default function HostDetailPage() {
                 Assigned Bookings
               </h2>
               <span className="px-4 py-2 bg-[#05d8c8] text-white rounded-full text-sm font-bold">
-                {host.bookingHosts.length}
+                {host.bookingHosts?.length || 0}
               </span>
             </div>
 
-            {host.bookingHosts.length === 0 ? (
+            {!host.bookingHosts || host.bookingHosts.length === 0 ? (
               <div className="text-center py-16 text-gray-400">
                 <p className="text-lg">
                   No bookings assigned to this host yet.
@@ -133,13 +177,13 @@ export default function HostDetailPage() {
                               year: "numeric",
                               month: "long",
                               day: "numeric",
-                            }
+                            },
                           )}
                         </h3>
                         <p className="text-sm text-gray-600">
                           {new Date(booking.startTime).toLocaleTimeString(
                             "nl-NL",
-                            { hour: "2-digit", minute: "2-digit" }
+                            { hour: "2-digit", minute: "2-digit" },
                           )}{" "}
                           -{" "}
                           {new Date(booking.endTime).toLocaleTimeString(
@@ -147,7 +191,7 @@ export default function HostDetailPage() {
                             {
                               hour: "2-digit",
                               minute: "2-digit",
-                            }
+                            },
                           )}
                         </p>
                       </div>
