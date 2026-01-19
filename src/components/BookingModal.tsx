@@ -165,6 +165,7 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
                     {new Date(booking.startTime).toLocaleTimeString("nl-NL", {
                       hour: "2-digit",
                       minute: "2-digit",
+                      timeZone: "UTC",
                     })}
                   </span>
                   <ArrowRightIcon className="w-4 h-4 text-slate-300" />
@@ -172,6 +173,7 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
                     {new Date(booking.endTime).toLocaleTimeString("nl-NL", {
                       hour: "2-digit",
                       minute: "2-digit",
+                      timeZone: "UTC",
                     })}
                   </span>
                 </div>
