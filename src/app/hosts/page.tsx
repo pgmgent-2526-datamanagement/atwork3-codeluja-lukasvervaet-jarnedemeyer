@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import { UsersIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { Host } from "@/types/host.type";
 import { HostsLoadingSkeleton } from "./HostsLoadingSkeleton";
+import { AddHostModal } from "@/components/AddHostModal";
 
 export default function HostsPage() {
   const [hosts, setHosts] = useState<Host[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+  const [openAddModal, setOpenAddModal] = useState(false);
   const hostsPerPage = 12;
 
   useEffect(() => {
@@ -31,12 +33,18 @@ export default function HostsPage() {
 
   const handleAddHost = () => {
     // TODO: Implement add host logic
-    alert("Add host functionality coming soon!");
+    setOpenAddModal(true);
   };
 
   if (loading) {
     return <HostsLoadingSkeleton />;
   }
+
+  // if (openAddModal) {
+  //   return (
+
+  //   );
+  // }
 
   return (
     <main className="fixed top-0 right-0 bottom-20 left-64 overflow-y-auto bg-gray-50/50 p-6 lg:p-10">
@@ -64,6 +72,15 @@ export default function HostsPage() {
           <span className="px-3 py-1 bg-white border rounded-full text-xs font-medium text-gray-500 shadow-sm">
             {hosts.length} total hosts
           </span>
+        </div>
+
+        <div
+          className={`fixed inset-0 bg-black/40 flex items-center justify-center z-1010 ${openAddModal ? "" : "hidden"}`}
+        >
+          <AddHostModal
+            isOpen={openAddModal}
+            onClose={() => setOpenAddModal(false)}
+          />
         </div>
 
         {hosts.length > 0 ? (
