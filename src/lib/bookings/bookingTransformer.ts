@@ -1,6 +1,7 @@
 import { ParsedBooking } from "./bookingParser";
 
 export interface TransformedBooking {
+  externalId: string;
   venue: string | null;
   dayOfWeek: string | null;
   startTime: Date;
@@ -117,7 +118,7 @@ function detectB2B(eposFamily: string, bookingDescription: string): boolean {
 
 function calculateHostsRequired(
   quantity: number,
-  hasOvenFood: boolean
+  hasOvenFood: boolean,
 ): number {
   // Base: 10-12 players = 1 host
   let hosts = Math.ceil(quantity / 12);
@@ -146,7 +147,7 @@ function calculateHostsRequired(
 }
 
 export function transformBooking(
-  parsed: ParsedBooking
+  parsed: ParsedBooking,
 ): TransformedBooking | null {
   // Filter out non-VR bookings (no time = food/drink orders only)
   if (!parsed.time || parsed.time.trim() === "") {
@@ -175,7 +176,13 @@ export function transformBooking(
   const hasOvenFood = detectOvenFood(parsed.bookingDescription);
   const isB2B = detectB2B(parsed.eposFamily, parsed.bookingDescription);
 
+  // Generate external ID from Date, Quantity, Epos Family, and Time
+  const externalId = `${parsed.date}_${parsed.quantity}_${parsed.eposFamily}_${parsed.time}`;
+
+  console.log("Generated externalId:", externalId);
+
   return {
+    externalId,
     venue: parsed.venue || null,
     dayOfWeek: parsed.dayOfWeek || null,
     startTime,
@@ -194,7 +201,7 @@ export function transformBooking(
 }
 
 export function transformBookings(
-  parsedBookings: ParsedBooking[]
+  parsedBookings: ParsedBooking[],
 ): TransformedBooking[] {
   return parsedBookings
     .map((booking) => transformBooking(booking))

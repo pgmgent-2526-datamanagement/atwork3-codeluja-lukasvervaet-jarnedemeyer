@@ -96,6 +96,7 @@ model ShiftRole {
 
 model Booking {
   id                 Int      @id @default(autoincrement())
+  externalId         String?  @unique
   venue              String?
   dayOfWeek          String?
   startTime          DateTime @db.Time
