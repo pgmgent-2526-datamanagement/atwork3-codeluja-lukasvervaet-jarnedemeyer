@@ -9,4 +9,9 @@ interface Host {
   updatedAt: string;
 }
 
-export type { Host };
+enum Status {
+  Medewerker = "MEDEWERKER",
+  Student = "STUDENT",
+}
+
+export type { Host, Status };
