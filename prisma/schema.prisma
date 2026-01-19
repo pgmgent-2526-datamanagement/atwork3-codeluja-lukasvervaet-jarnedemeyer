@@ -54,7 +54,6 @@ model Host {
   updatedAt DateTime @updatedAt
 
   bookingHosts BookingHost[]
-  shifts       Shift[]
 }
 
 enum HostStatus {
@@ -67,35 +66,13 @@ enum HostLabel {
   TRAINING
 }
 
-model Shift {
-  id        Int      @id @default(autoincrement())
-  hostId    Int?
-  startTime DateTime
-  endTime   DateTime
-  roleId    Int?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  host      Host?      @relation(fields: [hostId], references: [id])
-  role      ShiftRole? @relation(fields: [roleId], references: [id])
-}
-
-model ShiftRole {
-  id          Int      @id @default(autoincrement())
-  name        String   @unique
-  description String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  shifts      Shift[]
-}
-
 // ============================================
 // BOOKING MANAGEMENT
 // ============================================
 
 model Booking {
   id                 Int      @id @default(autoincrement())
+  externalId         String?  @unique
   venue              String?
   dayOfWeek          String?
   startTime          DateTime @db.Time
@@ -110,12 +87,9 @@ model Booking {
   packageName        String?
   bookingDescription String?
   notes              String?
-  customerId         Int?
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
 
-  customer           Customer?         @relation(fields: [customerId], references: [id])
-  foodItems          BookingFoodItem[]
   bookingHosts       BookingHost[]
 }
 
@@ -126,77 +100,4 @@ model BookingHost {
 
   booking   Booking @relation(fields: [bookingId], references: [id])
   host      Host    @relation(fields: [hostId], references: [id])
-}
-
-// ============================================
-// PACKAGE MANAGEMENT
-// ============================================
-
-model Package {
-  id               Int             @id @default(autoincrement())
-  name             String
-  category         PackageCategory
-  groupType        GroupType
-  playTimeMin      Int
-  visitDurationMin Int
-  pricePerPlayer   Decimal         @db.Decimal(10, 2)
-  gameSelection    String?
-  freeDrink        Boolean         @default(false)
-  freeSupervisor   Boolean         @default(false)
-  createdAt        DateTime        @default(now())
-  updatedAt        DateTime        @updatedAt
-}
-
-enum PackageCategory {
-  VR
-  VR_BATTLE
-  KIDS
-  SCHOOL
-}
-
-enum GroupType {
-  NORMAL
-  LARGE_GROUP
-}
-
-// ============================================
-// CUSTOMER MANAGEMENT
-// ============================================
-
-model Customer {
-  id        Int      @id @default(autoincrement())
-  firstName String
-  lastName  String
-  email     String   @unique
-  phone     String?
-  company   String?
-  vatNumber String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  bookings  Booking[]
-}
-
-// ============================================
-// FOOD MANAGEMENT
-// ============================================
-
-model FoodItem {
-  id          Int      @id @default(autoincrement())
-  name        String
-  description String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  bookings    BookingFoodItem[]
-}
-
-model BookingFoodItem {
-  id         Int @id @default(autoincrement())
-  bookingId  Int
-  foodItemId Int
-  quantity   Int @default(1)
-
-  booking    Booking  @relation(fields: [bookingId], references: [id])
-  foodItem   FoodItem @relation(fields: [foodItemId], references: [id])
 }

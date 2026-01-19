@@ -120,11 +120,11 @@ export default function HostsPage() {
 
         {hosts.length > 0 ? (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 min-h-[600px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 min-h-150">
               {currentHosts.map((host) => (
                 <div
                   key={host.id}
-                  className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-200 overflow-hidden group h-[220px] flex flex-col"
+                  className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-200 overflow-hidden group h-55 flex flex-col"
                 >
                   {/* Colored Header */}
                   <div

@@ -19,12 +19,12 @@ import {
   removeHostFromBooking,
 } from "@/utils/hosts.util";
 import { Host } from "@/types/host.type";
-// import { getSelectedHostsForBooking } from "@/app/api/hosts/addToBooking/route";
 
 const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
-  const [hosts, setHosts] = React.useState<Host[]>([]);
-  const [selectedHosts, setSelectedhosts] = useState<{ host: Host }[]>([]);
+  const [hosts, setHosts] = useState<Host[]>([]);
+  const [selectedHosts, setSelectedHosts] = useState<{ host: Host }[]>([]);
   const [pendingHostIds, setPendingHostIds] = useState<string[]>([]);
+  const [isLoadingHosts, setIsLoadingHosts] = useState(true);
 
   const handleAddButtonClick = async () => {
     if (!booking) return;
@@ -37,7 +37,7 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
       await Promise.all(promises);
 
       const updatedSelected = await getSelectedHostsForBooking(booking.id);
-      setSelectedhosts(updatedSelected || []);
+      setSelectedHosts(updatedSelected || []);
 
       setPendingHostIds([]);
     } catch (error) {
@@ -49,10 +49,30 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
     try {
       await removeHostFromBooking(bookingId, hostId);
       const updatedSelected = await getSelectedHostsForBooking(bookingId);
-      setSelectedhosts(updatedSelected || []);
+      setSelectedHosts(updatedSelected || []);
     } catch (error) {
       console.error("Error removing host:", error);
     }
+  };
+
+  // Check if host has a conflicting booking at the same time
+  const hasConflictingBooking = (host: Host): boolean => {
+    if (!host.bookingHosts || !booking) return false;
+
+    const bookingStart = new Date(booking.startTime).getTime();
+    const bookingEnd = new Date(booking.endTime).getTime();
+    const bookingDate = new Date(booking.bookingDate).toDateString();
+
+    return host.bookingHosts.some(({ booking: otherBooking }) => {
+      if (otherBooking.id === booking.id) return false;
+      if (new Date(otherBooking.bookingDate).toDateString() !== bookingDate)
+        return false;
+
+      const otherStart = new Date(otherBooking.startTime).getTime();
+      const otherEnd = new Date(otherBooking.endTime).getTime();
+
+      return bookingStart < otherEnd && bookingEnd > otherStart;
+    });
   };
 
   const filteredHosts = hosts.filter(
@@ -62,21 +82,26 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
       ),
   );
 
+  const maxSelectable = Math.max(
+    0,
+    (booking?.hostsRequired || 0) - selectedHosts.length,
+  );
+
   useEffect(() => {
     if (!booking?.id) return;
 
     const fetchHosts = async () => {
+      setIsLoadingHosts(true);
       try {
         const data = await getHosts();
-        console.log("Fetched data:", data);
         setHosts(data || []);
 
         const selected = await getSelectedHostsForBooking(booking.id);
-        console.log("Selected hosts for booking:", selected);
-        // store the full bookingHost objects (they include `host`)
-        setSelectedhosts(selected || []);
+        setSelectedHosts(selected || []);
       } catch (error) {
         console.error("Failed to fetch hosts:", error);
+      } finally {
+        setIsLoadingHosts(false);
       }
     };
     fetchHosts();
@@ -140,6 +165,7 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
                     {new Date(booking.startTime).toLocaleTimeString("nl-NL", {
                       hour: "2-digit",
                       minute: "2-digit",
+                      timeZone: "UTC",
                     })}
                   </span>
                   <ArrowRightIcon className="w-4 h-4 text-slate-300" />
@@ -147,6 +173,7 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
                     {new Date(booking.endTime).toLocaleTimeString("nl-NL", {
                       hour: "2-digit",
                       minute: "2-digit",
+                      timeZone: "UTC",
                     })}
                   </span>
                 </div>
@@ -225,61 +252,132 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
                   {booking.hostsRequired} Hosts Required
                 </p>
               </div>
-              <div>
-                <select
-                  name="hosts"
-                  id="hosts"
-                  className="border rounded-md p-2 h-40 w-full mb-2"
-                  multiple
-                  value={pendingHostIds}
-                  onChange={(e) => {
-                    // Correct way to get multiple values from a select element
-                    const values = Array.from(
-                      e.target.selectedOptions,
-                      (option) => option.value,
-                    );
-                    setPendingHostIds(values);
-                  }}
-                >
-                  {filteredHosts.map((host: Host) => (
-                    <option
-                      key={host.id}
-                      value={host.id}
-                      className="bg-gray-300 aria-selected:bg-emerald-300 mb-1 p-2 rounded-md"
-                    >
-                      {host.firstName} {host.lastName}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="flex justify-between">
-                {selectedHosts.length > 0 ? (
-                  <>
-                    <div className="flex flex-col overflow-y-scroll h-30 border rounded-md shadow-lg p-2">
-                      <h4 className="font-bold">Assigned Hosts:</h4>
-                      {selectedHosts.map((host: any) => (
-                        <div key={host.host.id}>
-                          {host.host.firstName} {host.host.lastName}{" "}
-                          <span
-                            className="cursor-pointer"
-                            onClick={() => deleteHost(host.host.id, booking.id)}
-                          >
-                            <Trash className="w-4 h-4 inline-block text-red-500 hover:text-red-700" />
-                          </span>
-                        </div>
+
+              <div className="flex gap-4 flex-1 min-h-0">
+                {/* Available Hosts Selection */}
+                <div className="flex-1 flex flex-col">
+                  <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">
+                    Available Hosts
+                  </h4>
+                  {isLoadingHosts ? (
+                    <div className="flex-1 border border-slate-200 rounded-xl bg-slate-50 p-4 space-y-2">
+                      {[...Array(5)].map((_, i) => (
+                        <div
+                          key={i}
+                          className="h-8 bg-slate-200 rounded animate-pulse"
+                        ></div>
                       ))}
                     </div>
-                  </>
-                ) : (
-                  <div>No hosts assigned yet.</div>
-                )}
-                <button
-                  onClick={handleAddButtonClick}
-                  className="py-3 px-4 bg-[#05d8c8] text-white font-bold rounded-xl hover:bg-[#04b3a9] shadow-lg shadow-[#05d8c8] transition-all text-sm w-40 h-10 items-center justify-center m-auto text-center"
-                >
-                  Add
-                </button>
+                  ) : (
+                    <div className="flex-1 border border-slate-200 rounded-xl overflow-hidden bg-slate-50">
+                      <select
+                        name="hosts"
+                        id="hosts"
+                        className="w-full h-full p-2 bg-transparent focus:outline-none"
+                        multiple
+                        value={pendingHostIds}
+                        onChange={(e) => {
+                          let values = Array.from(
+                            e.target.selectedOptions,
+                            (option) => option.value,
+                          );
+                          if (values.length > maxSelectable) {
+                            values = values.slice(0, maxSelectable);
+                          }
+                          setPendingHostIds(values);
+                        }}
+                        disabled={maxSelectable === 0}
+                      >
+                        {filteredHosts.map((host: Host) => {
+                          const isConflicting = hasConflictingBooking(host);
+                          const isDisabled =
+                            isConflicting ||
+                            (pendingHostIds.length >= maxSelectable &&
+                              !pendingHostIds.includes(host.id.toString()));
+
+                          return (
+                            <option
+                              key={host.id}
+                              value={host.id}
+                              className="p-3 mb-1 hover:bg-[#05d8c8] hover:text-white cursor-pointer rounded-lg"
+                              disabled={isDisabled}
+                            >
+                              {host.firstName} {host.lastName}
+                              {isConflicting && " 🔴 Booked"}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </div>
+                  )}
+                </div>
+                <div className="flex-1 flex flex-col">
+                  <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">
+                    Assigned Hosts
+                  </h4>
+                  <div className="flex-1 overflow-y-auto border border-slate-200 rounded-xl p-3 bg-white">
+                    {isLoadingHosts ? (
+                      <div className="space-y-2">
+                        {[...Array(3)].map((_, i) => (
+                          <div
+                            key={i}
+                            className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl"
+                          >
+                            <div className="w-10 h-10 rounded-full bg-slate-200 animate-pulse"></div>
+                            <div className="flex-1 space-y-2">
+                              <div className="h-4 bg-slate-200 rounded w-3/4 animate-pulse"></div>
+                              <div className="h-3 bg-slate-200 rounded w-1/2 animate-pulse"></div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : selectedHosts.length > 0 ? (
+                      <div className="space-y-2">
+                        {selectedHosts.map((host) => (
+                          <div
+                            key={host.host.id}
+                            className="flex items-center justify-between p-3 bg-slate-50 border border-slate-200 rounded-xl hover:border-[#05d8c8] transition-colors group"
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className="w-10 h-10 rounded-full bg-[#05d8c8] flex items-center justify-center text-white font-bold text-sm">
+                                {host.host.firstName.charAt(0)}
+                                {host.host.lastName.charAt(0)}
+                              </div>
+                              <div>
+                                <p className="font-bold text-slate-800 text-sm">
+                                  {host.host.firstName} {host.host.lastName}
+                                </p>
+                                <p className="text-xs text-slate-500 uppercase tracking-wide">
+                                  {host.host.status || "STUDENT"}
+                                </p>
+                              </div>
+                            </div>
+                            <button
+                              onClick={() =>
+                                deleteHost(host.host.id, booking.id)
+                              }
+                              className="p-2 hover:bg-red-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
+                            >
+                              <Trash className="w-4 h-4 text-red-500 hover:text-red-700" />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-center h-full text-slate-400 text-sm">
+                        No hosts assigned yet.
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
+
+              <button
+                onClick={handleAddButtonClick}
+                className="mt-4 w-full py-3 px-4 bg-[#05d8c8] text-white font-bold rounded-xl hover:bg-[#04b3a9] shadow-lg shadow-[#05d8c8]/30 transition-all text-sm"
+              >
+                Add Selected Hosts
+              </button>
             </section>
           </section>
         </div>

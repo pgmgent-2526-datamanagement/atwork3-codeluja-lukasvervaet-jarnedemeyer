@@ -183,7 +183,11 @@ export default function HostDetailPage() {
                         <p className="text-sm text-gray-600">
                           {new Date(booking.startTime).toLocaleTimeString(
                             "nl-NL",
-                            { hour: "2-digit", minute: "2-digit" },
+                            {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              timeZone: "UTC",
+                            },
                           )}{" "}
                           -{" "}
                           {new Date(booking.endTime).toLocaleTimeString(
@@ -191,6 +195,7 @@ export default function HostDetailPage() {
                             {
                               hour: "2-digit",
                               minute: "2-digit",
+                              timeZone: "UTC",
                             },
                           )}
                         </p>

@@ -174,10 +174,18 @@ export default function Home() {
                       {checkValidDate(booking.startTime)
                         ? `${new Date(booking.startTime).toLocaleTimeString(
                             "nl-NL",
-                            { hour: "2-digit", minute: "2-digit" }
+                            {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              timeZone: "UTC",
+                            },
                           )} - ${new Date(booking.endTime).toLocaleTimeString(
                             "nl-NL",
-                            { hour: "2-digit", minute: "2-digit" }
+                            {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              timeZone: "UTC",
+                            },
                           )}`
                         : "Time TBD"}
                     </span>
