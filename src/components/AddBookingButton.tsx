@@ -20,10 +20,13 @@ export default function RefreshBookings({
   };
 
   return (
-    <div className="flex items-center gap-4">
-      <div className="flex items-center gap-2">
-        <label htmlFor="daysAgo" className="text-sm font-medium text-gray-700">
-          Dagen terug:
+    <div className="flex flex-col md:flex-row items-stretch md:items-center gap-2 md:gap-4 w-full md:w-auto">
+      <div className="flex items-center gap-2 justify-between md:justify-start">
+        <label
+          htmlFor="daysAgo"
+          className="text-xs md:text-sm font-medium text-gray-700 whitespace-nowrap"
+        >
+          Terug:
         </label>
         <input
           id="daysAgo"
@@ -32,17 +35,17 @@ export default function RefreshBookings({
           max="7"
           value={daysAgo}
           onChange={(e) => setDaysAgo(parseInt(e.target.value) || 1)}
-          className="w-20 px-2 py-1 border border-gray-300 rounded-md text-sm"
+          className="w-16 md:w-20 px-2 py-1.5 border border-gray-300 rounded-md text-xs md:text-sm"
           disabled={loading}
         />
       </div>
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 justify-between md:justify-start">
         <label
           htmlFor="daysFuture"
-          className="text-sm font-medium text-gray-700"
+          className="text-xs md:text-sm font-medium text-gray-700 whitespace-nowrap"
         >
-          Dagen vooruit:
+          Vooruit:
         </label>
         <input
           id="daysFuture"
@@ -51,7 +54,7 @@ export default function RefreshBookings({
           max="30"
           value={daysFuture}
           onChange={(e) => setDaysFuture(parseInt(e.target.value) || 7)}
-          className="w-20 px-2 py-1 border border-gray-300 rounded-md text-sm"
+          className="w-16 md:w-20 px-2 py-1.5 border border-gray-300 rounded-md text-xs md:text-sm"
           disabled={loading}
         />
       </div>
