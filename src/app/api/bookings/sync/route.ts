@@ -7,25 +7,25 @@ const prisma = new PrismaClient();
 
 async function syncBookings(): Promise<Response> {
   try {
-    // Calculate date range: 2 weeks in the past to 2 weeks in the future
+    // Calculate date range: 1 week in the past to 1 week in the future
     const today = new Date();
-    const twoWeeksAgo = new Date(today);
-    twoWeeksAgo.setDate(today.getDate() - 14);
+    const oneWeekAgo = new Date(today);
+    oneWeekAgo.setDate(today.getDate() - 7);
 
-    const twoWeeksFromNow = new Date(today);
-    twoWeeksFromNow.setDate(today.getDate() + 14);
+    const oneWeekFromNow = new Date(today);
+    oneWeekFromNow.setDate(today.getDate() + 7);
 
-    // Delete bookings outside the 4-week window
+    // Delete bookings outside the 2-week window
     const deleteOldResult = await prisma.booking.deleteMany({
       where: {
         OR: [
-          { bookingDate: { lt: twoWeeksAgo } },
-          { bookingDate: { gt: twoWeeksFromNow } },
+          { bookingDate: { lt: oneWeekAgo } },
+          { bookingDate: { gt: oneWeekFromNow } },
         ],
       },
     });
     console.log(
-      "Deleted bookings outside 4-week window:",
+      "Deleted bookings outside 2-week window:",
       deleteOldResult.count,
     );
 
@@ -41,14 +41,14 @@ async function syncBookings(): Promise<Response> {
     const parsedBookings = parseBookings(rawData);
     const transformedBookings = transformBookings(parsedBookings);
 
-    // Filter bookings to only include those within the 4-week window
+    // Filter bookings to only include those within the 2-week window
     const filteredBookings = transformedBookings.filter((booking) => {
       const bookingDate = new Date(booking.bookingDate);
-      return bookingDate >= twoWeeksAgo && bookingDate <= twoWeeksFromNow;
+      return bookingDate >= oneWeekAgo && bookingDate <= oneWeekFromNow;
     });
 
     console.log(
-      `Filtered to ${filteredBookings.length} bookings within 4-week window (from ${parsedBookings.length} total)`,
+      `Filtered to ${filteredBookings.length} bookings within 2-week window (from ${parsedBookings.length} total)`,
     );
 
     // Track results
