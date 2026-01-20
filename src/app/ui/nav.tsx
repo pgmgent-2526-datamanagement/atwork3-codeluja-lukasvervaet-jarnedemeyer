@@ -1,18 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { Home, Calendar, Users, Smartphone, LucideIcon } from "lucide-react";
+import { Home, Calendar, Users, Smartphone } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
+import { NavLink } from "@/types/nav.type";
 
-interface NavLink {
-  name: string;
-  href: string;
-  icon: LucideIcon;
-  function?: () => void;
-}
+
 
 export default function Nav() {
   const [userRole, setUserRole] = useState<number | null>(null);

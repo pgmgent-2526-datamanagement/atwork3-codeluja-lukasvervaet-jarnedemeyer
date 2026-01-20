@@ -20,11 +20,36 @@ import {
 } from "@/utils/hosts.util";
 import { Host } from "@/types/host.type";
 
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  role: number;
+}
+
 const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
   const [hosts, setHosts] = useState<Host[]>([]);
   const [selectedHosts, setSelectedHosts] = useState<{ host: Host }[]>([]);
   const [pendingHostIds, setPendingHostIds] = useState<string[]>([]);
   const [isLoadingHosts, setIsLoadingHosts] = useState(true);
+  const [user, setUser] = useState<User | null>(null);
+
+  const isAdmin = user?.role === 1;
+
+  const fetchUser = async () => {
+    try {
+      const res = await fetch("/api/auth/user");
+      if (!res.ok) {
+        console.error("Failed to fetch user, status:", res.status);
+        return null;
+      }
+      const data = await res.json();
+      setUser(data?.user ?? null);
+    } catch (error) {
+      console.error("Failed to fetch user:", error);
+      return null;
+    }
+  };
 
   const handleAddButtonClick = async () => {
     if (!booking) return;
@@ -105,6 +130,7 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
       }
     };
     fetchHosts();
+    fetchUser();
   }, [booking?.id]);
 
   if (!booking) return null;
@@ -242,143 +268,145 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
               </div>
             </section>
             {/* hosts div */}
-            <section className="p-8 flex flex-col mx-auto border border-gray-300 rounded-md min-w-[40%] max-h-full">
-              <div className="space-y-1 mb-4">
-                <div className="flex items-center gap-2 text-slate-400">
-                  <UsersIcon className="w-4 h-4" />
-                  <span className="text-xs font-bold uppercase">Hosting</span>
+            {isAdmin && (
+              <section className="p-8 flex flex-col mx-auto border border-gray-300 rounded-md min-w-[40%] max-h-full">
+                <div className="space-y-1 mb-4">
+                  <div className="flex items-center gap-2 text-slate-400">
+                    <UsersIcon className="w-4 h-4" />
+                    <span className="text-xs font-bold uppercase">Hosting</span>
+                  </div>
+                  <p className="text-xl font-bold text-slate-800">
+                    {booking.hostsRequired} Hosts Required
+                  </p>
                 </div>
-                <p className="text-xl font-bold text-slate-800">
-                  {booking.hostsRequired} Hosts Required
-                </p>
-              </div>
 
-              <div className="flex gap-4 flex-1 min-h-0">
-                {/* Available Hosts Selection */}
-                <div className="flex-1 flex flex-col">
-                  <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">
-                    Available Hosts
-                  </h4>
-                  {isLoadingHosts ? (
-                    <div className="flex-1 border border-slate-200 rounded-xl bg-slate-50 p-4 space-y-2">
-                      {[...Array(5)].map((_, i) => (
-                        <div
-                          key={i}
-                          className="h-8 bg-slate-200 rounded animate-pulse"
-                        ></div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="flex-1 border border-slate-200 rounded-xl overflow-hidden bg-slate-50">
-                      <select
-                        name="hosts"
-                        id="hosts"
-                        className="w-full h-full p-2 bg-transparent focus:outline-none"
-                        multiple
-                        value={pendingHostIds}
-                        onChange={(e) => {
-                          let values = Array.from(
-                            e.target.selectedOptions,
-                            (option) => option.value,
-                          );
-                          if (values.length > maxSelectable) {
-                            values = values.slice(0, maxSelectable);
-                          }
-                          setPendingHostIds(values);
-                        }}
-                        disabled={maxSelectable === 0}
-                      >
-                        {filteredHosts.map((host: Host) => {
-                          const isConflicting = hasConflictingBooking(host);
-                          const isDisabled =
-                            isConflicting ||
-                            (pendingHostIds.length >= maxSelectable &&
-                              !pendingHostIds.includes(host.id.toString()));
-
-                          return (
-                            <option
-                              key={host.id}
-                              value={host.id}
-                              className="p-3 mb-1 hover:bg-[#05d8c8] hover:text-white cursor-pointer rounded-lg"
-                              disabled={isDisabled}
-                            >
-                              {host.firstName} {host.lastName}
-                              {isConflicting && " 🔴 Booked"}
-                            </option>
-                          );
-                        })}
-                      </select>
-                    </div>
-                  )}
-                </div>
-                <div className="flex-1 flex flex-col">
-                  <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">
-                    Assigned Hosts
-                  </h4>
-                  <div className="flex-1 overflow-y-auto border border-slate-200 rounded-xl p-3 bg-white">
+                <div className="flex gap-4 flex-1 min-h-0">
+                  {/* Available Hosts Selection */}
+                  <div className="flex-1 flex flex-col">
+                    <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">
+                      Available Hosts
+                    </h4>
                     {isLoadingHosts ? (
-                      <div className="space-y-2">
-                        {[...Array(3)].map((_, i) => (
+                      <div className="flex-1 border border-slate-200 rounded-xl bg-slate-50 p-4 space-y-2">
+                        {[...Array(5)].map((_, i) => (
                           <div
                             key={i}
-                            className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl"
-                          >
-                            <div className="w-10 h-10 rounded-full bg-slate-200 animate-pulse"></div>
-                            <div className="flex-1 space-y-2">
-                              <div className="h-4 bg-slate-200 rounded w-3/4 animate-pulse"></div>
-                              <div className="h-3 bg-slate-200 rounded w-1/2 animate-pulse"></div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    ) : selectedHosts.length > 0 ? (
-                      <div className="space-y-2">
-                        {selectedHosts.map((host) => (
-                          <div
-                            key={host.host.id}
-                            className="flex items-center justify-between p-3 bg-slate-50 border border-slate-200 rounded-xl hover:border-[#05d8c8] transition-colors group"
-                          >
-                            <div className="flex items-center gap-3">
-                              <div className="w-10 h-10 rounded-full bg-[#05d8c8] flex items-center justify-center text-white font-bold text-sm">
-                                {host.host.firstName.charAt(0)}
-                                {host.host.lastName.charAt(0)}
-                              </div>
-                              <div>
-                                <p className="font-bold text-slate-800 text-sm">
-                                  {host.host.firstName} {host.host.lastName}
-                                </p>
-                                <p className="text-xs text-slate-500 uppercase tracking-wide">
-                                  {host.host.status || "STUDENT"}
-                                </p>
-                              </div>
-                            </div>
-                            <button
-                              onClick={() =>
-                                deleteHost(host.host.id, booking.id)
-                              }
-                              className="p-2 hover:bg-red-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
-                            >
-                              <Trash className="w-4 h-4 text-red-500 hover:text-red-700" />
-                            </button>
-                          </div>
+                            className="h-8 bg-slate-200 rounded animate-pulse"
+                          ></div>
                         ))}
                       </div>
                     ) : (
-                      <div className="flex items-center justify-center h-full text-slate-400 text-sm">
-                        No hosts assigned yet.
+                      <div className="flex-1 border border-slate-200 rounded-xl overflow-hidden bg-slate-50">
+                        <select
+                          name="hosts"
+                          id="hosts"
+                          className="w-full h-full p-2 bg-transparent focus:outline-none"
+                          multiple
+                          value={pendingHostIds}
+                          onChange={(e) => {
+                            let values = Array.from(
+                              e.target.selectedOptions,
+                              (option) => option.value,
+                            );
+                            if (values.length > maxSelectable) {
+                              values = values.slice(0, maxSelectable);
+                            }
+                            setPendingHostIds(values);
+                          }}
+                          disabled={maxSelectable === 0}
+                        >
+                          {filteredHosts.map((host: Host) => {
+                            const isConflicting = hasConflictingBooking(host);
+                            const isDisabled =
+                              isConflicting ||
+                              (pendingHostIds.length >= maxSelectable &&
+                                !pendingHostIds.includes(host.id.toString()));
+
+                            return (
+                              <option
+                                key={host.id}
+                                value={host.id}
+                                className="p-3 mb-1 hover:bg-[#05d8c8] hover:text-white cursor-pointer rounded-lg"
+                                disabled={isDisabled}
+                              >
+                                {host.firstName} {host.lastName}
+                                {isConflicting && " 🔴 Booked"}
+                              </option>
+                            );
+                          })}
+                        </select>
                       </div>
                     )}
                   </div>
+                  <div className="flex-1 flex flex-col">
+                    <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">
+                      Assigned Hosts
+                    </h4>
+                    <div className="flex-1 overflow-y-auto border border-slate-200 rounded-xl p-3 bg-white">
+                      {isLoadingHosts ? (
+                        <div className="space-y-2">
+                          {[...Array(3)].map((_, i) => (
+                            <div
+                              key={i}
+                              className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl"
+                            >
+                              <div className="w-10 h-10 rounded-full bg-slate-200 animate-pulse"></div>
+                              <div className="flex-1 space-y-2">
+                                <div className="h-4 bg-slate-200 rounded w-3/4 animate-pulse"></div>
+                                <div className="h-3 bg-slate-200 rounded w-1/2 animate-pulse"></div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : selectedHosts.length > 0 ? (
+                        <div className="space-y-2">
+                          {selectedHosts.map((host) => (
+                            <div
+                              key={host.host.id}
+                              className="flex items-center justify-between p-3 bg-slate-50 border border-slate-200 rounded-xl hover:border-[#05d8c8] transition-colors group"
+                            >
+                              <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-full bg-[#05d8c8] flex items-center justify-center text-white font-bold text-sm">
+                                  {host.host.firstName.charAt(0)}
+                                  {host.host.lastName.charAt(0)}
+                                </div>
+                                <div>
+                                  <p className="font-bold text-slate-800 text-sm">
+                                    {host.host.firstName} {host.host.lastName}
+                                  </p>
+                                  <p className="text-xs text-slate-500 uppercase tracking-wide">
+                                    {host.host.status || "STUDENT"}
+                                  </p>
+                                </div>
+                              </div>
+                              <button
+                                onClick={() =>
+                                  deleteHost(host.host.id, booking.id)
+                                }
+                                className="p-2 hover:bg-red-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
+                              >
+                                <Trash className="w-4 h-4 text-red-500 hover:text-red-700" />
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="flex items-center justify-center h-full text-slate-400 text-sm">
+                          No hosts assigned yet.
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </div>
 
-              <button
-                onClick={handleAddButtonClick}
-                className="mt-4 w-full py-3 px-4 bg-[#05d8c8] text-white font-bold rounded-xl hover:bg-[#04b3a9] shadow-lg shadow-[#05d8c8]/30 transition-all text-sm"
-              >
-                Add Selected Hosts
-              </button>
-            </section>
+                <button
+                  onClick={handleAddButtonClick}
+                  className="mt-4 w-full py-3 px-4 bg-[#05d8c8] text-white font-bold rounded-xl hover:bg-[#04b3a9] shadow-lg shadow-[#05d8c8]/30 transition-all text-sm"
+                >
+                  Add Selected Hosts
+                </button>
+              </section>
+            )}
           </section>
         </div>
 
