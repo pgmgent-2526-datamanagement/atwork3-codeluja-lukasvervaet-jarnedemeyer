@@ -1,4 +1,5 @@
 import React from "react";
+import { Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { loginWithCode } from "@/utils/login.util";
@@ -6,6 +7,7 @@ import { loginWithCode } from "@/utils/login.util";
 function CodeModal({ close }: { close: () => void }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [codeVisible, setCodeVisible] = useState(false);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     setLoading(true);
@@ -25,14 +27,24 @@ function CodeModal({ close }: { close: () => void }) {
           Code
         </label>
 
-        <input
-          type="password"
-          id="code"
-          name="code"
-          className="border-2 border-[#05d8c8] p-2 rounded-md shadow-md w-full"
-          placeholder="••••••"
-          required
-        />
+        <div className="relative">
+          <input
+            type={codeVisible ? "text" : "password"}
+            id="code"
+            name="code"
+            className="border-2 border-[#05d8c8] p-2 pr-10 rounded-md shadow-md w-full"
+            placeholder="••••••"
+            required
+          />
+          <button
+            type="button"
+            onClick={() => setCodeVisible((prev) => !prev)}
+            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+            aria-label={codeVisible ? "Hide code" : "Show code"}
+          >
+            {codeVisible ? <EyeOff size={18} /> : <Eye size={18} />}
+          </button>
+        </div>
 
         <button
           className="h-10 cursor-pointer flex justify-center items-center bg-[#05d8c8] text-sm text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-[#04b3aa] transition-colors duration-300"
