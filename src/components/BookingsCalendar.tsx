@@ -44,7 +44,7 @@ export default function BookingsCalendar({ bookings }: BookingsCalendarProps) {
           height="auto"
           contentHeight="auto"
           slotMinTime="09:00:00"
-          slotMaxTime="22:00:00"
+          slotMaxTime="22:30:00"
           events={events}
           editable={false}
           locale="nl"
