@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
 import React, { useState, useEffect } from "react";
-import { Eye, EyeOff } from 'lucide-react'
+import { Eye, EyeOff } from "lucide-react";
 import { changeCode, resetPassword } from "@/utils/code.util";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import SuccesModal from "@/components/SuccesModal";
 import ErrorModal from "@/components/ErrorModal";
 import { useSession } from "next-auth/react";
@@ -317,4 +317,4 @@ function Code() {
   );
 }
 
-export default Code
+export default Code;
