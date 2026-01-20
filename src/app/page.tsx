@@ -36,24 +36,17 @@ export default function Home() {
     setIsModalOpen(true);
   };
 
-  const fetchData = async () => {
-    const bookingData = await getWeekBookings();
-    setBookings(bookingData || []);
-  };
-
-  const fetchB2BData = async () => {
-    const b2bdata = await getB2BBookings();
-    setB2b(b2bdata || []);
-  };
-
-  const fetchTodayBookings = async () => {
-    const todayData = await getTodayBookings();
-    setTodayBookings(todayData || []);
+  const fetchAllBookings = async () => {
+    await Promise.all([
+      getWeekBookings().then((data) => setBookings(data || [])),
+      getB2BBookings().then((data) => setB2b(data || [])),
+      getTodayBookings().then((data) => setTodayBookings(data || [])),
+    ]);
   };
 
   const refreshAllData = async () => {
     setLoading(true);
-    await Promise.all([fetchData(), fetchB2BData(), fetchTodayBookings()]);
+    await fetchAllBookings();
     setLoading(false);
     router.refresh();
   };
@@ -61,11 +54,15 @@ export default function Home() {
   useEffect(() => {
     const loadAll = async () => {
       setLoading(true);
-      await Promise.all([fetchData(), fetchB2BData(), fetchTodayBookings()]);
+      await fetchAllBookings();
       setLoading(false);
     };
     loadAll();
   }, []);
+
+  const handleHostsChanged = async () => {
+    await fetchAllBookings();
+  };
 
   if (loading) return <HomeLoader />;
 
@@ -189,6 +186,40 @@ export default function Home() {
                         {booking.food_required ? "Catering" : "No Food"}
                       </div>
                     </div>
+
+                    <div className="pt-2">
+                      <span className="block text-xs font-semibold text-gray-700 mb-1">
+                        Applied Hosts:
+                      </span>
+                      <div className="flex flex-col gap-2">
+                        {booking.bookingHosts &&
+                        booking.bookingHosts.length > 0 ? (
+                          booking.bookingHosts.map(({ host }) => (
+                            <div
+                              key={host.id}
+                              className="flex items-center gap-3 p-2 bg-slate-50 border border-slate-200 rounded-xl"
+                            >
+                              <div className="w-8 h-8 rounded-full bg-[#05d8c8] flex items-center justify-center text-white font-bold text-xs">
+                                {host.firstName.charAt(0)}
+                                {host.lastName.charAt(0)}
+                              </div>
+                              <div>
+                                <p className="font-bold text-slate-800 text-xs">
+                                  {host.firstName} {host.lastName}
+                                </p>
+                                <p className="text-[10px] text-slate-500 uppercase tracking-wide">
+                                  {host.status || "STUDENT"}
+                                </p>
+                              </div>
+                            </div>
+                          ))
+                        ) : (
+                          <div className="flex items-center justify-center h-10 text-slate-400 text-xs">
+                            No hosts assigned yet.
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
 
                   <button
@@ -213,6 +244,7 @@ export default function Home() {
           <BookingModal
             booking={selectedBooking}
             onClose={() => setIsModalOpen(false)}
+            onHostsChanged={handleHostsChanged}
           />
         )}
       </div>

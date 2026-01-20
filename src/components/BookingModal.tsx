@@ -27,7 +27,11 @@ interface User {
   role_id: number;
 }
 
-const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
+const BookingModal: React.FC<ModalProps> = ({
+  booking,
+  onClose,
+  onHostsChanged,
+}) => {
   const [hosts, setHosts] = useState<Host[]>([]);
   const [selectedHosts, setSelectedHosts] = useState<{ host: Host }[]>([]);
   const [pendingHostIds, setPendingHostIds] = useState<string[]>([]);
@@ -65,6 +69,10 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
       setSelectedHosts(updatedSelected || []);
 
       setPendingHostIds([]);
+
+      if (onHostsChanged) {
+        onHostsChanged(booking.id, updatedSelected || []);
+      }
     } catch (error) {
       console.error("Error adding hosts:", error);
     }
@@ -75,6 +83,10 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
       await removeHostFromBooking(bookingId, hostId);
       const updatedSelected = await getSelectedHostsForBooking(bookingId);
       setSelectedHosts(updatedSelected || []);
+
+      if (onHostsChanged) {
+        onHostsChanged(bookingId, updatedSelected || []);
+      }
     } catch (error) {
       console.error("Error removing host:", error);
     }
