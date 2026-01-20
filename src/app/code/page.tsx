@@ -4,10 +4,12 @@ import React, { useState } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
 import { changeCode } from '@/utils/code.util';
 import { useRouter } from 'next/navigation';
+import SuccesModal from "@/components/SuccesModal";
 
 function Code() {
   const [visible, setVisible] = useState(false);
   const [visibleRepeat, setVisibleRepeat] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   const router = useRouter();
 
@@ -20,6 +22,11 @@ function Code() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     await changeCode(event);
+    await setOpenModal(true);
+  };
+
+  const handleClose = () => {
+    setOpenModal(false);
     router.push("/");
   };
 
@@ -96,6 +103,14 @@ function Code() {
           </button>
         </form>
       </div>
+      {openModal && (
+        <SuccesModal
+          close={() => {
+            handleClose();
+          }}
+          subject="Code"
+        />
+      )}
     </div>
   );
 }
