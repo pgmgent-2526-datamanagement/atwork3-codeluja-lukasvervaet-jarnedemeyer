@@ -110,14 +110,14 @@ export default function Home() {
             iconColor="text-purple-600"
             iconBg="bg-purple-100"
           />
-          <StatsCard
+          {/* <StatsCard
             title="Staff Available"
             value="0"
             subtext="Currently on shift"
             Icon={UsersIcon}
             iconColor="text-green-600"
             iconBg="bg-green-100"
-          />
+          /> */}
         </div>
 
         <div className="mb-6 flex items-center justify-between">
