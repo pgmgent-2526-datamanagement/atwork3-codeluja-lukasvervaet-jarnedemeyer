@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
 import React, { useState, useEffect } from "react";
-import { Eye, EyeOff } from 'lucide-react'
+import { Eye, EyeOff } from "lucide-react";
 import { changeCode, resetPassword } from "@/utils/code.util";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import SuccesModal from "@/components/SuccesModal";
 import ErrorModal from "@/components/ErrorModal";
 import { useSession } from "next-auth/react";
@@ -130,7 +130,7 @@ function Code() {
                 : "text-gray-600 hover:text-gray-800"
             }`}
           >
-            Change Code
+            Wijzig Code
           </button>
           <button
             onClick={() => setActiveTab("password")}
@@ -140,7 +140,7 @@ function Code() {
                 : "text-gray-600 hover:text-gray-800"
             }`}
           >
-            Reset Password
+            Wachtwoord Resetten
           </button>
         </div>
 
@@ -148,7 +148,7 @@ function Code() {
         {activeTab === "code" && (
           <>
             <h1 className="text-2xl font-bold text-center text-gray-800 mb-2">
-              Change Login Code
+              Wijzig Inlogcode
             </h1>
             <form
               onSubmit={handleCodeSubmit}
@@ -159,7 +159,7 @@ function Code() {
                   htmlFor="new-code"
                   className="underline text-gray-700 font-medium"
                 >
-                  New Code
+                  Nieuwe Code
                 </label>
                 <div className="relative">
                   <input
@@ -188,7 +188,7 @@ function Code() {
                   htmlFor="repeat-code"
                   className="underline text-gray-700 font-medium"
                 >
-                  Repeat Code
+                  Herhaal Code
                 </label>
                 <div className="relative">
                   <input
@@ -216,7 +216,7 @@ function Code() {
                 type="submit"
                 className="bg-[#05d8c8] hover:bg-[#04c4b5] text-white font-semibold py-3 px-6 rounded-md shadow-md transition-colors duration-200 mt-4"
               >
-                Change Code
+                Wijzig Code
               </button>
             </form>
           </>
@@ -226,7 +226,7 @@ function Code() {
         {activeTab === "password" && (
           <>
             <h1 className="text-2xl font-bold text-center text-gray-800 mb-2">
-              Reset Password
+              Wachtwoord Resetten
             </h1>
             <form
               onSubmit={handlePasswordSubmit}
@@ -237,7 +237,7 @@ function Code() {
                   htmlFor="new-password"
                   className="underline text-gray-700 font-medium"
                 >
-                  New Password
+                  Nieuw Wachtwoord
                 </label>
                 <div className="relative">
                   <input
@@ -263,7 +263,7 @@ function Code() {
                   htmlFor="repeat-password"
                   className="underline text-gray-700 font-medium"
                 >
-                  Repeat Password
+                  Herhaal Wachtwoord
                 </label>
                 <div className="relative">
                   <input
@@ -292,7 +292,7 @@ function Code() {
                 type="submit"
                 className="bg-[#05d8c8] hover:bg-[#04c4b5] text-white font-semibold py-3 px-6 rounded-md shadow-md transition-colors duration-200 mt-4"
               >
-                Reset Password
+                Wachtwoord Resetten
               </button>
             </form>
           </>
@@ -317,4 +317,4 @@ function Code() {
   );
 }
 
-export default Code
+export default Code;

@@ -40,7 +40,7 @@ function CodeModal({ close }: { close: () => void }) {
             type="button"
             onClick={() => setCodeVisible((prev) => !prev)}
             className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-            aria-label={codeVisible ? "Hide code" : "Show code"}
+            aria-label={codeVisible ? "Code verbergen" : "Code tonen"}
           >
             {codeVisible ? <EyeOff size={18} /> : <Eye size={18} />}
           </button>
@@ -51,18 +51,18 @@ function CodeModal({ close }: { close: () => void }) {
           type="submit"
           disabled={loading}
         >
-          {loading ? "Logging in..." : "Login"}
+          {loading ? "Inloggen..." : "Inloggen"}
         </button>
 
         <div className="flex justify-center">
           {/* //? maybe open modal where user can insert the code */}
           <p>
-            Go back to the{" "}
+            Ga terug naar het{" "}
             <span
               onClick={close}
               className="underline text-[#03ad9f] cursor-pointer"
             >
-              login form
+              loginformulier
             </span>
             .
           </p>

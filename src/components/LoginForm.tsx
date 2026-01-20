@@ -28,7 +28,7 @@ export default function LoginPage({ open }: { open: () => void }) {
       >
         <div>
           <label htmlFor="email" className="underline">
-            E-Mail
+            E-mailadres
           </label>
           <input
             id="email"
@@ -42,7 +42,7 @@ export default function LoginPage({ open }: { open: () => void }) {
 
         <div>
           <label htmlFor="password" className="underline">
-            Password
+            Wachtwoord
           </label>
           <div className="relative">
             <input
@@ -57,7 +57,9 @@ export default function LoginPage({ open }: { open: () => void }) {
               type="button"
               onClick={() => setPasswordVisible((prev) => !prev)}
               className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-              aria-label={passwordVisible ? "Hide password" : "Show password"}
+              aria-label={
+                passwordVisible ? "Wachtwoord verbergen" : "Wachtwoord tonen"
+              }
             >
               {passwordVisible ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
@@ -70,7 +72,7 @@ export default function LoginPage({ open }: { open: () => void }) {
           }h-10 cursor-pointer flex justify-center items-center bg-[#05d8c8] text-sm text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-[#04b3aa] transition-colors duration-300`}
           disabled={loading}
         >
-          {loading ? "Logging in..." : "Login"}
+          {loading ? "Inloggen..." : "Inloggen"}
         </button>
 
         <hr />
@@ -78,7 +80,7 @@ export default function LoginPage({ open }: { open: () => void }) {
         <div className="flex justify-center">
           {/* //? maybe open modal where user can insert the code */}
           <p>
-            Or login with the{" "}
+            Of log in met de{" "}
             <span
               onClick={open}
               className="underline text-[#03ad9f] cursor-pointer"

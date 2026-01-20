@@ -94,12 +94,13 @@ export default function Nav() {
     await signOut({ callbackUrl: "/login" });
   };
 
+  // Translated user-facing text to Dutch
   const navItems = [
     {
-      title: "Navigation",
+      title: "Navigatie",
       links: [
         { name: "Home", href: "/", icon: Home },
-        { name: "Bookings", href: "/bookings", icon: Calendar },
+        { name: "Boekingen", href: "/bookings", icon: Calendar },
         ...(userRole === 1
           ? [
               { name: "Hosts", href: "/hosts", icon: Users },
@@ -109,10 +110,10 @@ export default function Nav() {
       ] as NavLink[],
     },
     {
-      title: "Authentication",
+      title: "Authenticatie",
       links: [
         {
-          name: "Logout",
+          name: "Uitloggen",
           href: "/logout",
           icon: Smartphone,
           function: handleLogOut,
@@ -127,7 +128,7 @@ export default function Nav() {
         width={100}
         height={100}
         src={logo}
-        alt="The Park Logo"
+        alt="Het Park Logo"
         className="flex justify-center items-center m-auto mt-2"
       />
       <div className="sticky top-6 px-5 py-6 space-y-8 flex flex-col justify-between max-h-[90%] h-full">
