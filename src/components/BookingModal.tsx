@@ -24,7 +24,7 @@ interface User {
   id: number;
   name: string;
   email: string;
-  role: number;
+  role_id: number;
 }
 
 const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
@@ -34,7 +34,7 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
   const [isLoadingHosts, setIsLoadingHosts] = useState(true);
   const [user, setUser] = useState<User | null>(null);
 
-  const isAdmin = user?.role === 1;
+  const isAdmin = user?.role_id === 1;
 
   const fetchUser = async () => {
     try {
