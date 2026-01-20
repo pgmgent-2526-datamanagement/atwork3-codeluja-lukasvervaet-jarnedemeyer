@@ -21,7 +21,14 @@ export async function GET() {
         },
       },
     });
-    return NextResponse.json({ hosts }, { status: 200 });
+
+    // inactive hosts should be last
+    const filteredHosts = hosts.sort((a, b) => {
+      if (a.active === b.active) return 0;
+      if (a.active && !b.active) return -1;
+      return 1;
+    });
+    return NextResponse.json({ hosts: filteredHosts }, { status: 200 });
   } catch (err) {
     console.error("[HOSTS_FETCH_ERROR]", err);
     const message =
