@@ -82,28 +82,30 @@ export default function HostsPage() {
   // }
 
   return (
-    <main className="fixed top-0 right-0 bottom-20 left-64 overflow-y-auto bg-gray-50/50 p-6 lg:p-10">
-      <div className="w-full min-h-full pb-8">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
+    <main className="lg:fixed lg:top-0 lg:right-0 lg:bottom-20 lg:left-64 lg:overflow-y-auto bg-gray-50/50 p-3 sm:p-4 md:p-6 lg:p-10 pb-20 lg:pb-10 min-h-screen lg:min-h-0 w-full lg:w-auto">
+      <div className="w-full lg:min-h-full lg:pb-8">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 lg:gap-4 mb-6 lg:mb-10">
           <div>
-            <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
+            <h1 className="text-2xl lg:text-3xl font-extrabold text-gray-900 tracking-tight">
               Staff Management
             </h1>
-            <p className="text-gray-500 mt-1">
+            <p className="text-gray-500 mt-1 text-sm lg:text-base">
               Manage your staff and view their availability
             </p>
           </div>
           <button
             onClick={handleAddHost}
-            className="flex items-center gap-2 px-4 py-2 bg-[#05d8c8] text-white rounded-lg hover:bg-[#04b3aa] transition-colors duration-300 shadow-md font-semibold"
+            className="flex items-center justify-center lg:justify-start gap-2 px-4 py-2 bg-[#05d8c8] text-white rounded-lg hover:bg-[#04b3aa] transition-colors duration-300 shadow-md font-semibold w-full lg:w-auto"
           >
             <PlusIcon className="w-5 h-5" />
             Add Host
           </button>
         </div>
 
-        <div className="mb-6 flex items-center justify-between">
-          <h2 className="text-xl font-bold text-gray-800">All Staff Members</h2>
+        <div className="mb-4 lg:mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+          <h2 className="text-lg lg:text-xl font-bold text-gray-800">
+            All Staff Members
+          </h2>
           <span className="px-3 py-1 bg-white border rounded-full text-xs font-medium text-gray-500 shadow-sm">
             {hosts.length} total hosts
           </span>
@@ -120,11 +122,11 @@ export default function HostsPage() {
 
         {hosts.length > 0 ? (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 min-h-150">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6 lg:min-h-150">
               {currentHosts.map((host) => (
                 <div
                   key={host.id}
-                  className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-200 overflow-hidden group h-55 flex flex-col"
+                  className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-200 overflow-hidden group min-h-fit lg:h-55 flex flex-col"
                 >
                   {/* Colored Header */}
                   <div
@@ -194,25 +196,25 @@ export default function HostsPage() {
               ))}
             </div>
 
-            {/* Fixed Pagination */}
+            {/* Pagination */}
             {totalPages > 1 && (
-              <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg py-4">
-                <div className="flex justify-center items-center gap-2">
+              <div className="mt-6 lg:mt-0 mb-4 lg:mb-0 bg-white border border-gray-200 lg:border-t rounded-lg lg:rounded-none shadow-sm lg:shadow-lg py-3 lg:py-4 px-2 lg:px-0 lg:fixed lg:bottom-0 lg:left-0 lg:right-0">
+                <div className="flex justify-center items-center gap-1 sm:gap-2">
                   <button
                     onClick={() =>
                       setCurrentPage((prev) => Math.max(prev - 1, 1))
                     }
                     disabled={currentPage === 1}
-                    className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-[#05d8c8] hover:text-white hover:border-[#05d8c8] disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300"
+                    className="px-3 lg:px-4 py-2 bg-white border border-gray-200 rounded-lg text-xs lg:text-sm font-medium text-gray-700 hover:bg-[#05d8c8] hover:text-white hover:border-[#05d8c8] disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300"
                   >
                     Previous
                   </button>
-                  <div className="flex gap-2">
+                  <div className="flex gap-1 lg:gap-2">
                     {[...Array(totalPages)].map((_, i) => (
                       <button
                         key={i}
                         onClick={() => setCurrentPage(i + 1)}
-                        className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-300 ${
+                        className={`px-2.5 lg:px-3 py-2 rounded-lg text-xs lg:text-sm font-medium transition-colors duration-300 ${
                           currentPage === i + 1
                             ? "bg-[#05d8c8] text-white shadow-md"
                             : "bg-white border border-gray-200 text-gray-700 hover:bg-[#05d8c8] hover:text-white hover:border-[#05d8c8]"
@@ -227,7 +229,7 @@ export default function HostsPage() {
                       setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                     }
                     disabled={currentPage === totalPages}
-                    className="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-[#05d8c8] hover:text-white hover:border-[#05d8c8] disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300"
+                    className="px-3 lg:px-4 py-2 bg-white border border-gray-200 rounded-lg text-xs lg:text-sm font-medium text-gray-700 hover:bg-[#05d8c8] hover:text-white hover:border-[#05d8c8] disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300"
                   >
                     Next
                   </button>
