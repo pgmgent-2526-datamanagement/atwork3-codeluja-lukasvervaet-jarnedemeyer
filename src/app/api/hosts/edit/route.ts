@@ -4,8 +4,7 @@ const prisma = new PrismaClient();
 
 export const PATCH = async (request: Request) => {
   try {
-    const { id,  active } =
-      await request.json();
+    const { id, active, firstName, lastName } = await request.json();
 
     if (!id || active === undefined) {
       return new Response(
@@ -17,6 +16,8 @@ export const PATCH = async (request: Request) => {
     const updatedHost = await prisma.host.update({
       where: { id },
       data: {
+        firstName,
+        lastName,
         active,
       },
     });
