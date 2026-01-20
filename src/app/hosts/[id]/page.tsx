@@ -7,6 +7,7 @@ import { BookingHost } from "@/types/booking-host.type";
 import { Booking } from "@/types/booking.type";
 import { HostDetailLoadingSkeleton } from "./HostDetailLoadingSkeleton";
 import { getHostById } from "@/utils/hosts.util";
+import { SquarePen } from "lucide-react";
 
 interface HostWithBookings extends Host {
   bookingHosts: BookingHost[];
@@ -19,8 +20,25 @@ export default function HostDetailPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [hostActive, setHostActive] = useState<boolean>(false);
+  const [originalHostActive, setOriginalHostActive] = useState<boolean>(false);
+  const [editName, setEditName] = useState(false);
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+  const [originalFirstName, setOriginalFirstName] = useState<string>("");
+  const [originalLastName, setOriginalLastName] = useState<string>("");
+
+  useEffect(() => {
+    if (host) {
+      setFirstName(host.firstName);
+      setLastName(host.lastName);
+      setOriginalFirstName(host.firstName);
+      setOriginalLastName(host.lastName);
+      setHostActive(host.active);
+      setOriginalHostActive(host.active);
+    }
+  }, [host]);
+
   const router = useRouter();
-  const [edit, setEdit] = useState(false);
 
   const handleEditHost = async () => {
     if (!host) return;
@@ -30,10 +48,19 @@ export default function HostDetailPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ id: host.id, active: hostActive }),
+        body: JSON.stringify({
+          id: host.id,
+          active: hostActive,
+          firstName,
+          lastName,
+        }),
       });
 
-      setEdit(false);
+      // Reset originals after save
+      setOriginalFirstName(firstName);
+      setOriginalLastName(lastName);
+      setOriginalHostActive(hostActive);
+      setEditName(false);
 
       if (response.ok) {
         router.push("/hosts");
@@ -79,6 +106,12 @@ export default function HostDetailPage() {
     );
   }
 
+  // Determine if there are unsaved changes
+  const nameChanged =
+    firstName !== originalFirstName || lastName !== originalLastName;
+  const activeChanged = hostActive !== originalHostActive;
+  const showSaveButton = nameChanged || activeChanged;
+
   return (
     <>
       <main className="bg-gray-50/50 min-h-screen pb-20 lg:pb-0 w-full lg:ml-64">
@@ -90,7 +123,7 @@ export default function HostDetailPage() {
           >
             ← Back
           </button>
-          {edit && (
+          {showSaveButton && (
             <button
               className="px-4 py-2 bg-[#05d8c8] text-white rounded-lg hover:bg-[#04c4b5] transition-colors duration-300 font-semibold ml-4"
               onClick={handleEditHost}
@@ -113,7 +146,45 @@ export default function HostDetailPage() {
 
               <div className="flex-1 text-center lg:text-left w-full">
                 <h1 className="text-xl md:text-2xl lg:text-4xl font-bold text-gray-900 mb-2 lg:mb-3">
-                  {host.firstName} {host.lastName}
+                  {editName ? (
+                    <div className="flex items-center gap-2 md:gap-3">
+                      <input
+                        type="text"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        className="px-2 md:px-3 py-1.5 md:py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#05d8c8] focus:border-transparent text-sm md:text-base"
+                        placeholder="First name"
+                      />
+                      <input
+                        type="text"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        className="px-2 md:px-3 py-1.5 md:py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#05d8c8] focus:border-transparent text-sm md:text-base"
+                        placeholder="Last name"
+                      />
+                      <button
+                        onClick={() => {
+                          setEditName(false);
+                          // Do not reset firstName/lastName so unsaved changes are preserved
+                        }}
+                        className="px-3 md:px-4 py-1.5 md:py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition-colors text-xs md:text-sm font-semibold"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2">
+                      <span className="text-gray-900">
+                        {host.firstName} {host.lastName}
+                      </span>
+                      <SquarePen
+                        className="w-5 h-5 text-gray-500 hover:text-[#05d8c8] cursor-pointer transition-colors"
+                        onClick={() => {
+                          setEditName(true);
+                        }}
+                      />
+                    </div>
+                  )}
                 </h1>
                 <div className="flex gap-2 lg:gap-3 items-center flex-wrap justify-center lg:justify-start w-full">
                   <span className="text-xs lg:text-sm font-semibold px-3 lg:px-4 py-1.5 lg:py-2 rounded-full border border-gray-300 bg-white text-gray-700 shadow-sm">
@@ -129,7 +200,6 @@ export default function HostDetailPage() {
                     className="bg-none border-none cursor-pointer"
                     onClick={() => {
                       setHostActive(!hostActive);
-                      setEdit(!edit);
                     }}
                   >
                     <span
