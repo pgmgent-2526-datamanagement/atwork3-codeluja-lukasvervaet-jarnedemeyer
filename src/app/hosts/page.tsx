@@ -82,7 +82,7 @@ export default function HostsPage() {
   // }
 
   return (
-    <main className="lg:fixed lg:top-0 lg:right-0 lg:bottom-20 lg:left-64 lg:overflow-y-auto bg-gray-50/50 p-3 sm:p-4 md:p-6 lg:p-10 pb-20 lg:pb-10 min-h-screen lg:min-h-0 w-full lg:w-auto">
+    <main className="bg-gray-50/50 p-3 sm:p-4 md:p-6 lg:p-10 pb-20 lg:pb-10 min-h-screen w-full lg:ml-64">
       <div className="w-full lg:min-h-full lg:pb-8">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 lg:gap-4 mb-6 lg:mb-10">
           <div>

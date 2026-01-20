@@ -57,7 +57,7 @@ export default function Nav() {
   // while loading session, show loading skeleton (but not on auth pages)
   if (status === "loading" && !isAuthPage) {
     return (
-      <aside className="hidden lg:block w-64 max-h-screen h-screen border-r border-gray-100 bg-white mr-3 shadow-md z-50 relative">
+      <aside className="hidden lg:block fixed left-0 top-0 w-64 h-screen border-r border-gray-100 bg-white shadow-md z-50">
         <div className="flex justify-center items-center m-auto mt-2 h-25">
           <div className="w-25 h-25 bg-gray-200 rounded-lg animate-pulse"></div>
         </div>
@@ -119,7 +119,7 @@ export default function Nav() {
   ];
 
   return (
-    <aside className="hidden lg:block w-64 max-h-screen h-screen border-r border-gray-100 bg-white mr-3 shadow-md z-50 relative">
+    <aside className="hidden lg:block fixed left-0 top-0 w-64 h-screen border-r border-gray-100 bg-white shadow-md z-50">
       <Image
         width={100}
         height={100}

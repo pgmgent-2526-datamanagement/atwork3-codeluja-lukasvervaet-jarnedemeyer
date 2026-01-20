@@ -70,7 +70,7 @@ export default function Home() {
   if (loading) return <HomeLoader />;
 
   return (
-    <main className="min-h-screen bg-gray-50/50 p-3 sm:p-4 md:p-6 lg:p-10 pb-20 lg:pb-10 w-full">
+    <main className="min-h-screen bg-gray-50/50 p-3 sm:p-4 md:p-6 lg:p-10 pb-20 lg:pb-10 w-full lg:ml-64">
       <div className="w-full">
         <div className="flex flex-col gap-3 mb-6 md:mb-10">
           <div>

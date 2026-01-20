@@ -78,7 +78,7 @@ export default function HostDetailPage() {
 
   return (
     <>
-      <main className="lg:fixed lg:top-0 lg:right-0 lg:bottom-0 lg:left-64 bg-gray-50/50 lg:overflow-y-auto min-h-screen lg:min-h-0 pb-20 lg:pb-0 w-full">
+      <main className="bg-gray-50/50 min-h-screen pb-20 lg:pb-0 w-full lg:ml-64">
         <div className="p-2 md:p-4 lg:p-10 space-y-3 md:space-y-4 lg:space-y-6 w-full">
           {/* Back Button */}
           <div className="flex gap-2 lg:gap-0 w-full">
