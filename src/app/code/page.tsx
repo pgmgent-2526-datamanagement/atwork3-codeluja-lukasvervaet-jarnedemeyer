@@ -303,13 +303,13 @@ function Code() {
           close={() => {
             handleClose();
           }}
-          subject={activeTab === "code" ? "Code" : "Password"}
+          subject="Code"
         />
       )}
       {errorModal.open && (
         <ErrorModal
           close={handleErrorClose}
-          subject={activeTab === "code" ? "Code" : "Password"}
+          subject="Code"
           message={errorModal.message}
         />
       )}
