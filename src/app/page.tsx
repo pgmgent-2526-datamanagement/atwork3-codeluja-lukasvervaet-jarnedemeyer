@@ -124,89 +124,91 @@ export default function Home() {
           </span>
         </div>
 
-        {todayBookings.length > 0 ? (
-          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4 lg:gap-6 border border-gray-200 lg:border-2 rounded-xl p-3 md:p-4 lg:p-6 bg-gray-50">
-            {todayBookings.map((booking) => (
-              <section
-                key={booking.id}
-                className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow p-3 sm:p-5 relative overflow-hidden group min-h-fit justify-between flex flex-col"
-              >
-                <div
-                  className={`absolute top-0 left-0 w-1 h-full ${
-                    booking.is_b2b ? "bg-[#05d8c8]" : "bg-blue-500"
-                  }`}
-                />
+        <div className="max-h-150 overflow-y-auto rounded-xl border border-gray-200 lg:border-2 bg-gray-50">
+          {todayBookings.length > 0 ? (
+            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4 lg:gap-6 p-3 md:p-4 lg:p-6">
+              {todayBookings.map((booking) => (
+                <section
+                  key={booking.id}
+                  className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow p-3 sm:p-5 relative overflow-hidden group min-h-fit justify-between flex flex-col"
+                >
+                  <div
+                    className={`absolute top-0 left-0 w-1 h-full ${
+                      booking.is_b2b ? "bg-[#05d8c8]" : "bg-blue-500"
+                    }`}
+                  />
 
-                <div className="flex justify-between items-start mb-3 sm:mb-4">
-                  <div className="flex items-center gap-2 text-gray-900">
-                    <UserGroupIcon className="w-5 h-5 text-gray-400" />
-                    <span className="text-base sm:text-lg font-bold">
-                      {booking.playersCount} Players
-                    </span>
-                  </div>
-                  <div className="flex items-end gap-1">
-                    {booking.is_b2b && (
-                      <span className="text-[10px] uppercase tracking-wider font-bold bg-purple-50 text-purple-700 px-2 py-0.5 rounded border border-purple-100">
-                        B2B
+                  <div className="flex justify-between items-start mb-3 sm:mb-4">
+                    <div className="flex items-center gap-2 text-gray-900">
+                      <UserGroupIcon className="w-5 h-5 text-gray-400" />
+                      <span className="text-base sm:text-lg font-bold">
+                        {booking.playersCount} Players
                       </span>
-                    )}
-                    {booking.food_required && (
-                      <span className="text-[10px] uppercase tracking-wider font-bold bg-orange-50 text-orange-700 px-2 py-0.5 rounded border border-orange-100">
-                        Food
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                <div className="space-y-2 sm:space-y-3">
-                  <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-gray-600 bg-gray-50 p-2 rounded-lg">
-                    <ClockIcon className="w-4 h-4 text-gray-400" />
-                    <span className="font-medium">
-                      {checkValidDate(booking.startTime)
-                        ? `${new Date(booking.startTime).toLocaleTimeString(
-                            "nl-NL",
-                            {
-                              hour: "2-digit",
-                              minute: "2-digit",
-                              timeZone: "UTC",
-                            },
-                          )} - ${new Date(booking.endTime).toLocaleTimeString(
-                            "nl-NL",
-                            {
-                              hour: "2-digit",
-                              minute: "2-digit",
-                              timeZone: "UTC",
-                            },
-                          )}`
-                        : "Time TBD"}
-                    </span>
-                  </div>
-
-                  <div className="pt-1 sm:pt-2 flex flex-wrap gap-2">
-                    <div className="flex items-center gap-1.5 text-xs text-gray-500">
-                      <CakeIcon className="w-4 h-4" />
-                      {booking.food_required ? "Catering" : "No Food"}
+                    </div>
+                    <div className="flex items-end gap-1">
+                      {booking.is_b2b && (
+                        <span className="text-[10px] uppercase tracking-wider font-bold bg-purple-50 text-purple-700 px-2 py-0.5 rounded border border-purple-100">
+                          B2B
+                        </span>
+                      )}
+                      {booking.food_required && (
+                        <span className="text-[10px] uppercase tracking-wider font-bold bg-orange-50 text-orange-700 px-2 py-0.5 rounded border border-orange-100">
+                          Food
+                        </span>
+                      )}
                     </div>
                   </div>
-                </div>
 
-                <button
-                  className="mt-3 sm:mt-4 w-full py-2 bg-gray-50 text-gray-600 text-xs sm:text-sm font-semibold rounded-lg hover:bg-[#05d8c8] hover:text-white transition-colors cursor-pointer"
-                  onClick={() => openModal(booking)}
-                >
-                  View Details
-                </button>
-              </section>
-            ))}
-          </section>
-        ) : (
-          <div className="bg-white border-2 border-dashed border-gray-200 rounded-xl p-6 sm:p-12 text-center">
-            <CalendarIcon className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-            <p className="text-gray-500 font-medium">
-              No bookings found for today.
-            </p>
-          </div>
-        )}
+                  <div className="space-y-2 sm:space-y-3">
+                    <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-gray-600 bg-gray-50 p-2 rounded-lg">
+                      <ClockIcon className="w-4 h-4 text-gray-400" />
+                      <span className="font-medium">
+                        {checkValidDate(booking.startTime)
+                          ? `${new Date(booking.startTime).toLocaleTimeString(
+                              "nl-NL",
+                              {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                                timeZone: "UTC",
+                              },
+                            )} - ${new Date(booking.endTime).toLocaleTimeString(
+                              "nl-NL",
+                              {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                                timeZone: "UTC",
+                              },
+                            )}`
+                          : "Time TBD"}
+                      </span>
+                    </div>
+
+                    <div className="pt-1 sm:pt-2 flex flex-wrap gap-2">
+                      <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                        <CakeIcon className="w-4 h-4" />
+                        {booking.food_required ? "Catering" : "No Food"}
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    className="mt-3 sm:mt-4 w-full py-2 bg-gray-50 text-gray-600 text-xs sm:text-sm font-semibold rounded-lg hover:bg-[#05d8c8] hover:text-white transition-colors cursor-pointer"
+                    onClick={() => openModal(booking)}
+                  >
+                    View Details
+                  </button>
+                </section>
+              ))}
+            </section>
+          ) : (
+            <div className="bg-white border-2 border-dashed border-gray-200 rounded-xl p-6 sm:p-12 text-center">
+              <CalendarIcon className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+              <p className="text-gray-500 font-medium">
+                No bookings found for today.
+              </p>
+            </div>
+          )}
+        </div>
         {isModalOpen && (
           <BookingModal
             booking={selectedBooking}
