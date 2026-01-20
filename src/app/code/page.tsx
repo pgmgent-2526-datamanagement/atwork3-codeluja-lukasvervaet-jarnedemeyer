@@ -7,12 +7,16 @@ import { useRouter } from 'next/navigation';
 
 function Code() {
   const [visible, setVisible] = useState(false);
+  const [visibleRepeat, setVisibleRepeat] = useState(false);
 
   const router = useRouter();
 
   const toggleVisibility = () => {
     setVisible(!visible);
   }
+  const toggleVisibilityRepeat = () => {
+    setVisibleRepeat(!visibleRepeat);
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     await changeCode(event);
@@ -27,7 +31,10 @@ function Code() {
         </h1>
         <form onSubmit={handleSubmit} className="flex flex-col space-y-6">
           <div className="flex flex-col space-y-2">
-            <label htmlFor="new-code" className="underline text-gray-700 font-medium">
+            <label
+              htmlFor="new-code"
+              className="underline text-gray-700 font-medium"
+            >
               New Code
             </label>
             <div className="relative">
@@ -53,13 +60,16 @@ function Code() {
             </div>
           </div>
           <div className="flex flex-col space-y-2">
-            <label htmlFor="repeat-code" className="underline text-gray-700 font-medium">
+            <label
+              htmlFor="repeat-code"
+              className="underline text-gray-700 font-medium"
+            >
               Repeat Code
             </label>
             <div className="relative">
               <input
                 placeholder="••••"
-                type={visible ? "text" : "password"}
+                type={visibleRepeat ? "text" : "password"}
                 id="repeat-code"
                 name="repeat-code"
                 pattern="\d{4}"
@@ -71,10 +81,10 @@ function Code() {
               />
               <button
                 type="button"
-                onClick={toggleVisibility}
+                onClick={toggleVisibilityRepeat}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
               >
-                {visible ? <EyeOff size={20} /> : <Eye size={20} />}
+                {visibleRepeat ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
             </div>
           </div>
