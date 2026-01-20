@@ -20,6 +20,7 @@ export default function HostDetailPage() {
   const [loading, setLoading] = useState(true);
   const [hostActive, setHostActive] = useState<boolean>(false);
   const router = useRouter();
+  const [edit, setEdit] = useState(false);
 
   const handleEditHost = async () => {
     if (!host) return;
@@ -31,6 +32,8 @@ export default function HostDetailPage() {
         },
         body: JSON.stringify({ id: host.id, active: hostActive }),
       });
+
+      setEdit(false);
 
       if (response.ok) {
         router.push("/hosts");
@@ -81,20 +84,20 @@ export default function HostDetailPage() {
       <main className="bg-gray-50/50 min-h-screen pb-20 lg:pb-0 w-full lg:ml-64">
         <div className="p-2 md:p-4 lg:p-10 space-y-3 md:space-y-4 lg:space-y-6 w-full">
           {/* Back Button */}
-          <div className="flex gap-2 lg:gap-0 w-full">
+          <button
+            className="px-4 py-2 bg-[#05d8c8] text-white rounded-lg hover:bg-[#04c4b5] transition-colors duration-300 font-semibold"
+            onClick={() => router.back()}
+          >
+            ← Back
+          </button>
+          {edit && (
             <button
-              className="flex-1 lg:flex-none px-3 lg:px-4 py-2.5 lg:py-2 bg-[#05d8c8] text-white rounded-lg hover:bg-[#04c4b5] transition-colors duration-300 font-semibold text-sm md:text-base"
-              onClick={() => router.back()}
-            >
-              ← Back
-            </button>
-            <button
-              className="flex-1 lg:flex-none px-3 lg:px-4 py-2.5 lg:py-2 bg-[#05d8c8] text-white rounded-lg hover:bg-[#04c4b5] transition-colors duration-300 font-semibold text-sm md:text-base lg:ml-4"
+              className="px-4 py-2 bg-[#05d8c8] text-white rounded-lg hover:bg-[#04c4b5] transition-colors duration-300 font-semibold ml-4"
               onClick={handleEditHost}
             >
               Save Changes
             </button>
-          </div>
+          )}
 
           {/* Host Information Section */}
           <div className="bg-white rounded-lg lg:rounded-xl border border-gray-200 shadow-lg p-3 md:p-5 lg:p-8 w-full">
@@ -124,7 +127,10 @@ export default function HostDetailPage() {
                   <button
                     type="button"
                     className="bg-none border-none cursor-pointer"
-                    onClick={() => setHostActive(!hostActive)}
+                    onClick={() => {
+                      setHostActive(!hostActive);
+                      setEdit(!edit);
+                    }}
                   >
                     <span
                       className={`px-4 lg:px-5 py-1.5 lg:py-2 rounded-full font-semibold text-xs lg:text-sm shadow-sm transition-colors ${

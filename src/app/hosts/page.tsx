@@ -6,6 +6,7 @@ import { HostsLoadingSkeleton } from "./HostsLoadingSkeleton";
 import { AddHostModal } from "@/components/AddHostModal";
 import { Trash } from "lucide-react";
 import { DeleteModal } from "@/components/DeleteModal";
+import SearchBar from "@/components/SearchBar";
 
 export default function HostsPage() {
   const [hosts, setHosts] = useState<Host[]>([]);
@@ -27,6 +28,11 @@ export default function HostsPage() {
         setLoading(false);
       });
   }, []);
+
+  const handleSearchResults = (results: Host[]) => {
+    setHosts(results);
+    setCurrentPage(1); // Reset to first page when search results change
+  };
 
   // Pagination logic
   const indexOfLastHost = currentPage * hostsPerPage;
@@ -82,24 +88,29 @@ export default function HostsPage() {
   // }
 
   return (
-    <main className="bg-gray-50/50 p-3 sm:p-4 md:p-6 lg:p-10 pb-20 lg:pb-10 min-h-screen w-full lg:ml-64">
-      <div className="w-full lg:min-h-full lg:pb-8">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 lg:gap-4 mb-6 lg:mb-10">
-          <div>
-            <h1 className="text-2xl lg:text-3xl font-extrabold text-gray-900 tracking-tight">
-              Staff Management
-            </h1>
-            <p className="text-gray-500 mt-1 text-sm lg:text-base">
-              Manage your staff and view their availability
-            </p>
+    <main className="fixed top-0 right-0 bottom-20 left-64 overflow-y-auto bg-gray-50/50 p-6 lg:p-10">
+      <div className="w-full min-h-full pb-8">
+        <div className="flex flex-col gap-4 mb-10">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
+                Staff Management
+              </h1>
+              <p className="text-gray-500 mt-1">
+                Manage your staff and view their availability
+              </p>
+            </div>
+            <button
+              onClick={handleAddHost}
+              className="flex items-center gap-2 px-4 py-2 bg-[#05d8c8] text-white rounded-lg hover:bg-[#04b3aa] transition-colors duration-300 shadow-md font-semibold"
+            >
+              <PlusIcon className="w-5 h-5" />
+              Add Host
+            </button>
           </div>
-          <button
-            onClick={handleAddHost}
-            className="flex items-center justify-center lg:justify-start gap-2 px-4 py-2 bg-[#05d8c8] text-white rounded-lg hover:bg-[#04b3aa] transition-colors duration-300 shadow-md font-semibold w-full lg:w-auto"
-          >
-            <PlusIcon className="w-5 h-5" />
-            Add Host
-          </button>
+          <div className="w-full md:w-96">
+            <SearchBar onSearch={handleSearchResults} />
+          </div>
         </div>
 
         <div className="mb-4 lg:mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
