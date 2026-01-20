@@ -142,8 +142,8 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
         onClick={onClose}
       />
 
-      <div className="relative bg-white h-full md:h-[95vh] w-full max-w-[90%] rounded-lg shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-right duration-300">
-        <div className="flex items-center justify-between px-6 py-4 border-b bg-white">
+      <div className="relative bg-white h-full md:h-[95vh] w-full md:max-w-[90%] rounded-none md:rounded-lg shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-right duration-300">
+        <div className="flex items-center justify-between px-4 md:px-6 py-4 border-b bg-white">
           <div className="flex items-center gap-2">
             <div
               className={`h-3 w-3 rounded-full ${
@@ -163,8 +163,8 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
         </div>
 
         <div className="flex-1 overflow-y-auto">
-          <div className="p-8 bg-slate-50 border-b">
-            <h2 className="text-3xl font-black text-slate-900 mb-2 leading-tight">
+          <div className="p-4 md:p-8 bg-slate-50 border-b">
+            <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-2 leading-tight">
               {booking.packageName}
             </h2>
             <div className="flex flex-wrap gap-2 mb-6">
@@ -186,7 +186,7 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
                 <p className="text-xs font-bold text-slate-400 uppercase tracking-tighter">
                   Event Schedule
                 </p>
-                <div className="flex items-center gap-2 font-mono text-lg font-bold text-slate-800">
+                <div className="flex items-center gap-2 font-mono text-base md:text-lg font-bold text-slate-800">
                   <span>
                     {new Date(booking.startTime).toLocaleTimeString("nl-NL", {
                       hour: "2-digit",
@@ -207,9 +207,9 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
             </div>
           </div>
 
-          <section className="p-8 flex flex-row gap-8 justify-between mx-auto h-[70%] min-h-50">
+          <section className="p-2 md:p-8 flex flex-col md:flex-row gap-4 md:gap-8 justify-between mx-auto md:h-[70%] min-h-50">
             {/* detail div */}
-            <section className="p-8 w-full min-w-[50%] border border-gray-300 rounded-md">
+            <section className="p-4 md:p-8 w-full md:min-w-[50%] border border-gray-300 rounded-md">
               <div className="grid grid-cols-2 gap-8 mb-10">
                 <div className="space-y-1">
                   <div className="flex items-center gap-2 text-slate-400">
@@ -218,7 +218,7 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
                       Attendance
                     </span>
                   </div>
-                  <p className="text-xl font-bold text-slate-800">
+                  <p className="text-lg md:text-xl font-bold text-slate-800">
                     {booking.playersCount} Players
                   </p>
                 </div>
@@ -269,13 +269,13 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
             </section>
             {/* hosts div */}
             {isAdmin && (
-              <section className="p-8 flex flex-col mx-auto border border-gray-300 rounded-md min-w-[40%] max-h-full">
+              <section className="p-4 md:p-8 flex flex-col mx-auto border border-gray-300 rounded-md md:min-w-[40%] max-h-full">
                 <div className="space-y-1 mb-4">
                   <div className="flex items-center gap-2 text-slate-400">
                     <UsersIcon className="w-4 h-4" />
                     <span className="text-xs font-bold uppercase">Hosting</span>
                   </div>
-                  <p className="text-xl font-bold text-slate-800">
+                  <p className="text-lg md:text-xl font-bold text-slate-800">
                     {booking.hostsRequired} Hosts Required
                   </p>
                 </div>
@@ -410,7 +410,7 @@ const BookingModal: React.FC<ModalProps> = ({ booking, onClose }) => {
           </section>
         </div>
 
-        <div className="p-6 bg-white flex gap-3 w-80 mx-auto">
+        <div className="p-4 md:p-6 bg-white flex gap-3 w-full md:w-80 mx-auto">
           <button
             onClick={onClose}
             className="flex-1 py-3 px-4 bg-[#05d8c8] text-white font-bold rounded-xl hover:bg-[#04b3a9] shadow-lg shadow-[#05d8c8] transition-all text-sm w-40 text-center"

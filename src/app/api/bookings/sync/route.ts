@@ -5,27 +5,29 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-async function syncBookings(): Promise<Response> {
+async function syncBookings(daysAgo = 7, daysFuture = 14): Promise<Response> {
   try {
-    // Calculate date range: 1 week in the past to 1 week in the future
+    // Calculate date range based on provided parameters
     const today = new Date();
-    const oneWeekAgo = new Date(today);
-    oneWeekAgo.setDate(today.getDate() - 7);
+    const startDate = new Date(today);
+    startDate.setDate(today.getDate() - daysAgo);
 
-    const oneWeekFromNow = new Date(today);
-    oneWeekFromNow.setDate(today.getDate() + 7);
+    const endDate = new Date(today);
+    endDate.setDate(today.getDate() + daysFuture);
 
-    // Delete bookings outside the 2-week window
+    const totalDays = daysAgo + daysFuture;
+
+    // Delete bookings outside the specified window
     const deleteOldResult = await prisma.booking.deleteMany({
       where: {
         OR: [
-          { bookingDate: { lt: oneWeekAgo } },
-          { bookingDate: { gt: oneWeekFromNow } },
+          { bookingDate: { lt: startDate } },
+          { bookingDate: { gt: endDate } },
         ],
       },
     });
     console.log(
-      "Deleted bookings outside 2-week window:",
+      `Deleted bookings outside ${totalDays}-day window:`,
       deleteOldResult.count,
     );
 
@@ -41,14 +43,14 @@ async function syncBookings(): Promise<Response> {
     const parsedBookings = parseBookings(rawData);
     const transformedBookings = transformBookings(parsedBookings);
 
-    // Filter bookings to only include those within the 2-week window
+    // Filter bookings to only include those within the specified window
     const filteredBookings = transformedBookings.filter((booking) => {
       const bookingDate = new Date(booking.bookingDate);
-      return bookingDate >= oneWeekAgo && bookingDate <= oneWeekFromNow;
+      return bookingDate >= startDate && bookingDate <= endDate;
     });
 
     console.log(
-      `Filtered to ${filteredBookings.length} bookings within 2-week window (from ${parsedBookings.length} total)`,
+      `Filtered to ${filteredBookings.length} bookings within ${totalDays}-day window (from ${parsedBookings.length} total)`,
     );
 
     // Track results
@@ -125,10 +127,18 @@ async function syncBookings(): Promise<Response> {
   }
 }
 
-export async function GET() {
-  return await syncBookings();
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const daysAgo = parseInt(searchParams.get("daysAgo") || "7");
+  const daysFuture = parseInt(searchParams.get("daysFuture") || "14");
+
+  return await syncBookings(daysAgo, daysFuture);
 }
 
-export async function POST() {
-  return await syncBookings();
+export async function POST(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const daysAgo = parseInt(searchParams.get("daysAgo") || "7");
+  const daysFuture = parseInt(searchParams.get("daysFuture") || "14");
+
+  return await syncBookings(daysAgo, daysFuture);
 }

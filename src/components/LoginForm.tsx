@@ -4,10 +4,12 @@ import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { loginUser } from "@/utils/login.util";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function LoginPage({ open }: { open: () => void }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     setLoading(true);
@@ -42,14 +44,24 @@ export default function LoginPage({ open }: { open: () => void }) {
           <label htmlFor="password" className="underline">
             Password
           </label>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            placeholder="••••••••"
-            required
-            className="border-2 border-[#05d8c8] p-2 rounded-md shadow-md w-full"
-          />
+          <div className="relative">
+            <input
+              id="password"
+              type={passwordVisible ? "text" : "password"}
+              name="password"
+              placeholder="••••••••"
+              required
+              className="border-2 border-[#05d8c8] p-2 pr-10 rounded-md shadow-md w-full"
+            />
+            <button
+              type="button"
+              onClick={() => setPasswordVisible((prev) => !prev)}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+              aria-label={passwordVisible ? "Hide password" : "Show password"}
+            >
+              {passwordVisible ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
+          </div>
         </div>
         <button
           type="submit"
