@@ -113,6 +113,11 @@ export default function Nav() {
       title: "Authenticatie",
       links: [
         {
+          name: "Reset Wachtwoord",
+          href: "/reset-password",
+          icon: Smartphone,
+        },
+        {
           name: "Uitloggen",
           href: "/logout",
           icon: Smartphone,
