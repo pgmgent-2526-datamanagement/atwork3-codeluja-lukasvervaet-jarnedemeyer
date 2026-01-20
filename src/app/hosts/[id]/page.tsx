@@ -20,6 +20,7 @@ export default function HostDetailPage() {
   const [loading, setLoading] = useState(true);
   const [hostActive, setHostActive] = useState<boolean>(false);
   const router = useRouter();
+  const [edit, setEdit] = useState(false);
 
   const handleEditHost = async () => {
     if (!host) return;
@@ -31,6 +32,8 @@ export default function HostDetailPage() {
         },
         body: JSON.stringify({ id: host.id, active: hostActive }),
       });
+
+      setEdit(false);
 
       if (response.ok) {
         router.push("/hosts");
@@ -87,12 +90,14 @@ export default function HostDetailPage() {
           >
             ← Back
           </button>
-          <button
-            className="px-4 py-2 bg-[#05d8c8] text-white rounded-lg hover:bg-[#04c4b5] transition-colors duration-300 font-semibold ml-4"
-            onClick={handleEditHost}
-          >
-            Save Changes
-          </button>
+          {edit && (
+            <button
+              className="px-4 py-2 bg-[#05d8c8] text-white rounded-lg hover:bg-[#04c4b5] transition-colors duration-300 font-semibold ml-4"
+              onClick={handleEditHost}
+            >
+              Save Changes
+            </button>
+          )}
 
           {/* Host Information Section */}
           <div className="bg-white rounded-xl border border-gray-200 shadow-lg p-8">
@@ -122,7 +127,10 @@ export default function HostDetailPage() {
                   <button
                     type="button"
                     className="bg-none border-none cursor-pointer"
-                    onClick={() => setHostActive(!hostActive)}
+                    onClick={() => {
+                      setHostActive(!hostActive);
+                      setEdit(!edit);
+                    }}
                   >
                     <span
                       className={`px-5 py-2 rounded-full font-semibold text-sm shadow-sm transition-colors ${
