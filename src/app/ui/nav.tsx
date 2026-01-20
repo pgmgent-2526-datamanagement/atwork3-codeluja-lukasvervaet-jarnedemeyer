@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Home, Calendar, Users, Smartphone, Sheet } from "lucide-react";
+import { Home, Calendar, Users, Smartphone, Sheet, Lock } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
@@ -112,6 +112,11 @@ export default function Nav() {
     {
       title: "Authenticatie",
       links: [
+        {
+          name: "Reset Wachtwoord",
+          href: "/reset-password",
+          icon: Lock,
+        },
         {
           name: "Uitloggen",
           href: "/logout",
