@@ -74,7 +74,7 @@ export default function HostDetailPage() {
   if (!host) {
     return (
       <main className="min-h-screen flex items-center justify-center">
-        <div className="text-red-500 text-lg">Host not found.</div>
+        <div className="text-red-500 text-lg">Host niet gevonden.</div>
       </main>
     );
   }
@@ -88,14 +88,14 @@ export default function HostDetailPage() {
             className="px-4 py-2 bg-[#05d8c8] text-white rounded-lg hover:bg-[#04c4b5] transition-colors duration-300 font-semibold"
             onClick={() => router.back()}
           >
-            ← Back
+            ← Terug
           </button>
           {edit && (
             <button
               className="px-4 py-2 bg-[#05d8c8] text-white rounded-lg hover:bg-[#04c4b5] transition-colors duration-300 font-semibold ml-4"
               onClick={handleEditHost}
             >
-              Save Changes
+              Wijzigingen Opslaan
             </button>
           )}
 
@@ -139,7 +139,7 @@ export default function HostDetailPage() {
                           : "bg-[#05d8c8] text-white"
                       }`}
                     >
-                      {hostActive ? "Active" : "Inactive"}
+                      {hostActive ? "Actief" : "Inactief"}
                     </span>
                   </button>
                 </div>
@@ -151,7 +151,7 @@ export default function HostDetailPage() {
           <div className="bg-white rounded-lg lg:rounded-xl border border-gray-200 shadow-lg p-3 md:p-5 lg:p-8 w-full">
             <div className="flex items-center justify-between mb-3 md:mb-4 lg:mb-6 pb-2 md:pb-3 lg:pb-4 border-b border-gray-200">
               <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-gray-900">
-                Assigned Bookings
+                Toegewezen Boekingen
               </h2>
               <span className="px-3 md:px-4 py-1.5 md:py-2 bg-[#05d8c8] text-white rounded-full text-xs md:text-sm font-bold shrink-0">
                 {host.bookingHosts?.length || 0}
@@ -161,7 +161,7 @@ export default function HostDetailPage() {
             {!host.bookingHosts || host.bookingHosts.length === 0 ? (
               <div className="text-center py-10 md:py-12 lg:py-16 text-gray-400">
                 <p className="text-sm md:text-base lg:text-lg">
-                  No bookings assigned to this host yet.
+                  Nog geen boekingen aan deze host toegewezen.
                 </p>
               </div>
             ) : (
@@ -209,7 +209,7 @@ export default function HostDetailPage() {
                         </p>
                       </div>
                       <span className="px-3 md:px-4 py-1.5 md:py-2 bg-[#05d8c8] text-white rounded-full text-xs md:text-sm font-bold shadow-md self-start lg:whitespace-nowrap">
-                        {booking.playersCount} Players
+                        {booking.playersCount} Spelers
                       </span>
                     </div>
 
@@ -217,7 +217,7 @@ export default function HostDetailPage() {
                       {booking.packageName && (
                         <div className="bg-gray-50 rounded-lg p-3 md:p-4 border border-gray-200 w-full">
                           <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-wide font-semibold mb-1">
-                            Package
+                            Pakket
                           </p>
                           <p className="text-sm md:text-base font-bold text-gray-900">
                             {booking.packageName}

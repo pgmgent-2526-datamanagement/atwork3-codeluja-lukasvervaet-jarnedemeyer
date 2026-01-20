@@ -94,10 +94,10 @@ export default function HostsPage() {
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 lg:gap-4">
             <div>
               <h1 className="text-2xl lg:text-3xl font-extrabold text-gray-900 tracking-tight">
-                Staff Management
+                Hostbeheer
               </h1>
               <p className="text-gray-500 mt-1 text-sm lg:text-base">
-                Manage your staff and view their availability
+                Beheer je hosts en bekijk hun beschikbaarheid
               </p>
             </div>
             <button
@@ -105,7 +105,7 @@ export default function HostsPage() {
               className="flex items-center justify-center lg:justify-start gap-2 px-4 py-2 bg-[#05d8c8] text-white rounded-lg hover:bg-[#04b3aa] transition-colors duration-300 shadow-md font-semibold w-full lg:w-auto"
             >
               <PlusIcon className="w-5 h-5" />
-              Add Host
+              Voeg Host Toe
             </button>
           </div>
           <div className="w-full lg:w-96">
@@ -115,10 +115,10 @@ export default function HostsPage() {
 
         <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
           <h2 className="text-lg sm:text-xl font-bold text-gray-800">
-            All Staff Members
+            Alle Hosts
           </h2>
           <span className="px-3 py-1 bg-white border rounded-full text-xs font-medium text-gray-500 shadow-sm">
-            {hosts.length} total hosts
+            {hosts.length} totaal aantal hosts
           </span>
         </div>
 
@@ -169,11 +169,11 @@ export default function HostsPage() {
                       </div>
                       {host.active ? (
                         <span className="text-[9px] uppercase tracking-wider font-bold bg-green-50 text-green-700 px-2 py-1 rounded-full border border-green-200 whitespace-nowrap shrink-0">
-                          Active
+                          Actief
                         </span>
                       ) : (
                         <span className="text-[9px] uppercase tracking-wider font-bold bg-gray-50 text-gray-600 px-2 py-1 rounded-full border border-gray-200 whitespace-nowrap shrink-0">
-                          Inactive
+                          Inactief
                         </span>
                       )}
                     </div>
@@ -196,7 +196,7 @@ export default function HostsPage() {
                         href={`/hosts/${host.id}`}
                         className="flex-1 py-2.5 bg-[#05d8c8] cursor-pointer text-white text-sm font-semibold rounded-lg hover:bg-[#04b3aa] transition-colors duration-300 shadow-md text-center"
                       >
-                        View Profile
+                        Bekijk Profiel
                       </a>
                       <button onClick={() => openModal(host)}>
                         <Trash className="text-red-500 cursor-pointer h-6 w-6 shrink-0" />
@@ -218,7 +218,7 @@ export default function HostsPage() {
                     disabled={currentPage === 1}
                     className="px-3 sm:px-4 py-2 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:bg-[#05d8c8] hover:text-white hover:border-[#05d8c8] disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300"
                   >
-                    Previous
+                    Vorige
                   </button>
                   <div className="flex gap-1 sm:gap-2">
                     {[...Array(totalPages)].map((_, i) => (
@@ -242,7 +242,7 @@ export default function HostsPage() {
                     disabled={currentPage === totalPages}
                     className="px-3 sm:px-4 py-2 bg-white border border-gray-200 rounded-lg text-xs sm:text-sm font-medium text-gray-700 hover:bg-[#05d8c8] hover:text-white hover:border-[#05d8c8] disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300"
                   >
-                    Next
+                    Volgende
                   </button>
                 </div>
               </div>
@@ -251,7 +251,7 @@ export default function HostsPage() {
         ) : (
           <div className="bg-white border-2 border-dashed border-gray-200 rounded-xl p-12 text-center">
             <UsersIcon className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-            <p className="text-gray-500 font-medium">No staff members found.</p>
+            <p className="text-gray-500 font-medium">Geen hosts gevonden.</p>
           </div>
         )}
       </div>

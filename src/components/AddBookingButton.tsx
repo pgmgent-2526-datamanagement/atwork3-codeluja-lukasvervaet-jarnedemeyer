@@ -61,7 +61,7 @@ export default function RefreshBookings({
 
       <Button
         width="34"
-        title={loading ? "Refreshing..." : "Refresh Bookings"}
+        title={loading ? "Refreshing..." : "Refresh Boekings"}
         onClick={handleClick}
         loading={loading}
       />
