@@ -46,7 +46,7 @@ export default function Bookings() {
   }, []);
 
   return (
-    <div className="relative flex flex-col justify-center items-center mx-auto my-auto w-[80%] lg:ml-64 h-23s0 border rounded-lg shadow-lg bg-gray-200/50 pb-6">
+    <div className="relative flex flex-col justify-center items-center mx-auto my-auto w-[80%] lg:ml-70 mt-4 h-23s0 border rounded-lg shadow-lg bg-gray-200/50 pb-6">
       <header className="flex p-2 justify-between space-x-3 items-center text-center w-full h-min">
         <select
           value={filter.type}
