@@ -1,15 +1,28 @@
-export const refreshData = async (onRefresh: () => void) => {
-  const res = await fetch("/api/bookings/sync", {
-    method: "POST",
-  });
+export const refreshData = async (
+  onRefresh: () => void,
+  daysAgo?: number,
+  daysFuture?: number,
+) => {
+  const params = new URLSearchParams();
+
+  if (daysAgo !== undefined) {
+    params.append("daysAgo", daysAgo.toString());
+  }
+
+  if (daysFuture !== undefined) {
+    params.append("daysFuture", daysFuture.toString());
+  }
+
+  const query = params.toString();
+  const url = query ? `/api/bookings/sync?${query}` : "/api/bookings/sync";
+
+  const res = await fetch(url, { method: "POST" });
 
   if (!res.ok) {
     console.error("Failed to sync bookings", res.status);
     return;
-  } else {
-    console.log("Bookings synced successfully");
-    if (onRefresh) {
-      onRefresh();
-    }
   }
+
+  console.log("Bookings synced successfully");
+  onRefresh();
 };
