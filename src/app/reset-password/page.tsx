@@ -55,10 +55,7 @@ function Password() {
           className="flex flex-col space-y-6"
         >
           <div className="flex flex-col space-y-2">
-            <label
-              htmlFor="new-password"
-              className="underline text-gray-700 font-medium"
-            >
+            <label htmlFor="new-password" className="text-gray-700 font-medium">
               Nieuw Wachtwoord
             </label>
             <div className="relative">
@@ -83,7 +80,7 @@ function Password() {
           <div className="flex flex-col space-y-2">
             <label
               htmlFor="repeat-password"
-              className="underline text-gray-700 font-medium"
+              className="text-gray-700 font-medium"
             >
               Herhaal Wachtwoord
             </label>

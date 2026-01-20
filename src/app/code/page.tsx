@@ -107,10 +107,7 @@ function Code() {
           </h1>
           <form onSubmit={handleCodeSubmit} className="flex flex-col space-y-6">
             <div className="flex flex-col space-y-2">
-              <label
-                htmlFor="new-code"
-                className="underline text-gray-700 font-medium"
-              >
+              <label htmlFor="new-code" className="text-gray-700 font-medium">
                 Nieuwe Code
               </label>
               <div className="relative">
@@ -138,7 +135,7 @@ function Code() {
             <div className="flex flex-col space-y-2">
               <label
                 htmlFor="repeat-code"
-                className="underline text-gray-700 font-medium"
+                className="text-gray-700 font-medium"
               >
                 Herhaal Code
               </label>
