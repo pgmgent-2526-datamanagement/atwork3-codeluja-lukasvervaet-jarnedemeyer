@@ -40,7 +40,7 @@ function SearchBar({ onSearch }: SearchBarProps) {
     <div className="flex gap-2 w-full">
       <input
         type="text"
-        placeholder="Search by name or status..."
+        placeholder="Zoek bij naam of status..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         onKeyPress={handleKeyPress}

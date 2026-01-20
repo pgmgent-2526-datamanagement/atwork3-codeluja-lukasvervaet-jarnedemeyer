@@ -75,7 +75,7 @@ export default function Home() {
               Dashboard
             </h1>
             <p className="text-gray-500 mt-1 text-xs md:text-sm">
-              Welcome back! Here is your booking overview for today.
+              Welkom terug! Hier is je overzicht van de boekingen voor vandaag.
             </p>
           </div>
           <RefreshBookings onRefresh={refreshAllData} />
@@ -83,25 +83,25 @@ export default function Home() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-6 md:mb-10">
           <StatsCard
-            title="Today's Total"
+            title="Totaal Vandaag"
             value={String(todayBookings.length)}
-            subtext="Bookings for today"
+            subtext="Boekingen voor vandaag"
             Icon={ClockIcon}
             iconColor="text-orange-600"
             iconBg="bg-orange-100"
           />
           <StatsCard
-            title="Weekly Total"
+            title="Totaal Deze Week"
             value={String(bookings.length)}
-            subtext="Active bookings"
+            subtext="Boekingen deze week"
             Icon={CalendarIcon}
             iconColor="text-blue-600"
             iconBg="bg-blue-100"
           />
           <StatsCard
-            title="B2B Sessions"
+            title="B2B Sessies"
             value={String(b2b.length)}
-            subtext="Corporate clients this week"
+            subtext="Zakelijke klanten deze week"
             Icon={BuildingOfficeIcon}
             iconColor="text-purple-600"
             iconBg="bg-purple-100"
@@ -110,10 +110,10 @@ export default function Home() {
 
         <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
           <h2 className="text-lg sm:text-xl font-bold text-gray-800">
-            Today&apos;s Schedule
+            Planning van vandaag
           </h2>
           <span className="px-3 py-1 bg-white border rounded-full text-xs font-medium text-gray-500 shadow-sm">
-            {new Date().toLocaleDateString("en-GB", {
+            {new Date().toLocaleDateString("nl-NL", {
               weekday: "long",
               day: "numeric",
               month: "long",
@@ -139,7 +139,7 @@ export default function Home() {
                     <div className="flex items-center gap-2 text-gray-900">
                       <UserGroupIcon className="w-5 h-5 text-gray-400" />
                       <span className="text-base sm:text-lg font-bold">
-                        {booking.playersCount} Players
+                        {booking.playersCount} Spelers
                       </span>
                     </div>
                     <div className="flex items-end gap-1">
@@ -183,13 +183,13 @@ export default function Home() {
                     <div className="pt-1 sm:pt-2 flex flex-wrap gap-2">
                       <div className="flex items-center gap-1.5 text-xs text-gray-500">
                         <CakeIcon className="w-4 h-4" />
-                        {booking.food_required ? "Catering" : "No Food"}
+                        {booking.food_required ? "Catering" : "Geen Eten"}
                       </div>
                     </div>
 
                     <div className="pt-2">
                       <span className="block text-xs font-semibold text-gray-700 mb-1">
-                        Applied Hosts:
+                        Toegepaste Hosts:
                       </span>
                       <div className="flex flex-col gap-2">
                         {booking.bookingHosts &&
@@ -215,7 +215,7 @@ export default function Home() {
                           ))
                         ) : (
                           <div className="flex items-center justify-center h-10 text-slate-400 text-xs">
-                            No hosts assigned yet.
+                            Geen hosts toegewezen.
                           </div>
                         )}
                       </div>
@@ -226,7 +226,7 @@ export default function Home() {
                     className="mt-3 sm:mt-4 w-full py-2 bg-gray-50 text-gray-600 text-xs sm:text-sm font-semibold rounded-lg hover:bg-[#05d8c8] hover:text-white transition-colors cursor-pointer"
                     onClick={() => openModal(booking)}
                   >
-                    View Details
+                    Bekijk Details
                   </button>
                 </section>
               ))}
@@ -235,7 +235,7 @@ export default function Home() {
             <div className="bg-white border-2 border-dashed border-gray-200 rounded-xl p-6 sm:p-12 text-center">
               <CalendarIcon className="w-12 h-12 text-gray-300 mx-auto mb-4" />
               <p className="text-gray-500 font-medium">
-                No bookings found for today.
+                Geen boekingen gevonden voor vandaag.
               </p>
             </div>
           )}

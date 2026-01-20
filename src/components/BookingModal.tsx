@@ -196,7 +196,7 @@ const BookingModal: React.FC<ModalProps> = ({
               </div>
               <div className="flex-1">
                 <p className="text-xs font-bold text-slate-400 uppercase tracking-tighter">
-                  Event Schedule
+                  Evenement Tijdsduur
                 </p>
                 <div className="flex items-center gap-2 font-mono text-base md:text-lg font-bold text-slate-800">
                   <span>
@@ -227,11 +227,11 @@ const BookingModal: React.FC<ModalProps> = ({
                   <div className="flex items-center gap-2 text-slate-400">
                     <UserGroupIcon className="w-4 h-4" />
                     <span className="text-xs font-bold uppercase">
-                      Attendance
+                      Aanwezigheid
                     </span>
                   </div>
                   <p className="text-lg md:text-xl font-bold text-slate-800">
-                    {booking.playersCount} Players
+                    {booking.playersCount} Spelers
                   </p>
                 </div>
               </div>
@@ -250,12 +250,12 @@ const BookingModal: React.FC<ModalProps> = ({
                     </div>
                     <div>
                       <p className="text-sm font-bold text-slate-800">
-                        Catering Service
+                        Cateringservice
                       </p>
                       <p className="text-xs text-slate-500">
                         {booking.food_required
-                          ? "Client requested food"
-                          : "No food requirements"}
+                          ? "Inbegrepen"
+                          : "Niet inbegrepen"}
                       </p>
                     </div>
                   </div>
@@ -268,13 +268,13 @@ const BookingModal: React.FC<ModalProps> = ({
                   <div className="flex items-center gap-2 text-slate-400">
                     <ChatBubbleBottomCenterTextIcon className="w-4 h-4" />
                     <span className="text-xs font-bold uppercase tracking-widest">
-                      Internal Remarks
+                      Interne Opmerkingen
                     </span>
                   </div>
                   <div className="bg-slate-50 rounded-2xl p-5 border border-slate-100 italic text-slate-600 text-sm leading-relaxed">
                     {booking.notes ||
                       booking.bookingDescription ||
-                      "No specific instructions provided for this booking."}
+                      "Geen specifieke instructies voor dit evenement."}
                   </div>
                 </div>
               </div>
@@ -296,7 +296,7 @@ const BookingModal: React.FC<ModalProps> = ({
                   {/* Available Hosts Selection */}
                   <div className="flex-1 flex flex-col">
                     <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">
-                      Available Hosts
+                      Beschikbare Hosts
                     </h4>
                     {isLoadingHosts ? (
                       <div className="flex-1 border border-slate-200 rounded-xl bg-slate-50 p-4 space-y-2">
@@ -352,7 +352,7 @@ const BookingModal: React.FC<ModalProps> = ({
                   </div>
                   <div className="flex-1 flex flex-col">
                     <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">
-                      Assigned Hosts
+                      Toegekende Hosts
                     </h4>
                     <div className="flex-1 overflow-y-auto border border-slate-200 rounded-xl p-3 bg-white">
                       {isLoadingHosts ? (
@@ -415,7 +415,7 @@ const BookingModal: React.FC<ModalProps> = ({
                   onClick={handleAddButtonClick}
                   className="mt-4 w-full py-3 px-4 bg-[#05d8c8] text-white font-bold rounded-xl hover:bg-[#04b3a9] shadow-lg shadow-[#05d8c8]/30 transition-all text-sm"
                 >
-                  Add Selected Hosts
+                  Geselecteerde Hosts Toevoegen
                 </button>
               </section>
             )}
@@ -427,7 +427,7 @@ const BookingModal: React.FC<ModalProps> = ({
             onClick={onClose}
             className="flex-1 py-3 px-4 bg-[#05d8c8] text-white font-bold rounded-xl hover:bg-[#04b3a9] shadow-lg shadow-[#05d8c8] transition-all text-sm w-40 text-center"
           >
-            Close
+            Sluiten
           </button>
         </div>
       </div>
