@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Home, Calendar, Users, Smartphone } from "lucide-react";
+import { Home, Calendar, Users, Smartphone, Sheet } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
@@ -103,7 +103,10 @@ export default function Nav() {
         { name: "Home", href: "/", icon: Home },
         { name: "Bookings", href: "/bookings", icon: Calendar },
         ...(userRole === 1
-          ? [{ name: "Hosts", href: "/hosts", icon: Users }]
+          ? [
+              { name: "Hosts", href: "/hosts", icon: Users },
+              { name: "Code", href: "/code", icon: Sheet },
+            ]
           : []),
       ] as NavLink[],
     },
