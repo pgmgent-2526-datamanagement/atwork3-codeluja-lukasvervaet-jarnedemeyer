@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
-import { getNavItems } from "@/components/NavItems";
+import { getNavItems } from "@/components/navigation/NavItems";
 import NavSkeletonLoader from "@/components/loaders/NavSkeletonLoader";
 import { getUser } from "@/utils/user.util";
 

@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { UsersIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { Host } from "@/types/host.type";
 import { HostsLoadingSkeleton } from "../../components/loaders/HostsLoadingSkeleton";
-import { AddHostModal } from "@/components/AddHostModal";
+import { AddHostModal } from "@/components/modals/AddHostModal";
 import { Trash } from "lucide-react";
-import { DeleteModal } from "@/components/DeleteModal";
+import { DeleteModal } from "@/components/modals/DeleteModal";
 import SearchBar from "@/components/SearchBar";
 import { getHosts, deleteHost } from "@/utils/hosts.util";
 

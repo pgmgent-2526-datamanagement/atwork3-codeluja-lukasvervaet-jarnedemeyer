@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import CodeModal from "@/components/CodeForm";
-import LoginForm from "@/components/LoginForm";
+import CodeModal from "@/components/forms/CodeForm";
+import LoginForm from "@/components/forms/LoginForm";
 
 export default function LoginPage() {
   const [isCodeModalOpen, setIsCodeModalOpen] = useState(false);

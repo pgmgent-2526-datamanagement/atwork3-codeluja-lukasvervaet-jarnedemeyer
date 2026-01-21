@@ -4,11 +4,11 @@ import React, { useState, useEffect } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { changeCode, resetPassword } from "@/utils/code.util";
 import { useRouter } from "next/navigation";
-import SuccesModal from "@/components/SuccesModal";
-import ErrorModal from "@/components/ErrorModal";
+import SuccesModal from "@/components/modals/SuccesModal";
+import ErrorModal from "@/components/modals/ErrorModal";
 import { useSession } from "next-auth/react";
-import { SkeletonBookingItem } from "@/components/Loader";
-import TabNavigation from "@/components/TabNavigation";
+import { SkeletonBookingItem } from "@/components/loaders/Loader";
+import TabNavigation from "@/components/navigation/TabNavigation";
 import { isAdmin } from "@/utils/auth.util";
 
 function Code() {
