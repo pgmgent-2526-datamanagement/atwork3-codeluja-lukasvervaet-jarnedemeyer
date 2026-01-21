@@ -9,7 +9,7 @@ import ErrorModal from "@/components/ErrorModal";
 import { useSession } from "next-auth/react";
 import { SkeletonBookingItem } from "@/components/Loader";
 import TabNavigation from "@/components/TabNavigation";
-import { isAdmin } from "@/utils/auth";
+import { isAdmin } from "@/utils/auth.util";
 
 function Code() {
   const { data: session, status } = useSession();
