@@ -5,7 +5,7 @@ import { Host } from "@/types/host.type";
 import BookingModal from "@/components/BookingModal";
 import { BookingHost } from "@/types/booking-host.type";
 import { Booking } from "@/types/booking.type";
-import { HostDetailLoadingSkeleton } from "./HostDetailLoadingSkeleton";
+import { HostDetailLoadingSkeleton } from "../../../components/loaders/HostDetailLoadingSkeleton";
 import { getHostById, updateHost } from "@/utils/hosts.util";
 import { SquarePen } from "lucide-react";
 

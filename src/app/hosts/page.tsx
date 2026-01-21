@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { UsersIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { Host } from "@/types/host.type";
-import { HostsLoadingSkeleton } from "./HostsLoadingSkeleton";
+import { HostsLoadingSkeleton } from "../../components/loaders/HostsLoadingSkeleton";
 import { AddHostModal } from "@/components/AddHostModal";
 import { Trash } from "lucide-react";
 import { DeleteModal } from "@/components/DeleteModal";
