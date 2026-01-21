@@ -176,7 +176,7 @@ const BookingModal: React.FC<ModalProps> = ({
 
         <div className="flex-1 overflow-y-auto">
           <div className="p-4 md:p-8 bg-slate-50 border-b">
-            <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-2 leading-tight">
+            <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-2 leading-tight text-left">
               {booking.packageName}
             </h2>
             <div className="flex flex-wrap gap-2 mb-6">
@@ -195,7 +195,7 @@ const BookingModal: React.FC<ModalProps> = ({
                 <ClockIcon className="w-6 h-6" />
               </div>
               <div className="flex-1">
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-tighter">
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-tighter text-left">
                   Evenement Tijdsduur
                 </p>
                 <div className="flex items-center gap-2 font-mono text-base md:text-lg font-bold text-slate-800">
@@ -230,7 +230,7 @@ const BookingModal: React.FC<ModalProps> = ({
                       Aanwezigheid
                     </span>
                   </div>
-                  <p className="text-lg md:text-xl font-bold text-slate-800">
+                  <p className="text-lg md:text-xl font-bold text-slate-800 text-left">
                     {booking.playersCount} Spelers
                   </p>
                 </div>
@@ -287,7 +287,7 @@ const BookingModal: React.FC<ModalProps> = ({
                     <UsersIcon className="w-4 h-4" />
                     <span className="text-xs font-bold uppercase">Hosting</span>
                   </div>
-                  <p className="text-lg md:text-xl font-bold text-slate-800">
+                  <p className="text-lg md:text-xl font-bold text-slate-800 text-left">
                     {booking.hostsRequired} Hosts Required
                   </p>
                 </div>

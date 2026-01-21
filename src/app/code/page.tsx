@@ -119,7 +119,7 @@ function Code() {
 
   return (
     <div className="flex justify-center items-center h-screen w-full">
-      <div className="flex flex-col bg-white rounded-lg shadow-md border-2 border-[#05d8c8] p-10 max-w-98 h-[550px] space-y-6">
+      <div className="flex flex-col bg-white rounded-lg shadow-md border-2 border-[#05d8c8] p-10 max-w-98 h-137.5 space-y-6">
         {/* Tab Navigation */}
         <div className="flex gap-2 border-b border-gray-200">
           <button
