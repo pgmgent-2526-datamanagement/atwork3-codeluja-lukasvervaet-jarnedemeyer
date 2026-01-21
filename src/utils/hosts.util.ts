@@ -94,3 +94,24 @@ export const deleteHost = async (hostId: number) => {
 
   return response.json();
 };
+
+export const updateHost = async (hostData: {
+  id: number;
+  active: boolean;
+  firstName: string;
+  lastName: string;
+}) => {
+  const response = await fetch(`/api/hosts/edit`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(hostData),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to update host");
+  }
+
+  return response.json();
+};

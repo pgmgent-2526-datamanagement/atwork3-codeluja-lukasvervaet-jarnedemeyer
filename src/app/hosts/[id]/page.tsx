@@ -6,7 +6,7 @@ import BookingModal from "@/components/BookingModal";
 import { BookingHost } from "@/types/booking-host.type";
 import { Booking } from "@/types/booking.type";
 import { HostDetailLoadingSkeleton } from "./HostDetailLoadingSkeleton";
-import { getHostById } from "@/utils/hosts.util";
+import { getHostById, updateHost } from "@/utils/hosts.util";
 import { SquarePen } from "lucide-react";
 
 interface HostWithBookings extends Host {
@@ -27,6 +27,8 @@ export default function HostDetailPage() {
   const [originalFirstName, setOriginalFirstName] = useState<string>("");
   const [originalLastName, setOriginalLastName] = useState<string>("");
 
+  const router = useRouter();
+
   useEffect(() => {
     if (host) {
       setFirstName(host.firstName);
@@ -38,22 +40,14 @@ export default function HostDetailPage() {
     }
   }, [host]);
 
-  const router = useRouter();
-
   const handleEditHost = async () => {
     if (!host) return;
     try {
-      const response = await fetch(`/api/hosts/edit`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: host.id,
-          active: hostActive,
-          firstName,
-          lastName,
-        }),
+      await updateHost({
+        id: host.id,
+        active: hostActive,
+        firstName,
+        lastName,
       });
 
       // Reset originals after save
@@ -62,9 +56,7 @@ export default function HostDetailPage() {
       setOriginalHostActive(hostActive);
       setEditName(false);
 
-      if (response.ok) {
-        router.push("/hosts");
-      }
+      router.push("/hosts");
     } catch (error) {
       console.error("Error updating host:", error);
     }
