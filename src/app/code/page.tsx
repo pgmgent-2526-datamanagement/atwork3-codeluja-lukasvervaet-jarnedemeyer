@@ -9,9 +9,11 @@ import ErrorModal from "@/components/ErrorModal";
 import { useSession } from "next-auth/react";
 import { SkeletonBookingItem } from "@/components/Loader";
 import TabNavigation from "@/components/TabNavigation";
+import { isAdmin } from "@/utils/auth";
 
 function Code() {
   const { data: session, status } = useSession();
+
   const [visible, setVisible] = useState(false);
   const [visibleRepeat, setVisibleRepeat] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -22,7 +24,7 @@ function Code() {
     message?: string;
   }>({ open: false });
   const [activeTab, setActiveTab] = useState<"code" | "password">("code");
-  const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
+  const [isAdminState, setIsAdmin] = useState<boolean | null>(null);
 
   const router = useRouter();
 
@@ -36,21 +38,10 @@ function Code() {
         return;
       }
 
-      // Fallback: fetch from endpoint if not in session
-      try {
-        const res = await fetch("/api/auth/user");
-        if (!res.ok) {
-          router.push("/");
-          return;
-        }
-        const data = await res.json();
-        if (data?.user?.role_id === 1) {
-          setIsAdmin(true);
-          return;
-        }
-        router.push("/");
-      } catch (error) {
-        console.error("Error checking admin status:", error);
+      const adminStatus = await isAdmin(session);
+      if (adminStatus) {
+        setIsAdmin(true);
+      } else {
         router.push("/");
       }
     };
@@ -59,7 +50,7 @@ function Code() {
   }, [session, status, router]);
 
   // Show loader while checking auth
-  if (status === "loading" || isAdmin === null) {
+  if (status === "loading" || isAdminState === null) {
     return (
       <div className="flex justify-center items-center h-screen w-full">
         <SkeletonBookingItem />
@@ -68,7 +59,7 @@ function Code() {
   }
 
   // If not admin, don't render anything (will redirect)
-  if (!isAdmin) {
+  if (!isAdminState) {
     return null;
   }
 
