@@ -5,9 +5,10 @@ import { Host } from "@/types/hosts/host.type";
 import BookingModal from "@/components/modals/BookingModal";
 import { BookingHost } from "@/types/bookings/booking-host.type";
 import { Booking } from "@/types/bookings/booking.type";
-import { HostDetailLoadingSkeleton } from "../../../components/loaders/HostDetailLoadingSkeleton";
+
 import { getHostById, updateHost } from "@/utils/hosts/hosts.util";
 import { SquarePen } from "lucide-react";
+import { HostDetailLoadingSkeleton } from "@/components/loaders/HostDetailLoadingSkeleton";
 
 interface HostWithBookings extends Host {
   bookingHosts: BookingHost[];

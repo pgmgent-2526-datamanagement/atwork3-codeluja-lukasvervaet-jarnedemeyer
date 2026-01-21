@@ -2,12 +2,12 @@
 import { useEffect, useState } from "react";
 import { UsersIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { Host } from "@/types/hosts/host.type";
-import { HostsLoadingSkeleton } from "../../components/loaders/HostsLoadingSkeleton";
 import { AddHostModal } from "@/components/modals/AddHostModal";
 import { Trash } from "lucide-react";
 import { DeleteModal } from "@/components/modals/DeleteModal";
 import SearchBar from "@/components/SearchBar";
 import { getHosts, deleteHost } from "@/utils/hosts/hosts.util";
+import { HostsLoadingSkeleton } from "@/components/loaders/HostsLoadingSkeleton";
 
 export default function HostsPage() {
   const [hosts, setHosts] = useState<Host[]>([]);
