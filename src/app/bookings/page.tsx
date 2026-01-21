@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Booking } from "@/types/booking.type";
 import { Filter } from "@/types/filter.type";
-import { getDBBookings } from "@/utils/bookings.util";
+import { fetchBookings } from "@/utils/bookings.util";
 import { filterBookings } from "@/utils/filter.util";
 
 export default function Bookings() {
@@ -23,10 +23,10 @@ export default function Bookings() {
   const [loading, setLoading] = useState<boolean>(true); // eslint-disable-line
   const [filter, setFilter] = useState<Filter>({ type: "all" }); // eslint-disable-line
 
-  const fetchBookings = async () => {
+  const loadBookings = async () => {
     setLoading(true);
-    const dbData = await getDBBookings();
-    setBookings(dbData || []);
+    const dbData = await fetchBookings();
+    setBookings(dbData);
     setLoading(false);
   };
 
@@ -34,11 +34,8 @@ export default function Bookings() {
     return filterBookings({ filter, bookings });
   };
 
-  // eslint-disable-next-line
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    const loadBookings = async () => {
-      await fetchBookings();
-    };
     loadBookings();
   }, []);
 

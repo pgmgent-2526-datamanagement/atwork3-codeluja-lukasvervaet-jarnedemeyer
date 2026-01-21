@@ -77,3 +77,13 @@ export const mapEventBookings = (bookings: Booking[]): CalendarEvent[] => {
       };
     });
 };
+
+export const fetchBookings = async (): Promise<Booking[]> => {
+  try {
+    const dbData = await getDBBookings();
+    return dbData || [];
+  } catch (error) {
+    console.error("Error fetching bookings:", error);
+    return [];
+  }
+};
