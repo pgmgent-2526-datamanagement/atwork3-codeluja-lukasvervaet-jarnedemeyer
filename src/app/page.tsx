@@ -9,7 +9,6 @@ import {
   CakeIcon,
   BuildingOfficeIcon,
 } from "@heroicons/react/24/outline";
-import StatsCard from "../components/cards/StatsCard";
 import RefreshBookings from "@/components/AddBookingButton";
 import HomeLoader from "@/components/loaders/HomeLoader";
 import BookingModal from "@/components/modals/BookingModal";
@@ -21,6 +20,7 @@ import {
   getWeekBookings,
 } from "@/utils/bookings/bookings.util";
 import { Booking } from "@/types/bookings/booking.type";
+import StatsCard from "@/components/cards/StatsCard";
 
 export default function Home() {
   const router = useRouter();
