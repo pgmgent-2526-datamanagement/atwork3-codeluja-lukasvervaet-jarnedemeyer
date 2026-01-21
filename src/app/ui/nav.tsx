@@ -1,14 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { Home, Calendar, Users, Smartphone, Sheet } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
-import { NavLink } from "@/types/nav.type";
-import { getUser } from "@/utils/user.util";
+import { getNavItems } from "@/components/NavItems";
 import NavSkeletonLoader from "@/components/loaders/NavSkeletonLoader";
+import { getUser } from "@/utils/user.util";
 
 export default function Nav() {
   const [userRole, setUserRole] = useState<number | null>(null);
@@ -44,37 +43,7 @@ export default function Nav() {
   // hide nav if not authenticated
   if (!session) return null;
 
-  const handleLogOut = async () => {
-    await signOut({ callbackUrl: "/login" });
-  };
-
-  // Translated user-facing text to Dutch
-  const navItems = [
-    {
-      title: "Navigatie",
-      links: [
-        { name: "Home", href: "/", icon: Home },
-        { name: "Boekingen", href: "/bookings", icon: Calendar },
-        ...(userRole === 1
-          ? [
-              { name: "Hosts", href: "/hosts", icon: Users },
-              { name: "Code", href: "/code", icon: Sheet },
-            ]
-          : []),
-      ] as NavLink[],
-    },
-    {
-      title: "Authenticatie",
-      links: [
-        {
-          name: "Uitloggen",
-          href: "/logout",
-          icon: Smartphone,
-          function: handleLogOut,
-        },
-      ] as NavLink[],
-    },
-  ];
+  const navItems = getNavItems(userRole);
 
   return (
     <aside className="hidden lg:block fixed left-0 top-0 w-64 h-screen border-r border-gray-100 bg-white shadow-md z-50">
