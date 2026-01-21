@@ -19,7 +19,7 @@ import {
   getB2BBookings,
   getTodayBookings,
   getWeekBookings,
-} from "@/utils/bookings.util";
+} from "@/utils/bookings/bookings.util";
 import { Booking } from "@/types/bookings/booking.type";
 
 export default function Home() {

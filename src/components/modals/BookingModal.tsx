@@ -17,7 +17,7 @@ import {
   getHosts,
   getSelectedHostsForBooking,
   removeHostFromBooking,
-} from "@/utils/hosts.util";
+} from "@/utils/hosts/hosts.util";
 import { Host } from "@/types/hosts/host.type";
 
 interface User {

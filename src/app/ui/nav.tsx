@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { getNavItems } from "@/components/navigation/NavItems";
 import NavSkeletonLoader from "@/components/loaders/NavSkeletonLoader";
-import { getUser } from "@/utils/user.util";
+import { getUser } from "@/utils/users/user.util";
 
 export default function Nav() {
   const [userRole, setUserRole] = useState<number | null>(null);

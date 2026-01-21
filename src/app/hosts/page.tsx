@@ -7,7 +7,7 @@ import { AddHostModal } from "@/components/modals/AddHostModal";
 import { Trash } from "lucide-react";
 import { DeleteModal } from "@/components/modals/DeleteModal";
 import SearchBar from "@/components/SearchBar";
-import { getHosts, deleteHost } from "@/utils/hosts.util";
+import { getHosts, deleteHost } from "@/utils/hosts/hosts.util";
 
 export default function HostsPage() {
   const [hosts, setHosts] = useState<Host[]>([]);

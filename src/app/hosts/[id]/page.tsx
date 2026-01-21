@@ -6,7 +6,7 @@ import BookingModal from "@/components/modals/BookingModal";
 import { BookingHost } from "@/types/bookings/booking-host.type";
 import { Booking } from "@/types/bookings/booking.type";
 import { HostDetailLoadingSkeleton } from "../../../components/loaders/HostDetailLoadingSkeleton";
-import { getHostById, updateHost } from "@/utils/hosts.util";
+import { getHostById, updateHost } from "@/utils/hosts/hosts.util";
 import { SquarePen } from "lucide-react";
 
 interface HostWithBookings extends Host {

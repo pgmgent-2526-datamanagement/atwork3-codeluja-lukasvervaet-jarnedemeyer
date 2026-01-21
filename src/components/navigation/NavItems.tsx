@@ -1,4 +1,4 @@
-import { signOutUser } from "@/utils/auth.util";
+import { signOutUser } from "@/utils/auth/auth.util";
 import { Home, Calendar, Users, Smartphone, Sheet } from "lucide-react";
 import { NavLink } from "@/types/navigation/nav.type";
 

@@ -2,7 +2,7 @@ import React from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
-import { loginWithCode } from "@/utils/login.util";
+import { loginWithCode } from "@/utils/auth/login.util";
 
 function CodeModal({ close }: { close: () => void }) {
   const router = useRouter();

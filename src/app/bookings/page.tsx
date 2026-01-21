@@ -6,8 +6,8 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Booking } from "@/types/bookings/booking.type";
 import { Filter } from "@/types/ui/filter.type";
-import { fetchBookings } from "@/utils/bookings.util";
-import { filterBookings } from "@/utils/filter.util";
+import { fetchBookings } from "@/utils/bookings/bookings.util";
+import { filterBookings } from "@/utils/ui/filter.util";
 
 export default function Bookings() {
   const { data: session, status } = useSession();

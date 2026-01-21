@@ -7,7 +7,7 @@ import { useState } from "react";
 import BookingModal from "./modals/BookingModal";
 import { Booking } from "@/types/bookings/booking.type";
 import { BookingsCalendarProps } from "@/types/ui/calendar.type";
-import { mapEventBookings } from "@/utils/bookings.util";
+import { mapEventBookings } from "@/utils/bookings/bookings.util";
 
 export default function BookingsCalendar({ bookings }: BookingsCalendarProps) {
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
