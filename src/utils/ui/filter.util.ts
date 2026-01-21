@@ -1,5 +1,5 @@
-import { Booking } from "@/types/booking.type";
-import { Filter } from "@/types/filter.type";
+import { Booking } from "@/types/bookings/booking.type";
+import { Filter } from "@/types/ui/filter.type";
 
 export const filterBookings = ({
   filter,

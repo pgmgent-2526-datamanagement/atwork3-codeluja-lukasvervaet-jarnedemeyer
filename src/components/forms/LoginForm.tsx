@@ -3,7 +3,7 @@
 import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { loginUser } from "@/utils/login.util";
+import { loginUser } from "@/utils/auth/login.util";
 import { Eye, EyeOff } from "lucide-react";
 
 export default function LoginPage({ open }: { open: () => void }) {

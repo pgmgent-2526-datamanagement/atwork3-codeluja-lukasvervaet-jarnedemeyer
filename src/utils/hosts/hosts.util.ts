@@ -1,3 +1,6 @@
+// Utility functions for managing hosts data
+
+// Fetch all hosts from the database
 export const getHosts = async () => {
   try {
     const response = await fetch("/api/hosts", { cache: "no-store" });
@@ -45,7 +48,7 @@ export const getSelectedHostsForBooking = async (bookingId: number) => {
     if (!bookingHostsRes.ok) {
       console.warn(
         "/api/bookinghosts/:bookingId returned",
-        bookingHostsRes.status
+        bookingHostsRes.status,
       );
       return [];
     }
@@ -74,6 +77,43 @@ export const removeHostFromBooking = async (
 
   if (!response.ok) {
     throw new Error("Failed to remove host from booking");
+  }
+
+  return response.json();
+};
+
+export const deleteHost = async (hostId: number) => {
+  const response = await fetch("/api/hosts/delete", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ id: hostId }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to delete host");
+  }
+
+  return response.json();
+};
+
+export const updateHost = async (hostData: {
+  id: number;
+  active: boolean;
+  firstName: string;
+  lastName: string;
+}) => {
+  const response = await fetch(`/api/hosts/edit`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(hostData),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to update host");
   }
 
   return response.json();

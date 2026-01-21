@@ -1,5 +1,6 @@
 "use client";
 
+// Session provider wrapper for NextAuth authentication
 import { SessionProvider as NextAuthProvider } from "next-auth/react";
 import { ReactNode } from "react";
 

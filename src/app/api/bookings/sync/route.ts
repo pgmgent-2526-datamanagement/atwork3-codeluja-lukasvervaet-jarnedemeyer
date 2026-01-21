@@ -1,3 +1,4 @@
+// API route for syncing bookings from Google Sheets to database
 import { parseBookings } from "@/lib/bookings/bookingParser";
 import { transformBookings } from "@/lib/bookings/bookingTransformer";
 import { readSheet } from "@/lib/googleSheets";
@@ -5,6 +6,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+// Sync bookings within a specified date range
 async function syncBookings(daysAgo = 7, daysFuture = 14): Promise<Response> {
   try {
     // Calculate date range based on provided parameters

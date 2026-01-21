@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/components/Button";
-import { refreshData } from "@/utils/refresh.util";
+import { refreshData } from "@/utils/auth/refresh.util";
 import { useState } from "react";
 
 export default function RefreshBookings({

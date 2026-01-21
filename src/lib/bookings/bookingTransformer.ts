@@ -1,6 +1,8 @@
-import { TransformedBooking } from "@/types/transformed-booking.type";
+// Transform parsed booking data from Google Sheets into database format
+import { TransformedBooking } from "@/types/bookings/transformed-booking.type";
 import { ParsedBooking } from "./bookingParser";
 
+// Parse date and time strings into Date objects
 function parseDateTime(dateString: string, timeString: string): Date {
   try {
     const [day, month, year] = dateString.split("/");
@@ -17,6 +19,7 @@ function parseDateTime(dateString: string, timeString: string): Date {
   }
 }
 
+// Extract package information from booking description
 function extractPackageFromDescription(description: string): {
   name: string;
   duration: number;

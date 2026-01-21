@@ -1,5 +1,5 @@
-import { Booking } from "./booking.type";
-import { Host } from "./host.type";
+import { Booking } from "../bookings/booking.type";
+import { Host } from "../hosts/host.type";
 export interface ModalProps {
   booking: Booking | null;
   onClose: () => void;

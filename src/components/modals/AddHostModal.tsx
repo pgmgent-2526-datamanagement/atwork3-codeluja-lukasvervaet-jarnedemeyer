@@ -5,15 +5,18 @@ import { createPortal } from "react-dom";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Plus } from "lucide-react";
 
-import { Host, Status } from "@/types/host.type";
-import { getHosts } from "@/utils/hosts.util";
+import { Host, Status } from "@/types/hosts/host.type";
+import { getHosts } from "@/utils/hosts/hosts.util";
 
 interface AddHostModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export const AddHostModal: React.FC<AddHostModalProps> = ({ isOpen, onClose }) => {
+export const AddHostModal: React.FC<AddHostModalProps> = ({
+  isOpen,
+  onClose,
+}) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",

@@ -1,12 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import { UsersIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { Host } from "@/types/host.type";
-import { HostsLoadingSkeleton } from "./HostsLoadingSkeleton";
-import { AddHostModal } from "@/components/AddHostModal";
+import { Host } from "@/types/hosts/host.type";
+import { HostsLoadingSkeleton } from "../../components/loaders/HostsLoadingSkeleton";
+import { AddHostModal } from "@/components/modals/AddHostModal";
 import { Trash } from "lucide-react";
-import { DeleteModal } from "@/components/DeleteModal";
+import { DeleteModal } from "@/components/modals/DeleteModal";
 import SearchBar from "@/components/SearchBar";
+import { getHosts, deleteHost } from "@/utils/hosts/hosts.util";
 
 export default function HostsPage() {
   const [hosts, setHosts] = useState<Host[]>([]);
@@ -17,16 +18,18 @@ export default function HostsPage() {
   const hostsPerPage = 12;
 
   useEffect(() => {
-    fetch("/api/hosts")
-      .then((res) => res.json())
-      .then((data) => {
-        setHosts(data.hosts || data);
+    const loadHosts = async () => {
+      try {
+        const data = await getHosts();
+        setHosts(data);
+      } catch (error) {
+        console.error("Error loading hosts:", error);
+      } finally {
         setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching hosts:", error);
-        setLoading(false);
-      });
+      }
+    };
+
+    loadHosts();
   }, []);
 
   const handleSearchResults = (results: Host[]) => {
@@ -41,7 +44,6 @@ export default function HostsPage() {
   const totalPages = Math.ceil(hosts.length / hostsPerPage);
 
   const handleAddHost = () => {
-    // TODO: Implement add host logic
     setOpenAddModal(true);
   };
 
@@ -58,34 +60,13 @@ export default function HostsPage() {
   };
 
   const handleDeleteHost = async (hostId: number) => {
-    await fetch(`/api/hosts/delete`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id: hostId }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          // Remove the deleted host from the state
-          setHosts((prevHosts) =>
-            prevHosts.filter((host) => host.id !== hostId),
-          );
-        } else {
-          console.error("Failed to delete host");
-        }
-      })
-      .catch((error) => {
-        console.error("Error deleting host:", error);
-      });
-    window.location.reload();
+    try {
+      await deleteHost(hostId);
+      setHosts((prevHosts) => prevHosts.filter((host) => host.id !== hostId));
+    } catch (error) {
+      console.error("Error deleting host:", error);
+    }
   };
-
-  // if (openAddModal) {
-  //   return (
-
-  //   );
-  // }
 
   return (
     <main className="bg-gray-50/50 p-3 sm:p-4 md:p-6 lg:p-10 pb-20 lg:pb-10 min-h-screen w-full lg:ml-64">

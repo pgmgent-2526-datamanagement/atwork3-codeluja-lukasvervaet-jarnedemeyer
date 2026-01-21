@@ -1,5 +1,7 @@
+// Google Sheets integration for reading booking data
 import { google } from "googleapis";
 
+// Read data from a specific sheet and range
 export async function readSheet(sheetName, range = "A:Z") {
   // Debug: Check if environment variables are loaded
   if (!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL) {

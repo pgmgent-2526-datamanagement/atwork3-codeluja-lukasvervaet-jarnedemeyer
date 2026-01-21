@@ -1,12 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { Host } from "@/types/host.type";
-import BookingModal from "@/components/BookingModal";
-import { BookingHost } from "@/types/booking-host.type";
-import { Booking } from "@/types/booking.type";
-import { HostDetailLoadingSkeleton } from "./HostDetailLoadingSkeleton";
-import { getHostById } from "@/utils/hosts.util";
+import { Host } from "@/types/hosts/host.type";
+import BookingModal from "@/components/modals/BookingModal";
+import { BookingHost } from "@/types/bookings/booking-host.type";
+import { Booking } from "@/types/bookings/booking.type";
+import { HostDetailLoadingSkeleton } from "../../../components/loaders/HostDetailLoadingSkeleton";
+import { getHostById, updateHost } from "@/utils/hosts/hosts.util";
 import { SquarePen } from "lucide-react";
 
 interface HostWithBookings extends Host {
@@ -27,6 +27,8 @@ export default function HostDetailPage() {
   const [originalFirstName, setOriginalFirstName] = useState<string>("");
   const [originalLastName, setOriginalLastName] = useState<string>("");
 
+  const router = useRouter();
+
   useEffect(() => {
     if (host) {
       setFirstName(host.firstName);
@@ -38,22 +40,14 @@ export default function HostDetailPage() {
     }
   }, [host]);
 
-  const router = useRouter();
-
   const handleEditHost = async () => {
     if (!host) return;
     try {
-      const response = await fetch(`/api/hosts/edit`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: host.id,
-          active: hostActive,
-          firstName,
-          lastName,
-        }),
+      await updateHost({
+        id: host.id,
+        active: hostActive,
+        firstName,
+        lastName,
       });
 
       // Reset originals after save
@@ -62,9 +56,7 @@ export default function HostDetailPage() {
       setOriginalHostActive(hostActive);
       setEditName(false);
 
-      if (response.ok) {
-        router.push("/hosts");
-      }
+      router.push("/hosts");
     } catch (error) {
       console.error("Error updating host:", error);
     }

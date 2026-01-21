@@ -1,11 +1,9 @@
+// NextAuth configuration for handling authentication
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "@/lib/client";
 import bcrypt from "bcrypt";
 
-/* We define authOptions as a separate constant and export it,
- * so it can be used as an argument for other functions that require it (e.g. getServerSession)
- */
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -33,7 +31,7 @@ export const authOptions: NextAuthOptions = {
         }
         const passwordsMatch = await bcrypt.compare(
           credentials.password,
-          user.password!
+          user.password!,
         );
 
         return passwordsMatch ? { ...user, id: user.id.toString() } : null;

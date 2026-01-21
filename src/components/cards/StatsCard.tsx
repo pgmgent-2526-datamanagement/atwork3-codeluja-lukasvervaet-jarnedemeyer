@@ -1,5 +1,5 @@
 import React from "react";
-import { StatsCardProps } from "@/types/card.type";
+import { StatsCardProps } from "@/types/ui/card.type";
 
 const StatsCard: React.FC<StatsCardProps> = ({
   title,
