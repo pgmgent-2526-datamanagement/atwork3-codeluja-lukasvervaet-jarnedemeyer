@@ -31,16 +31,12 @@ function Code() {
       if (status === "loading") return;
 
       if (!session) {
-        console.log("No session found, redirecting to login");
         router.push("/login");
         return;
       }
 
-      console.log("Session user:", session.user);
-
       // Fallback: fetch from endpoint if not in session
       try {
-        console.log("Fetching user data from endpoint");
         const res = await fetch("/api/auth/user");
         if (!res.ok) {
           router.push("/");

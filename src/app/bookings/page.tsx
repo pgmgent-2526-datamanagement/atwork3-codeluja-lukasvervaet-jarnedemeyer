@@ -1,12 +1,9 @@
 "use client";
-
 import BookingsCalendar from "@/components/BookingsCalendar";
-import { SkeletonCalendarContainer } from "@/components/Loader";
-
+import FilterDropdown from "@/components/FilterDropdown";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-
 import { Booking } from "@/types/booking.type";
 import { Filter } from "@/types/filter.type";
 import { getDBBookings } from "@/utils/bookings.util";
@@ -48,20 +45,7 @@ export default function Bookings() {
   return (
     <div className="relative flex flex-col justify-center items-center mx-auto my-auto w-[80%] lg:ml-70 mt-4 h-23s0 border rounded-lg shadow-lg bg-gray-200/50 pb-6">
       <header className="flex p-2 justify-between space-x-3 items-center text-center w-full h-min">
-        <select
-          value={filter.type}
-          onChange={(e) =>
-            setFilter({ type: e.target.value as Filter["type"] })
-          }
-          className="border absolute top-5 left-5 rounded-md p-2 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="all">All Bookings</option>
-          <option value="b2b">B2B Bookings</option>
-          <option value="food">Require food</option>
-          <option value="bronze">Bronze Package</option>
-          <option value="silver">Silver Package</option>
-          <option value="gold">Gold Package</option>
-        </select>
+        <FilterDropdown filter={filter} setFilter={setFilter} />
         <BookingsCalendar bookings={filteredBookings()} />
       </header>
     </div>
