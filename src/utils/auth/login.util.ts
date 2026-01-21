@@ -1,5 +1,7 @@
+// Authentication utilities for user login
 import { signIn } from "next-auth/react";
 
+// Handle login with email and password
 export const loginUser = async (event: React.FormEvent<HTMLFormElement>) => {
   event.preventDefault();
 
@@ -21,8 +23,9 @@ export const loginUser = async (event: React.FormEvent<HTMLFormElement>) => {
   }
 };
 
+// Handle login with access code
 export const loginWithCode = async (
-  event: React.FormEvent<HTMLFormElement>
+  event: React.FormEvent<HTMLFormElement>,
 ) => {
   event.preventDefault();
 

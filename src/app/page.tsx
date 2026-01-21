@@ -9,18 +9,18 @@ import {
   CakeIcon,
   BuildingOfficeIcon,
 } from "@heroicons/react/24/outline";
-import StatsCard from "../components/StatsCard";
+import StatsCard from "../components/cards/StatsCard";
 import RefreshBookings from "@/components/AddBookingButton";
-import HomeLoader from "@/components/HomeLoader";
-import BookingModal from "@/components/BookingModal";
+import HomeLoader from "@/components/loaders/HomeLoader";
+import BookingModal from "@/components/modals/BookingModal";
 
 import {
   checkValidDate,
   getB2BBookings,
   getTodayBookings,
   getWeekBookings,
-} from "@/utils/bookings.util";
-import { Booking } from "@/types/booking.type";
+} from "@/utils/bookings/bookings.util";
+import { Booking } from "@/types/bookings/booking.type";
 
 export default function Home() {
   const router = useRouter();

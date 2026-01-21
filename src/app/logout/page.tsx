@@ -1,5 +1,6 @@
 "use client";
 
+// Logout page - signs user out and redirects to login
 import { useEffect } from "react";
 import { signOut } from "next-auth/react";
 

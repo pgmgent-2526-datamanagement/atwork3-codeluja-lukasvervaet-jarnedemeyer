@@ -4,10 +4,10 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useState } from "react";
-import BookingModal from "./BookingModal";
-import { Booking } from "@/types/booking.type";
-import { BookingsCalendarProps } from "@/types/calendar.type";
-import { mapEventBookings } from "@/utils/bookings.util";
+import BookingModal from "./modals/BookingModal";
+import { Booking } from "@/types/bookings/booking.type";
+import { BookingsCalendarProps } from "@/types/ui/calendar.type";
+import { mapEventBookings } from "@/utils/bookings/bookings.util";
 
 export default function BookingsCalendar({ bookings }: BookingsCalendarProps) {
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
@@ -17,7 +17,7 @@ export default function BookingsCalendar({ bookings }: BookingsCalendarProps) {
   // eslint-disable-next-line
   const handleEventClick = (clickInfo: any) => {
     const originalBooking = bookings.find(
-      (b) => String(b.id) === clickInfo.event.id
+      (b) => String(b.id) === clickInfo.event.id,
     );
 
     if (originalBooking) {

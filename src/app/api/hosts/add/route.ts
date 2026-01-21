@@ -1,3 +1,4 @@
+// API route for adding a new host to the database
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 
@@ -19,7 +20,7 @@ export async function POST(request: Request) {
         firstName,
         lastName,
         status,
-        active
+        active,
       },
     });
 

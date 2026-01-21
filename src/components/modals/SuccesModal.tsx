@@ -1,7 +1,15 @@
 import React from 'react'
 import { createPortal } from 'react-dom';
 
-function SuccesModal({ close, subject }: { close: () => void; subject: string }) {
+function SuccesModal({
+  close,
+  subject,
+  action,
+}: {
+  close: () => void;
+  subject: string;
+  action: string;
+}) {
   return createPortal(
     <div className="fixed inset-0 z-9999 flex items-center justify-center p-6">
       <div
@@ -14,19 +22,19 @@ function SuccesModal({ close, subject }: { close: () => void; subject: string })
           <div>
             <h2 className="text-lg font-semibold text-slate-900">Success!</h2>
             <p className="text-sm text-slate-500 mt-1">
-              {subject} has been successfully added.
+              {subject} is succesvol {action}.
             </p>
           </div>
-          </div>
-            <div className="flex items-center gap-3 w-full p-4 justify-center">
-              <button
-                type="button"
-                onClick={close}
-                className="py-2 px-4 bg-white border border-slate-200 text-slate-700 font-medium rounded-lg hover:bg-slate-100 transition"
-              >
-                Cancel
-              </button>
-            </div>
+        </div>
+        <div className="flex items-center gap-3 w-full p-4 justify-center">
+          <button
+            type="button"
+            onClick={close}
+            className="py-2 px-4 bg-white border border-slate-200 text-slate-700 font-medium rounded-lg hover:bg-slate-100 transition"
+          >
+            Cancel
+          </button>
+        </div>
       </div>
     </div>,
     document.body,

@@ -1,5 +1,6 @@
+// Large card component for displaying detailed information with children content
 import React from "react";
-import { LargeCardProps } from "@/types/card.type";
+import { LargeCardProps } from "@/types/ui/card.type";
 
 const LargeCard: React.FC<LargeCardProps> = ({
   title,

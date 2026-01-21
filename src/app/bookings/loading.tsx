@@ -1,7 +1,5 @@
-import {
-  SkeletonBookingItem,
-  SkeletonCalendarContainer,
-} from "@/components/Loader";
+import { SkeletonBookingItem, SkeletonCalendarContainer } from "@/components/loaders/Loader";
+
 
 export default function Loading() {
   return (

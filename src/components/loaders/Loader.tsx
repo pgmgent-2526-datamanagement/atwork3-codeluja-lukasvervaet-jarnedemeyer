@@ -66,7 +66,7 @@ export const SkeletonBookingItem: React.FC = () => (
 );
 
 export const SkeletonCalendarContainer: React.FC = () => (
-  <div className="p-4 bg-white rounded-lg shadow-xl mt-6 w-full max-w-[850px] mx-auto">
+  <div className="p-4 bg-white rounded-lg shadow-xl mt-6 w-full max-w-212.5 mx-auto">
     <Box width="w-full" height="h-10" className="mb-4" />
     <Box width="w-full" height="h-[28rem]" />
   </div>

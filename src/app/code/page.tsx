@@ -1,16 +1,20 @@
 "use client";
 
+// Admin page for changing access code and resetting user passwords
 import React, { useState, useEffect } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import { changeCode, resetPassword } from "@/utils/code.util";
+import { changeCode, resetPassword } from "@/utils/ui/code.util";
 import { useRouter } from "next/navigation";
-import SuccesModal from "@/components/SuccesModal";
-import ErrorModal from "@/components/ErrorModal";
+import SuccesModal from "@/components/modals/SuccesModal";
+import ErrorModal from "@/components/modals/ErrorModal";
 import { useSession } from "next-auth/react";
-import { SkeletonBookingItem } from "@/components/Loader";
+import { SkeletonBookingItem } from "@/components/loaders/Loader";
+import TabNavigation from "@/components/navigation/TabNavigation";
+import { isAdmin } from "@/utils/auth/auth.util";
 
 function Code() {
   const { data: session, status } = useSession();
+
   const [visible, setVisible] = useState(false);
   const [visibleRepeat, setVisibleRepeat] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -21,7 +25,7 @@ function Code() {
     message?: string;
   }>({ open: false });
   const [activeTab, setActiveTab] = useState<"code" | "password">("code");
-  const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
+  const [isAdminState, setIsAdmin] = useState<boolean | null>(null);
 
   const router = useRouter();
 
@@ -31,29 +35,14 @@ function Code() {
       if (status === "loading") return;
 
       if (!session) {
-        console.log("No session found, redirecting to login");
         router.push("/login");
         return;
       }
 
-      console.log("Session user:", session.user);
-
-      // Fallback: fetch from endpoint if not in session
-      try {
-        console.log("Fetching user data from endpoint");
-        const res = await fetch("/api/auth/user");
-        if (!res.ok) {
-          router.push("/");
-          return;
-        }
-        const data = await res.json();
-        if (data?.user?.role_id === 1) {
-          setIsAdmin(true);
-          return;
-        }
-        router.push("/");
-      } catch (error) {
-        console.error("Error checking admin status:", error);
+      const adminStatus = await isAdmin(session);
+      if (adminStatus) {
+        setIsAdmin(true);
+      } else {
         router.push("/");
       }
     };
@@ -62,7 +51,7 @@ function Code() {
   }, [session, status, router]);
 
   // Show loader while checking auth
-  if (status === "loading" || isAdmin === null) {
+  if (status === "loading" || isAdminState === null) {
     return (
       <div className="flex justify-center items-center h-screen w-full">
         <SkeletonBookingItem />
@@ -71,7 +60,7 @@ function Code() {
   }
 
   // If not admin, don't render anything (will redirect)
-  if (!isAdmin) {
+  if (!isAdminState) {
     return null;
   }
 
@@ -119,30 +108,9 @@ function Code() {
 
   return (
     <div className="flex justify-center items-center h-screen w-full">
-      <div className="flex flex-col bg-white rounded-lg shadow-md border-2 border-[#05d8c8] p-10 max-w-98 h-[550px] space-y-6">
+      <div className="flex flex-col bg-white rounded-lg shadow-md border-2 border-[#05d8c8] p-10 max-w-98 h-137.5 space-y-6">
         {/* Tab Navigation */}
-        <div className="flex gap-2 border-b border-gray-200">
-          <button
-            onClick={() => setActiveTab("code")}
-            className={`flex-1 py-3 px-4 font-medium transition-colors ${
-              activeTab === "code"
-                ? "border-b-2 border-[#05d8c8] text-[#05d8c8]"
-                : "text-gray-600 hover:text-gray-800"
-            }`}
-          >
-            Wijzig Code
-          </button>
-          <button
-            onClick={() => setActiveTab("password")}
-            className={`flex-1 py-3 px-4 font-medium transition-colors ${
-              activeTab === "password"
-                ? "border-b-2 border-[#05d8c8] text-[#05d8c8]"
-                : "text-gray-600 hover:text-gray-800"
-            }`}
-          >
-            Wachtwoord Resetten
-          </button>
-        </div>
+        <TabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
 
         {/* Change Code Tab */}
         {activeTab === "code" && (
@@ -304,6 +272,7 @@ function Code() {
             handleClose();
           }}
           subject={activeTab === "code" ? "Code" : "Password"}
+          action={""}
         />
       )}
       {errorModal.open && (

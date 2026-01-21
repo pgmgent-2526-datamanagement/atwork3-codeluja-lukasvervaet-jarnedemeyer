@@ -1,7 +1,8 @@
 "use client";
 
+// Component for refreshing booking data from Google Sheets with configurable date range
 import Button from "@/components/Button";
-import { refreshData } from "@/utils/refresh.util";
+import { refreshData } from "@/utils/auth/refresh.util";
 import { useState } from "react";
 
 export default function RefreshBookings({

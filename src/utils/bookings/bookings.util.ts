@@ -1,6 +1,8 @@
-import { Booking } from "@/types/booking.type";
-import { CalendarEvent } from "@/types/calendar.type";
+// Utility functions for fetching and managing bookings data
+import { Booking } from "@/types/bookings/booking.type";
+import { CalendarEvent } from "@/types/ui/calendar.type";
 
+// Fetch bookings for the current week
 export const getWeekBookings = async () => {
   try {
     const res = await fetch("/api/bookings/week");
@@ -41,6 +43,7 @@ export const getDBBookings = async () => {
   }
 };
 
+// Validate if date string is a valid date
 export const checkValidDate = (dateString: string) => {
   const date = new Date(dateString);
   return (
@@ -48,6 +51,7 @@ export const checkValidDate = (dateString: string) => {
   );
 };
 
+// Convert bookings to calendar event format
 export const mapEventBookings = (bookings: Booking[]): CalendarEvent[] => {
   return bookings
     .filter((b) => b.bookingDate && b.startTime && b.endTime)
@@ -76,4 +80,14 @@ export const mapEventBookings = (bookings: Booking[]): CalendarEvent[] => {
         backgroundColor: booking.is_b2b ? "#10b981" : "#3b82f6",
       };
     });
+};
+
+export const fetchBookings = async (): Promise<Booking[]> => {
+  try {
+    const dbData = await getDBBookings();
+    return dbData || [];
+  } catch (error) {
+    console.error("Error fetching bookings:", error);
+    return [];
+  }
 };

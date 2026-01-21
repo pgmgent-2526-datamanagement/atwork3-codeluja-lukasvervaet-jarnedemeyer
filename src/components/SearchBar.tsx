@@ -1,8 +1,9 @@
+// Search bar component for filtering hosts by name
 import React, { useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 interface SearchBarProps {
-  onSearch: (results: any[]) => void;
+  onSearch: (results: []) => void;
 }
 
 function SearchBar({ onSearch }: SearchBarProps) {

@@ -1,51 +1,33 @@
 "use client";
 
+// Sidebar navigation component with dynamic links based on user role
 import Link from "next/link";
-import { Home, Calendar, Users, Smartphone, Sheet } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
-import { NavLink } from "@/types/nav.type";
+import { getNavItems } from "@/components/navigation/NavItems";
+import NavSkeletonLoader from "@/components/loaders/NavSkeletonLoader";
+import { getUser } from "@/utils/users/user.util";
 
 export default function Nav() {
   const [userRole, setUserRole] = useState<number | null>(null);
   const logo = "/logo-thepark.svg";
   const pathname = usePathname();
   const { data: session, status } = useSession();
-  const fetchUser = async () => {
-    try {
-      const res = await fetch("/api/auth/user");
-      if (!res.ok) {
-        console.error("Failed to fetch user, status:", res.status);
-        return null;
-      }
-      const data = await res.json();
-      const user = data?.user ?? null;
-      return user;
-    } catch (err) {
-      console.error("Error fetching user:", err);
-      return null;
-    }
-  };
 
   useEffect(() => {
-    if (!session) {
-      // schedule state update asynchronously to avoid synchronous setState in effect
-      Promise.resolve().then(() => setUserRole(null));
-      return;
-    }
+    const fetchAndSetUserRole = async () => {
+      if (!session) {
+        setUserRole(null);
+        return;
+      }
 
-    let mounted = true;
-    (async () => {
-      const user = await fetchUser();
-      if (!mounted) return;
+      const user = await getUser();
       setUserRole(user?.role_id ?? null);
-    })();
-
-    return () => {
-      mounted = false;
     };
+
+    fetchAndSetUserRole();
   }, [session]);
 
   // Check if we're on an auth page (login, logout, etc.)
@@ -56,71 +38,13 @@ export default function Nav() {
 
   // while loading session, show loading skeleton (but not on auth pages)
   if (status === "loading" && !isAuthPage) {
-    return (
-      <aside className="hidden lg:block fixed left-0 top-0 w-64 h-screen border-r border-gray-100 bg-white shadow-md z-50">
-        <div className="flex justify-center items-center m-auto mt-2 h-25">
-          <div className="w-25 h-25 bg-gray-200 rounded-lg animate-pulse"></div>
-        </div>
-        <div className="sticky top-6 px-5 py-6 space-y-8 flex flex-col justify-between max-h-[90%] h-full">
-          <div>
-            <div className="h-3 bg-gray-200 rounded w-20 mb-3 animate-pulse"></div>
-            <nav className="space-y-1">
-              {[...Array(3)].map((_, i) => (
-                <div key={i} className="flex items-center gap-3 px-3 py-2">
-                  <div className="w-4.5 h-4.5 bg-gray-200 rounded animate-pulse"></div>
-                  <div className="h-4 bg-gray-200 rounded w-20 animate-pulse"></div>
-                </div>
-              ))}
-            </nav>
-          </div>
-          <div>
-            <div className="h-3 bg-gray-200 rounded w-24 mb-3 animate-pulse"></div>
-            <nav className="space-y-1">
-              <div className="flex items-center gap-3 px-3 py-2">
-                <div className="w-4.5 h-4.5 bg-gray-200 rounded animate-pulse"></div>
-                <div className="h-4 bg-gray-200 rounded w-16 animate-pulse"></div>
-              </div>
-            </nav>
-          </div>
-        </div>
-      </aside>
-    );
+    return <NavSkeletonLoader />;
   }
 
   // hide nav if not authenticated
   if (!session) return null;
 
-  const handleLogOut = async () => {
-    await signOut({ callbackUrl: "/login" });
-  };
-
-  // Translated user-facing text to Dutch
-  const navItems = [
-    {
-      title: "Navigatie",
-      links: [
-        { name: "Home", href: "/", icon: Home },
-        { name: "Boekingen", href: "/bookings", icon: Calendar },
-        ...(userRole === 1
-          ? [
-              { name: "Hosts", href: "/hosts", icon: Users },
-              { name: "Code", href: "/code", icon: Sheet },
-            ]
-          : []),
-      ] as NavLink[],
-    },
-    {
-      title: "Authenticatie",
-      links: [
-        {
-          name: "Uitloggen",
-          href: "/logout",
-          icon: Smartphone,
-          function: handleLogOut,
-        },
-      ] as NavLink[],
-    },
-  ];
+  const navItems = getNavItems(userRole);
 
   return (
     <aside className="hidden lg:block fixed left-0 top-0 w-64 h-screen border-r border-gray-100 bg-white shadow-md z-50">

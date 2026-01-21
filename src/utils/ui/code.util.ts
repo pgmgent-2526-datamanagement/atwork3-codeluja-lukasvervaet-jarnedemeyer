@@ -1,7 +1,7 @@
 import { FormEvent } from "react";
-import { getUser } from "./user.util";
-import bcrypt from "bcryptjs";
 
+import bcrypt from "bcryptjs";
+import { getUser } from "../users/user.util";
 
 export const changeCode = async (event: FormEvent<HTMLFormElement>) => {
   event.preventDefault();

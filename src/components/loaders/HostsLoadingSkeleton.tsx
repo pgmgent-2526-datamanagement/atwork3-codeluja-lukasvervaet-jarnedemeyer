@@ -18,11 +18,11 @@ export function HostsLoadingSkeleton() {
         </div>
 
         {/* Host Cards Grid Skeleton */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 min-h-[600px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 min-h-150">
           {[...Array(12)].map((_, i) => (
             <div
               key={i}
-              className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden h-[220px] flex flex-col animate-pulse"
+              className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden h-55 flex flex-col animate-pulse"
             >
               {/* Colored Header */}
               <div className="h-2 w-full bg-gray-300" />
