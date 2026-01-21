@@ -7,6 +7,7 @@ import { AddHostModal } from "@/components/AddHostModal";
 import { Trash } from "lucide-react";
 import { DeleteModal } from "@/components/DeleteModal";
 import SearchBar from "@/components/SearchBar";
+import { getHosts } from "@/utils/hosts.util";
 
 export default function HostsPage() {
   const [hosts, setHosts] = useState<Host[]>([]);
@@ -17,16 +18,18 @@ export default function HostsPage() {
   const hostsPerPage = 12;
 
   useEffect(() => {
-    fetch("/api/hosts")
-      .then((res) => res.json())
-      .then((data) => {
-        setHosts(data.hosts || data);
+    const loadHosts = async () => {
+      try {
+        const data = await getHosts();
+        setHosts(data);
+      } catch (error) {
+        console.error("Error loading hosts:", error);
+      } finally {
         setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching hosts:", error);
-        setLoading(false);
-      });
+      }
+    };
+
+    loadHosts();
   }, []);
 
   const handleSearchResults = (results: Host[]) => {
@@ -41,7 +44,6 @@ export default function HostsPage() {
   const totalPages = Math.ceil(hosts.length / hostsPerPage);
 
   const handleAddHost = () => {
-    // TODO: Implement add host logic
     setOpenAddModal(true);
   };
 
