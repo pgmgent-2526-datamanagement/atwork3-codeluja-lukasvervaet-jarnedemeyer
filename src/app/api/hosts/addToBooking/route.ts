@@ -1,3 +1,4 @@
+// API route for assigning a host to a booking
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 

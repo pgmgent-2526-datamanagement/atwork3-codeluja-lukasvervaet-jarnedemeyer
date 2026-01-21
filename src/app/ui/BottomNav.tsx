@@ -1,5 +1,6 @@
 "use client";
 
+// Mobile bottom navigation bar with dynamic links
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { getNavItems } from "@/components/navigation/NavItems";

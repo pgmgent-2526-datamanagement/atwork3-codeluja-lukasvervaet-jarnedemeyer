@@ -1,5 +1,6 @@
 "use client";
 
+// Admin page for changing access code and resetting user passwords
 import React, { useState, useEffect } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { changeCode, resetPassword } from "@/utils/ui/code.util";

@@ -1,3 +1,4 @@
+// API route for fetching all hosts with their booking relationships
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 

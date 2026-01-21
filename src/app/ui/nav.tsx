@@ -1,5 +1,6 @@
 "use client";
 
+// Sidebar navigation component with dynamic links based on user role
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";

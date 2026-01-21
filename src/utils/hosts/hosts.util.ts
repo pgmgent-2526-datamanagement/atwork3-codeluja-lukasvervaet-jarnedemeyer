@@ -1,3 +1,6 @@
+// Utility functions for managing hosts data
+
+// Fetch all hosts from the database
 export const getHosts = async () => {
   try {
     const response = await fetch("/api/hosts", { cache: "no-store" });
