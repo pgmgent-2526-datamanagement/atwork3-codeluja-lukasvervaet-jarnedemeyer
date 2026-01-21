@@ -1,3 +1,4 @@
+import { signOutUser } from "@/utils/auth.util";
 import { Home, Calendar, Users, Smartphone, Sheet } from "lucide-react";
 import { NavLink } from "@/types/nav.type";
 
@@ -20,9 +21,10 @@ export const getNavItems = (userRole: number | null) => [
     links: [
       {
         name: "Uitloggen",
-        href: "/logout",
+        href: "#",
         icon: Smartphone,
+        function: signOutUser,
       },
-    ] as NavLink[],
+    ] as (NavLink & { function?: () => Promise<void> })[],
   },
 ];

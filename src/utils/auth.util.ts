@@ -1,4 +1,5 @@
 import { Session } from "next-auth";
+import { signOut } from "next-auth/react";
 
 export async function isAdmin(session: Session | null): Promise<boolean> {
   if (!session) {
@@ -17,3 +18,7 @@ export async function isAdmin(session: Session | null): Promise<boolean> {
     return false;
   }
 }
+
+export const signOutUser = async () => {
+  await signOut({ callbackUrl: "/login" });
+};
