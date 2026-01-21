@@ -1,5 +1,5 @@
-import { Booking } from "@/types/booking.type";
-import { CalendarEvent } from "@/types/calendar.type";
+import { Booking } from "@/types/bookings/booking.type";
+import { CalendarEvent } from "@/types/ui/calendar.type";
 
 export const getWeekBookings = async () => {
   try {

@@ -11,14 +11,14 @@ import {
   ChatBubbleBottomCenterTextIcon,
   ArrowRightIcon,
 } from "@heroicons/react/24/outline";
-import { ModalProps } from "@/types/modal.type";
+import { ModalProps } from "@/types/ui/modal.type";
 import {
   addHostToBooking,
   getHosts,
   getSelectedHostsForBooking,
   removeHostFromBooking,
 } from "@/utils/hosts.util";
-import { Host } from "@/types/host.type";
+import { Host } from "@/types/hosts/host.type";
 
 interface User {
   id: number;

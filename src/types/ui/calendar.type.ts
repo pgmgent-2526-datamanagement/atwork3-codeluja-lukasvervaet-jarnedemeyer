@@ -1,4 +1,4 @@
-import { Booking } from "./booking.type";
+import { Booking } from "../bookings/booking.type";
 interface CalendarEvent {
   id: string;
   title: string;

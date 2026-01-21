@@ -5,8 +5,8 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useState } from "react";
 import BookingModal from "./modals/BookingModal";
-import { Booking } from "@/types/booking.type";
-import { BookingsCalendarProps } from "@/types/calendar.type";
+import { Booking } from "@/types/bookings/booking.type";
+import { BookingsCalendarProps } from "@/types/ui/calendar.type";
 import { mapEventBookings } from "@/utils/bookings.util";
 
 export default function BookingsCalendar({ bookings }: BookingsCalendarProps) {

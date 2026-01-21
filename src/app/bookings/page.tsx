@@ -4,8 +4,8 @@ import FilterDropdown from "@/components/FilterDropdown";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { Booking } from "@/types/booking.type";
-import { Filter } from "@/types/filter.type";
+import { Booking } from "@/types/bookings/booking.type";
+import { Filter } from "@/types/ui/filter.type";
 import { fetchBookings } from "@/utils/bookings.util";
 import { filterBookings } from "@/utils/filter.util";
 

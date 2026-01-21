@@ -20,7 +20,7 @@ import {
   getTodayBookings,
   getWeekBookings,
 } from "@/utils/bookings.util";
-import { Booking } from "@/types/booking.type";
+import { Booking } from "@/types/bookings/booking.type";
 
 export default function Home() {
   const router = useRouter();

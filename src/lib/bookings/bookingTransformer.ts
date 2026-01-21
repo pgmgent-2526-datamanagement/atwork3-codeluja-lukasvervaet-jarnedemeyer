@@ -1,4 +1,4 @@
-import { TransformedBooking } from "@/types/transformed-booking.type";
+import { TransformedBooking } from "@/types/bookings/transformed-booking.type";
 import { ParsedBooking } from "./bookingParser";
 
 function parseDateTime(dateString: string, timeString: string): Date {

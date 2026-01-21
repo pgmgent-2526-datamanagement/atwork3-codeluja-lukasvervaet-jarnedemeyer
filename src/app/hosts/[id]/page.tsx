@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { Host } from "@/types/host.type";
+import { Host } from "@/types/hosts/host.type";
 import BookingModal from "@/components/modals/BookingModal";
-import { BookingHost } from "@/types/booking-host.type";
-import { Booking } from "@/types/booking.type";
+import { BookingHost } from "@/types/bookings/booking-host.type";
+import { Booking } from "@/types/bookings/booking.type";
 import { HostDetailLoadingSkeleton } from "../../../components/loaders/HostDetailLoadingSkeleton";
 import { getHostById, updateHost } from "@/utils/hosts.util";
 import { SquarePen } from "lucide-react";

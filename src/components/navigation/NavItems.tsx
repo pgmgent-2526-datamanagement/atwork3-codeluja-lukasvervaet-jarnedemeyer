@@ -1,6 +1,6 @@
 import { signOutUser } from "@/utils/auth.util";
 import { Home, Calendar, Users, Smartphone, Sheet } from "lucide-react";
-import { NavLink } from "@/types/nav.type";
+import { NavLink } from "@/types/navigation/nav.type";
 
 export const getNavItems = (userRole: number | null) => [
   {

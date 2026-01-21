@@ -1,5 +1,5 @@
 import React from "react";
-import { Filter } from "@/types/filter.type";
+import { Filter } from "@/types/ui/filter.type";
 
 interface FilterDropdownProps {
   filter: Filter;
