@@ -8,6 +8,7 @@ import SuccesModal from "@/components/SuccesModal";
 import ErrorModal from "@/components/ErrorModal";
 import { useSession } from "next-auth/react";
 import { SkeletonBookingItem } from "@/components/Loader";
+import TabNavigation from "@/components/TabNavigation";
 
 function Code() {
   const { data: session, status } = useSession();
@@ -117,28 +118,7 @@ function Code() {
     <div className="flex justify-center items-center h-screen w-full">
       <div className="flex flex-col bg-white rounded-lg shadow-md border-2 border-[#05d8c8] p-10 max-w-98 h-137.5 space-y-6">
         {/* Tab Navigation */}
-        <div className="flex gap-2 border-b border-gray-200">
-          <button
-            onClick={() => setActiveTab("code")}
-            className={`flex-1 py-3 px-4 font-medium transition-colors ${
-              activeTab === "code"
-                ? "border-b-2 border-[#05d8c8] text-[#05d8c8]"
-                : "text-gray-600 hover:text-gray-800"
-            }`}
-          >
-            Wijzig Code
-          </button>
-          <button
-            onClick={() => setActiveTab("password")}
-            className={`flex-1 py-3 px-4 font-medium transition-colors ${
-              activeTab === "password"
-                ? "border-b-2 border-[#05d8c8] text-[#05d8c8]"
-                : "text-gray-600 hover:text-gray-800"
-            }`}
-          >
-            Wachtwoord Resetten
-          </button>
-        </div>
+        <TabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
 
         {/* Change Code Tab */}
         {activeTab === "code" && (
