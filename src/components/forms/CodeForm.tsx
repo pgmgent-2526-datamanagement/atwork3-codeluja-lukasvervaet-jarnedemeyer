@@ -1,3 +1,4 @@
+// Code-based login form for staff authentication
 import React from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";

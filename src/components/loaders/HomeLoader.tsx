@@ -1,4 +1,4 @@
-import { SkeletonStatsCard } from "@/components/Loader";
+import { SkeletonStatsCard } from "./Loader";
 
 export default function HomeLoader() {
   return (

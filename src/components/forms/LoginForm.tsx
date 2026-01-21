@@ -1,5 +1,6 @@
 "use client";
 
+// Login form with email/password authentication and option to switch to code login
 import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

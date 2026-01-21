@@ -1,3 +1,4 @@
+// Dropdown component for filtering bookings by type (all, b2b, food, packages)
 import React from "react";
 import { Filter } from "@/types/ui/filter.type";
 

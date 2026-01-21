@@ -1,3 +1,4 @@
+// Statistics card component displaying a metric with icon
 import React from "react";
 import { StatsCardProps } from "@/types/ui/card.type";
 

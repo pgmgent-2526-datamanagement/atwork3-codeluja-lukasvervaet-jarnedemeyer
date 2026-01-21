@@ -1,4 +1,6 @@
 "use client";
+
+// Reusable button component with loading state and customizable width
 import React from "react";
 import { ButtonProps } from "@/types/ui/button.type";
 

@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
 import React, { useState } from "react";
-import { Eye, EyeOff } from 'lucide-react';
-import { resetPassword } from "@/utils/code.util";
-import SuccesModal from "@/components/SuccesModal";
-import ErrorModal from "@/components/ErrorModal";
-import { useRouter } from 'next/navigation';
+import { Eye, EyeOff } from "lucide-react";
+import { useRouter } from "next/navigation";
+import SuccesModal from "@/components/modals/SuccesModal";
+import ErrorModal from "@/components/modals/ErrorModal";
+import { resetPassword } from "@/utils/ui/code.util";
 
 function Password() {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -46,7 +46,7 @@ function Password() {
 
   return (
     <div className="flex justify-center items-center h-screen w-full">
-      <div className="flex flex-col bg-white rounded-lg shadow-md border-2 border-[#05d8c8] p-10 max-w-98 h-[550px] space-y-6">
+      <div className="flex flex-col bg-white rounded-lg shadow-md border-2 border-[#05d8c8] p-10 max-w-98 h-137.5 space-y-6">
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-2">
           Reset Wachtwoord
         </h1>
